@@ -1,0 +1,72 @@
+create table users(
+    firstName varchar(10) not null, 
+    lastName varchar(10) not null, 
+	username varchar(20) not null,
+	phone varchar(15),
+    email varchar(50) not null,
+    userPassword varchar(20) not null, 
+    image varchar(100), 
+    userType int, 
+    primary key(username)
+);
+
+create table clients(
+	username varchar(20) not null, 
+    totalPayments double, 
+    primary key(username), 
+    foreign key(username) references users(username)
+);
+
+create table colors(
+	colorID int not null auto_increment, 
+    hex varchar(10), 
+    colorName varchar(10),
+    primary key(colorID)
+);
+
+create table categories(
+	category varchar(20) not null, 
+    primary key(category)
+);
+
+create table products(
+	productID int not null auto_increment, 
+    productName varchar(100) not null,
+    category varchar(20),
+    price double, 
+    offer double, 
+    numberOfOrders int, 
+    image varchar(100), 
+    primary key(productID),
+    foreign key(category) references categories(category)
+);
+
+create table colorQuantity(
+	colorID int not null, 
+    productID int not null,
+    quantity int, 
+    constraint PK_colorQuantity primary key(colorID, productID),
+    foreign key(colorID) references colors(colorID), 
+    foreign key(productID) references products(productID)
+);
+
+create table productReview(
+	reviewID int not null auto_increment,
+	username varchar(20) not null, 
+    productID int not null, 
+    rate int not null, 
+    clientComment varchar(500),
+    primary key(reviewID), 
+    foreign key(username) references clients(username),
+    foreign key(productID) references products(productID)
+);
+
+create table installers(
+	username varchar(20) not null, 
+    category varchar(20) not null, 
+    pricePerHour double, 
+    primary key(username), 
+    foreign key(username) references users(username),
+    foreign key(category) references categories(category)
+);
+
