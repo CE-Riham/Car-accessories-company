@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="866.0" styleClass="back" stylesheets="@../../../../../../../demo/src/main/resources/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newproj.SignUpController">
+   <children>
+      <TextField fx:id="gmail" layoutX="149.0" layoutY="91.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter Your Email" />
+      <Button fx:id="signUp" layoutX="316.0" layoutY="369.0" mnemonicParsing="false" onAction="#signUp1Clicked" prefHeight="27.0" prefWidth="92.0" style="-fx-background-color: black;" styleClass="back" text="Save" />
+      <PasswordField fx:id="pass" layoutX="149.0" layoutY="134.0" prefHeight="26.0" prefWidth="259.0" promptText="Enter Your Password" />
+      <TextField fx:id="userName" layoutX="148.0" layoutY="52.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter Your UserName" />
+      <TextField fx:id="phoneNumber" layoutX="149.0" layoutY="172.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter Your Phone Number" />
+      <Button fx:id="back" layoutX="148.0" layoutY="370.0" mnemonicParsing="false" onAction="#backClicked" prefHeight="8.0" prefWidth="84.0" style="-fx-background-color: black;" styleClass="back" text="Back" />
+      <TextField fx:id="ID" layoutX="148.0" layoutY="14.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter Your ID" />
+      <TextField fx:id="creditCard" layoutX="149.0" layoutY="246.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter Your Credit Card" />
+      <TextField fx:id="VIN" layoutX="148.0" layoutY="210.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter Your VIN" />
+      <TextField fx:id="address" layoutX="149.0" layoutY="290.0" prefHeight="27.0" prefWidth="259.0" promptText="Enter Your Address" />
+      <TextField fx:id="message" layoutX="148.0" layoutY="329.0" prefHeight="27.0" prefWidth="259.0" promptText="Message" />
+   </children>
+</AnchorPane>
