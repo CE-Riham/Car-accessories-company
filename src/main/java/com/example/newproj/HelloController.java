@@ -51,7 +51,7 @@ public class HelloController {
                 String passwordA = ra.getString(2);
                 Parent root;
                 if (gmailLogIn.getText().equals(gmailA) && passwordLogIn.getText().equals(passwordA)) {
-                    root = FXMLLoader.load(getClass().getResource("menu2.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("screen3.fxml"));
                     Stage stage = (Stage) login1.getScene().getWindow();
                     stage.setScene(new Scene(root));
                     stage.show();
@@ -68,7 +68,7 @@ public class HelloController {
                     return;}
                 else if (gmailLogIn.getText().equals(gmail) && passwordLogIn.getText().equals(password)) {
                     setZ(gmailLogIn.getText());
-                    root = FXMLLoader.load(getClass().getResource("Screen2.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("Screen3.fxml"));
                     Stage stage = (Stage) login1.getScene().getWindow();
                     stage.setScene(new Scene(root));
                     stage.show();
