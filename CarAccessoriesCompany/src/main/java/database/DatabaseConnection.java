@@ -3,21 +3,21 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DBConnector {
+public class DatabaseConnection {
     private String databaseName, username, password;
     private int port;
     private Connection con;
 
     private boolean status;
 
-    public DBConnector(){
+    public DatabaseConnection(){
         setPort(3306);
         setDatabaseName("caraccessoriescompany");
         setUsername("root");
         setPassword("12345678password");
         setCon();
     }
-    public DBConnector(int port, String databaseName, String username, String password){
+    public DatabaseConnection(int port, String databaseName, String username, String password){
         setPort(port);
         setDatabaseName(databaseName);
         setUsername(username);
@@ -43,7 +43,7 @@ public class DBConnector {
     public void setCon() {
         String url = "jdbc:mysql://localhost:" + port + "/" + databaseName;
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con= DriverManager.getConnection(url,username,password);
             setStatus(true);
         }catch(Exception e){
@@ -58,5 +58,9 @@ public class DBConnector {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Connection getCon() {
+        return con;
     }
 }
