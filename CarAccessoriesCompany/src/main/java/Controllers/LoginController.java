@@ -1,4 +1,4 @@
-package company;
+package Controllers;
 
 import javafx.fxml.FXML;
 import javax.swing.*;
@@ -9,17 +9,13 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordTextField;
-
-
     @FXML
     private TextField usernameTextField;
-
     @FXML
     protected void onLoginClick() {
         //TODO
         JOptionPane.showMessageDialog(null, "Hello!");
     }
-
     @FXML
     protected void onSignupClick(){
         //TODO

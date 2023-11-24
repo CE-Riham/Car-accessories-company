@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="500.0" prefWidth="800.0" styleClass="back" stylesheets="@../../../../../../../demo/src/main/resources/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="company.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="500.0" prefWidth="800.0" styleClass="back" stylesheets="@../../../../../../../demo/src/main/resources/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
 <children>
       <AnchorPane prefHeight="500.0" prefWidth="450.0" style="-fx-background-color: black;" />
       <VBox alignment="TOP_CENTER" layoutX="450.0" prefHeight="500.0" prefWidth="350.0">
@@ -59,11 +59,14 @@
                   </Button>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Don't have an account?" />
-                        <Button fx:id="onSignupClick" mnemonicParsing="false" prefHeight="24.0" prefWidth="57.0" style="-fx-background-color: transparent;" styleClass="back" stylesheets="@../../../../../../../demo/src/main/resources/style.css" text="sign up" underline="true">
+                        <Label text="Don't have an account? " />
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onSignupClick" prefHeight="24.0" prefWidth="57.0" style="-fx-background-color: transparent;" styleClass="back" stylesheets="@../../../../../../../demo/src/main/resources/style.css" text="sign up" underline="true">
                            <font>
                               <Font size="11.0" />
                            </font>
+                           <padding>
+                              <Insets top="-1.0" />
+                           </padding>
                         </Button>
                      </children>
                   </HBox>
