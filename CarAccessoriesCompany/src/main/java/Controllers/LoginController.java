@@ -1,5 +1,6 @@
 package Controllers;
 
+import Classes.Starter;
 import javafx.fxml.FXML;
 import javax.swing.*;
 import javafx.scene.control.PasswordField;
@@ -14,8 +15,8 @@ public class LoginController {
     @FXML
     protected void onLoginClick() {
         //TODO
-        JOptionPane.showMessageDialog(null, "Hello!");
-
+//        JOptionPane.showMessageDialog(null, "Hello!");
+        System.out.println(Starter.userSession);
     }
     @FXML
     protected void onSignupClick(){
