@@ -29,9 +29,9 @@ public class Starter extends Application {
 
 
         Login login = new Login(connector.getCon());
-        login.loginUser("rihamkatout", "123456");
-        System.out.println(login.getStatus());
-        System.out.println(userSession);
+//        login.loginUser("rihamkatout", "123456");
+//        System.out.println(login.getStatus());
+//        System.out.println(userSession);
 //        dataRetriever.selectUsers("username = 'rihamkatout'");
 //        System.out.println(dataRetriever.getStatus());
 //        dataRetriever.selectAddresses( "");

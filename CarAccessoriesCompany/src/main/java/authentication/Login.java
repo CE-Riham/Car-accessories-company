@@ -7,6 +7,7 @@ import model.User;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Locale;
 
 public class Login {
     private String username, password, status;
@@ -24,7 +25,7 @@ public class Login {
     }
 
     public boolean loginUser(String username, String password){
-        this.username = username;
+        this.username = username.toLowerCase();
         this.password = password;
 
         List<User> allUsers = retrievingData.selectUsers("username = '" + this.username + "'");
