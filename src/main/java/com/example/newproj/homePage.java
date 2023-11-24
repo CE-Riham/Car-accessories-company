@@ -11,10 +11,12 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 public class homePage {
 
-
+    @FXML
+    private TextField carMakeModelField;
 
     @FXML
     private TextField searchField;
@@ -24,7 +26,8 @@ public class homePage {
 
     @FXML
     private TextArea productTextArea;
-
+    @FXML
+    private DatePicker preferredDateField;
     @FXML
     void showProducts(ActionEvent event) {
         String searchText = searchField.getText();
@@ -94,5 +97,42 @@ public class homePage {
         }
 
 
+    }
+    @FXML
+    void insertInstallationRequest(ActionEvent event) {
+        int userId =UserSession.getInstance().getUserId();
+        String selectedProduct = productTextArea.getSelectedText();
+        if (selectedProduct != null && !selectedProduct.isEmpty()) {
+            String[] productInfo = selectedProduct.split("\n");
+            int productId = Integer.parseInt(productInfo[0].split(":")[1].trim());
+
+            // Get the installation request details from the additional fields
+            String carMakeModel = carMakeModelField.getText();
+            LocalDate preferredDate = preferredDateField.getValue();
+
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/mysql", "root", "Vqo@954719")) {
+                // Prepare the SQL query
+                String insertSql = "INSERT INTO installationrequests (UserId, ProductId, CarMakeModel, PreferredDate) VALUES (?, ?, ?, ?)";
+                try (PreparedStatement insertStatement = connection.prepareStatement(insertSql)) {
+                    insertStatement.setInt(1, userId);
+                    insertStatement.setInt(2, productId);
+                    insertStatement.setString(3, carMakeModel);
+                    insertStatement.setDate(4, Date.valueOf(preferredDate));
+                    insertStatement.executeUpdate();
+
+                    showAlert("Installation request successfully inserted!");
+                }
+            } catch (SQLException e) {
+                showAlert("Something Wrong!");
+
+            }
+        }
+}
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Installation Request");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

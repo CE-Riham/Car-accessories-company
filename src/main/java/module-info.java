@@ -7,6 +7,7 @@ module com.example.newproj {
     requires java.sql;
     requires AnimateFX;
     requires java.desktop;
+//    requires javax.servlet.api;
 
 
     opens com.example.newproj to javafx.fxml;
