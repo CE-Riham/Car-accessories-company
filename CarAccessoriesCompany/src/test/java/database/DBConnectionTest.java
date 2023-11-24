@@ -5,10 +5,10 @@ import io.cucumber.java.en.When;
 
 import static org.junit.Assert.assertEquals;
 
-public class DBConnectorTest {
+public class DBConnectionTest {
     private String databaseName, username, password;
     private int port;
-    private DBConnector testConnection;
+    private DatabaseConnection testConnection;
     @When("I want to connect to database")
     public void iWantToConnectToDatabase() {
     }
@@ -27,7 +27,7 @@ public class DBConnectorTest {
     }
     @Then("he should see {string}")
     public void heShouldSee(String message) {
-        testConnection = new DBConnector(port, databaseName, username, password);
+        testConnection = new DatabaseConnection(port, databaseName, username, password);
         String status = (testConnection.isStatus() ?
                 "Connected to the database successfully" : "Couldn't connect to the database");
         assertEquals(status, message);

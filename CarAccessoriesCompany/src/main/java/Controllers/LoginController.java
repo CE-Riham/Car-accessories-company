@@ -15,6 +15,7 @@ public class LoginController {
     protected void onLoginClick() {
         //TODO
         JOptionPane.showMessageDialog(null, "Hello!");
+
     }
     @FXML
     protected void onSignupClick(){
