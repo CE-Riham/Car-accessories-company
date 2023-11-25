@@ -8,7 +8,7 @@ public class DatabaseConnection {
     private int port;
     private Connection con;
 
-    private boolean status;
+    private String status;
 
     public DatabaseConnection(){
         setPort(3306);
@@ -45,19 +45,19 @@ public class DatabaseConnection {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             con= DriverManager.getConnection(url,username,password);
-            setStatus(true);
+            setStatus("Connected to the database successfully");
         }catch(Exception e){
             System.out.println(e);
-            setStatus(false);
+            setStatus("Couldn't connect to the database");
         }
     }
 
-    public boolean isStatus() {
-        return status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public String getStatus() {
+        return status;
     }
 
     public Connection getCon() {

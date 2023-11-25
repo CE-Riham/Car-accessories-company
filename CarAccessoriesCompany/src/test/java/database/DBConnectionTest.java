@@ -28,8 +28,7 @@ public class DBConnectionTest {
     @Then("he should see {string}")
     public void heShouldSee(String message) {
         testConnection = new DatabaseConnection(port, databaseName, username, password);
-        String status = (testConnection.isStatus() ?
-                "Connected to the database successfully" : "Couldn't connect to the database");
+        String status = testConnection.getStatus();
         assertEquals(status, message);
 
     }

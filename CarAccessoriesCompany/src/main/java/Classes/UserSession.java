@@ -6,14 +6,7 @@ public class UserSession extends User{
     private String sessionId;
 
     public UserSession(User user) {
-        setUsername(user.getUsername());
-        setFirstName(user.getFirstName());
-        setLastName(user.getLastName());
-        setEmail(user.getEmail());
-        setPassword(user.getPassword());
-        setPhoneNumber(user.getPhoneNumber());
-        setAddress(user.getAddress());
-        setImagePath(user.getImagePath());
+        super(user);
     }
 
     public String getSessionId() {

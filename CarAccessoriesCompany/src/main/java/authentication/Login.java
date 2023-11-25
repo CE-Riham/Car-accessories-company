@@ -9,10 +9,10 @@ import java.sql.Connection;
 import java.util.List;
 
 public class Login {
-    private String username, password, status;
-    private RetrievingData retrievingData;
+    private String status;
+    private RetrievingData usersRetriever;
     public Login(Connection connection) {
-        retrievingData = new RetrievingData(connection);
+        usersRetriever = new RetrievingData(connection);
     }
 
     public String getStatus() {
@@ -24,10 +24,9 @@ public class Login {
     }
 
     public boolean loginUser(String username, String password){
-        this.username = username.toLowerCase();
-        this.password = password;
+        username = username.toLowerCase();
 
-        List<User> allUsers = retrievingData.selectUsers("username = '" + this.username + "'");
+        List<User> allUsers = usersRetriever.selectUsers("username = '" + username + "'");
         if(allUsers != null && allUsers.size() != 0 ) {
             User tmpUser = allUsers.get(0);
             if (tmpUser.getPassword().equals(password)) {

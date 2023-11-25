@@ -1,13 +1,23 @@
 package database;
 
+import helpers.Generator;
 import model.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class InsertingData {
+    private String status;
     private Connection con;
     public InsertingData(Connection connection){
         con = connection;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public boolean insertUser(User user){
@@ -15,16 +25,12 @@ public class InsertingData {
             String query = "insert into users "
                     + " values (?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString (1, "Riham");
-            preparedStmt.setString (2, "Katout");
-            preparedStmt.setString   (3, "rihamkatout3");
-            preparedStmt.setString(4, "0599119482");
-            preparedStmt.setString    (5, "rihamkatm@gmail.com");
-            preparedStmt.setString    (6, "123456");
-            preparedStmt.setString    (7, "");
+            preparedStmt = Generator.userToPS(preparedStmt, user);
             preparedStmt.execute();
+            setStatus("User was inserted successfully");
             return true;
         } catch (Exception e) {
+            setStatus("Couldn't insert user");
             return false;
         }
     }
