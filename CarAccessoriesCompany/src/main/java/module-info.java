@@ -10,4 +10,6 @@ module com.example.caraccessoriescompany {
     exports Controllers;
     exports Classes;
     opens Classes to javafx.fxml;
+    exports helpers;
+    opens helpers to javafx.fxml;
 }

@@ -1,5 +1,6 @@
 package database;
 
+import helpers.Generator;
 import model.Address;
 import model.User;
 
@@ -25,6 +26,7 @@ public class RetrievingData{
         this.status = status;
     }
 
+
     public List<User> selectUsers(String condition){
         List<User> users = new ArrayList<>();
         try {
@@ -35,14 +37,7 @@ public class RetrievingData{
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs != null && rs.next()) {
-                User tmpUser = new User();
-                tmpUser.setFirstName(rs.getString("firstName"));
-                tmpUser.setLastName(rs.getString("lastName"));
-                tmpUser.setUsername(rs.getString("username"));
-                tmpUser.setPhoneNumber(rs.getString("phone"));
-                tmpUser.setEmail(rs.getString("email"));
-                tmpUser.setPassword(rs.getString("userPassword"));
-                tmpUser.setImagePath(rs.getString("image"));
+                User tmpUser = Generator.rsToUser(rs);
                 users.add(tmpUser);
                 System.out.println(tmpUser);
             }
@@ -64,10 +59,7 @@ public class RetrievingData{
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs != null && rs.next()) {
-                Address tmpAddress = new Address();
-                tmpAddress.setCountry(rs.getString("country"));
-                tmpAddress.setCity(rs.getString("city"));
-                tmpAddress.setStreet(rs.getString("street"));
+                Address tmpAddress = Generator.rsToAddress(rs);
                 addresses.add(tmpAddress);
                 System.out.println(tmpAddress);
             }
