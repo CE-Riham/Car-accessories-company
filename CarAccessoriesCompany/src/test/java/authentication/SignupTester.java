@@ -1,9 +1,11 @@
+package authentication;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class signup {
+public class SignupTester {
     @When("I click on sign up and flag is {string}")
     public void iClickOnSignUpAndFlagIs(String string) {
         assertEquals(true, string.equals("true"));

@@ -1,4 +1,4 @@
-package tmp;
+package Controllers;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -16,6 +16,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javax.swing.*;
 import javafx.scene.control.TextField;
+import tmp.Database;
+import tmp.TESTINPUT;
 
 
 public class SignUpController {
