@@ -9,13 +9,13 @@ Feature: Login feature
     Then user should see '<message>'
     And close the connection
 
-  Examples:
-    | username      | password    | message                      |
-    | rihamkatout   | 123456      | Valid username and password  |
-    | rihamkatout2  | 123456      | Valid username and password  |
-    | rihamkatout3  | 123456      | Valid username and password  |
-    | rihamkatout9  | 123456      | Invalid username or password |
-    | rihamkatout   | 12de456     | Invalid username or password |
-    |               | 12de456     | Invalid username or password |
-    | rihamkatout   |             | Invalid username or password |
+    Examples:
+      | username      | password    | message                      |
+      | rihamkatout   | 123456      | Valid username and password  |
+      | rihamkatout2  | 123456      | Valid username and password  |
+      | rihamkatout3  | 123456      | Valid username and password  |
+      | rihamkatout9  | 123456      | Invalid username or password |
+      | rihamkatout   | 12de456     | Invalid username or password |
+      |               | 12de456     | Invalid username or password |
+      | rihamkatout   |             | Invalid username or password |
 

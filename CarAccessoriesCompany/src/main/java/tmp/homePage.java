@@ -93,7 +93,7 @@ public class homePage {
     }
     @FXML
     void insertInstallationRequest(ActionEvent event) {
-        int userId =UserSession.getInstance().getUserId();
+        int userId = 1;//UserSession.getInstance().getUserId();
         String selectedProduct = productTextArea.getSelectedText();
         if (selectedProduct != null && !selectedProduct.isEmpty()) {
             String[] productInfo = selectedProduct.split("\n");

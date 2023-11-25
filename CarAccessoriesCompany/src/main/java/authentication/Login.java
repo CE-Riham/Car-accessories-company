@@ -7,7 +7,6 @@ import model.User;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Locale;
 
 public class Login {
     private String username, password, status;

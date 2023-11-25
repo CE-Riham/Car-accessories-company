@@ -1,12 +1,11 @@
 package Classes;
 
-import javafx.scene.Parent;
 import model.User;
 
-public class UserSession extends User {
+public class UserSession extends User{
     private String sessionId;
 
-    public UserSession(User user){
+    public UserSession(User user) {
         setUsername(user.getUsername());
         setFirstName(user.getFirstName());
         setLastName(user.getLastName());
@@ -27,7 +26,7 @@ public class UserSession extends User {
 
     @Override
     public String toString() {
-        return "tmp.UserSession{" + getUsername() + ": " +
+        return "Classes.UserSession{" + getUsername() + ": " +
                 "sessionId='" + sessionId + '\'' +
                 '}';
     }
