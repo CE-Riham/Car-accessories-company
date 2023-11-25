@@ -38,8 +38,8 @@ public class Starter extends Application {
 //        System.out.println(dataRetriever.getStatus());
 //        System.out.println(flag);
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
-        stage.setTitle("Login");
+        Scene scene = new Scene(fxmlLoader.load(), 608, 837);
+        stage.setTitle("Car Zone Company");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
