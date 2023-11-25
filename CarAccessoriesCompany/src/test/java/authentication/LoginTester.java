@@ -1,6 +1,5 @@
 package authentication;
 
-import Classes.Starter;
 import database.DatabaseConnection;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,9 +12,11 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class LoginTester {
+
     private String status, username, password;
     private DatabaseConnection connection;
     private Login login;
+
 
     @BeforeAll
     @Given("user is connected to the database")
@@ -23,10 +24,11 @@ public class LoginTester {
         connection = new DatabaseConnection();
         login = new Login(connection.getCon());
     }
+
     @When("he fills in {string} with {string}")
     public void heFillsInWith(String field, String input) {
         if(field.equals("username"))
-                username = input;
+            username = input;
         else
             password = input;
     }
@@ -37,7 +39,7 @@ public class LoginTester {
     }
     @Then("user should see {string}")
     public void userShouldSee(String message) {
-        assertEquals(status, message);
+        assertEquals(status,message);
     }
     @AfterAll
     @Then("close the connection")

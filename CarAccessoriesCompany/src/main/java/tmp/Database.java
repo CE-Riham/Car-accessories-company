@@ -1,4 +1,5 @@
-import oracle.jdbc.pool.OracleDataSource;
+package tmp;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,8 +29,8 @@ public class Database {
             statement = connection.createStatement();
              return statement.executeQuery(string);
         } catch (SQLException e) {
-            logger.log(null,"Database connection error: ");
-            System.out.println("In Database");
+            logger.log(null,"tmp.Database connection error: ");
+            System.out.println("In tmp.Database");
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -57,7 +58,7 @@ public class Database {
             statement = connection.createStatement();
             statement.executeUpdate(string);
         } catch (SQLException | ClassNotFoundException e) {
-            logger.log(null,"Database connection error: ");
+            logger.log(null,"tmp.Database connection error: ");
         }
     }
 }

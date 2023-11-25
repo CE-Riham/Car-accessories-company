@@ -1,4 +1,5 @@
-import animatefx.animation.FadeIn;
+package tmp;
+
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 
@@ -8,12 +9,10 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import javafx.scene.control.PasswordField;
-import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javax.swing.*;
 import javafx.scene.control.TextField;
@@ -64,7 +63,7 @@ public class SignUpController {
             Stage stage = (Stage) back.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-            new FadeIn(root).play();
+//            new FadeIn(root).play();
         }catch (IOException e){
             logger.log(null," An error occurred while opening a new window:");
         }
@@ -105,7 +104,7 @@ public class SignUpController {
             Database.insertIntoDatabase("INSERT INTO customer values('" + phoneNumber.getText() + "','" + VIN.getText() + "','" + creditCard.getText() + "','" + address.getText() + "','" + gmail.getText() + "','" + userName.getText()+ "','" + pass.getText() + "','" + message.getText()+ "','" + ID.getText()+ "')");
             JOptionPane.showMessageDialog(null, "DONE ", "INSERTED", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
-            logger.log(null,"Database connection error: ");
+            logger.log(null,"tmp.Database connection error: ");
         }
         try{
             Parent root;
@@ -113,7 +112,7 @@ public class SignUpController {
             Stage stage = (Stage) signUp.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-            new FadeIn(root).play();
+//            new FadeIn(root).play();
         }catch (IOException e){
             logger.log(null," An error occurred while opening a new window:");
         }

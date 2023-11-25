@@ -1,4 +1,4 @@
-import animatefx.animation.FadeIn;
+package tmp;//import animatefx.animation.FadeIn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,7 +83,7 @@ public class HelloController {
                         Stage stage = (Stage) login1.getScene().getWindow();
                         stage.setScene(new Scene(root));
                         stage.show();
-                        new FadeIn(root).play();
+//                        new FadeIn(root).play();
                         return;
 //                    } else {
 //                        // Handle invalid credentials
@@ -105,13 +105,13 @@ public class HelloController {
                     Stage stage = (Stage) login1.getScene().getWindow();
                     stage.setScene(new Scene(root));
                     stage.show();
-                    new FadeIn(root).play();
+//                    new FadeIn(root).play();
                     return;
                 }
             }
             JOptionPane.showMessageDialog(null, "Incorrect Gmail");
         } catch (SQLException e) {
-            logger.log(null,"Database connection error: ");
+            logger.log(null,"tmp.Database connection error: ");
         }
         catch (IOException e){
             logger.log(null," An error occurred while opening a new window:");        }
@@ -129,7 +129,7 @@ public class HelloController {
             System.out.println("D3");
             stage.show();
             System.out.println("D4");
-            new FadeIn(root).play();
+//            new FadeIn(root).play();
             System.out.println("D5");
         }catch (Exception e){
             //System.out.println("DDDDDDDDDDDDDDDDDDDDDDD");
