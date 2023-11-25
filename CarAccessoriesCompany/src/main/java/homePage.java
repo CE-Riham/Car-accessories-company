@@ -1,18 +1,9 @@
-package com.example.newproj;
-
-import animatefx.animation.FadeIn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javax.swing.*;
-import java.io.IOException;
+
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.logging.Logger;
 public class homePage {
 
     @FXML

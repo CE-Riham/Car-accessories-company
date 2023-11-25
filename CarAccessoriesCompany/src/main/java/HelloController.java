@@ -1,5 +1,3 @@
-package com.example.newproj;
-
 import animatefx.animation.FadeIn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

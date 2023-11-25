@@ -1,4 +1,3 @@
-package com.example.newproj;
 import oracle.jdbc.pool.OracleDataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
