@@ -1,5 +1,3 @@
-package com.example.newproj;
-
 public class TESTINPUT {
     private TESTINPUT(){
 

@@ -1,5 +1,3 @@
-package com.example.newproj;
-
 public class UserSession {
     private static UserSession instance;
     private int userId;
