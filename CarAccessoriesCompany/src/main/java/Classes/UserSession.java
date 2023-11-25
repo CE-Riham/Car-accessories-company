@@ -27,7 +27,7 @@ public class UserSession extends User {
 
     @Override
     public String toString() {
-        return "UserSession{" + getUsername() + ": " +
+        return "tmp.UserSession{" + getUsername() + ": " +
                 "sessionId='" + sessionId + '\'' +
                 '}';
     }

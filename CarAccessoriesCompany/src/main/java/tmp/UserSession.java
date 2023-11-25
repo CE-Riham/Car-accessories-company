@@ -1,3 +1,5 @@
+package tmp;
+
 public class UserSession {
     private static UserSession instance;
     private int userId;

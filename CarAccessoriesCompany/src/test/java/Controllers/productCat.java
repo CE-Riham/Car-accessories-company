@@ -1,11 +1,8 @@
-import com.example.newproj.Database;
+package Controllers;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import static org.junit.Assert.assertEquals;
-
-import java.sql.*;
-import java.util.logging.Logger;
 public class productCat {
     @Given("the user is on the homepage")
     public void the_user_is_on_the_homepage() {

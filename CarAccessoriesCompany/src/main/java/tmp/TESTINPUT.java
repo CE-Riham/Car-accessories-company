@@ -1,3 +1,5 @@
+package tmp;
+
 public class TESTINPUT {
     private TESTINPUT(){
 
