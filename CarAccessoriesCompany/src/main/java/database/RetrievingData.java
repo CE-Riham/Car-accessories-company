@@ -26,21 +26,21 @@ public class RetrievingData{
         this.status = status;
     }
 
+    private ResultSet getFromData(String type, String condition) throws Exception{
+        ResultSet rs = null;
+        String query = "SELECT * FROM " + type + " " + (condition.equals("") ? "":"where " + condition);
+        Statement st = con.createStatement();
+        rs = st.executeQuery(query);
+        return rs;
+    }
 
     public List<User> selectUsers(String condition){
         List<User> users = new ArrayList<>();
         try {
-            String query = "SELECT * FROM users ";
-            if (!condition.equals(""))
-                query += "where " + condition;
+            ResultSet rs = getFromData("users", condition);
+            while (rs != null && rs.next())
+                users.add(Generator.rsToUser(rs));
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs != null && rs.next()) {
-                User tmpUser = Generator.rsToUser(rs);
-                users.add(tmpUser);
-                System.out.println(tmpUser);
-            }
             setStatus("Retrieving users successfully");
             return users;
         }catch (Exception e){
@@ -52,17 +52,10 @@ public class RetrievingData{
     public List<Address> selectAddresses(String condition){
         List<Address> addresses = new ArrayList<>();
         try {
-            String query = "SELECT * FROM addresses ";
-            if (!condition.equals(""))
-                query += "where " + condition;
+            ResultSet rs = getFromData("addresses", condition);
+            while (rs != null && rs.next())
+                addresses.add(Generator.rsToAddress(rs));
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs != null && rs.next()) {
-                Address tmpAddress = Generator.rsToAddress(rs);
-                addresses.add(tmpAddress);
-                System.out.println(tmpAddress);
-            }
             setStatus("Retrieving addresses successfully");
             return addresses;
         }catch (Exception e){

@@ -30,7 +30,6 @@ public class DBConnectionTest {
         testConnection = new DatabaseConnection(port, databaseName, username, password);
         String status = testConnection.getStatus();
         assertEquals(status, message);
-
     }
 
 }

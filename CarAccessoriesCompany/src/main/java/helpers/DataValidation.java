@@ -20,6 +20,12 @@ public class DataValidation {
             return "Phone number can't be empty";
         if(user.getPassword().equals(""))
             return "Password can't be empty";
+        if(user.getUsername().equals(""))
+            return "Username can't be empty";
+        if(user.getFirstName().equals(""))
+            return "First name can't be empty";
+        if(user.getLastName().equals(""))
+            return "Last name can't be empty";
         if(emailValidationTest(user.getEmail())){
             if(phoneNumberValidationTest(user.getPhoneNumber())) {
                 if (passwordValidationTest(user.getPassword()))
