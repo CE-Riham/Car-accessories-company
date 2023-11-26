@@ -64,7 +64,7 @@
                                     <Font name="Arial" size="13.0" />
                                  </font>
                               </Label>
-                              <Hyperlink text="sign up" textFill="#ae938d">
+                              <Hyperlink onAction="#onSignupClick" text="sign up" textFill="#ae938d">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
