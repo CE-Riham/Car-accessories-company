@@ -25,7 +25,7 @@ public class LoginTester {
         login = new Login(connection.getCon());
     }
 
-    @When("he fills in {string} with {string}")
+    @When("he fills in {string} with {string} for login")
     public void heFillsInWith(String field, String input) {
         if(field.equals("username"))
             username = input;
@@ -37,7 +37,7 @@ public class LoginTester {
         login.loginUser(username, password);
         status = login.getStatus();
     }
-    @Then("user should see {string}")
+    @Then("user should see {string} for login")
     public void userShouldSee(String message) {
         assertEquals(status,message);
     }
