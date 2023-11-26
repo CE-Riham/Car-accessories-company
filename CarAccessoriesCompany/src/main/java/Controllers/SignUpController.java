@@ -5,6 +5,10 @@ import authentication.Register;
 import helpers.DataValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.User;
@@ -27,16 +31,15 @@ public class SignUpController {
 
     @FXML
     void onLoginClick(ActionEvent event) {
-//        try {
-//            Parent root;
-//            root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-//            Stage stage = (Stage) back.getScene().getWindow();
-//            stage.setScene(new Scene(root));
-//            stage.show();
-////            new FadeIn(root).play();
-//        }catch (IOException e){
-//            logger.log(null," An error occurred while opening a new window:");
-//        }
+        try{
+            if (event.getSource() instanceof Node) {
+                Parent root = FXMLLoader.load(getClass().getResource("/FXMLFiles/login.fxml"));
+                Node source = (Node) event.getSource();
+                source.getScene().setRoot(root);
+            }
+        }catch (Exception e){
+            System.out.println("Can't open login page");
+        }
     }
 
     @FXML
