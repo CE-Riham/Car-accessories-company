@@ -1,0 +1,46 @@
+/*
+    color1 : #414141
+    color2 : #6d6960
+    color3 : #949376
+    color4 : #C9B3AD
+    color5 : #EFEEEC
+    color6 : #D6C8C1
+*/
+.auth-text-field-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #6d6960; /* color2*/
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arial';
+}
+
+.color1-button {
+    -fx-background-color: #414141; /* color1 */
+    -fx-text-fill: #EFEEEC; /* color5 */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+
+}
+.color1-button:hover {
+    -fx-background-color: #51514c;
+    -fx-cursor: hand;
+}
+
+.auth-text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #C9B3AD; /* color4 */
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0px;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+.auth-text-field:focused {
+    -fx-border-color: #C9B3AD;
+}
+
+
+.auth-text-field .text {
+    -fx-fill: #999;
+}
