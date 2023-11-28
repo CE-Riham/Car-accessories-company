@@ -34,7 +34,7 @@ public class Login {
                 setStatus("Valid username and password");
                 Starter.userSession = new UserSession(tmpUser);
                 int userId = -1;
-                String sql = "SELECT id FROM users WHERE username = ?";
+                String sql = "SELECT id FROM users_new WHERE username = ?";
                 try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/mysql", "root", "Vqo@954719");
                      PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 

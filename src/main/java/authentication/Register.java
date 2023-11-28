@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Register {
     private String status;
-    private InsertingData userInserter;
+    public InsertingData userInserter;
     private RetrievingData userRetriever;
 
     public Register(Connection connection){

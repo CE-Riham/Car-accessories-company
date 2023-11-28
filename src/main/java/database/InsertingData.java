@@ -24,7 +24,7 @@ public class InsertingData {
 
     public boolean insertUser(User user){
         try {
-            String query = "insert into users "
+            String query = "insert into users_new "
                     + " values (?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt = Generator.userToPS(preparedStmt, user);
@@ -38,12 +38,13 @@ public class InsertingData {
     }
     public boolean insertInstallReq(installReq req) {
         try {
-            String query = "insert into installationrequests values ( ?, ?, ?, ?);";
+            String query = "INSERT INTO installationrequests VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
-            System.out.println(req.toString()+"   ");
 
             preparedStmt = Generator.InstallToPS(preparedStmt, req);
-            preparedStmt.execute();
+            preparedStmt.executeUpdate();
+            System.out.println("HHHHHHHHHHHHhhh : "+preparedStmt);
+
             setStatus("Install Request was inserted successfully");
             return true;
         } catch (SQLException e) {
