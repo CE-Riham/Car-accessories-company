@@ -2,10 +2,15 @@ package helpers;
 
 import model.Address;
 import model.User;
+import model.installReq;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class Generator {
     public static User rsToUser(ResultSet rs) throws SQLException {
@@ -35,6 +40,17 @@ public class Generator {
         preparedStmt.setString    (5, user.getEmail());
         preparedStmt.setString    (6, user.getPassword());
         preparedStmt.setString    (7, "");
+        return preparedStmt;
+    }
+
+    public static PreparedStatement InstallToPS(PreparedStatement preparedStmt, installReq req) throws SQLException {
+        System.out.println(req.toString()+"   IN INSTAALL");
+        LocalDate localDate = req.getPreferredData();
+        Date sqlDate = Date.valueOf(localDate);
+        preparedStmt.setInt (1, req.getUserid());
+        preparedStmt.setInt (2, req.getProductid());
+        preparedStmt.setInt   (3, req.getCarMakeModel());
+        preparedStmt.setDate(4,sqlDate);
         return preparedStmt;
     }
 }

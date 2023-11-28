@@ -3,13 +3,13 @@ package Classes;
 import model.User;
 
 public class UserSession extends User{
-    private String sessionId;
+    private static String sessionId;
 
     public UserSession(User user) {
         super(user);
     }
 
-    public String getSessionId() {
+    public static String getSessionId() {
         return sessionId;
     }
 
