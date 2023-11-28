@@ -6,7 +6,7 @@ import database.RetrievingData;
 import javafx.scene.Scene;
 import model.User;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.List;
 
 public class Login {
@@ -33,7 +33,23 @@ public class Login {
             if (tmpUser.getPassword().equals(password)) {
                 setStatus("Valid username and password");
                 Starter.userSession = new UserSession(tmpUser);
-                Starter.userSession.setSessionId(Starter.sessionManager.createSession(username));
+                int userId = -1;
+                String sql = "SELECT id FROM users WHERE username = ?";
+                try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/mysql", "root", "Vqo@954719");
+                     PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+                    preparedStatement.setString(1, username);
+
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        if (resultSet.next()) {
+                            userId = resultSet.getInt("id");
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace(); // Handle the exception appropriately
+                }
+                Starter.userSession.setSessionId(String.valueOf(userId));
+
                 return true;
             }
         }

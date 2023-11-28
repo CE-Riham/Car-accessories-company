@@ -2,9 +2,11 @@ package database;
 
 import helpers.Generator;
 import model.User;
+import model.installReq;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class InsertingData {
     private String status;
@@ -31,6 +33,26 @@ public class InsertingData {
             return true;
         } catch (Exception e) {
             setStatus("Couldn't insert user");
+            return false;
+        }
+    }
+    public boolean insertInstallReq(installReq req) {
+        try {
+            String query = "insert into installationrequests values ( ?, ?, ?, ?);";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            System.out.println(req.toString()+"   ");
+
+            preparedStmt = Generator.InstallToPS(preparedStmt, req);
+            preparedStmt.execute();
+            setStatus("Install Request was inserted successfully");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log the exception for debugging
+            setStatus("Couldn't insert Request due to a database error");
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            setStatus("An unexpected error occurred while inserting the request");
             return false;
         }
     }
