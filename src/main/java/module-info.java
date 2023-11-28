@@ -5,6 +5,7 @@ module com.example.caraccessoriescompany {
     requires com.oracle.database.jdbc;
     requires java.sql;
     requires AnimateFX;
+    requires java.mail;
 
 
     opens Controllers to javafx.fxml;

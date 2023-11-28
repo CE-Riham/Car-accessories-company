@@ -44,7 +44,6 @@ public class Generator {
     }
 
     public static PreparedStatement InstallToPS(PreparedStatement preparedStmt, installReq req) throws SQLException {
-        System.out.println(req.toString()+"   IN INSTAALL");
         LocalDate localDate = req.getPreferredData();
         Date sqlDate = Date.valueOf(localDate);
         preparedStmt.setInt (1, req.getUserid());

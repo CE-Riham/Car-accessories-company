@@ -30,7 +30,7 @@ public class RetrievingData{
     public List<User> selectUsers(String condition){
         List<User> users = new ArrayList<>();
         try {
-            String query = "SELECT * FROM users ";
+            String query = "SELECT * FROM users_new ";
             if (!condition.equals(""))
                 query += "where " + condition;
 
