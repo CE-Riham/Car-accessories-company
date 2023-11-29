@@ -8,9 +8,9 @@ import java.sql.PreparedStatement;
 
 public class InsertingData {
     private String status;
-    private Connection con;
+    private Connection connection;
     public InsertingData(Connection connection){
-        con = connection;
+        this.connection = connection;
     }
     public String getStatus() {
         return status;
@@ -24,7 +24,7 @@ public class InsertingData {
         try {
             String query = "insert into users "
                     + " values (?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.userToPS(preparedStmt, user);
             preparedStmt.execute();
             setStatus("User was inserted successfully");

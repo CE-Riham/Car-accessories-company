@@ -1,7 +1,5 @@
 package authentication;
 
-import Classes.Starter;
-import Classes.UserSession;
 import database.InsertingData;
 import database.RetrievingData;
 import helpers.DataValidation;
@@ -27,22 +25,28 @@ public class Register {
         this.status = status;
     }
 
-    public boolean registerUser(User user){
+    public void registerUserTest(User user){
         String st = DataValidation.userValidationTest(user);
         if(st.equals("Valid")){
             List<User> allUsers = userRetriever.selectUsers("username = '" + user.getUsername() + "'");
-            if(allUsers == null || allUsers.size() == 0 ) {
-                if(userInserter.insertUser(user)) {
+            if(allUsers == null || allUsers.size() == 0 )
                     setStatus("User was registered successfully");
-                    return true;
-                }
-                setStatus("Couldn't register user");
-            }
             else
                 setStatus("Username is already taken");
         }
         else
             setStatus(st);
+    }
+    public boolean registerUser(User user){
+        registerUserTest(user);
+        if(getStatus().equals("User was registered successfully")){
+            if(userInserter.insertUser(user)) {
+                setStatus("User was registered successfully");
+                return true;
+            }
+            setStatus("Couldn't register user");
+
+        }
         return false;
     }
 }

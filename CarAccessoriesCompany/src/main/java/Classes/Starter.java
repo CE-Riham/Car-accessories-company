@@ -18,6 +18,8 @@ public class Starter extends Application {
         sessionManager = new UserSessionManager();
         connector = new DatabaseConnection();
         System.out.println(connector.getStatus());
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 608, 837);
         stage.setTitle("Car Zone Company");
