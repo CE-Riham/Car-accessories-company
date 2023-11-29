@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Compiled class file
 *.class
 
@@ -24,6 +25,8 @@
 hs_err_pid*
 replay_pid*
 =======
+=======
+>>>>>>> 49e82c6 (commit)
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -61,5 +64,9 @@ build/
 .vscode/
 
 ### Mac OS ###
+<<<<<<< HEAD
 .DS_Store
 >>>>>>> 36210fc (Second commit)
+=======
+.DS_Store
+>>>>>>> 49e82c6 (commit)
