@@ -1,7 +1,5 @@
 package authentication;
 
-import Classes.Starter;
-import Classes.UserSession;
 import database.InsertingData;
 import database.RetrievingData;
 import helpers.DataValidation;

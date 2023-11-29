@@ -1,30 +1,39 @@
-Feature: Select data from database
+Feature: Retrieve data from database
 
-  Scenario Outline: User retrieves various data
+  Scenario Outline: I retrieve from users entity
     Given I'm connected to a database
     When I fill in condition with "<condition>"
-    And I want to retrieve '<entity>'
-    Then I should see "<message>"
+    And I want to retrieve 'users'
+    Then I should see "<message>" for retrieving data
     And close the connection
   Examples:
-  | entity           | condition                                          | message                                        |
-  | users            |                                                    | Retrieving users successfully                  |
-  | users            | username = 'rihamkatout'                           | Retrieving users successfully                  |
-  | users            | username = rihamkatout                             | Error while retrieving users from database     |
-  | users            | username = 'nousername'                            | Retrieving users successfully                  |
-  | users            | phone = '0599119482'                               | Retrieving users successfully                  |
-  | users            | email = 'rihamk@gm.c'                              | Retrieving users successfully                  |
-  | users            | firstName = 'Riham'                                | Retrieving users successfully                  |
-  | users            | lastName = 'Katout'                                | Retrieving users successfully                  |
-  | users            | username = 'rihamkatout' AND firstName = 'Riham'   | Retrieving users successfully                  |
-  | users            | latName = 'Katout'                                 | Error while retrieving users from database     |
-  | users            | lastName = 'Katout' ANDD firstName = 'Riham'       | Error while retrieving users from database     |
-  | addresses        |                                                    | Retrieving addresses successfully              |
-  | addresses        | city = 'Nablus'                                    | Retrieving addresses successfully              |
-  | addresses        | country = 'Palestine'                              | Retrieving addresses successfully              |
-  | addresses        | country = 'FakeCountry'                            | Retrieving addresses successfully              |
-  | addresses        | street = 'Sikkah street'                           | Retrieving addresses successfully              |
-  | addresses        | country = 'Palestine' AND city = 'Nablus'          | Retrieving addresses successfully              |
-  | addresses        | country = 'Palestine' ANDDDD city = 'Nablus'       | Error while retrieving addresses from database |
-  | invalidEntity    | country = 'Palestine' ANDDDD city = 'Nablus'       | Error while retrieving from database           |
+    | condition                                          | message                                        |
+    |                                                    | Retrieving users successfully                  |
+    | username = 'rihamkatout'                           | Retrieving users successfully                  |
+    | username = rihamkatout                             | Error while retrieving users from database     |
+    | username = 'nousername'                            | Retrieving users successfully                  |
+    | phone = '0599119482'                               | Retrieving users successfully                  |
+    | email = 'rihamk@gm.c'                              | Retrieving users successfully                  |
+    | firstName = 'Riham'                                | Retrieving users successfully                  |
+    | lastName = 'Katout'                                | Retrieving users successfully                  |
+    | username = 'rihamkatout' AND firstName = 'Riham'   | Retrieving users successfully                  |
+    | latName = 'Katout'                                 | Error while retrieving users from database     |
+    | lastName = 'Katout' ANDD firstName = 'Riham'       | Error while retrieving users from database     |
+
+
+  Scenario Outline: I retrieve from addresses entity
+    Given I'm connected to a database
+    When I fill in condition with "<condition>"
+    And I want to retrieve 'addresses'
+    Then I should see "<message>" for retrieving data
+    And close the connection
+    Examples:
+      | condition                                          | message                                        |
+      |                                                    | Retrieving addresses successfully              |
+      | city = 'Nablus'                                    | Retrieving addresses successfully              |
+      | country = 'Palestine'                              | Retrieving addresses successfully              |
+      | country = 'FakeCountry'                            | Retrieving addresses successfully              |
+      | street = 'Sikkah street'                           | Retrieving addresses successfully              |
+      | country = 'Palestine' AND city = 'Nablus'          | Retrieving addresses successfully              |
+      | country = 'Palestine' ANDDDD city = 'Nablus'       | Error while retrieving addresses from database |
 

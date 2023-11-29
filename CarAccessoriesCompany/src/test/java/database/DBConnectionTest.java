@@ -11,6 +11,7 @@ public class DBConnectionTest {
     private DatabaseConnection testConnection;
     @When("I want to connect to database")
     public void iWantToConnectToDatabase() {
+        assert(true);
     }
     @When("I fill in {string} with {string}")
     public void iFillInWith(String field, String input) {
@@ -25,11 +26,10 @@ public class DBConnectionTest {
         else assert(false);
         assert(true);
     }
-    @Then("he should see {string}")
-    public void heShouldSee(String message) {
+    @Then("I should see {string} for connection")
+    public void iShouldSee(String message) {
         testConnection = new DatabaseConnection(port, databaseName, username, password);
         String status = testConnection.getStatus();
         assertEquals(status, message);
     }
-
 }
