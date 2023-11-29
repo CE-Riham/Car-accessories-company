@@ -38,7 +38,7 @@ public class DBRetrievingTest {
         else
             status = "Error while retrieving from database";
     }
-    @Then("I should see {string}")
+    @Then("I should see {string} for retrieving data")
     public void iShouldSee(String message) {
         assertEquals(status, message);
     }

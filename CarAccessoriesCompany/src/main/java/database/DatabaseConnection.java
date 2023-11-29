@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DatabaseConnection {
-    private String databaseName, username, password;
+    private String databaseName, username, password, status;
     private int port;
     private Connection con;
-
-    private String status;
 
     public DatabaseConnection(){
         setPort(3306);
@@ -24,6 +22,12 @@ public class DatabaseConnection {
         setPassword(password);
         setCon();
     }
+    public String getStatus() { return status;}
+
+    public Connection getCon() {
+        return con;
+    }
+
     public void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
     }
@@ -39,6 +43,10 @@ public class DatabaseConnection {
     public void setPort(int port) {
         this.port = port;
     }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 
     public void setCon() {
         String url = "jdbc:mysql://localhost:" + port + "/" + databaseName;
@@ -50,17 +58,5 @@ public class DatabaseConnection {
             System.out.println(e);
             setStatus("Couldn't connect to the database");
         }
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Connection getCon() {
-        return con;
     }
 }

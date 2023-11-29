@@ -6,7 +6,7 @@ Feature: Connecting to a given database
     And I fill in 'databaseName' with 'caraccessoriescompany'
     And I fill in 'username' with 'root'
     And I fill in 'password' with '12345678password'
-    Then he should see "Connected to the database successfully"
+    Then I should see "Connected to the database successfully" for connection
 
   Scenario: Failure connection
     When I want to connect to database
@@ -14,4 +14,6 @@ Feature: Connecting to a given database
     And I fill in 'databaseName' with 'invalidName'
     And I fill in 'username' with 'invalidRoot'
     And I fill in 'password' with 'invalidPassword'
-    Then he should see "Couldn't connect to the database"
+    Then I should see "Couldn't connect to the database" for connection
+
+

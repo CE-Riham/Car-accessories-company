@@ -26,9 +26,9 @@ public class RetrievingData{
         this.status = status;
     }
 
-    private ResultSet getFromData(String type, String condition) throws Exception{
+    private ResultSet getFromData(String entity, String condition) throws Exception{
         ResultSet rs = null;
-        String query = "SELECT * FROM " + type + " " + (condition.equals("") ? "":"where " + condition);
+        String query = "SELECT * FROM " + entity + " " + (condition.equals("") ? "":"where " + condition);
         Statement st = con.createStatement();
         rs = st.executeQuery(query);
         return rs;
@@ -63,6 +63,4 @@ public class RetrievingData{
             return null;
         }
     }
-
-
 }
