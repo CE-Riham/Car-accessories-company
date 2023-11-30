@@ -3,6 +3,7 @@ package Controllers;
 import Classes.Starter;
 import authentication.Register;
 import helpers.DataValidation;
+import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,15 +32,7 @@ public class SignUpController {
 
     @FXML
     void onLoginClick(ActionEvent event) {
-        try{
-            if (event.getSource() instanceof Node) {
-                Parent root = FXMLLoader.load(getClass().getResource("/FXMLFiles/login.fxml"));
-                Node source = (Node) event.getSource();
-                source.getScene().setRoot(root);
-            }
-        }catch (Exception e){
-            System.out.println("Can't open login page");
-        }
+        StageHelper.showLogin(event);
     }
 
     @FXML
@@ -56,16 +49,6 @@ public class SignUpController {
         System.out.println(status);
         JOptionPane.showMessageDialog(null, status, "ERROR!", JOptionPane.ERROR_MESSAGE);
 
-//        try{
-//            Parent root;
-//            root = FXMLLoader.load(getClass().getResource("screen3.fxml"));
-//            Stage stage = (Stage) signUp.getScene().getWindow();
-//            stage.setScene(new Scene(root));
-//            stage.show();
-////            new FadeIn(root).play();
-//        }catch (IOException e){
-//            logger.log(null," An error occurred while opening a new window:");
-//        }
     }
-    }
+}
 

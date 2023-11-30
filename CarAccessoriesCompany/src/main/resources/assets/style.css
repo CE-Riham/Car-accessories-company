@@ -44,3 +44,67 @@
 .auth-text-field .text {
     -fx-fill: #999;
 }
+
+.admin-header{
+    -fx-background-color: #414141; /* color1 */
+    -fx-alignment: justify;
+    /*
+    -fx-border-color: #C9B3AD;
+    -fx-border-width: 0 0 5 0;
+    */
+}
+.admin-header-item{
+    -fx-background-color: transparent;
+    -fx-text-fill: #EFEEEC; /* color5 */
+    -fx-border-width: 0 0 5 0;
+    -fx-font-size: 26px;
+    -fx-padding: 0 0 -2 0;
+}
+.admin-header-menu{
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+}
+
+.admin-header-item:hover{
+    -fx-border-color: #C9B3AD;
+    -fx-cursor: hand;
+}
+
+.icon{
+    -fx-cursor: hand;
+}
+
+.transparent-button{
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+}
+
+.back{
+    -fx-background-color: #414141; /* color1 */
+}
+
+.profile-label {
+    -fx-background-color: transparent;
+    -fx-text-fill: #231F20;
+    -fx-font-weight: bold;
+    -fx-alignment:center;
+}
+
+.profile-text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent; /* color1 */
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0 0 -3 0px;
+    -fx-font-size: 24px;
+    -fx-text-fill: #231F20;
+}
+
+.profile-text-field:focused {
+    -fx-border-color: #414141;
+}
+
+
+.profile-text-field .text {
+    -fx-fill: #231F20;
+}
