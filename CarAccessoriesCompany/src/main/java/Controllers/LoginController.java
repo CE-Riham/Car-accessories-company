@@ -2,12 +2,12 @@ package Controllers;//import animatefx.animation.FadeIn;
 
 import Classes.Starter;
 import authentication.Login;
+import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -26,7 +26,7 @@ public class LoginController {
     private PasswordField passwordTextField;
 
     @FXML
-    protected void onLoginClick() {
+    protected void onLoginClick(ActionEvent event) {
         //TODO
         //next page
         String username = usernameTextField.getText().toLowerCase(), password = passwordTextField.getText();
@@ -35,22 +35,15 @@ public class LoginController {
 
         if(!flag)
             JOptionPane.showMessageDialog(null, login.getStatus(), "ERROR!", JOptionPane.ERROR_MESSAGE);
-        else
-            JOptionPane.showMessageDialog(null, login.getStatus(), "Ok", JOptionPane.DEFAULT_OPTION);
+        else {
+            StageHelper.showAdmin(event);
+        }
 
     }
 
     @FXML
     void onSignupClick(ActionEvent event) {
-        try{
-            if (event.getSource() instanceof Node) {
-                Parent root = FXMLLoader.load(getClass().getResource("/FXMLFiles/signup.fxml"));
-                Node source = (Node) event.getSource();
-                source.getScene().setRoot(root);
-            }
-        }catch (Exception e){
-            System.out.println("Can't open sign-up page");
-        }
+        StageHelper.showSignup(event);
     }
     @FXML
     protected void onForgetPasswordClick(){
