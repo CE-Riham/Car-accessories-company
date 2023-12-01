@@ -1,6 +1,5 @@
-package Classes;
+package classes;
 
-import authentication.UserSessionManager;
 import database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,18 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class Starter extends Application {
-    public static DatabaseConnection connector;
-    public static UserSessionManager sessionManager;
-    public static UserSession userSession;
+    public static final Logger logger = Logger.getLogger(Starter.class.getName());
     @Override
     public void start(Stage stage) throws IOException {
-        sessionManager = new UserSessionManager();
-        connector = new DatabaseConnection();
-        System.out.println(connector.getStatus());
-
-
+        DBConnector.setConnector(new DatabaseConnection());
+        logger.info(DBConnector.getConnector().getStatus());
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 608, 837);
         stage.setTitle("Car Zone Company");

@@ -149,7 +149,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.caraccessoriescompany/Classes.Starter
+                                com.example.caraccessoriescompany/classes.Starter
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

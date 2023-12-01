@@ -1,20 +1,5 @@
-package Controllers;
+package controllers;
 
-import Classes.Mail;
-import Classes.Starter;
-import Classes.UserSession;
-import authentication.Register;
-import database.InsertingData;
-import database.RetrievingData;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import model.installReq;
-
-import javax.mail.MessagingException;
-import java.io.IOException;
-import java.sql.*;
-import java.time.LocalDate;
 public class homePage {
 //    private installReq request;
 //    private InsertingData reqInserter;

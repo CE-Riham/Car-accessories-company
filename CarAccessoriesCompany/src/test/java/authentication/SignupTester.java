@@ -1,6 +1,5 @@
 package authentication;
 
-import Classes.Starter;
 import database.DatabaseConnection;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

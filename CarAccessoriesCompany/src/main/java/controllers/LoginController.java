@@ -1,13 +1,11 @@
-package Controllers;//import animatefx.animation.FadeIn;
+package controllers;//import animatefx.animation.FadeIn;
 
-import Classes.Starter;
+import classes.DBConnector;
+import classes.Starter;
 import authentication.Login;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -16,7 +14,7 @@ import javax.swing.*;
 public class LoginController {
     private Login login;
     public LoginController(){
-        login = new Login(Starter.connector.getCon());
+        login = new Login(DBConnector.getConnector().getCon());
     }
 
     @FXML
@@ -31,7 +29,7 @@ public class LoginController {
         //next page
         String username = usernameTextField.getText().toLowerCase(), password = passwordTextField.getText();
         boolean flag = login.loginUser(username, password);
-        System.out.println(login.getStatus());
+        Starter.logger.info(login.getStatus());
 
         if(!flag)
             JOptionPane.showMessageDialog(null, login.getStatus(), "ERROR!", JOptionPane.ERROR_MESSAGE);

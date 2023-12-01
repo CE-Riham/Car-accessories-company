@@ -1,15 +1,12 @@
-package Controllers;
+package controllers;
 
-import Classes.Starter;
+import classes.DBConnector;
+import classes.Starter;
 import authentication.Register;
 import helpers.DataValidation;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.User;
@@ -21,7 +18,7 @@ public class SignUpController {
 
     private Register userRegisterer;
     public SignUpController(){
-        userRegisterer = new Register(Starter.connector.getCon());
+        userRegisterer = new Register(DBConnector.getConnector().getCon());
     }
     @FXML
     private TextField emailTextField, firstNameTextField, lastNameTextField, phoneTextField, usernameTextField;
