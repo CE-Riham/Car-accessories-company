@@ -6,6 +6,7 @@ import model.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +27,17 @@ public class RetrievingData{
         this.status = status;
     }
 
-    private ResultSet getFromData(String entity, String condition) throws Exception{
+    private ResultSet getFromData(String entity, String condition) throws SQLException {
         ResultSet rs = null;
         String query = "SELECT * FROM " + entity + " " + (condition.equals("") ? "":"where " + condition);
-        Statement st = con.createStatement();
-        rs = st.executeQuery(query);
-        return rs;
+        Statement st = null;
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            return rs;
+        }finally {
+            if(st != null) st.close();
+        }
     }
 
     public List<User> selectUsers(String condition){
@@ -45,7 +51,7 @@ public class RetrievingData{
             return users;
         }catch (Exception e){
             setStatus("Error while retrieving users from database");
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -60,7 +66,7 @@ public class RetrievingData{
             return addresses;
         }catch (Exception e){
             setStatus("Error while retrieving addresses from database");
-            return null;
+            return new ArrayList<>();
         }
     }
 }
