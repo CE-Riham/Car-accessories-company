@@ -88,7 +88,7 @@ public class User {
     }
 
     public String getImagePath() {
-        return (imagePath.equals("")?"/assets/usersPictures/nouser.png":imagePath);
+        return ( (imagePath.equals("") || imagePath.equals(null)) ? "/assets/usersPictures/nouser.png":imagePath);
     }
 
     public void setImagePath(String imagePath) {

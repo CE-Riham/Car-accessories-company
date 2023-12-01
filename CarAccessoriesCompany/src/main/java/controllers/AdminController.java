@@ -201,6 +201,7 @@ public class AdminController {
         setProfileEditable(true);
     }
 
+    //done
     @FXML
     void onChangePasswordClick(ActionEvent event) {
         setProfileEditable(false);
@@ -250,6 +251,7 @@ public class AdminController {
         changePictureButton.setVisible(false);
         changePasswordButton.setVisible(true);
 
+        //update admin information
         String email = emailTextField.getText();
         String firstNameTmp = firstNameTextField.getText();
         String lastNameTmp = lastNameTextField.getText();
@@ -260,6 +262,8 @@ public class AdminController {
                 "admin", UserSession.getCurrentUser().getAddress());
 
         dataUpdater.updateUser(user, condition);
+
+        //result
         String status = dataUpdater.getStatus();
         if(status.equals("User was updated successfully")){
             Alerts.informationAlert("Update", null, status);
