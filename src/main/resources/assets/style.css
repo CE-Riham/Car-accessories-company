@@ -1,0 +1,212 @@
+/*
+    color1 : #414141
+    color2 : #6d6960
+    color3 : #949376
+    color4 : #C9B3AD
+    color5 : #EFEEEC
+    color6 : #D6C8C1
+*/
+.auth-text-field-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #6d6960; /* color2*/
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arial';
+}
+
+/*.label{*/
+/*    -fx-font-size: 24px;*/
+/*    -fx-text-fill: #6d6960; !* color2*!*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-font-family: 'Arial';*/
+/*}*/
+.color1-button {
+    -fx-background-color: #414141; /* color1 */
+    -fx-text-fill: #EFEEEC; /* color5 */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+
+}
+.color1-button:hover {
+    -fx-background-color: #51514c;
+    -fx-cursor: hand;
+}
+
+.auth-text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #C9B3AD; /* color4 */
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0px;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+.auth-text-field:focused {
+    -fx-border-color: #C9B3AD;
+}
+
+
+.auth-text-field .text {
+    -fx-fill: #999;
+}
+
+.admin-header{
+    -fx-background-color: #414141; /* color1 */
+    -fx-alignment: justify;
+    /*
+    -fx-border-color: #C9B3AD;
+    -fx-border-width: 0 0 5 0;
+    */
+}
+.admin-header-item{
+    -fx-background-color: transparent;
+    -fx-text-fill: #EFEEEC; /* color5 */
+    -fx-border-width: 0 0 5 0;
+    -fx-font-size: 26px;
+    -fx-padding: 0 0 -2 0;
+}
+.admin-header-menu{
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+}
+.
+.admin-header-item:hover{
+    -fx-border-color: #C9B3AD;
+    -fx-cursor: hand;
+}
+
+.icon{
+    -fx-cursor: hand;
+}
+
+.transparent-button{
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+}
+
+.back{
+    -fx-background-color: #414141; /* color1 */
+}
+
+.profile-label {
+    -fx-background-color: transparent;
+    -fx-text-fill: #231F20;
+    -fx-font-weight: bold;
+    -fx-alignment:center;
+}
+
+.profile-text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent; /* color1 */
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0 0 -3 0px;
+    -fx-font-size: 24px;
+    -fx-text-fill: #231F20;
+}
+
+.profile-text-field:focused {
+    -fx-border-color: #414141;
+}
+
+
+.profile-text-field .text {
+    -fx-fill: #231F20;
+}
+/*#carMakeModelField{*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-border-color: transparent; !* color1 *!*/
+/*    -fx-border-radius: 0;*/
+/*    -fx-border-width: 0 0 2 0;*/
+/*    -fx-padding: 0 0 -3 0px;*/
+/*    -fx-font-size: 18px;*/
+/*    -fx-text-fill: #231F20;*/
+/*}*/
+/*#searchField{*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-border-color: transparent; !* color1 *!*/
+/*    -fx-border-radius: 0;*/
+/*    -fx-border-width: 0 0 2 0;*/
+/*    -fx-padding: 0 0 -3 0px;*/
+/*    -fx-font-size: 18px;*/
+/*    -fx-text-fill: #231F20;*/
+
+/*}*/
+/*#categoryComboBox {*/
+/*    font-family: 'Arial', sans-serif;*/
+/*    font-size: 14px;*/
+/*    padding: 8px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    background-color: #fff;*/
+/*    width: 200px;*/
+/*}*/
+
+/*#categoryComboBox option {*/
+/*    font-size: 14px;*/
+/*    padding: 8px;*/
+/*}*/
+
+/*#button1{*/
+/*    -fx-background-color: #414141; !* color1 *!*/
+/*    -fx-text-fill: #EFEEEC; !* color5 *!*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-font-size: 12px;*/
+/*}*/
+/*#buuton2{*/
+/*    -fx-background-color: #414141; !* color1 *!*/
+/*    -fx-text-fill: #EFEEEC; !* color5 *!*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-font-size: 12px;*/
+/*}*/
+/*#orderBtt{*/
+/*    -fx-background-color: #414141; !* color1 *!*/
+/*    -fx-text-fill: #EFEEEC; !* color5 *!*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-font-size: 12px;*/
+/*}*/
+/*#preferredDateField{*/
+/*    appearance: none;*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    border: none;*/
+/*    outline: none;*/
+/*    background: transparent;*/
+/*    color: #fff;*/
+/*    font-size: 16px;*/
+/*    padding: 8px;*/
+/*    border-radius: 5px;*/
+/*    border: 2px solid #000;*/
+/*}*/
+/*#homePage{*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-alignment: center;*/
+/*}*/
+/*#productTextArea{*/
+/*    -fx-font-family: "Arial";*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-control-inner-background: #ffffff; !* Background color *!*/
+/*    -fx-text-fill: #000000; !* Text color *!*/
+/*    -fx-border-color: #cccccc; !* Border color *!*/
+/*    -fx-border-width: 10px; !* Border width *!*/
+/*    -fx-border-radius: 10px; !* Border radius *!*/
+/*    -fx-padding: 5px; !* Padding *!*/
+/*    -fx-pref-height: 200px;*/
+/*    -fx-wrap-text: true;*/
+/*}*/
+/*.scroll-pane {*/
+/*    -fx-pref-height: 200.0;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
