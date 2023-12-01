@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Generator {
+    private Generator() {
+        throw new IllegalStateException("Utility class");
+    }
     public static User rsToUser(ResultSet rs) throws SQLException {
         User tmpUser = new User();
         tmpUser.setFirstName(rs.getString("firstName"));
