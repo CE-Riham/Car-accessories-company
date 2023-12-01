@@ -8,6 +8,7 @@ import database.UpdatingData;
 import helpers.Alerts;
 import helpers.DataValidation;
 import helpers.StageHelper;
+import helpers.Uploader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -21,7 +22,9 @@ import java.util.Optional;
 
 public class AdminController {
     private UpdatingData dataUpdater;
+    private Uploader uploader;
     public AdminController(){
+        uploader = new Uploader();
         dataUpdater = new UpdatingData(DBConnector.getConnector().getCon());
     }
     @FXML
@@ -91,7 +94,6 @@ public class AdminController {
         button.setStyle("-fx-border-color: #C9B3AD;");
     }
 
-
     private void disableAllPanesExcept(AnchorPane pane){
         profile.setVisible(false);
         pane.setVisible(true);
@@ -109,6 +111,12 @@ public class AdminController {
     }
 
     private void getProfileFromDB(){
+        firstName.setText(UserSession.getCurrentUser().getFirstName());
+        lastName.setText(UserSession.getCurrentUser().getLastName());
+        Image image = new Image(getClass().getResourceAsStream(UserSession.getCurrentUser().getImagePath()));
+        profilePicture.setFill(new ImagePattern(image));
+        //TODO
+        //refresh picture
         User tmpUser = UserSession.getCurrentUser();
         //admin data
         firstNameTextField.setText(tmpUser.getFirstName());
@@ -123,13 +131,8 @@ public class AdminController {
     //done
     @FXML
     void onAdminNameClick(ActionEvent event) {
-        User tmpUser = UserSession.getCurrentUser();
         disableAllMenuButtonsExcept(adminNameButton);
         disableAllPanesExcept(profile);
-        firstName.setText(tmpUser.getFirstName());
-        lastName.setText(tmpUser.getLastName());
-        Image image = new Image(getClass().getResourceAsStream(tmpUser.getImagePath()));
-        profilePicture.setFill(new ImagePattern(image));
         getProfileFromDB();
         Starter.logger.info("Profile was opened successfully :)");
     }
@@ -188,6 +191,25 @@ public class AdminController {
     @FXML
     void onChangePictureClick(ActionEvent event) {
         //TODO
+        String savePath = "src/main/resources/assets/usersPictures/"+ UserSession.getCurrentUser().getUsername() + ".png";
+        boolean uploadImageFlag = uploader.uploadImage();
+        if(uploadImageFlag){
+            boolean savingFlag = uploader.saveToFile(savePath);
+            if(savingFlag){
+                //save the new photo in database
+                String imagePath = savePath.substring(18);
+                User user = UserSession.getCurrentUser();
+                user.setImagePath(imagePath);
+                String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
+                dataUpdater.updateUser(user, condition);
+                String status = dataUpdater.getStatus();
+                if(status.equals("User was updated successfully")){
+                    UserSession.setCurrentUser(user);
+                    Alerts.informationAlert("Update", null, "Image was updated successfully.");
+                    getProfileFromDB();
+                }
+            }
+        }
     }
 
     //done
@@ -214,7 +236,7 @@ public class AdminController {
             if(DataValidation.passwordValidationTest(password)){
                 User user = UserSession.getCurrentUser();
                 user.setPassword(password);
-                String condition = "where username = \'" + usernameTextField.getText() + "\';";
+                String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
                 dataUpdater.updateUser(user, condition);
                 String status = dataUpdater.getStatus();
                 if(status.equals("User was updated successfully")){
@@ -268,8 +290,6 @@ public class AdminController {
         if(status.equals("User was updated successfully")){
             Alerts.informationAlert("Update", null, status);
             UserSession.setCurrentUser(user);
-            firstName.setText(firstNameTmp);
-            lastName.setText(lastNameTmp);
         }
         else
             Alerts.errorAlert("Error", null, status);
