@@ -50,15 +50,15 @@ public class RetrievingData{
         List<Address> addresses = new ArrayList<>();
         Statement st = null;
         try {
-            String query = "SELECT * FROM users " + (condition.equals("") ? "":"where " + condition);
+            String query = "SELECT * FROM addresses " + (condition.equals("") ? "":"where " + condition);
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs != null && rs.next())
                 addresses.add(Generator.rsToAddress(rs));
-            setStatus("Retrieving users successfully");
+            setStatus("Retrieving addresses successfully");
             return addresses;
         }catch (Exception e){
-            setStatus("Error while retrieving users from database");
+            setStatus("Error while retrieving addresses from database");
             return new ArrayList<>();
         }finally {
             if(st != null)st.close();

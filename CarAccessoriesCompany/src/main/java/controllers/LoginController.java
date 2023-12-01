@@ -3,6 +3,7 @@ package controllers;//import animatefx.animation.FadeIn;
 import classes.DBConnector;
 import classes.Starter;
 import authentication.Login;
+import classes.UserSession;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +37,8 @@ public class LoginController {
         if(!flag)
             JOptionPane.showMessageDialog(null, login.getStatus(), "ERROR!", JOptionPane.ERROR_MESSAGE);
         else {
-            StageHelper.showAdmin(event);
+            if(UserSession.getCurrentUser().getUserType().equals("admin"))
+                StageHelper.showAdmin(event);
         }
 
     }

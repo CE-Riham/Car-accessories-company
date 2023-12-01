@@ -20,6 +20,7 @@ public class Generator {
         tmpUser.setEmail(rs.getString("email"));
         tmpUser.setPassword(rs.getString("userPassword"));
         tmpUser.setImagePath(rs.getString("image"));
+        tmpUser.setUserType(rs.getString("userType"));
         return tmpUser;
     }
 
@@ -37,7 +38,8 @@ public class Generator {
         preparedStmt.setString(4, user.getPhoneNumber());
         preparedStmt.setString    (5, user.getEmail());
         preparedStmt.setString    (6, user.getPassword());
-        preparedStmt.setString    (7, "");
+        preparedStmt.setString    (7, user.getImagePath());
+        preparedStmt.setString    (8, user.getUserType());
         return preparedStmt;
     }
 }
