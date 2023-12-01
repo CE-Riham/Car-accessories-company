@@ -1,5 +1,6 @@
 package classes;
 import java.util.Properties;
+import java.util.logging.Level;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -14,7 +15,7 @@ public class Mail {
         Mail mail = new Mail();
         mail.setupServerProperties();
         mail.draftEmail(names);
-        System.out.println("Befor mail.send"+"     ; ;;;;;;;;;;;;;;");
+        Starter.logger.info("Befor mail.send     ; ;;;;;;;;;;;;;;");
 
         mail.sendEmail();
     }
@@ -31,13 +32,13 @@ public class Mail {
             transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
 
         } catch (MessagingException e) {
-            System.err.println("Error sending email: " + e.getMessage());
+            Starter.logger.log(Level.INFO,"Error sending email: {0}", e.getMessage());
             e.printStackTrace();
         } finally {
             try {
                 transport.close();
             } catch (MessagingException e) {
-                System.err.println("Error closing transport: " + e.getMessage());
+                Starter.logger.log(Level.INFO,"Error closing transport: {0}", e.getMessage());
                 e.printStackTrace();
             }
         }

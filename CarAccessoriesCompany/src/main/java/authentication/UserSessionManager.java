@@ -42,7 +42,7 @@ public class UserSessionManager {
     // Method to invalidate a session (logout)
     public static void invalidateSession(String sessionId) {
         userSessions.remove(sessionId);
-        Starter.logger.log(Level.INFO, "Session invalidated for Session ID: {0}", new Object[]{sessionId});
+        Starter.logger.log(Level.INFO, "Session invalidated for Session ID: {0}", sessionId);
     }
 
 }

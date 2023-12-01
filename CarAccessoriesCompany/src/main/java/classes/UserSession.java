@@ -15,8 +15,7 @@ public class UserSession{
     }
 
     public static User getCurrentUser() {
-        User tmpUser = new User(currentUser);
-        return tmpUser;
+        return new User(currentUser);
     }
 
     public static void setCurrentUser(User currentUser) {
