@@ -27,46 +27,41 @@ public class RetrievingData{
         this.status = status;
     }
 
-    private ResultSet getFromData(String entity, String condition) throws SQLException {
-        ResultSet rs = null;
-        String query = "SELECT * FROM " + entity + " " + (condition.equals("") ? "":"where " + condition);
+    public List<User> selectUsers(String condition) throws SQLException {
+        List<User> users = new ArrayList<>();
         Statement st = null;
         try {
+            String query = "SELECT * FROM users " + (condition.equals("") ? "":"where " + condition);
             st = con.createStatement();
-            rs = st.executeQuery(query);
-            return rs;
-        }finally {
-            if(st != null) st.close();
-        }
-    }
-
-    public List<User> selectUsers(String condition){
-        List<User> users = new ArrayList<>();
-        try {
-            ResultSet rs = getFromData("users", condition);
+            ResultSet rs = st.executeQuery(query);
             while (rs != null && rs.next())
                 users.add(Generator.rsToUser(rs));
-
             setStatus("Retrieving users successfully");
             return users;
         }catch (Exception e){
             setStatus("Error while retrieving users from database");
             return new ArrayList<>();
+        }finally {
+            if(st != null)st.close();
         }
     }
 
-    public List<Address> selectAddresses(String condition){
+    public List<Address> selectAddresses(String condition) throws SQLException {
         List<Address> addresses = new ArrayList<>();
+        Statement st = null;
         try {
-            ResultSet rs = getFromData("addresses", condition);
+            String query = "SELECT * FROM users " + (condition.equals("") ? "":"where " + condition);
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
             while (rs != null && rs.next())
                 addresses.add(Generator.rsToAddress(rs));
-
-            setStatus("Retrieving addresses successfully");
+            setStatus("Retrieving users successfully");
             return addresses;
         }catch (Exception e){
-            setStatus("Error while retrieving addresses from database");
+            setStatus("Error while retrieving users from database");
             return new ArrayList<>();
+        }finally {
+            if(st != null)st.close();
         }
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import model.User;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 
 public class SignUpController {
@@ -41,7 +42,7 @@ public class SignUpController {
     }
 
     @FXML
-    void onRegisterClick(ActionEvent event) {
+    void onRegisterClick(ActionEvent event) throws SQLException {
         //TODO
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();

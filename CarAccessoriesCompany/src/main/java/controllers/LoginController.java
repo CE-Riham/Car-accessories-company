@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class LoginController {
     private Login login;
@@ -24,7 +25,7 @@ public class LoginController {
     private PasswordField passwordTextField;
 
     @FXML
-    protected void onLoginClick(ActionEvent event) {
+    protected void onLoginClick(ActionEvent event) throws SQLException {
         //TODO
         //next page
         String username = usernameTextField.getText().toLowerCase();
