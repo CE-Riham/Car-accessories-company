@@ -1,10 +1,15 @@
 package database;
 
+import classes.Starter;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DatabaseConnection {
-    private String databaseName, username, password, status;
+    private String databaseName;
+    private String username;
+    private String password;
+    private String status;
     private int port;
     private Connection con;
 
@@ -55,7 +60,7 @@ public class DatabaseConnection {
             con= DriverManager.getConnection(url,username,password);
             setStatus("Connected to the database successfully");
         }catch(Exception e){
-            System.out.println(e);
+            Starter.logger.warning(e.getMessage());
             setStatus("Couldn't connect to the database");
         }
     }
