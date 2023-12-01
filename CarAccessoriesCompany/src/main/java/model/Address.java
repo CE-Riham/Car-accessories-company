@@ -1,7 +1,9 @@
 package model;
 
 public class Address {
-    private String country, city, street;
+    private String country;
+    private String city;
+    private String street;
 
     public String getCountry() {
         return country;

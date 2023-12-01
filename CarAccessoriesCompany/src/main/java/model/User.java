@@ -1,7 +1,13 @@
 package model;
 
 public class User {
-    private String username, firstName, lastName, phoneNumber, password, email, imagePath;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String password;
+    private String email;
+    private String imagePath;
     private Address address;
     public User(){
         this.username    = "";
