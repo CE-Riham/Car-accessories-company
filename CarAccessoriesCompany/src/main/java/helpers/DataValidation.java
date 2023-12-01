@@ -59,7 +59,7 @@ public class DataValidation {
     }
 
     public static boolean passwordValidationTest(String password) {
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
         return regexMatcher(regex, password);
 
     }
