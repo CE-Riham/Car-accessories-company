@@ -1,22 +1,23 @@
-package Controllers;//import animatefx.animation.FadeIn;
+package controllers;//import animatefx.animation.FadeIn;
 
-import Classes.Starter;
+import classes.DBConnector;
+import classes.Starter;
 import authentication.Login;
+import classes.UserSession;
+import helpers.Alerts;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class LoginController {
     private Login login;
     public LoginController(){
-        login = new Login(Starter.connector.getCon());
+        login = new Login(DBConnector.getConnector().getCon());
     }
 
     @FXML
@@ -26,17 +27,19 @@ public class LoginController {
     private PasswordField passwordTextField;
 
     @FXML
-    protected void onLoginClick(ActionEvent event) {
+    protected void onLoginClick(ActionEvent event) throws SQLException {
         //TODO
         //next page
-        String username = usernameTextField.getText().toLowerCase(), password = passwordTextField.getText();
+        String username = usernameTextField.getText().toLowerCase();
+        String password = passwordTextField.getText();
         boolean flag = login.loginUser(username, password);
-        System.out.println(login.getStatus());
+        Starter.logger.info(login.getStatus());
 
         if(!flag)
-            JOptionPane.showMessageDialog(null, login.getStatus(), "ERROR!", JOptionPane.ERROR_MESSAGE);
+            Alerts.errorAlert("Error", null, login.getStatus());
         else {
-            StageHelper.showAdmin(event);
+            if(UserSession.getCurrentUser().getUserType().equals("admin"))
+                StageHelper.showAdmin(event);
         }
 
     }

@@ -8,10 +8,10 @@ module com.example.caraccessoriescompany {
     requires java.mail;
 
 
-    opens Controllers to javafx.fxml;
-    exports Controllers;
-    exports Classes;
-    opens Classes to javafx.fxml;
+    opens controllers to javafx.fxml;
+    exports controllers;
+    exports classes;
+    opens classes to javafx.fxml;
     exports helpers;
     opens helpers to javafx.fxml;
 }

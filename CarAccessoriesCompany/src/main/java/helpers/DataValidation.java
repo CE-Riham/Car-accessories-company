@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 
 public class DataValidation {
 
+    private DataValidation() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static boolean regexMatcher(String regex, String value){
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
@@ -55,7 +59,7 @@ public class DataValidation {
     }
 
     public static boolean passwordValidationTest(String password) {
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
         return regexMatcher(regex, password);
 
     }

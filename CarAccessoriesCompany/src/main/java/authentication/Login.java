@@ -1,11 +1,11 @@
 package authentication;
 
-import Classes.Starter;
-import Classes.UserSession;
+import classes.UserSession;
 import database.RetrievingData;
 import model.User;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Login {
@@ -23,16 +23,14 @@ public class Login {
         this.status = status;
     }
 
-    public boolean loginUser(String username, String password){
-        username = username.toLowerCase();
-
-        List<User> allUsers = usersRetriever.selectUsers("username = '" + username + "'");
-        if(allUsers != null && allUsers.size() != 0 ) {
+    public boolean loginUser(String username, String password) throws SQLException {
+        List<User> allUsers = usersRetriever.selectUsers("username = '" + username.toLowerCase() + "';");
+        if(allUsers != null && !allUsers.isEmpty() ) {
             User tmpUser = allUsers.get(0);
             if (tmpUser.getPassword().equals(password)) {
                 setStatus("Valid username and password");
-                Starter.userSession = new UserSession(tmpUser);
-                Starter.userSession.setSessionId(Starter.sessionManager.createSession(username));
+                UserSession.setCurrentUser(tmpUser);
+                UserSession.setSessionId(UserSessionManager.createSession(username));
                 return true;
             }
         }

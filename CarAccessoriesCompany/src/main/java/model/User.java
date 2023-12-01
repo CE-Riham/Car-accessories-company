@@ -1,7 +1,14 @@
 package model;
 
 public class User {
-    private String username, firstName, lastName, phoneNumber, password, email, imagePath;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String password;
+    private String email;
+    private String imagePath;
+    private String userType;
     private Address address;
     public User(){
         this.username    = "";
@@ -11,11 +18,12 @@ public class User {
         this.password    = "";
         this.email       = "";
         this.imagePath   = "";
+        this.userType    = "";
         this.address     = null;
     }
     public User(String username, String firstName, String lastName,
                 String phoneNumber, String password, String email,
-                String imagePath, Address address) {
+                String imagePath, String userType, Address address) {
         setUsername(username);
         setFirstName(firstName);
         setLastName(lastName);
@@ -23,12 +31,13 @@ public class User {
         setPassword(password);
         setEmail(email);
         setImagePath(imagePath);
+        setUserType(userType);
         setAddress(address);
     }
     public User(User user){
         this(user.getUsername(), user.getFirstName(), user.getLastName(),
                 user.getPhoneNumber(), user.getPassword(), user.getEmail(),
-                user.getImagePath(), user.getAddress());
+                user.getImagePath(), user.getUserType(), user.getAddress());
     }
     public String getUsername() {
         return username;
@@ -79,7 +88,7 @@ public class User {
     }
 
     public String getImagePath() {
-        return (imagePath.equals("")?"/assets/usersPictures/nouser.png":imagePath);
+        return ( (imagePath.equals("") || imagePath.equals(null)) ? "/assets/usersPictures/nouser.png":imagePath);
     }
 
     public void setImagePath(String imagePath) {
@@ -92,6 +101,14 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     @Override

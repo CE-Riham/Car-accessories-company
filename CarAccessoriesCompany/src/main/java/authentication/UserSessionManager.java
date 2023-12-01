@@ -1,16 +1,22 @@
 package authentication;
 
+import classes.Starter;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class UserSessionManager {
     private static Map<String, String> userSessions = new HashMap<>();
 
+    private UserSessionManager() {
+        throw new IllegalStateException("Utility class");
+    }
     // Method to create a session for a user upon successful login
     public static String createSession(String username) {
         String sessionId = generateSessionId();
         userSessions.put(sessionId, username);
-        System.out.println("Session created for user: " + username + ", Session ID: " + sessionId);
+        Starter.logger.log(Level.INFO, "Session created for user: {0}, Session ID: {1}", new Object[]{username, sessionId});
         return sessionId;
     }
 
@@ -36,15 +42,7 @@ public class UserSessionManager {
     // Method to invalidate a session (logout)
     public static void invalidateSession(String sessionId) {
         userSessions.remove(sessionId);
-        System.out.println("Session invalidated for Session ID: " + sessionId);
-    }
-
-    // For demonstration: displaying all active sessions
-    public static void displayActiveSessions() {
-        System.out.println("Active Sessions:");
-        for (Map.Entry<String, String> entry : userSessions.entrySet()) {
-            System.out.println("Session ID: " + entry.getKey() + ", Username: " + entry.getValue());
-        }
+        Starter.logger.log(Level.INFO, "Session invalidated for Session ID: {0}", sessionId);
     }
 
 }
