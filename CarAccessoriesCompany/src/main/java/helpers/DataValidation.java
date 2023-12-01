@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 
 public class DataValidation {
 
+    private DataValidation() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static boolean regexMatcher(String regex, String value){
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
