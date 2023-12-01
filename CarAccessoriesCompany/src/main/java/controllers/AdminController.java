@@ -1,6 +1,8 @@
-package Controllers;
+package controllers;
 
-import Classes.Starter;
+import authentication.UserSessionManager;
+import classes.Starter;
+import classes.UserSession;
 import helpers.Alerts;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
@@ -65,7 +67,7 @@ public class AdminController {
     }
 
     private void getProfileFromDB(){
-        User tmpUser = Starter.userSession;
+        User tmpUser = UserSession.getCurrentUser();
         //admin data
         firstNameTextField.setText(tmpUser.getFirstName());
         lastNameTextField.setText(tmpUser.getLastName());
@@ -78,7 +80,7 @@ public class AdminController {
     private
     @FXML
     void onAdminNameClick(ActionEvent event) {
-        User tmpUser = Starter.userSession;
+        User tmpUser = UserSession.getCurrentUser();
         disableAllMenuButtonsExcept(adminNameButton);
         disableAllPanesExcept(profile);
         firstName.setText(tmpUser.getFirstName());
@@ -132,12 +134,12 @@ public class AdminController {
         Optional<ButtonType> result = Alerts.confirmationMessage("Logout", "Are you sure you want to logout?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             System.out.println("Logout");
-            Starter.sessionManager.invalidateSession(Starter.userSession.getSessionId());
-            Starter.userSession = null;
+            UserSessionManager.invalidateSession(UserSession.getSessionId());
+            UserSession.setSessionId(null);
             StageHelper.showLogin(event);
         }
         else
-            System.out.println("Logout canceled.");
+            Starter.logger.info("Logout canceled.");
     }
 
     @FXML

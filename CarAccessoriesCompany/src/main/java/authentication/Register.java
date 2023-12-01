@@ -29,7 +29,7 @@ public class Register {
         String st = DataValidation.userValidationTest(user);
         if(st.equals("Valid")){
             List<User> allUsers = userRetriever.selectUsers("username = '" + user.getUsername() + "'");
-            if(allUsers == null || allUsers.size() == 0 )
+            if(allUsers == null || allUsers.isEmpty())
                     setStatus("User was registered successfully");
             else
                 setStatus("Username is already taken");
@@ -40,10 +40,8 @@ public class Register {
     public boolean registerUser(User user){
         registerUserTest(user);
         if(getStatus().equals("User was registered successfully")){
-            if(userInserter.insertUser(user)) {
-                setStatus("User was registered successfully");
+            if(userInserter.insertUser(user))
                 return true;
-            }
             setStatus("Couldn't register user");
 
         }
