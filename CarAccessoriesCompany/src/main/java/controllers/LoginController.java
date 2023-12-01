@@ -4,6 +4,7 @@ import classes.DBConnector;
 import classes.Starter;
 import authentication.Login;
 import classes.UserSession;
+import helpers.Alerts;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +36,7 @@ public class LoginController {
         Starter.logger.info(login.getStatus());
 
         if(!flag)
-            JOptionPane.showMessageDialog(null, login.getStatus(), "ERROR!", JOptionPane.ERROR_MESSAGE);
+            Alerts.errorAlert("Error", null, login.getStatus());
         else {
             if(UserSession.getCurrentUser().getUserType().equals("admin"))
                 StageHelper.showAdmin(event);

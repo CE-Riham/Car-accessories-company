@@ -1,16 +1,16 @@
 package controllers;
 
 import authentication.UserSessionManager;
+import classes.DBConnector;
 import classes.Starter;
 import classes.UserSession;
+import database.UpdatingData;
 import helpers.Alerts;
+import helpers.DataValidation;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
@@ -20,7 +20,10 @@ import model.User;
 import java.util.Optional;
 
 public class AdminController {
-
+    private UpdatingData dataUpdater;
+    public AdminController(){
+        dataUpdater = new UpdatingData(DBConnector.getConnector().getCon());
+    }
     @FXML
     private Button adminNameButton;
     @FXML
@@ -75,6 +78,7 @@ public class AdminController {
     @FXML
     private TextField streetTextField;
 
+    //done
     private void disableAllMenuButtonsExcept(Button button){
         String style = "-fx-border-color: transparent;";
         adminNameButton.setStyle(style);
@@ -87,15 +91,16 @@ public class AdminController {
         button.setStyle("-fx-border-color: #C9B3AD;");
     }
 
+
     private void disableAllPanesExcept(AnchorPane pane){
         profile.setVisible(false);
         pane.setVisible(true);
     }
 
+    //done
     private void setProfileEditable(boolean flag){
         firstNameTextField.setEditable(flag);
         lastNameTextField.setEditable(flag);
-        usernameTextField.setEditable(flag);
         phoneTextField.setEditable(flag);
         emailTextField.setEditable(flag);
         countryTextField.setEditable(flag);
@@ -114,7 +119,8 @@ public class AdminController {
         //TODO
         //add address
     }
-    private
+
+    //done
     @FXML
     void onAdminNameClick(ActionEvent event) {
         User tmpUser = UserSession.getCurrentUser();
@@ -168,7 +174,7 @@ public class AdminController {
     //done
     @FXML
     void onLogoutClick(ActionEvent event) {
-        Optional<ButtonType> result = Alerts.confirmationMessage("Logout", "Are you sure you want to logout?");
+        Optional<ButtonType> result = Alerts.confirmationAlert("Logout", "Are you sure you want to logout?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Starter.logger.info("Logout");
             UserSessionManager.invalidateSession(UserSession.getSessionId());
@@ -176,7 +182,7 @@ public class AdminController {
             StageHelper.showLogin(event);
         }
         else
-            Starter.logger.info("Logout canceled.");
+            Starter.logger.info("Logout was canceled.");
     }
 
     @FXML
@@ -187,7 +193,6 @@ public class AdminController {
     //done
     @FXML
     void onEditProfileClick(ActionEvent event) {
-
         changePictureButton.setVisible(true);
         changePasswordButton.setVisible(false);
         editProfileButton.setVisible(false);
@@ -199,6 +204,27 @@ public class AdminController {
     @FXML
     void onChangePasswordClick(ActionEvent event) {
         setProfileEditable(false);
+        String header = """
+                            - at least 8 characters
+                            - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
+                            - Can contain special characters""";
+        Optional<String> result = Alerts.withInputAlert("Change password", header, "Password: ");
+        result.ifPresent(password -> {
+            if(DataValidation.passwordValidationTest(password)){
+                User user = UserSession.getCurrentUser();
+                user.setPassword(password);
+                String condition = "where username = \'" + usernameTextField.getText() + "\';";
+                dataUpdater.updateUser(user, condition);
+                String status = dataUpdater.getStatus();
+                if(status.equals("User was updated successfully")){
+                    Alerts.informationAlert("Update", null, "password was updated successfully.");
+                    UserSession.setCurrentUser(user);
+                }
+            }
+            else{
+                Alerts.errorAlert("Error", null, "Invalid password.");
+            }
+        });
     }
 
     //done
@@ -215,12 +241,35 @@ public class AdminController {
 
     @FXML
     void onSaveProfileClick(ActionEvent event){
+        //TODO
+        //edit address
         setProfileEditable(false);
         saveProfileButton.setVisible(false);
         cancelProfileButton.setVisible(false);
         editProfileButton.setVisible(true);
         changePictureButton.setVisible(false);
         changePasswordButton.setVisible(true);
+
+        String email = emailTextField.getText();
+        String firstNameTmp = firstNameTextField.getText();
+        String lastNameTmp = lastNameTextField.getText();
+        String phone = phoneTextField.getText();
+        String condition = "where username = \'" + usernameTextField.getText() + "\';";
+        User user = new User(UserSession.getCurrentUser().getUsername(), firstNameTmp, lastNameTmp, phone,
+                UserSession.getCurrentUser().getPassword(), email, UserSession.getCurrentUser().getImagePath(),
+                "admin", UserSession.getCurrentUser().getAddress());
+
+        dataUpdater.updateUser(user, condition);
+        String status = dataUpdater.getStatus();
+        if(status.equals("User was updated successfully")){
+            Alerts.informationAlert("Update", null, status);
+            UserSession.setCurrentUser(user);
+            firstName.setText(firstNameTmp);
+            lastName.setText(lastNameTmp);
+        }
+        else
+            Alerts.errorAlert("Error", null, status);
+        getProfileFromDB();
     }
 
 }

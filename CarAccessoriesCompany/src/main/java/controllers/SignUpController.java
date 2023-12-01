@@ -52,7 +52,6 @@ public class SignUpController {
         String password = passwordTextField.getText();
 
         User user = new User(username, firstName, lastName, phone, password, email, "", "customer", null);
-        DataValidation.userValidationTest(user);
         userRegisterer.registerUser(user);
         String status = userRegisterer.getStatus();
         Starter.logger.info(status);
