@@ -1,6 +1,5 @@
 package authentication;
 
-import classes.Starter;
 import classes.UserSession;
 import database.RetrievingData;
 import model.User;
