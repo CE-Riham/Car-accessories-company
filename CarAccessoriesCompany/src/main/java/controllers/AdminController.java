@@ -22,13 +22,35 @@ import java.util.Optional;
 public class AdminController {
 
     @FXML
-    private Button adminNameButton, adminsButton, customersButton, dashboardButton, installersButton, ordersButton;
+    private Button adminNameButton;
+    @FXML
+    private Button adminsButton;
+    @FXML
+    private Button customersButton;
+    @FXML
+    private Button dashboardButton;
+    @FXML
+    private Button installersButton;
+    @FXML
+    private Button ordersButton;
 
     @FXML
-    private Button productsButton, changePictureButton, editProfileButton, changePasswordButton, saveProfileButton, cancelProfileButton;
+    private Button productsButton;
+    @FXML
+    private Button changePictureButton;
+    @FXML
+    private Button editProfileButton;
+    @FXML
+    private Button changePasswordButton;
+    @FXML
+    private Button saveProfileButton;
+    @FXML
+    private Button cancelProfileButton;
 
     @FXML
-    private Label firstName, lastName;
+    private Label firstName;
+    @FXML
+    private Label lastName;
 
     @FXML
     private AnchorPane profile;
@@ -37,16 +59,31 @@ public class AdminController {
     private Circle profilePicture;
 
     @FXML
-    private TextField firstNameTextField, lastNameTextField, usernameTextField,phoneTextField, emailTextField, countryTextField, cityTextField, streetTextField;
+    private TextField firstNameTextField;
+    @FXML
+    private TextField lastNameTextField;
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private TextField phoneTextField;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private TextField countryTextField;
+    @FXML
+    private TextField cityTextField;
+    @FXML
+    private TextField streetTextField;
 
     private void disableAllMenuButtonsExcept(Button button){
-        adminNameButton.setStyle("-fx-border-color: transparent;");
-        adminsButton.setStyle("-fx-border-color: transparent;");
-        customersButton.setStyle("-fx-border-color: transparent;");
-        dashboardButton.setStyle("-fx-border-color: transparent;");
-        installersButton.setStyle("-fx-border-color: transparent;");
-        ordersButton.setStyle("-fx-border-color: transparent;");
-        productsButton.setStyle("-fx-border-color: transparent;");
+        String style = "-fx-border-color: transparent;";
+        adminNameButton.setStyle(style);
+        adminsButton.setStyle(style);
+        customersButton.setStyle(style);
+        dashboardButton.setStyle(style);
+        installersButton.setStyle(style);
+        ordersButton.setStyle(style);
+        productsButton.setStyle(style);
         button.setStyle("-fx-border-color: #C9B3AD;");
     }
 
@@ -88,7 +125,7 @@ public class AdminController {
         Image image = new Image(getClass().getResourceAsStream(tmpUser.getImagePath()));
         profilePicture.setFill(new ImagePattern(image));
         getProfileFromDB();
-        System.out.println("Profile was opened successfully :)");
+        Starter.logger.info("Profile was opened successfully :)");
     }
 
 
@@ -125,7 +162,7 @@ public class AdminController {
 
     @FXML
     void onNotificationsCLick(ActionEvent event) {
-        System.out.println("beeb");
+        Starter.logger.info("beeb");
     }
 
     //done
@@ -133,7 +170,7 @@ public class AdminController {
     void onLogoutClick(ActionEvent event) {
         Optional<ButtonType> result = Alerts.confirmationMessage("Logout", "Are you sure you want to logout?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("Logout");
+            Starter.logger.info("Logout");
             UserSessionManager.invalidateSession(UserSession.getSessionId());
             UserSession.setSessionId(null);
             StageHelper.showLogin(event);
@@ -144,7 +181,7 @@ public class AdminController {
 
     @FXML
     void onChangePictureClick(ActionEvent event) {
-
+        //TODO
     }
 
     //done

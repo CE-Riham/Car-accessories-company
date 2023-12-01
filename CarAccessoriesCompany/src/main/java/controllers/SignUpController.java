@@ -1,8 +1,8 @@
 package controllers;
 
+import authentication.Register;
 import classes.DBConnector;
 import classes.Starter;
-import authentication.Register;
 import helpers.DataValidation;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
@@ -21,7 +21,15 @@ public class SignUpController {
         userRegisterer = new Register(DBConnector.getConnector().getCon());
     }
     @FXML
-    private TextField emailTextField, firstNameTextField, lastNameTextField, phoneTextField, usernameTextField;
+    private TextField emailTextField;
+    @FXML
+    private TextField firstNameTextField;
+    @FXML
+    private TextField lastNameTextField;
+    @FXML
+    private TextField phoneTextField;
+    @FXML
+    private TextField usernameTextField;
 
     @FXML
     private PasswordField passwordTextField;
@@ -35,15 +43,18 @@ public class SignUpController {
     @FXML
     void onRegisterClick(ActionEvent event) {
         //TODO
-        String email = emailTextField.getText(), firstName = firstNameTextField.getText(),
-                lastName = lastNameTextField.getText(), phone = phoneTextField.getText(),
-                username = usernameTextField.getText(), password = passwordTextField.getText();
+        String email = emailTextField.getText();
+        String firstName = firstNameTextField.getText();
+        String lastName = lastNameTextField.getText();
+        String phone = phoneTextField.getText();
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
 
         User user = new User(username, firstName, lastName, phone, password, email, "", null);
-        System.out.println(DataValidation.userValidationTest(user));
+        DataValidation.userValidationTest(user);
         userRegisterer.registerUser(user);
         String status = userRegisterer.getStatus();
-        System.out.println(status);
+        Starter.logger.info(status);
         JOptionPane.showMessageDialog(null, status, "ERROR!", JOptionPane.ERROR_MESSAGE);
 
     }

@@ -27,7 +27,8 @@ public class LoginController {
     protected void onLoginClick(ActionEvent event) {
         //TODO
         //next page
-        String username = usernameTextField.getText().toLowerCase(), password = passwordTextField.getText();
+        String username = usernameTextField.getText().toLowerCase();
+        String password = passwordTextField.getText();
         boolean flag = login.loginUser(username, password);
         Starter.logger.info(login.getStatus());
 
