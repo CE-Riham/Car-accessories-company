@@ -26,7 +26,7 @@ public class DBRetrievingTest {
         condition = string;
     }
     @When("I want to retrieve {string}")
-    public void iWantToRetrieve(String entity) {
+    public void iWantToRetrieve(String entity) throws SQLException {
         if(entity.equals("users")) {
             retrievingData.selectUsers(condition);
             status = retrievingData.getStatus();

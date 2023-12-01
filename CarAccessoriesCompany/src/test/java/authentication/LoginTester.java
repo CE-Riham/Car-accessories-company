@@ -33,7 +33,7 @@ public class LoginTester {
             password = input;
     }
     @When("user clicks on login")
-    public void userClicksOnLogin() {
+    public void userClicksOnLogin() throws SQLException {
         login.loginUser(username, password);
         status = login.getStatus();
     }
