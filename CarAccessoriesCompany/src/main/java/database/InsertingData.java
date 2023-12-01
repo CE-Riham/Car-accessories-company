@@ -23,7 +23,7 @@ public class InsertingData {
     public boolean insertUser(User user){
         try {
             String query = "insert into users "
-                    + " values (?, ?, ?, ?, ?, ?, ?);";
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.userToPS(preparedStmt, user);
             preparedStmt.execute();

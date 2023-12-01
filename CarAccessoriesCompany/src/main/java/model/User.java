@@ -8,6 +8,7 @@ public class User {
     private String password;
     private String email;
     private String imagePath;
+    private String userType;
     private Address address;
     public User(){
         this.username    = "";
@@ -17,11 +18,12 @@ public class User {
         this.password    = "";
         this.email       = "";
         this.imagePath   = "";
+        this.userType    = "";
         this.address     = null;
     }
     public User(String username, String firstName, String lastName,
                 String phoneNumber, String password, String email,
-                String imagePath, Address address) {
+                String imagePath, String userType, Address address) {
         setUsername(username);
         setFirstName(firstName);
         setLastName(lastName);
@@ -29,12 +31,13 @@ public class User {
         setPassword(password);
         setEmail(email);
         setImagePath(imagePath);
+        setUserType(userType);
         setAddress(address);
     }
     public User(User user){
         this(user.getUsername(), user.getFirstName(), user.getLastName(),
                 user.getPhoneNumber(), user.getPassword(), user.getEmail(),
-                user.getImagePath(), user.getAddress());
+                user.getImagePath(), user.getUserType(), user.getAddress());
     }
     public String getUsername() {
         return username;
@@ -98,6 +101,14 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     @Override
