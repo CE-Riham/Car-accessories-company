@@ -3,6 +3,7 @@ package controllers;
 import authentication.Register;
 import classes.DBConnector;
 import classes.Starter;
+import helpers.Alerts;
 import helpers.DataValidation;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
@@ -55,7 +56,13 @@ public class SignUpController {
         userRegisterer.registerUser(user);
         String status = userRegisterer.getStatus();
         Starter.logger.info(status);
-        JOptionPane.showMessageDialog(null, status, "ERROR!", JOptionPane.ERROR_MESSAGE);
+        if(status.equals("User was registered successfully")){
+            Alerts.informationAlert("Register user", null, status);
+            StageHelper.showLogin(event);
+        }
+        else {
+            Alerts.errorAlert("Register user", null, status);
+        }
 
     }
 }
