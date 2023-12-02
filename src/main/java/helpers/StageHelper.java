@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class StageHelper {
-
     private static void showPage(ActionEvent event, String path, int width, int height) throws Exception{
         if (event.getSource() instanceof Node) {
             Parent root = FXMLLoader.load(StageHelper.class.getResource(path));
@@ -21,14 +20,6 @@ public class StageHelper {
             stage.centerOnScreen();
         }
     }
-    public static void showAdmin(ActionEvent event){
-        try{
-            String path = "/FXMLFiles/admin.fxml";
-            showPage(event, path, 1600, 900);
-        }catch (Exception e){
-            System.out.println("Can't open admin page");
-        }
-    }
     public static void showHomePage(ActionEvent event){
         try{
             String path = "/FXMLFiles/homePage.fxml";
@@ -37,6 +28,15 @@ public class StageHelper {
             System.out.println("Can't open admin page");
         }
     }
+    public static void showAdmin(ActionEvent event){
+        try{
+            String path = "/FXMLFiles/admin.fxml";
+            showPage(event, path, 1600, 900);
+        }catch (Exception e){
+            System.out.println("Can't open admin page");
+        }
+    }
+
     public static void showLogin(ActionEvent event){
         try{
             String path = "/FXMLFiles/login.fxml";

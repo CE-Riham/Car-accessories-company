@@ -43,23 +43,25 @@ public class InsertingData {
             return false;
         }
     }
-//    public boolean insertInstallReq(installReq req) {
-//        try {
-//            String query = "INSERT INTO installationrequests VALUES (?, ?, ?, ?)";
-//            PreparedStatement preparedStmt = connection.prepareStatement(query);
-//
-//            preparedStmt = Generator.InstallToPS(preparedStmt, req);
-//            preparedStmt.executeUpdate();
-//            setStatus("Install Request was inserted successfully");
-//            return true;
-//        } catch (SQLException e) {
-//            e.printStackTrace(); // Log the exception for debugging
-//            setStatus("Couldn't insert Request due to a database error");
-//            return false;
-//        } catch (Exception e) {
-//            e.printStackTrace(); // Log the exception for debugging
-//            setStatus("An unexpected error occurred while inserting the request");
-//            return false;
-//        }
-//    }
+
+
+    public boolean insertInstallationRequest(installReq req) {
+        try {
+            String query = "INSERT INTO installationrequests VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+
+            preparedStmt = Generator.InstallToPS(preparedStmt, req);
+            preparedStmt.executeUpdate();
+            setStatus("Install Request was inserted successfully");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log the exception for debugging
+            setStatus("Couldn't insert Request due to a database error");
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            setStatus("An unexpected error occurred while inserting the request");
+            return false;
+        }
+    }
 }

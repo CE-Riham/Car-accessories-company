@@ -6,6 +6,7 @@ module com.example.caraccessoriescompany {
     requires java.sql;
     requires AnimateFX;
     requires java.mail;
+    requires io.cucumber.messages;
 
 
     opens Controllers to javafx.fxml;

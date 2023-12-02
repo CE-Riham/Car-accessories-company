@@ -6,6 +6,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/cases", monochrome = true,snippets = SnippetType.CAMELCASE, glue = {"Controllers"})
+@CucumberOptions(features = "src/test/resources/tmp",
+        monochrome = true,snippets = SnippetType.CAMELCASE, glue = {"Controllers"})
 public class Test {
 }

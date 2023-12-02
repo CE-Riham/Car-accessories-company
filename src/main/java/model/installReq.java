@@ -5,6 +5,8 @@ import database.RetrievingData;
 
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class installReq {
@@ -74,5 +76,18 @@ public class installReq {
                 ", CarMakeModel='" + CarMakeModel + '\'' +
                 ", PreferredDate='" + PreferredData +
                 '}';
+    }
+
+    public void validateAndStore() {
+        System.out.println("Not Ready");
+    }
+
+    public List<LocalDate> checkInstallerAvailability() {
+        return new ArrayList<>();
+
+    }
+
+    public List<LocalDate> getAvailableTimeSlots() {
+        return new ArrayList<>();
     }
 }

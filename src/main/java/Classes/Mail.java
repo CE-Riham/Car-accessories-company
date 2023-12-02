@@ -9,13 +9,12 @@ public class Mail {
 
     Session newSession = null;
     MimeMessage mimeMessage = null;
+    boolean flag= false;
 
     public void rasheedEmail(String names) throws MessagingException {
         Mail mail = new Mail();
         mail.setupServerProperties();
         mail.draftEmail(names);
-       // System.out.println("Befor mail.send"+"     ; ;;;;;;;;;;;;;;");
-
         mail.sendEmail();
     }
 
@@ -23,13 +22,11 @@ public class Mail {
         String fromUser = "s12028064@stu.najah.edu";
         String fromUserP = "vqo@954719";
         String emailHost = "smtp.gmail.com";
-
         Transport transport = newSession.getTransport("smtp");
-
         try {
             transport.connect(emailHost, fromUser, fromUserP);
             transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-
+            flag = true;
         } catch (MessagingException e) {
             System.err.println("Error sending email: " + e.getMessage());
             e.printStackTrace();
@@ -71,4 +68,7 @@ public class Mail {
         newSession = Session.getDefaultInstance(properties, null);
     }
 
+    public boolean isEmailSentSuccessfully() {
+        return flag;
+    }
 }
