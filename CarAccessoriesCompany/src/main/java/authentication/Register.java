@@ -41,8 +41,10 @@ public class Register {
     public boolean registerUser(User user) throws SQLException {
         registerUserTest(user);
         if(getStatus().equals("User was registered successfully")){
-            if(userInserter.insertUser(user))
+            if(userInserter.insertUser(user)) {
+                userInserter.insertCustomer(user.getUsername(), 0);
                 return true;
+            }
             setStatus("Couldn't register user");
 
         }

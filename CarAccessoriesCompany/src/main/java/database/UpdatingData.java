@@ -1,5 +1,6 @@
 package database;
 
+import classes.Starter;
 import helpers.DataValidation;
 import helpers.Generator;
 import model.User;
@@ -21,10 +22,10 @@ public class UpdatingData {
         this.status = status;
     }
     public boolean updateUserTest(User user, String condition){
+        Starter.logger.info(condition);
         String st = DataValidation.userValidationTest(user);
-        if(st.equals("Valid")){
-                setStatus("User was updated successfully");
-        }
+        if(st.equals("Valid"))
+            setStatus("User was updated successfully");
         else
             setStatus(st);
         return false;
