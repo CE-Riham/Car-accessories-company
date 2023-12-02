@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataValidation {
-
+    private static String valid = "Valid";
     private DataValidation() {
         throw new IllegalStateException("Utility class");
     }
@@ -17,17 +17,32 @@ public class DataValidation {
         return matcher.matches();
     }
 
-    public static String userValidationTest(User user){
+    private static String emptyUserFieldsTest(User user){
         if(user.getEmail().equals("")) return "Email address can't be empty";
         if(user.getPhoneNumber().equals("")) return "Phone number can't be empty";
         if(user.getPassword().equals("")) return "Password can't be empty";
         if(user.getUsername().equals("")) return "Username can't be empty";
         if(user.getFirstName().equals("")) return "First name can't be empty";
         if(user.getLastName().equals("")) return "Last name can't be empty";
+        if(user.getUserType().equals("")) return "User type can't be empty";
+        return valid;
+    }
+    public static String userValidationTest(User user){
+        String emptyFieldsTest = emptyUserFieldsTest(user);
+        if(!emptyFieldsTest.equals(valid))
+                return emptyFieldsTest;
         if(emailValidationTest(user.getEmail())){
             if(phoneNumberValidationTest(user.getPhoneNumber())) {
-                if (passwordValidationTest(user.getPassword())) return "Valid";
-                return "Invalid password";
+                if (passwordValidationTest(user.getPassword())) {
+                    if (user.getUserType().equals("admin") || user.getUserType().equals("customer") || user.getUserType().equals("installer"))
+                        return valid;
+                    else {
+                        return "Invalid user type";
+                    }
+                }
+                else{
+                    return "Invalid password";
+                }
             }
             return "Invalid phone number";
         }

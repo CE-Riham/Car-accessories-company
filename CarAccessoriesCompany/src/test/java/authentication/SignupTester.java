@@ -1,6 +1,7 @@
 package authentication;
 
 import database.DatabaseConnection;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.User;
@@ -16,7 +17,7 @@ public class SignupTester {
     private DatabaseConnection connection;
     private String status;
 
-    @BeforeAll
+    @Before
     @When("user is in sign-up page")
     public void userIsOnTheSignUpPage() {
         connection = new DatabaseConnection();
@@ -37,6 +38,8 @@ public class SignupTester {
             user.setPassword(input);
         else if(field.equals("email"))
             user.setEmail(input);
+        else if(field.equals("userType"))
+            user.setUserType(input);
         else
             assert(false);
         assert(true);
