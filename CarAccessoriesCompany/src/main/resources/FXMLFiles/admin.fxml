@@ -57,7 +57,7 @@
             </HBox>
             <AnchorPane prefHeight="820.0" prefWidth="1600.0" styleClass="back">
                <children>
-                  <AnchorPane fx:id="profile" prefHeight="820.0" prefWidth="1600.0" styleClass="back" visible="false">
+                  <AnchorPane fx:id="profilePane" prefHeight="820.0" prefWidth="1600.0" styleClass="back" visible="false">
                      <children>
                         <ImageView fitHeight="800.0" fitWidth="1400.0" layoutX="100.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -209,7 +209,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="profile1" layoutX="10.0" layoutY="10.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+                  <AnchorPane fx:id="productsPane" layoutX="10.0" layoutY="10.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
                      <children>
                         <ScrollPane layoutX="50.0" layoutY="120.0" prefHeight="650.0" prefWidth="1500.0">
                           <content>

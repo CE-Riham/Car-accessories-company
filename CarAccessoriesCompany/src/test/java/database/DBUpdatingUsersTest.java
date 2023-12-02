@@ -1,5 +1,6 @@
 package database;
 
+import database.updating.UserUpdater;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -15,14 +16,14 @@ public class DBUpdatingUsersTest {
     private String condition;
     private String status;
     private DatabaseConnection connection;
-    private UpdatingData updatingData;
+    private UserUpdater userUpdater;
     private User user;
     @Before
     @Given("I'm connected to a database to update data")
     public void iMConnectedToADatabaseToUpdateData() {
         user = new User("rihamkatout", "Riham", "Katout", "0599119482", "asAS12!@", "rihamkatm@gmail.com", "rihamkatout.png", "admin", null);
         connection = new DatabaseConnection();
-        updatingData = new UpdatingData(connection.getCon());
+        userUpdater = new UserUpdater(connection.getCon());
     }
     @When("I fill in update condition with {string}")
     public void iFillInUpdateConditionWith(String condition) {
@@ -52,8 +53,8 @@ public class DBUpdatingUsersTest {
     }
     @When("I submit to update")
     public void iSubmitToUpdate() {
-        updatingData.updateUserTest(user, condition);
-        status = updatingData.getStatus();
+        userUpdater.updateUserTest(user, condition);
+        status = userUpdater.getStatus();
     }
     @Then("I should see {string} for updating data")
     public void iShouldSeeForInsertingData(String message) {
@@ -64,6 +65,4 @@ public class DBUpdatingUsersTest {
     public void closeTheConnectionAndEndInserting() throws SQLException {
         connection.getCon().close();
     }
-
-
 }

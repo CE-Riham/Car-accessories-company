@@ -1,7 +1,7 @@
 package authentication;
 
 import classes.UserSession;
-import database.RetrievingData;
+import database.retrieving.RetrievingUser;
 import model.User;
 
 import java.sql.Connection;
@@ -10,9 +10,9 @@ import java.util.List;
 
 public class Login {
     private String status;
-    private RetrievingData usersRetriever;
+    private RetrievingUser usersRetriever;
     public Login(Connection connection) {
-        usersRetriever = new RetrievingData(connection);
+        usersRetriever = new RetrievingUser(connection);
     }
 
     public String getStatus() {
@@ -24,7 +24,7 @@ public class Login {
     }
 
     public boolean loginUser(String username, String password) throws SQLException {
-        List<User> allUsers = usersRetriever.selectFromUsersTable("where username = '" + username.toLowerCase() + "';");
+        List<User> allUsers = usersRetriever.findUserByUsername(username.toLowerCase());
         if(allUsers != null && !allUsers.isEmpty() ) {
             User tmpUser = allUsers.get(0);
             if (tmpUser.getPassword().equals(password)) {
@@ -37,6 +37,4 @@ public class Login {
         setStatus("Invalid username or password");
         return false;
     }
-
-
 }

@@ -3,7 +3,6 @@ package database;
 import helpers.Generator;
 import model.Address;
 import model.Product;
-import model.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -26,25 +25,6 @@ public class RetrievingData{
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public List<User> selectFromUsersTable(String condition) throws SQLException {
-        List<User> users = new ArrayList<>();
-        Statement st = null;
-        try {
-            String query = "SELECT * FROM users " + condition;
-            st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs != null && rs.next())
-                users.add(Generator.rsToUser(rs));
-            setStatus("Retrieving users successfully");
-            return users;
-        }catch (Exception e){
-            setStatus("Error while retrieving users from database");
-            return new ArrayList<>();
-        }finally {
-            if(st != null)st.close();
-        }
     }
 
     public List<Address> selectFromAddressesTable(String condition) throws SQLException {

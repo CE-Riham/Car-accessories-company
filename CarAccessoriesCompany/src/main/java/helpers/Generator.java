@@ -49,14 +49,14 @@ public class Generator {
         return tmpProduct;
     }
     public static PreparedStatement userToPS(PreparedStatement preparedStmt, User user) throws SQLException {
-        preparedStmt.setString (1, user.getFirstName());
-        preparedStmt.setString (2, user.getLastName());
-        preparedStmt.setString   (3, user.getUsername());
-        preparedStmt.setString(4, user.getPhoneNumber());
-        preparedStmt.setString    (5, user.getEmail());
-        preparedStmt.setString    (6, user.getPassword());
-        preparedStmt.setString    (7, user.getImagePath());
-        preparedStmt.setString    (8, user.getUserType());
+        preparedStmt.setString  (1, user.getFirstName());
+        preparedStmt.setString  (2, user.getLastName());
+        preparedStmt.setString  (3, user.getUsername());
+        preparedStmt.setString  (4, user.getPhoneNumber());
+        preparedStmt.setString  (5, user.getEmail());
+        preparedStmt.setString  (6, user.getPassword());
+        preparedStmt.setString  (7, user.getImagePath());
+        preparedStmt.setString  (8, user.getUserType());
         return preparedStmt;
     }
 }

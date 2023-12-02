@@ -10,8 +10,6 @@ public class Product extends ProductCard {
     private int availableAmount;
     private String longDescription;
 
-
-
     public int getAvailableAmount() {
         return availableAmount;
     }
@@ -27,8 +25,6 @@ public class Product extends ProductCard {
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
     }
-
-
 
     public void addColor(String color, int quantity){
         colorQuantity.put(color, quantity);
