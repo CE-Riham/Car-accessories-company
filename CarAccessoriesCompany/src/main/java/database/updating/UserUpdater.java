@@ -17,10 +17,10 @@ public class UserUpdater{
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
+
     public boolean updateUserTest(User user, String condition){
         Starter.logger.info(condition);
         String st = DataValidation.userValidationTest(user);
