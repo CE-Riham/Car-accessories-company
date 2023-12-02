@@ -1,7 +1,6 @@
 package model;
 
 import database.InsertingData;
-import database.RetrievingData;
 
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -15,11 +14,9 @@ public class InstallReq {
 
 
     private InsertingData userInserter;
-    private RetrievingData userRetriever;
 
     public InstallReq(Connection connection){
         userInserter = new InsertingData(connection);
-        userRetriever = new RetrievingData(connection);
     }
 
     public InstallReq(){
