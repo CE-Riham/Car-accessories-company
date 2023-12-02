@@ -1,7 +1,7 @@
 Feature: Retrieve data from database
 
   Scenario Outline: I retrieve from users entity
-    Given I'm connected to a database
+    Given I'm connected to a database to retrieve data
     When I fill in condition with "<condition>"
     And I want to retrieve 'users'
     Then I should see "<message>" for retrieving data
@@ -22,7 +22,7 @@ Feature: Retrieve data from database
 
 
   Scenario Outline: I retrieve from addresses entity
-    Given I'm connected to a database
+    Given I'm connected to a database to retrieve data
     When I fill in condition with "<condition>"
     And I want to retrieve 'addresses'
     Then I should see "<message>" for retrieving data

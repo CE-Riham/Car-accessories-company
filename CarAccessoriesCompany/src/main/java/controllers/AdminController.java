@@ -8,6 +8,7 @@ import database.UpdatingData;
 import helpers.Alerts;
 import helpers.DataValidation;
 import helpers.StageHelper;
+import helpers.Uploader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,11 +18,15 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import model.User;
 
+import java.io.File;
 import java.util.Optional;
 
 public class AdminController {
     private UpdatingData dataUpdater;
+    private String successfulUpdate = "User was updated successfully";
+    private Uploader uploader;
     public AdminController(){
+        uploader = new Uploader();
         dataUpdater = new UpdatingData(DBConnector.getConnector().getCon());
     }
     @FXML
@@ -91,7 +96,6 @@ public class AdminController {
         button.setStyle("-fx-border-color: #C9B3AD;");
     }
 
-
     private void disableAllPanesExcept(AnchorPane pane){
         profile.setVisible(false);
         pane.setVisible(true);
@@ -108,7 +112,16 @@ public class AdminController {
         streetTextField.setEditable(flag);
     }
 
+    private void setProfilePicture(){
+        File file = new File(UserSession.getCurrentUser().getImagePath() );
+        String localUrl = file.toURI().toString();
+        Image image = new Image(localUrl);
+        profilePicture.setFill(new ImagePattern(image));
+    }
     private void getProfileFromDB(){
+        setProfilePicture();
+        firstName.setText(UserSession.getCurrentUser().getFirstName());
+        lastName.setText(UserSession.getCurrentUser().getLastName());
         User tmpUser = UserSession.getCurrentUser();
         //admin data
         firstNameTextField.setText(tmpUser.getFirstName());
@@ -123,14 +136,10 @@ public class AdminController {
     //done
     @FXML
     void onAdminNameClick(ActionEvent event) {
-        User tmpUser = UserSession.getCurrentUser();
         disableAllMenuButtonsExcept(adminNameButton);
         disableAllPanesExcept(profile);
-        firstName.setText(tmpUser.getFirstName());
-        lastName.setText(tmpUser.getLastName());
-        Image image = new Image(getClass().getResourceAsStream(tmpUser.getImagePath()));
-        profilePicture.setFill(new ImagePattern(image));
         getProfileFromDB();
+        setProfilePicture();
         Starter.logger.info("Profile was opened successfully :)");
     }
 
@@ -188,6 +197,24 @@ public class AdminController {
     @FXML
     void onChangePictureClick(ActionEvent event) {
         //TODO
+        String savePath = "src/main/resources/assets/usersPictures/"+ UserSession.getCurrentUser().getUsername() + ".png";
+        boolean uploadImageFlag = uploader.uploadImage();
+        if(uploadImageFlag){
+            boolean savingFlag = uploader.saveToFile(savePath);
+            if(savingFlag){
+                //save the new photo in database
+                User user = UserSession.getCurrentUser();
+                user.setImagePath(savePath);
+                String condition = " where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
+                dataUpdater.updateUser(user, condition);
+                String status = dataUpdater.getStatus();
+                if(status.equals(successfulUpdate)){
+                    UserSession.setCurrentUser(user);
+                    Alerts.informationAlert("Change picture", null, "Picture was updated successfully.");
+                    getProfileFromDB();
+                }
+            }
+        }
     }
 
     //done
@@ -214,10 +241,10 @@ public class AdminController {
             if(DataValidation.passwordValidationTest(password)){
                 User user = UserSession.getCurrentUser();
                 user.setPassword(password);
-                String condition = "where username = \'" + usernameTextField.getText() + "\';";
+                String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
                 dataUpdater.updateUser(user, condition);
                 String status = dataUpdater.getStatus();
-                if(status.equals("User was updated successfully")){
+                if(status.equals(successfulUpdate)){
                     Alerts.informationAlert("Update", null, "password was updated successfully.");
                     UserSession.setCurrentUser(user);
                 }
@@ -265,15 +292,14 @@ public class AdminController {
 
         //result
         String status = dataUpdater.getStatus();
-        if(status.equals("User was updated successfully")){
+        if(status.equals(successfulUpdate)){
             Alerts.informationAlert("Update", null, status);
             UserSession.setCurrentUser(user);
-            firstName.setText(firstNameTmp);
-            lastName.setText(lastNameTmp);
         }
         else
             Alerts.errorAlert("Error", null, status);
         getProfileFromDB();
+
     }
 
 }

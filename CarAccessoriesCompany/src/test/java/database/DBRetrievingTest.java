@@ -1,10 +1,10 @@
 package database;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.sql.SQLException;
 
@@ -15,8 +15,8 @@ public class DBRetrievingTest {
     private DatabaseConnection connection;
     private RetrievingData retrievingData;
 
-    @BeforeAll
-    @Given("I'm connected to a database")
+    @Before
+    @Given("I'm connected to a database to retrieve data")
     public void iMConnectedToADatabase() {
        connection = new DatabaseConnection();
        retrievingData = new RetrievingData(connection.getCon());
@@ -42,7 +42,7 @@ public class DBRetrievingTest {
     public void iShouldSee(String message) {
         assertEquals(status, message);
     }
-    @AfterAll
+    @After
     @Then("close the connection")
     public void closeTheConnection() throws SQLException {
         connection.getCon().close();

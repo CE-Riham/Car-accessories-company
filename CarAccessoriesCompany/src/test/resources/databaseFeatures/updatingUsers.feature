@@ -1,0 +1,32 @@
+Feature: Updating users from database
+
+  Scenario Outline: I want to update users
+    Given I'm connected to a database to update data
+    When I fill in update condition with "<condition>"
+    And I want to update "<field>" to "<newValue>"
+    And I submit to update
+    Then I should see "<message>" for updating data
+    And close the connection and end inserting
+    Examples:
+    |field        |newValue         |condition                        |message                       |
+    |username     |shahdhamad       | where username = 'shahd11'      |User was updated successfully |
+    |lastName     |Muneer           | where username = 'rihamkatout2' |User was updated successfully |
+    |firstName    |Riham            | where username = 'rihamkatout'  |User was updated successfully |
+    |phone        |0594643780       | where username = 'rahafkatout'  |User was updated successfully |
+    |email        |shahd@gmail.com  | where username = 'shahd11'      |User was updated successfully |
+    |userPassword |asD2!d12         | where username = 'rahafkatout'  |User was updated successfully |
+    |image        |rihamkatout3.jpg | where username = 'rihamkatout3' |User was updated successfully |
+    |userType     |customer         | where username = 'shahd11'      |User was updated successfully |
+    |userType     |installer        | where username = 'shahd11'      |User was updated successfully |
+    |userType     |admin            | where username = 'shahd11'      |User was updated successfully |
+    |lastName     |newLastName      | where username = 'shahd1'       |User was updated successfully |
+    |firstName    |newFirstName     | where username = 'noUser'       |User was updated successfully |
+    |phone        |0599             | where username = 'shahd11'      |Invalid phone number          |
+    |phone        |05991194fd       | where username = 'shahd11'      |Invalid phone number          |
+    |email        |invalidEmail     | where username = 'shahd11'      |Invalid email address         |
+    |email        |invalidEmail@a   | where username = 'shahd11'      |Invalid email address         |
+    |email        |invalidEmail@a.  | where username = 'shahd11'      |Invalid email address         |
+    |userPassword |invalidPassword  | where username = 'shahd11'      |Invalid password              |
+    |userPassword |invalidpassword2 | where username = 'shahd11'      |Invalid password              |
+    |userType     |invalidType      | where username = 'shahd11'      |Invalid user type             |
+

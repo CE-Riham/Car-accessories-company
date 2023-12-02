@@ -1,8 +1,8 @@
 package controllers;//import animatefx.animation.FadeIn;
 
+import authentication.Login;
 import classes.DBConnector;
 import classes.Starter;
-import authentication.Login;
 import classes.UserSession;
 import helpers.Alerts;
 import helpers.StageHelper;
@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import javax.swing.*;
 import java.sql.SQLException;
 
 public class LoginController {

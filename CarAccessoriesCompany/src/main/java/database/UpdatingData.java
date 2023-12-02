@@ -6,7 +6,6 @@ import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.List;
 
 public class UpdatingData {
     private String status;
@@ -21,7 +20,15 @@ public class UpdatingData {
     public void setStatus(String status) {
         this.status = status;
     }
-
+    public boolean updateUserTest(User user, String condition){
+        String st = DataValidation.userValidationTest(user);
+        if(st.equals("Valid")){
+                setStatus("User was updated successfully");
+        }
+        else
+            setStatus(st);
+        return false;
+    }
     public boolean updateUser(User user, String condition){
         String st = DataValidation.userValidationTest(user);
         if(st.equals("Valid")){
