@@ -1,5 +1,6 @@
 package database;
 
+import database.retrieving.RetrievingUser;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -11,15 +12,16 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class DBRetrievingUsersTest {
-    private String condition, status;
+    private String condition;
+    private String status;
     private DatabaseConnection connection;
-    private RetrievingData retrievingData;
+    private RetrievingUser retrievingData;
 
     @Before
     @Given("I'm connected to a database to retrieve users")
     public void iMConnectedToADatabase() {
        connection = new DatabaseConnection();
-       retrievingData = new RetrievingData(connection.getCon());
+       retrievingData = new RetrievingUser(connection.getCon());
     }
     @When("I fill in condition with {string} for users")
     public void iFillInConditionWith(String string) {
@@ -28,7 +30,7 @@ public class DBRetrievingUsersTest {
     @When("I want to retrieve {string} users")
     public void iWantToRetrieve(String entity) throws SQLException {
         if(entity.equals("users")) {
-            retrievingData.selectFromUsersTable(condition);
+            retrievingData.selectUsersWithCondition(condition);
             status = retrievingData.getStatus();
         }
         else

@@ -7,11 +7,6 @@ Feature: Retrieve products from database
     Then I should see "<message>" for retrieving products
     And close the connection after retrieving products
 
-#  image varchar(100),
-#  longDescription varchar(500) not null,
-#  shortDescription varchar(100) not null,
-#  availability int not null,
-
     Examples:
       | condition                                      | message                                       |
       |                                                | Retrieving products successfully              |

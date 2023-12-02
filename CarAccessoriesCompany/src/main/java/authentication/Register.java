@@ -1,7 +1,7 @@
 package authentication;
 
 import database.InsertingData;
-import database.RetrievingData;
+import database.retrieving.RetrievingUser;
 import helpers.DataValidation;
 import model.User;
 
@@ -12,11 +12,11 @@ import java.util.List;
 public class Register {
     private String status;
     private InsertingData userInserter;
-    private RetrievingData userRetriever;
+    private RetrievingUser userRetriever;
 
     public Register(Connection connection){
         userInserter = new InsertingData(connection);
-        userRetriever = new RetrievingData(connection);
+        userRetriever = new RetrievingUser(connection);
     }
     public String getStatus() {
         return status;
@@ -29,7 +29,7 @@ public class Register {
     public void registerUserTest(User user) throws SQLException {
         String st = DataValidation.userValidationTest(user);
         if(st.equals("Valid")){
-            List<User> allUsers = userRetriever.selectFromUsersTable("where username = '" + user.getUsername() + "'");
+            List<User> allUsers = userRetriever.findUserByUsername(user.getUsername());
             if(allUsers == null || allUsers.isEmpty())
                     setStatus("User was registered successfully");
             else

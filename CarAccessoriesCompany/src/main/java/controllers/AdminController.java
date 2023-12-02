@@ -4,7 +4,7 @@ import authentication.UserSessionManager;
 import classes.DBConnector;
 import classes.Starter;
 import classes.UserSession;
-import database.UpdatingData;
+import database.updating.UserUpdater;
 import helpers.Alerts;
 import helpers.DataValidation;
 import helpers.StageHelper;
@@ -22,12 +22,12 @@ import java.io.File;
 import java.util.Optional;
 
 public class AdminController {
-    private UpdatingData dataUpdater;
+    private UserUpdater dataUpdater;
     private String successfulUpdate = "User was updated successfully";
     private Uploader uploader;
     public AdminController(){
         uploader = new Uploader();
-        dataUpdater = new UpdatingData(DBConnector.getConnector().getCon());
+        dataUpdater = new UserUpdater(DBConnector.getConnector().getCon());
     }
     @FXML
     private Button adminNameButton;
@@ -61,7 +61,10 @@ public class AdminController {
     private Label lastName;
 
     @FXML
-    private AnchorPane profile;
+    private AnchorPane profilePane;
+
+    @FXML
+    private AnchorPane productsPane;
 
     @FXML
     private Circle profilePicture;
@@ -97,7 +100,8 @@ public class AdminController {
     }
 
     private void disableAllPanesExcept(AnchorPane pane){
-        profile.setVisible(false);
+        profilePane.setVisible(false);
+        productsPane.setVisible(false);
         pane.setVisible(true);
     }
 
@@ -131,13 +135,20 @@ public class AdminController {
         emailTextField.setText(tmpUser.getEmail());
         //TODO
         //add address
+
+        setProfileEditable(false);
+        saveProfileButton.setVisible(false);
+        cancelProfileButton.setVisible(false);
+        editProfileButton.setVisible(true);
+        changePictureButton.setVisible(false);
+        changePasswordButton.setVisible(true);
     }
 
     //done
     @FXML
     void onAdminNameClick(ActionEvent event) {
         disableAllMenuButtonsExcept(adminNameButton);
-        disableAllPanesExcept(profile);
+        disableAllPanesExcept(profilePane);
         getProfileFromDB();
         setProfilePicture();
         Starter.logger.info("Profile was opened successfully :)");
@@ -158,6 +169,7 @@ public class AdminController {
     @FXML
     void onProductsClick(ActionEvent event) {
         disableAllMenuButtonsExcept(productsButton);
+        disableAllPanesExcept(productsPane);
     }
 
     @FXML
@@ -206,7 +218,7 @@ public class AdminController {
                 User user = UserSession.getCurrentUser();
                 user.setImagePath(savePath);
                 String condition = " where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
-                dataUpdater.updateUser(user, condition);
+                dataUpdater.updateUsersAllFields(user, condition);
                 String status = dataUpdater.getStatus();
                 if(status.equals(successfulUpdate)){
                     UserSession.setCurrentUser(user);
@@ -242,7 +254,7 @@ public class AdminController {
                 User user = UserSession.getCurrentUser();
                 user.setPassword(password);
                 String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
-                dataUpdater.updateUser(user, condition);
+                dataUpdater.updateUsersAllFields(user, condition);
                 String status = dataUpdater.getStatus();
                 if(status.equals(successfulUpdate)){
                     Alerts.informationAlert("Update", null, "password was updated successfully.");
@@ -258,12 +270,6 @@ public class AdminController {
     //done
     @FXML
     void onCancelProfileClick(ActionEvent event){
-        setProfileEditable(false);
-        saveProfileButton.setVisible(false);
-        cancelProfileButton.setVisible(false);
-        editProfileButton.setVisible(true);
-        changePictureButton.setVisible(false);
-        changePasswordButton.setVisible(true);
         getProfileFromDB();
     }
 
@@ -271,13 +277,6 @@ public class AdminController {
     void onSaveProfileClick(ActionEvent event){
         //TODO
         //edit address
-        setProfileEditable(false);
-        saveProfileButton.setVisible(false);
-        cancelProfileButton.setVisible(false);
-        editProfileButton.setVisible(true);
-        changePictureButton.setVisible(false);
-        changePasswordButton.setVisible(true);
-
         //update admin information
         String email = emailTextField.getText();
         String firstNameTmp = firstNameTextField.getText();
@@ -288,7 +287,7 @@ public class AdminController {
                 UserSession.getCurrentUser().getPassword(), email, UserSession.getCurrentUser().getImagePath(),
                 "admin", UserSession.getCurrentUser().getAddress());
 
-        dataUpdater.updateUser(user, condition);
+        dataUpdater.updateUsersAllFields(user, condition);
 
         //result
         String status = dataUpdater.getStatus();
