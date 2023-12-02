@@ -55,7 +55,7 @@ public class DBUpdatingUsersTest {
         updatingData.updateUserTest(user, condition);
         status = updatingData.getStatus();
     }
-    @Then("I should see {string} for inserting data")
+    @Then("I should see {string} for updating data")
     public void iShouldSeeForInsertingData(String message) {
         assertEquals(status, message);
     }

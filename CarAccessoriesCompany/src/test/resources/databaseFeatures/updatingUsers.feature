@@ -5,7 +5,7 @@ Feature: Updating users from database
     When I fill in update condition with "<condition>"
     And I want to update "<field>" to "<newValue>"
     And I submit to update
-    Then I should see "<message>" for inserting data
+    Then I should see "<message>" for updating data
     And close the connection and end inserting
     Examples:
     |field        |newValue         |condition                        |message                       |
