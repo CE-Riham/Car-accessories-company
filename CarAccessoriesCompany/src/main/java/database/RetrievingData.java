@@ -2,6 +2,7 @@ package database;
 
 import helpers.Generator;
 import model.Address;
+import model.Product;
 import model.User;
 
 import java.sql.Connection;
@@ -27,11 +28,11 @@ public class RetrievingData{
         this.status = status;
     }
 
-    public List<User> selectUsers(String condition) throws SQLException {
+    public List<User> selectFromUsersTable(String condition) throws SQLException {
         List<User> users = new ArrayList<>();
         Statement st = null;
         try {
-            String query = "SELECT * FROM users " + (condition.equals("") ? "":"where " + condition);
+            String query = "SELECT * FROM users " + condition;
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs != null && rs.next())
@@ -46,11 +47,11 @@ public class RetrievingData{
         }
     }
 
-    public List<Address> selectAddresses(String condition) throws SQLException {
+    public List<Address> selectFromAddressesTable(String condition) throws SQLException {
         List<Address> addresses = new ArrayList<>();
         Statement st = null;
         try {
-            String query = "SELECT * FROM addresses " + (condition.equals("") ? "":"where " + condition);
+            String query = "SELECT * FROM addresses " + condition;
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs != null && rs.next())
@@ -59,6 +60,25 @@ public class RetrievingData{
             return addresses;
         }catch (Exception e){
             setStatus("Error while retrieving addresses from database");
+            return new ArrayList<>();
+        }finally {
+            if(st != null)st.close();
+        }
+    }
+
+    public List<Product> selectFromProductsTable(String condition) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        Statement st = null;
+        try {
+            String query = "SELECT * FROM products " + condition;
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs != null && rs.next())
+                products.add(Generator.rsToProduct(rs));
+            setStatus("Retrieving products successfully");
+            return products;
+        }catch (Exception e){
+            setStatus("Error while retrieving products from database");
             return new ArrayList<>();
         }finally {
             if(st != null)st.close();
