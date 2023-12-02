@@ -1,6 +1,8 @@
 package helpers;
 
 import model.Address;
+import model.Category;
+import model.Product;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -30,6 +32,21 @@ public class Generator {
         tmpAddress.setCity(rs.getString("city"));
         tmpAddress.setStreet(rs.getString("street"));
         return tmpAddress;
+    }
+
+    public static Product rsToProduct(ResultSet rs) throws SQLException {
+        Product tmpProduct = new Product();
+        tmpProduct.setProductID(rs.getInt("productID"));
+        tmpProduct.setProductName(rs.getString("productName"));
+        String category = rs.getString("category");
+        tmpProduct.setProductCategory(Category.valueOf(category.toUpperCase()));
+        tmpProduct.setProductPrice(rs.getDouble("price"));
+        tmpProduct.setNumberOfOrders(rs.getInt("numberOfOrders"));
+        tmpProduct.setImagePath(rs.getString("image"));
+        tmpProduct.setLongDescription(rs.getString("longDescription"));
+        tmpProduct.setShortDescription(rs.getString("shortDescription"));
+        tmpProduct.setAvailableAmount(rs.getInt("availability"));
+        return tmpProduct;
     }
     public static PreparedStatement userToPS(PreparedStatement preparedStmt, User user) throws SQLException {
         preparedStmt.setString (1, user.getFirstName());

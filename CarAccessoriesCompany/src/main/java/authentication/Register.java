@@ -29,7 +29,7 @@ public class Register {
     public void registerUserTest(User user) throws SQLException {
         String st = DataValidation.userValidationTest(user);
         if(st.equals("Valid")){
-            List<User> allUsers = userRetriever.selectUsers("username = '" + user.getUsername() + "'");
+            List<User> allUsers = userRetriever.selectFromUsersTable("where username = '" + user.getUsername() + "'");
             if(allUsers == null || allUsers.isEmpty())
                     setStatus("User was registered successfully");
             else

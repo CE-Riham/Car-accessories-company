@@ -24,7 +24,7 @@ public class Login {
     }
 
     public boolean loginUser(String username, String password) throws SQLException {
-        List<User> allUsers = usersRetriever.selectUsers("username = '" + username.toLowerCase() + "';");
+        List<User> allUsers = usersRetriever.selectFromUsersTable("where username = '" + username.toLowerCase() + "';");
         if(allUsers != null && !allUsers.isEmpty() ) {
             User tmpUser = allUsers.get(0);
             if (tmpUser.getPassword().equals(password)) {

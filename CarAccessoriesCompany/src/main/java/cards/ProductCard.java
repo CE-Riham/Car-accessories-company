@@ -74,7 +74,7 @@ public class ProductCard{
         setProductName("");
         setShortDescription("");
         setImagePath("");
-        setProductCategory(Category.Other);
+        setProductCategory(Category.OTHER);
     }
     public ProductCard(int productID, int numberOfOrders, double productPrice,
                        String productName, String shortDescription, String imagePath, Category productCategory) {
