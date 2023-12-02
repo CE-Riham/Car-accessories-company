@@ -4,7 +4,6 @@ import authentication.Register;
 import classes.DBConnector;
 import classes.Starter;
 import helpers.Alerts;
-import helpers.DataValidation;
 import helpers.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.User;
 
-import javax.swing.*;
 import java.sql.SQLException;
 
 
