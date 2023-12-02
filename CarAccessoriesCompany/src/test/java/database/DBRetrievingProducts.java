@@ -1,5 +1,6 @@
 package database;
 
+import database.retrieving.RetrievingProducts;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -13,13 +14,13 @@ import static org.junit.Assert.assertEquals;
 public class DBRetrievingProducts {
     private String condition, status;
     private DatabaseConnection connection;
-    private RetrievingData retrievingData;
+    private RetrievingProducts retrievingData;
 
     @Before
     @Given("I'm connected to a database to retrieve products")
     public void iMConnectedToADatabase() {
         connection = new DatabaseConnection();
-        retrievingData = new RetrievingData(connection.getCon());
+        retrievingData = new RetrievingProducts(connection.getCon());
     }
     @When("I fill in condition with {string} for products")
     public void iFillInConditionWith(String string) {
@@ -28,7 +29,7 @@ public class DBRetrievingProducts {
     @When("I want to retrieve {string} products")
     public void iWantToRetrieve(String entity) throws SQLException {
         if(entity.equals("products")){
-            retrievingData.selectFromProductsTable(condition);
+            retrievingData.selectProductsWithCondition(condition);
             status = retrievingData.getStatus();
         }
         else
