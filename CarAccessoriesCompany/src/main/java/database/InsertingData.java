@@ -34,4 +34,20 @@ public class InsertingData {
             return false;
         }
     }
+
+    public boolean insertCustomer(String username, double account){
+        try {
+            String query = "insert into customers "
+                    + " values (?, ?);";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString (1, username);
+            preparedStmt.setString (2, String.valueOf(account));
+            preparedStmt.execute();
+            setStatus("customer was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert customer");
+            return false;
+        }
+    }
 }
