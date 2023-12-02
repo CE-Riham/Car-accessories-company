@@ -18,10 +18,12 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import model.User;
 
+import java.io.File;
 import java.util.Optional;
 
 public class AdminController {
     private UpdatingData dataUpdater;
+    private String successfulUpdate = "User was updated successfully";
     private Uploader uploader;
     public AdminController(){
         uploader = new Uploader();
@@ -110,13 +112,16 @@ public class AdminController {
         streetTextField.setEditable(flag);
     }
 
+    private void setProfilePicture(){
+        File file = new File(UserSession.getCurrentUser().getImagePath() );
+        String localUrl = file.toURI().toString();
+        Image image = new Image(localUrl);
+        profilePicture.setFill(new ImagePattern(image));
+    }
     private void getProfileFromDB(){
+        setProfilePicture();
         firstName.setText(UserSession.getCurrentUser().getFirstName());
         lastName.setText(UserSession.getCurrentUser().getLastName());
-        Image image = new Image(getClass().getResourceAsStream(UserSession.getCurrentUser().getImagePath()));
-        profilePicture.setFill(new ImagePattern(image));
-        //TODO
-        //refresh picture
         User tmpUser = UserSession.getCurrentUser();
         //admin data
         firstNameTextField.setText(tmpUser.getFirstName());
@@ -134,6 +139,7 @@ public class AdminController {
         disableAllMenuButtonsExcept(adminNameButton);
         disableAllPanesExcept(profile);
         getProfileFromDB();
+        setProfilePicture();
         Starter.logger.info("Profile was opened successfully :)");
     }
 
@@ -197,15 +203,14 @@ public class AdminController {
             boolean savingFlag = uploader.saveToFile(savePath);
             if(savingFlag){
                 //save the new photo in database
-                String imagePath = savePath.substring(18);
                 User user = UserSession.getCurrentUser();
-                user.setImagePath(imagePath);
-                String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
+                user.setImagePath(savePath);
+                String condition = " where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
                 dataUpdater.updateUser(user, condition);
                 String status = dataUpdater.getStatus();
-                if(status.equals("User was updated successfully")){
+                if(status.equals(successfulUpdate)){
                     UserSession.setCurrentUser(user);
-                    Alerts.informationAlert("Update", null, "Image was updated successfully.");
+                    Alerts.informationAlert("Change picture", null, "Picture was updated successfully.");
                     getProfileFromDB();
                 }
             }
@@ -239,7 +244,7 @@ public class AdminController {
                 String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
                 dataUpdater.updateUser(user, condition);
                 String status = dataUpdater.getStatus();
-                if(status.equals("User was updated successfully")){
+                if(status.equals(successfulUpdate)){
                     Alerts.informationAlert("Update", null, "password was updated successfully.");
                     UserSession.setCurrentUser(user);
                 }
@@ -287,13 +292,14 @@ public class AdminController {
 
         //result
         String status = dataUpdater.getStatus();
-        if(status.equals("User was updated successfully")){
+        if(status.equals(successfulUpdate)){
             Alerts.informationAlert("Update", null, status);
             UserSession.setCurrentUser(user);
         }
         else
             Alerts.errorAlert("Error", null, status);
         getProfileFromDB();
+
     }
 
 }
