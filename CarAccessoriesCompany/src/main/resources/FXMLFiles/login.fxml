@@ -19,7 +19,7 @@
 <children>
       <ImageView fitHeight="837.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/loginGUI.png" />
+            <Image url="@../assets/Pages/loginGUI.png" />
          </image>
       </ImageView>
       <VBox alignment="CENTER" layoutY="437.0" prefHeight="401.0" prefWidth="606.0" style="-fx-background-color: transparent;">
