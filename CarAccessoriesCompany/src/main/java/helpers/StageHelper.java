@@ -28,7 +28,7 @@ public class StageHelper {
     }
     public static void showAdmin(ActionEvent event){
         try{
-            showPage(event, "/FXMLFiles/admin.fxml", 1600, 900);
+            showPage(event, "/FXMLFiles/adminPage.fxml", 1600, 900);
         }catch (Exception e){
             Starter.logger.warning("Can't open admin page");
         }
@@ -36,7 +36,7 @@ public class StageHelper {
 
     public static void showLogin(ActionEvent event){
         try{
-            showPage(event, "/FXMLFiles/login.fxml", 608, 837);
+            showPage(event, "/FXMLFiles/loginPage.fxml", 608, 837);
         }catch (Exception e){
             Starter.logger.warning("Can't open login page");
         }
@@ -44,7 +44,7 @@ public class StageHelper {
 
     public static void showSignup(ActionEvent event){
         try{
-            showPage(event, "/FXMLFiles/signup.fxml", 608, 837);
+            showPage(event, "/FXMLFiles/signupPage.fxml", 608, 837);
         }catch (Exception e){
             Starter.logger.warning("Can't open sign-up page");
         }
