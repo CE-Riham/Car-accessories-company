@@ -17,7 +17,7 @@
 <children>
       <ImageView fitHeight="837.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/signupGUI.png" />
+            <Image url="@../assets/Pages/signupGUI.png" />
          </image>
       </ImageView>
       <VBox alignment="CENTER" prefHeight="837.0" prefWidth="606.0" style="-fx-background-color: transparent;">
@@ -151,7 +151,7 @@
             </VBox>
          </children>
          <padding>
-            <Insets bottom="120.0" />
+            <Insets bottom="120.0" top="200.0" />
          </padding>
       </VBox>
 </children>

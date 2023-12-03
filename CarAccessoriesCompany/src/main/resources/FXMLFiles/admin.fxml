@@ -39,12 +39,12 @@
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
-                                    <Image url="@../assets/notification.png" />
+                                    <Image url="@../assets/icons/notification.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
-                                    <Image url="@../assets/logout.png" />
+                                    <Image url="@../assets/icons/logout.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -61,7 +61,7 @@
                      <children>
                         <ImageView fitHeight="800.0" fitWidth="1400.0" layoutX="100.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/profileBackground.png" />
+                              <Image url="@../assets/Pages/adminProfilePage.png" />
                            </image>
                         </ImageView>
                         <VBox layoutX="574.0" layoutY="103.0" prefHeight="587.0" prefWidth="888.0">
