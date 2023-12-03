@@ -1,16 +1,13 @@
 package classes;
 
 import database.DatabaseConnection;
-import database.retrieving.RetrievingUser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class Starter extends Application {
@@ -20,18 +17,7 @@ public class Starter extends Application {
         DBConnector.setConnector(new DatabaseConnection());
         logger.info(DBConnector.getConnector().getStatus());
 
-//        RetrievingData dataRetriever = new RetrievingData(DBConnector.getConnector().getCon());
-//        List<Product> products = dataRetriever.selectFromProductsTable("");
-//        for (Product p: products) {
-//            System.out.println(p);
-//        }
-//        RetrievingUser users = new RetrievingUser(DBConnector.getConnector().getCon());
-//        List<User> userss  = users.findUserByUsername("shahd11");
-//        for (User user:userss) {
-//            System.out.println(user);
-//        }
-//        System.out.println(users.getStatus());
-        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/addProductPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 608, 837);
         stage.setTitle("Car Zone Company");
         stage.setScene(scene);
