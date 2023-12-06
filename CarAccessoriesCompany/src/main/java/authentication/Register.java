@@ -1,6 +1,6 @@
 package authentication;
 
-import database.InsertingData;
+import database.inserting.InsertingData;
 import database.retrieving.RetrievingUser;
 import helpers.DataValidation;
 import model.User;
@@ -26,27 +26,23 @@ public class Register {
         this.status = status;
     }
 
-    public void registerUserTest(User user) throws SQLException {
+    public boolean registerUser(User user) throws SQLException {
         String st = DataValidation.userValidationTest(user);
-        if(st.equals("Valid")){
+        setStatus(st);
+        if(getStatus().equals("Valid")){
             List<User> allUsers = userRetriever.findUserByUsername(user.getUsername());
-            if(allUsers == null || allUsers.isEmpty())
+            if(allUsers == null || allUsers.isEmpty()) {
+                if(userInserter.insertUser(user)){
+                    if(user.getUserType().equals("customer"))
+                        userInserter.insertCustomer(user.getUsername(), 0);
+                    else if(user.getUserType().equals("installer"))
+                        userInserter.insertInstaller(user.getUsername(), 0, 0);
                     setStatus("User was registered successfully");
+                    return true;
+                }
+            }
             else
                 setStatus("Username is already taken");
-        }
-        else
-            setStatus(st);
-    }
-    public boolean registerUser(User user) throws SQLException {
-        registerUserTest(user);
-        if(getStatus().equals("User was registered successfully")){
-            if(userInserter.insertUser(user)) {
-                userInserter.insertCustomer(user.getUsername(), 0);
-                return true;
-            }
-            setStatus("Couldn't register user");
-
         }
         return false;
     }

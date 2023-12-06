@@ -1,4 +1,4 @@
-package database;
+package database.inserting;
 
 import helpers.Generator;
 import model.Product;
@@ -48,6 +48,26 @@ public class InsertingData {
             return true;
         } catch (Exception e) {
             setStatus("Couldn't insert customer");
+            return false;
+        }finally{
+            if(preparedStmt!=null)preparedStmt.close();
+        }
+    }
+
+    public boolean insertInstaller(String username, double account, int installationTimes) throws SQLException {
+        PreparedStatement preparedStmt = null;
+        try {
+            String query = "insert into installers "
+                    + " values (?, ?, ?);";
+            preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString (1, username);
+            preparedStmt.setDouble (2, account);
+            preparedStmt.setInt (3, installationTimes);
+            preparedStmt.execute();
+            setStatus("installer was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert installer");
             return false;
         }finally{
             if(preparedStmt!=null)preparedStmt.close();

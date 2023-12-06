@@ -19,7 +19,7 @@ public class DBRetrievingAddressesTest {
     @Before
     @Given("I'm connected to a database to retrieve addresses")
     public void iMConnectedToADatabase() {
-       connection = new DatabaseConnection();
+       connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
        retrievingData = new RetrievingAddress(connection.getCon());
     }
     @When("I fill in condition with {string} for addresses")

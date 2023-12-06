@@ -19,7 +19,7 @@ public class DBRetrievingProducts {
     @Before
     @Given("I'm connected to a database to retrieve products")
     public void iMConnectedToADatabase() {
-        connection = new DatabaseConnection();
+        connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
         retrievingData = new RetrievingProducts(connection.getCon());
     }
     @When("I fill in condition with {string} for products")

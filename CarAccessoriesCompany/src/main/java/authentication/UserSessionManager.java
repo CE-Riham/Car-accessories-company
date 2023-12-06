@@ -1,18 +1,30 @@
 package authentication;
 
 import classes.Starter;
+import classes.UserSession;
+import helpers.Alerts;
+import helpers.stage_helpers.AuthenticationStageHelper;
+import javafx.event.ActionEvent;
+import javafx.scene.control.ButtonType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 
 public class UserSessionManager {
     private static Map<String, String> userSessions = new HashMap<>();
+    private static String status;
+    public static String getStatus() {
+        return status;
+    }
+    public static void setStatus(String status) {
+        UserSessionManager.status = status;
+    }
 
     private UserSessionManager() {
         throw new IllegalStateException("Utility class");
     }
-    // Method to create a session for a user upon successful login
     public static String createSession(String username) {
         String sessionId = generateSessionId();
         userSessions.put(sessionId, username);
@@ -20,17 +32,10 @@ public class UserSessionManager {
         return sessionId;
     }
 
-    // Method to check if a session exists for a given session ID
     public static boolean isValidSession(String sessionId) {
         return userSessions.containsKey(sessionId);
     }
 
-    // Method to retrieve username from a session ID
-    public static String getUsernameFromSession(String sessionId) {
-        return userSessions.get(sessionId);
-    }
-
-    // Simulated session ID generation method
     private static String generateSessionId() {
         String tmpID;
         do{
@@ -39,10 +44,14 @@ public class UserSessionManager {
         return  tmpID; // Not a secure way, just for demonstration
     }
 
-    // Method to invalidate a session (logout)
     public static void invalidateSession(String sessionId) {
         userSessions.remove(sessionId);
-        Starter.logger.log(Level.INFO, "Session invalidated for Session ID: {0}", sessionId);
+        setStatus("Session invalidated for Session ID:" + sessionId);
     }
+    public static void logoutUser(){
+        UserSessionManager.invalidateSession(UserSession.getSessionId());
+        UserSession.setSessionId(null);
+        setStatus("Logged out");
 
+    }
 }

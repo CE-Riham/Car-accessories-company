@@ -25,8 +25,7 @@ public class UserSession{
         Optional<ButtonType> result = Alerts.confirmationAlert("Logout", "Are you sure you want to logout?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Starter.logger.info("Logout");
-            UserSessionManager.invalidateSession(UserSession.getSessionId());
-            UserSession.setSessionId(null);
+            UserSessionManager.logoutUser();
             AuthenticationStageHelper.showLogin(event);
         }
         else

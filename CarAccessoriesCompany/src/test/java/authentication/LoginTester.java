@@ -17,11 +17,10 @@ public class LoginTester {
     private DatabaseConnection connection;
     private Login login;
 
-
     @BeforeAll
     @Given("user is connected to the database")
     public void userIsConnectedToTheDatabase() {
-        connection = new DatabaseConnection();
+        connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
         login = new Login(connection.getCon());
     }
 

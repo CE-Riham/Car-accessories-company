@@ -22,7 +22,7 @@ public class DBUpdatingUsersTest {
     @Given("I'm connected to a database to update data")
     public void iMConnectedToADatabaseToUpdateData() {
         user = new User("rihamkatout", "Riham", "Katout", "0599119482", "asAS12!@", "rihamkatm@gmail.com", "rihamkatout.png", "admin", null);
-        connection = new DatabaseConnection();
+        connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
         userUpdater = new UserUpdater(connection.getCon());
     }
     @When("I fill in update condition with {string}")
