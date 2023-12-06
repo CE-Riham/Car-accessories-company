@@ -23,6 +23,7 @@ public class Product extends ProductCard {
     }
 
     public Product(){
+        super();
         setAvailableAmount(0);
         setLongDescription("");
     }

@@ -1,10 +1,10 @@
 package database;
 
 import helpers.Generator;
+import model.Product;
 import model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 public class InsertingData {
     private String status;
@@ -35,11 +35,12 @@ public class InsertingData {
         }
     }
 
-    public boolean insertCustomer(String username, double account){
+    public boolean insertCustomer(String username, double account) throws SQLException {
+        PreparedStatement preparedStmt = null;
         try {
             String query = "insert into customers "
                     + " values (?, ?);";
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString (1, username);
             preparedStmt.setString (2, String.valueOf(account));
             preparedStmt.execute();
@@ -48,6 +49,26 @@ public class InsertingData {
         } catch (Exception e) {
             setStatus("Couldn't insert customer");
             return false;
+        }finally{
+            if(preparedStmt!=null)preparedStmt.close();
         }
+    }
+
+    public int insertProduct(Product product){
+        try {
+            String query = "insert into products (productName, category, price, numberOfOrders, image, longDescription, " +
+                    "shortDescription, availability) values (?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement preparedStmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt = Generator.productToPS(preparedStmt, product);
+            preparedStmt.executeUpdate();
+            setStatus("Product was inserted successfully");
+            ResultSet rs = preparedStmt.getGeneratedKeys(); //to get productID
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            setStatus("Couldn't insert Product");
+        }
+        return -1;
     }
 }

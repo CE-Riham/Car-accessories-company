@@ -52,7 +52,7 @@ public class ProductCard{
     }
 
     public String getImagePath() {
-        return (imagePath.equals("") ? "/assets/products/noproduct.png":imagePath);
+        return (imagePath.equals("") ? "src/main/resources/assets/products/noproduct.png":imagePath);
     }
 
     public void setImagePath(String imagePath) {

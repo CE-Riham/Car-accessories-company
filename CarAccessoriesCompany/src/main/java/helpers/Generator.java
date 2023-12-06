@@ -59,4 +59,15 @@ public class Generator {
         preparedStmt.setString  (8, user.getUserType());
         return preparedStmt;
     }
+    public static PreparedStatement productToPS(PreparedStatement preparedStmt, Product product) throws SQLException {
+        preparedStmt.setString  (1, product.getProductName());
+        preparedStmt.setString  (2, product.getProductCategory().toString());
+        preparedStmt.setDouble  (3, product.getProductPrice());
+        preparedStmt.setInt     (4, product.getNumberOfOrders());
+        preparedStmt.setString  (5, product.getImagePath());
+        preparedStmt.setString  (6, product.getLongDescription());
+        preparedStmt.setString  (7, product.getShortDescription());
+        preparedStmt.setInt     (8, product.getAvailableAmount());
+        return preparedStmt;
+    }
 }

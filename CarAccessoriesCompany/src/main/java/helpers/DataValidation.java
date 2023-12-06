@@ -40,6 +40,10 @@ public class DataValidation {
         if(!integerValidationTest(quantity)) return "Invalid quantity";
         return valid;
     }
+    public static String productValidationTest(Product product){
+        return productFieldsTest(product.getProductName(), product.getLongDescription(), product.getShortDescription(),
+                product.getProductCategory().toString(), String.valueOf(product.getProductPrice()), String.valueOf(product.getAvailableAmount()));
+    }
     public static String userValidationTest(User user){
         String emptyFieldsTest = emptyUserFieldsTest(user);
         if(!emptyFieldsTest.equals(valid))

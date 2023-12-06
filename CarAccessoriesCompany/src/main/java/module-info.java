@@ -14,4 +14,8 @@ module com.example.caraccessoriescompany {
     opens classes to javafx.fxml;
     exports helpers;
     opens helpers to javafx.fxml;
+    exports controllers.admin_controllers;
+    opens controllers.admin_controllers to javafx.fxml;
+    exports helpers.stage_helpers;
+    opens helpers.stage_helpers to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package helpers;
+package helpers.stage_helpers;
 
 import classes.Starter;
 import javafx.event.ActionEvent;
@@ -10,27 +10,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StageHelper {
+public class AuthenticationStageHelper {
 
-    private StageHelper() {
+    private AuthenticationStageHelper() {
         throw new IllegalStateException("Utility class");
     }
     private static void showPage(ActionEvent event, String path, int width, int height) throws IOException {
         if (event.getSource() instanceof Node source) {
-            Parent root = FXMLLoader.load(StageHelper.class.getResource(path));
+            Parent root = FXMLLoader.load(AuthenticationStageHelper.class.getResource(path));
             Scene scene = source.getScene();
             Stage stage = (Stage) scene.getWindow();
             scene.setRoot(root);
             stage.setHeight(height);
             stage.setWidth(width);
             stage.centerOnScreen();
-        }
-    }
-    public static void showAdmin(ActionEvent event){
-        try{
-            showPage(event, "/FXMLFiles/adminPage.fxml", 1600, 900);
-        }catch (Exception e){
-            Starter.logger.warning("Can't open admin page");
         }
     }
 

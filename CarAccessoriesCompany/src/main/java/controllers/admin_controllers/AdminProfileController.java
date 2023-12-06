@@ -1,49 +1,40 @@
-package controllers;
+package controllers.admin_controllers;
 
-import authentication.UserSessionManager;
 import classes.DBConnector;
 import classes.Starter;
 import classes.UserSession;
 import database.updating.UserUpdater;
 import helpers.Alerts;
 import helpers.DataValidation;
-import helpers.StageHelper;
+import helpers.stage_helpers.AdminStageHelper;
 import helpers.Uploader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import model.User;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class AdminController {
+public class AdminProfileController implements Initializable {
     private UserUpdater dataUpdater;
     private String successfulUpdate = "User was updated successfully";
     private Uploader uploader;
-    public AdminController(){
+    public AdminProfileController(){
         uploader = new Uploader();
         dataUpdater = new UserUpdater(DBConnector.getConnector().getCon());
     }
-    @FXML
-    private Button adminNameButton;
-    @FXML
-    private Button adminsButton;
-    @FXML
-    private Button customersButton;
-    @FXML
-    private Button dashboardButton;
-    @FXML
-    private Button installersButton;
-    @FXML
-    private Button ordersButton;
 
     @FXML
-    private Button productsButton;
+    private Button adminProfileButton;
     @FXML
     private Button changePictureButton;
     @FXML
@@ -59,12 +50,6 @@ public class AdminController {
     private Label firstName;
     @FXML
     private Label lastName;
-
-    @FXML
-    private AnchorPane profilePane;
-
-    @FXML
-    private AnchorPane productsPane;
 
     @FXML
     private Circle profilePicture;
@@ -86,26 +71,10 @@ public class AdminController {
     @FXML
     private TextField streetTextField;
 
-    //done
-    private void disableAllMenuButtonsExcept(Button button){
-        String style = "-fx-border-color: transparent;";
-        adminNameButton.setStyle(style);
-        adminsButton.setStyle(style);
-        customersButton.setStyle(style);
-        dashboardButton.setStyle(style);
-        installersButton.setStyle(style);
-        ordersButton.setStyle(style);
-        productsButton.setStyle(style);
-        button.setStyle("-fx-border-color: #C9B3AD;");
+    private void disableAllMenuButtonsExcept(){
+        adminProfileButton.setStyle("-fx-border-color: #C9B3AD;");
     }
 
-    private void disableAllPanesExcept(AnchorPane pane){
-        profilePane.setVisible(false);
-        productsPane.setVisible(false);
-        pane.setVisible(true);
-    }
-
-    //done
     private void setProfileEditable(boolean flag){
         firstNameTextField.setEditable(flag);
         lastNameTextField.setEditable(flag);
@@ -144,47 +113,38 @@ public class AdminController {
         changePasswordButton.setVisible(true);
     }
 
-    //done
     @FXML
-    void onAdminNameClick(ActionEvent event) {
-        disableAllMenuButtonsExcept(adminNameButton);
-        disableAllPanesExcept(profilePane);
-        getProfileFromDB();
-        setProfilePicture();
-        Starter.logger.info("Profile was opened successfully :)");
+    void onAdminProfileClick(ActionEvent event) {
+        AdminStageHelper.showAdminProfile(event);
     }
-
-
-
     @FXML
     void onDashboardClick(ActionEvent event) {
-        disableAllMenuButtonsExcept(dashboardButton);
+        AdminStageHelper.showAdminDashboard(event);
     }
 
     @FXML
     void onOrdersClick(ActionEvent event) {
-        disableAllMenuButtonsExcept(ordersButton);
+        //TODO
     }
 
     @FXML
     void onProductsClick(ActionEvent event) {
-        disableAllMenuButtonsExcept(productsButton);
-        disableAllPanesExcept(productsPane);
+        AdminStageHelper.showAdminProducts(event);
     }
 
     @FXML
     void onCustomersClick(ActionEvent event) {
-        disableAllMenuButtonsExcept(customersButton);
+        //TODO
     }
 
     @FXML
     void onInstallersClick(ActionEvent event) {
-        disableAllMenuButtonsExcept(installersButton);
+
     }
 
     @FXML
     void onAdminsClick(ActionEvent event) {
-        disableAllMenuButtonsExcept(adminsButton);
+
     }
 
     @FXML
@@ -192,27 +152,12 @@ public class AdminController {
         Starter.logger.info("beeb");
     }
 
-    //done
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        Optional<ButtonType> result = Alerts.confirmationAlert("Logout", "Are you sure you want to logout?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            Starter.logger.info("Logout");
-            UserSessionManager.invalidateSession(UserSession.getSessionId());
-            UserSession.setSessionId(null);
-            StageHelper.showLogin(event);
-        }
-        else
-            Starter.logger.info("Logout was canceled.");
-    }
-
     @FXML
     void onChangePictureClick(ActionEvent event) {
-        //TODO
         String savePath = "src/main/resources/assets/usersPictures/"+ UserSession.getCurrentUser().getUsername() + ".png";
         boolean uploadImageFlag = uploader.uploadImage();
         if(uploadImageFlag){
-            boolean savingFlag = uploader.saveToFile(savePath);
+            boolean savingFlag = uploader.saveToFile(savePath, true);
             if(savingFlag){
                 //save the new photo in database
                 User user = UserSession.getCurrentUser();
@@ -301,4 +246,14 @@ public class AdminController {
 
     }
 
+    @FXML
+    void onLogoutClick(ActionEvent event) {
+        UserSession.logoutUser(event);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        disableAllMenuButtonsExcept();
+        getProfileFromDB();
+    }
 }
