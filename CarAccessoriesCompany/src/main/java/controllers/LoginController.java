@@ -5,7 +5,8 @@ import classes.DBConnector;
 import classes.Starter;
 import classes.UserSession;
 import helpers.Alerts;
-import helpers.StageHelper;
+import helpers.stage_helpers.AdminStageHelper;
+import helpers.stage_helpers.AuthenticationStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -38,14 +39,14 @@ public class LoginController {
             Alerts.errorAlert("Error", null, login.getStatus());
         else {
             if(UserSession.getCurrentUser().getUserType().equals("admin"))
-                StageHelper.showAdmin(event);
+                AdminStageHelper.showAdminDashboard(event);
         }
 
     }
 
     @FXML
     void onSignupClick(ActionEvent event) {
-        StageHelper.showSignup(event);
+        AuthenticationStageHelper.showSignup(event);
     }
     @FXML
     protected void onForgetPasswordClick(){

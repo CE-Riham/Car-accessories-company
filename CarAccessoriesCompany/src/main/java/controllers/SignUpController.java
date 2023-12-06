@@ -4,7 +4,8 @@ import authentication.Register;
 import classes.DBConnector;
 import classes.Starter;
 import helpers.Alerts;
-import helpers.StageHelper;
+import helpers.stage_helpers.AdminStageHelper;
+import helpers.stage_helpers.AuthenticationStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -37,7 +38,7 @@ public class SignUpController {
 
     @FXML
     void onLoginClick(ActionEvent event) {
-        StageHelper.showLogin(event);
+        AuthenticationStageHelper.showLogin(event);
     }
 
     @FXML
@@ -56,7 +57,7 @@ public class SignUpController {
         Starter.logger.info(status);
         if(status.equals("User was registered successfully")){
             Alerts.informationAlert("Register user", null, status);
-            StageHelper.showLogin(event);
+            AuthenticationStageHelper.showLogin(event);
         }
         else {
             Alerts.errorAlert("Register user", null, status);

@@ -1,6 +1,14 @@
 package classes;
 
+import authentication.UserSessionManager;
+import helpers.Alerts;
+import helpers.stage_helpers.AdminStageHelper;
+import helpers.stage_helpers.AuthenticationStageHelper;
+import javafx.event.ActionEvent;
+import javafx.scene.control.ButtonType;
 import model.User;
+
+import java.util.Optional;
 
 public class UserSession{
     private static String sessionId;
@@ -12,6 +20,17 @@ public class UserSession{
     public static User getCurrentUser() { return new User(currentUser);}
     public static void setCurrentUser(User currentUser) {
         UserSession.currentUser = new User(currentUser);
+    }
+    public static void logoutUser(ActionEvent event){
+        Optional<ButtonType> result = Alerts.confirmationAlert("Logout", "Are you sure you want to logout?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Starter.logger.info("Logout");
+            UserSessionManager.invalidateSession(UserSession.getSessionId());
+            UserSession.setSessionId(null);
+            AuthenticationStageHelper.showLogin(event);
+        }
+        else
+            Starter.logger.info("Logout was canceled.");
     }
     @Override
     public String toString() {

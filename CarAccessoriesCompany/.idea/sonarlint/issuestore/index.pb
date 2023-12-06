@@ -31,8 +31,6 @@ V
 &src/main/java/classes/UserSession.java,9\2\92b3042562e7afffc46e0e986fe34104f2bf2636
 ^
 .src/main/java/database/DatabaseConnection.java,9\9\9947704c3902b8642354ee4170ac821e6f22e829
-Z
-*src/main/java/database/RetrievingData.java,a\7\a7bcd5848a8e01ce8863906ff69fd7f10dbace27
 Y
 )src/main/java/database/InsertingData.java,e\8\e899f6dfd2705ce9badc2012806be46cbb3f0802
 Q
@@ -45,8 +43,6 @@ Y
 )src/main/java/helpers/DataValidation.java,c\9\c9437540eab3183494775d0756d298bf21273af5
 V
 &src/main/java/helpers/StageHelper.java,f\a\faf20b6481a27a646f41613560e9a1cdc02b4c9c
-W
-'src/main/java/database/UserUpdater.java,8\1\814f61d2a2c2230e3f3a1c892f87ae441d493e5b
 S
 #src/main/java/helpers/Uploader.java,6\4\6489801eb740209e24abbba34c13f881ef66848c
 M
@@ -71,3 +67,19 @@ e
 0src/test/java/database/DBRetrievingProducts.java,d\9\d9d9c0348be8e521d33330bee17bfd2a4325962c
 _
 /src/test/java/database/DBUpdatingUsersTest.java,2\3\23d79331055481c37cb26aaf702b0b4ce4b4160c
+h
+8src/main/java/database/retrieving/RetrievingAddress.java,6\9\691558295422b24588c0a16209765f849499e6a9
+e
+5src/main/java/database/retrieving/RetrievingUser.java,9\1\91195a204ad7c7edde1048a0de87dd0b6e6d896a
+`
+0src/main/java/database/updating/UserUpdater.java,3\e\3e65d99b4491491ed24f20ddc5baec13c4601210
+i
+9src/main/java/database/retrieving/RetrievingProducts.java,4\3\43bb4f3069ab27bbfd8f5eecc1c03d789ef21dc9
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+[
++src/test/java/controllers/orderProduct.java,a\5\a59bbac44b45e94dc8b9335478a437ae89d39516
+]
+-src/test/java/controllers/installRequest.java,4\d\4d401e747a7e33eb22539359de5d8ac49325491f
+c
+3src/main/java/controllers/AddProductController.java,6\3\636ae88a3c3982a3655dbc3549b57625bed3d5ec

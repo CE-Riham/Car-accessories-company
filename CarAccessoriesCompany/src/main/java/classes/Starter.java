@@ -17,7 +17,7 @@ public class Starter extends Application {
         DBConnector.setConnector(new DatabaseConnection());
         logger.info(DBConnector.getConnector().getStatus());
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/addProductPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/loginPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 608, 837);
         stage.setTitle("Car Zone Company");
         stage.setScene(scene);
