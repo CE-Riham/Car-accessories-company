@@ -1,5 +1,6 @@
 package controllers.admin_controllers;
 
+import authentication.UserSessionManager;
 import classes.UserSession;
 import helpers.stage_helpers.AdminStageHelper;
 import javafx.event.ActionEvent;

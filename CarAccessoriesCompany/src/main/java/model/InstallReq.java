@@ -1,6 +1,6 @@
 package model;
 
-import database.InsertingData;
+import database.inserting.InsertingData;
 
 import java.sql.Connection;
 import java.time.LocalDate;

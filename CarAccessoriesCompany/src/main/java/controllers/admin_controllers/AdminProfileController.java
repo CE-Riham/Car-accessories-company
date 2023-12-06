@@ -1,5 +1,6 @@
 package controllers.admin_controllers;
 
+import authentication.UserSessionManager;
 import classes.DBConnector;
 import classes.Starter;
 import classes.UserSession;

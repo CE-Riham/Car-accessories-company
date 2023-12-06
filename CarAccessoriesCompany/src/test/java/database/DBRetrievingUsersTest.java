@@ -20,7 +20,7 @@ public class DBRetrievingUsersTest {
     @Before
     @Given("I'm connected to a database to retrieve users")
     public void iMConnectedToADatabase() {
-       connection = new DatabaseConnection();
+       connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
        retrievingData = new RetrievingUser(connection.getCon());
     }
     @When("I fill in condition with {string} for users")

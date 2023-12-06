@@ -1,7 +1,7 @@
 package controllers.admin_controllers;
 
 import classes.DBConnector;
-import database.InsertingData;
+import database.inserting.InsertingData;
 import database.updating.ProductUpdater;
 import helpers.Alerts;
 import helpers.DataValidation;
