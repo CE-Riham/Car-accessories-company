@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.AdminProductsController">
+<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.products.AdminProductsController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>
@@ -52,15 +51,10 @@
                   </AnchorPane>
                </children>
             </HBox>
-            <AnchorPane prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+            <AnchorPane maxWidth="1600.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
                <children>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+                  <AnchorPane layoutX="10.0" layoutY="10.0" maxWidth="1600.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
                      <children>
-                        <ScrollPane layoutX="50.0" layoutY="120.0" prefHeight="650.0" prefWidth="1500.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="1500.0" />
-                          </content>
-                        </ScrollPane>
                         <HBox alignment="CENTER_RIGHT" layoutX="50.0" layoutY="50.0" prefHeight="50.0" prefWidth="1500.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#onAddProductClick" text="add a product">
@@ -70,6 +64,26 @@
                               </Button>
                            </children>
                         </HBox>
+                        <VBox layoutX="40.0" layoutY="140.0" maxWidth="1500.0" prefHeight="650.0" prefWidth="1500.0" spacing="30.0">
+                           <children>
+                              <HBox fx:id="row1" maxHeight="270.0" maxWidth="1500.0" minHeight="270.0" minWidth="1500.0" prefHeight="270.0" prefWidth="1500.0" spacing="30.0" />
+                              <HBox fx:id="row2" maxHeight="270.0" maxWidth="1500.0" minHeight="270.0" minWidth="1500.0" prefHeight="270.0" prefWidth="1500.0" spacing="30.0" />
+                              <HBox fx:id="row21" alignment="CENTER" maxWidth="1500.0" prefHeight="270.0" prefWidth="1500.0" spacing="50.0">
+                                 <children>
+                                    <Button fx:id="prevButton" disable="true" mnemonicParsing="false" onAction="#onPrevButtonClick" text="prev">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="nextButton" disable="true" mnemonicParsing="false" onAction="#onNextButtonClick" text="next">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
                </children>

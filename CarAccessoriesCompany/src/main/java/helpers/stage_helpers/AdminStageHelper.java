@@ -28,21 +28,21 @@ public class AdminStageHelper {
     }
     public static void showAdminDashboard(ActionEvent event){
         try{
-            showPage(event, "/FXMLFiles/admin_pages/adminDashboardPage.fxml", 1600, 900);
+            showPage(event, "/FXMLFiles/admin_pages/adminDashboardPage.fxml", 1615, 938);
         }catch (Exception e){
             Starter.logger.warning("Can't open admin dashboard page");
         }
     }
     public static void showAdminProfile(ActionEvent event){
         try{
-            showPage(event, "/FXMLFiles/admin_pages/adminProfilePage.fxml", 1600, 900);
+            showPage(event, "/FXMLFiles/admin_pages/adminProfilePage.fxml", 1615, 938);
         }catch (Exception e){
             Starter.logger.warning("Can't open admin profile page");
         }
     }
     public static void showAdminProducts(ActionEvent event){
         try{
-            showPage(event, "/FXMLFiles/admin_pages/adminProductsPage.fxml", 1600, 900);
+            showPage(event, "/FXMLFiles/admin_pages/adminProductsPage.fxml", 1615, 965);
         }catch (Exception e){
             Starter.logger.warning("Can't open admin products page");
         }

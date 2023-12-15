@@ -1,6 +1,7 @@
-package database;
+package database.retrieving;
 
-import database.retrieving.RetrievingAddress;
+import database.DatabaseConnection;
+import database.retrieving.RetrievingUser;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -11,36 +12,37 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 
-public class DBRetrievingAddressesTest {
-    private String condition, status;
+public class DBRetrievingUsersTest {
+    private String condition;
+    private String status;
     private DatabaseConnection connection;
-    private RetrievingAddress retrievingData;
+    private RetrievingUser retrievingData;
 
     @Before
-    @Given("I'm connected to a database to retrieve addresses")
+    @Given("I'm connected to a database to retrieve users")
     public void iMConnectedToADatabase() {
        connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
-       retrievingData = new RetrievingAddress(connection.getCon());
+       retrievingData = new RetrievingUser(connection.getCon());
     }
-    @When("I fill in condition with {string} for addresses")
+    @When("I fill in condition with {string} for users")
     public void iFillInConditionWith(String string) {
         condition = string;
     }
-    @When("I want to retrieve {string} addresses")
+    @When("I want to retrieve {string} users")
     public void iWantToRetrieve(String entity) throws SQLException {
-        if(entity.equals("addresses")){
-            retrievingData.selectAddressesWithCondition(condition);
+        if(entity.equals("users")) {
+            retrievingData.selectUsersWithCondition(condition);
             status = retrievingData.getStatus();
         }
         else
             status = "Error while retrieving from database";
     }
-    @Then("I should see {string} for retrieving addresses")
+    @Then("I should see {string} for retrieving users")
     public void iShouldSee(String message) {
         assertEquals(status, message);
     }
     @After
-    @Then("close the connection after retrieving addresses")
+    @Then("close the connection after retrieving users")
     public void closeTheConnection() throws SQLException {
         connection.getCon().close();
     }

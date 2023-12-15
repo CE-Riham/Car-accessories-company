@@ -1,4 +1,4 @@
-package controllers.admin_controllers;
+package controllers.admin_controllers.products;
 
 import classes.DBConnector;
 import database.inserting.InsertingData;
@@ -78,7 +78,7 @@ public class AddProductController implements Initializable{
                 String savePath = "src/main/resources/assets/products/" +  productID + ".png";
                 boolean savingFlag = uploader.saveToFile(savePath, false);
                 if(savingFlag){
-                    //save the new photo in database
+                    //save new photo to database
                     product.setImagePath(savePath);
                     String condition = " where productID = \'" + productID + "\';";
                     ProductUpdater productUpdater = new ProductUpdater(DBConnector.getConnector().getCon());

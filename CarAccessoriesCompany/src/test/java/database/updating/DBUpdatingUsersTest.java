@@ -1,5 +1,6 @@
-package database;
+package database.updating;
 
+import database.DatabaseConnection;
 import database.updating.UserUpdater;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
