@@ -1,6 +1,7 @@
-package database;
+package database.retrieving;
 
-import database.retrieving.RetrievingUser;
+import database.DatabaseConnection;
+import database.retrieving.RetrievingProducts;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -11,37 +12,36 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 
-public class DBRetrievingUsersTest {
-    private String condition;
-    private String status;
+public class DBRetrievingProducts {
+    private String condition, status;
     private DatabaseConnection connection;
-    private RetrievingUser retrievingData;
+    private RetrievingProducts retrievingData;
 
     @Before
-    @Given("I'm connected to a database to retrieve users")
+    @Given("I'm connected to a database to retrieve products")
     public void iMConnectedToADatabase() {
-       connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
-       retrievingData = new RetrievingUser(connection.getCon());
+        connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
+        retrievingData = new RetrievingProducts(connection.getCon());
     }
-    @When("I fill in condition with {string} for users")
+    @When("I fill in condition with {string} for products")
     public void iFillInConditionWith(String string) {
         condition = string;
     }
-    @When("I want to retrieve {string} users")
+    @When("I want to retrieve {string} products")
     public void iWantToRetrieve(String entity) throws SQLException {
-        if(entity.equals("users")) {
-            retrievingData.selectUsersWithCondition(condition);
+        if(entity.equals("products")){
+            retrievingData.selectProductsWithCondition(condition);
             status = retrievingData.getStatus();
         }
         else
             status = "Error while retrieving from database";
     }
-    @Then("I should see {string} for retrieving users")
+    @Then("I should see {string} for retrieving products")
     public void iShouldSee(String message) {
         assertEquals(status, message);
     }
     @After
-    @Then("close the connection after retrieving users")
+    @Then("close the connection after retrieving products")
     public void closeTheConnection() throws SQLException {
         connection.getCon().close();
     }

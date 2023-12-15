@@ -1,14 +1,13 @@
 package controllers.admin_controllers;
 
-import authentication.UserSessionManager;
 import classes.DBConnector;
 import classes.Starter;
 import classes.UserSession;
 import database.updating.UserUpdater;
 import helpers.Alerts;
 import helpers.DataValidation;
-import helpers.stage_helpers.AdminStageHelper;
 import helpers.Uploader;
+import helpers.stage_helpers.AdminStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -29,8 +29,6 @@ V
 &src/main/java/classes/UserSession.java,9\2\92b3042562e7afffc46e0e986fe34104f2bf2636
 ^
 .src/main/java/database/DatabaseConnection.java,9\9\9947704c3902b8642354ee4170ac821e6f22e829
-Y
-)src/main/java/database/InsertingData.java,e\8\e899f6dfd2705ce9badc2012806be46cbb3f0802
 Q
 !src/main/java/helpers/Alerts.java,4\2\42c0b8b9599f2f5f13c6203a3d4e843137e16ae5
 P
@@ -55,14 +53,6 @@ P
  src/main/java/model/Product.java,0\6\06c2a30bdf9271d833924cab83b8653e90c1ec08
 Z
 *src/main/java/authentication/Register.java,c\5\c5fc894747b394bcb8d4b30fcbff3da8fe2843af
-a
-1src/test/java/database/DBRetrievingUsersTest.java,5\6\560e663c7d617434829aa1afc0686e7e1e434699
-e
-5src/test/java/database/DBRetrievingAddressesTest.java,7\1\71e89db2c3716f8b7e5ff77ac07a14d0e297bd1a
-`
-0src/test/java/database/DBRetrievingProducts.java,d\9\d9d9c0348be8e521d33330bee17bfd2a4325962c
-_
-/src/test/java/database/DBUpdatingUsersTest.java,2\3\23d79331055481c37cb26aaf702b0b4ce4b4160c
 h
 8src/main/java/database/retrieving/RetrievingAddress.java,6\9\691558295422b24588c0a16209765f849499e6a9
 e
@@ -95,3 +85,7 @@ c
 3src/main/java/database/inserting/InsertingData.java,3\e\3e313f5180a985081c273d22640f02b045de949c
 ^
 .src/test/java/authentication/LogoutTester.java,1\3\13864e024bcab623e810d7d71ef39fd0584d026e
+k
+;src/test/java/database/retrieving/DBRetrievingProducts.java,3\8\3805910f37242696848f8324e3e957637151911d
+l
+<src/test/java/database/retrieving/DBRetrievingUsersTest.java,c\6\c6736bd4d3c4053f0b3b7cd81407e299972ca309

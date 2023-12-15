@@ -27,7 +27,7 @@ public class RetrievingProducts {
         this.status = status;
     }
 
-    public List<Product> selectProductsWithCondition(String condition) throws SQLException {
+    public List<Product> selectProductsWithCondition(String condition) {
         List<Product> products = new ArrayList<>();
         Statement st = null;
         try {
@@ -42,19 +42,26 @@ public class RetrievingProducts {
             setStatus("Error while retrieving products from database");
             return new ArrayList<>();
         }finally {
-            if(st != null)st.close();
+            try{
+                if (st != null) st.close();
+            }catch (Exception e){
+                return new ArrayList<>();
+            }
         }
     }
-    public List<Product> selectFromProductsTable(String field, String input) throws SQLException {
+    public List<Product> selectAllProducts(){
+        return selectProductsWithCondition(";");
+    }
+    public List<Product> selectFromProductsTable(String field, String input){
         return selectProductsWithCondition("where " + field + " = \'" + input + "\';");
     }
     public List<Product> findProductsByID(String ID) throws SQLException {
         return selectFromProductsTable("productID", ID);
     }
-    public List<Product> findProductsByProductName(String productName) throws SQLException {
+    public List<Product> findProductsByProductName(String productName){
         return selectFromProductsTable("productName", productName);
     }
-    public List<Product> findProductsByCategory(String category) throws SQLException {
+    public List<Product> findProductsByCategory(String category){
         return selectFromProductsTable("category", category);
     }
 }
