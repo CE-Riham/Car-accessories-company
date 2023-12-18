@@ -1,11 +1,11 @@
 package database.retrieving;
 
+import classes.Starter;
 import helpers.Generator;
 import model.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class RetrievingUser {
     public void setStatus(String status) {
         this.status = status;
     }
-    public List<User> selectUsersWithCondition(String condition) throws SQLException {
+    public List<User> selectUsersWithCondition(String condition){
         List<User> users = new ArrayList<>();
         Statement st = null;
         try {
@@ -40,28 +40,32 @@ public class RetrievingUser {
             setStatus("Error while retrieving users from database");
             return new ArrayList<>();
         }finally {
-            if(st != null)st.close();
+            try{
+                if (st != null) st.close();
+            }catch (Exception e){
+                Starter.logger.warning("Can't close statement");
+            }
         }
     }
-    public List<User> selectFromUsersTable(String field, String input) throws SQLException {
+    public List<User> selectFromUsersTable(String field, String input){
         return selectUsersWithCondition("where " + field + " = \'" + input + "\';");
     }
-    public List<User> findUserByUsername(String username) throws SQLException {
+    public List<User> findUserByUsername(String username){
         return selectFromUsersTable("username", username);
     }
-    public List<User> findUserByFirstName(String firstName) throws SQLException {
+    public List<User> findUserByFirstName(String firstName){
         return selectFromUsersTable("firstName", firstName);
     }
-    public List<User> findUserByLastName(String lastName) throws SQLException {
+    public List<User> findUserByLastName(String lastName){
         return selectFromUsersTable("lastName", lastName);
     }
-    public List<User> findUserByEmail(String email) throws SQLException {
+    public List<User> findUserByEmail(String email){
         return selectFromUsersTable("email", email);
     }
-    public List<User> findUserByPhone(String phone) throws SQLException {
+    public List<User> findUserByPhone(String phone){
         return selectFromUsersTable("phone", phone);
     }
-    public List<User> findUserByUserType(String userType) throws SQLException {
+    public List<User> findUserByUserType(String userType){
         return selectFromUsersTable("userType", userType);
     }
 

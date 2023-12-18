@@ -75,10 +75,6 @@ y
 Isrc/main/java/controllers/admin_controllers/AdminDashboardController.java,3\1\31b20c9e9d531acfc0a54b2616d20b8c4c54b359
 r
 Bsrc/main/java/helpers/stage_helpers/AuthenticationStageHelper.java,5\f\5fdd39da1f32863b057c0342fb87ca1e878c4826
-u
-Esrc/main/java/controllers/admin_controllers/AddProductController.java,f\7\f72a8aa5b59009f548a87b8aa6725641ea7c5533
-x
-Hsrc/main/java/controllers/admin_controllers/AdminProductsController.java,4\a\4a242ebccedb9978904a3c6923281e6421a011df
 i
 9src/main/java/helpers/stage_helpers/AdminStageHelper.java,6\4\64a470bef0827cd1bf1344bd41ff6af13b7ebcab
 c
@@ -89,3 +85,13 @@ k
 ;src/test/java/database/retrieving/DBRetrievingProducts.java,3\8\3805910f37242696848f8324e3e957637151911d
 l
 <src/test/java/database/retrieving/DBRetrievingUsersTest.java,c\6\c6736bd4d3c4053f0b3b7cd81407e299972ca309
+~
+Nsrc/main/java/controllers/admin_controllers/products/AddProductController.java,5\f\5f2fcf664f158398fe799d544ac101c5d76d6bc5
+
+Qsrc/main/java/controllers/admin_controllers/products/AdminProductsController.java,7\0\702ff9e4af9f180d84b8fdbc21ed3eed9ab4cc68
+N
+src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
+ƒ
+Ssrc/main/java/controllers/admin_controllers/customers/AdminCustomersController.java,b\4\b4df8ed67286fbc033fa3e9a2bf2e476b32fae0e
+Q
+!src/main/java/cards/UserCard.java,7\0\70cb2ee5fd9a7f388e9b4520e7f6d9f08f3df989

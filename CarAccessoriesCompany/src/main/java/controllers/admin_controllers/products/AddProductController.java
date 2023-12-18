@@ -99,4 +99,9 @@ public class AddProductController implements Initializable{
             imagePathLabel.setText(uploader.getFileName());
         }
     }
+
+    @FXML
+    void onCancelButtonClick(ActionEvent event){
+        AdminStageHelper.showAdminProducts(event);
+    }
 }
