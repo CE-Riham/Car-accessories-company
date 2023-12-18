@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.products.AdminProductsController">
+<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.customers.AdminCustomersController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>
@@ -20,8 +20,8 @@
                         <Button mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="View profile" />
                         <Button mnemonicParsing="false" onAction="#onDashboardClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Dashboard" />
                         <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Orders" />
-                        <Button fx:id="productsButton" mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Products" />
-                        <Button mnemonicParsing="false" onAction="#onCustomersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Customers" />
+                        <Button mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Products" />
+                        <Button fx:id="customersButton" mnemonicParsing="false" onAction="#onCustomersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Customers" />
                         <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Installers" />
                         <Button mnemonicParsing="false" onAction="#onAdminsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="admins" />
                      </children>
@@ -55,15 +55,6 @@
                <children>
                   <AnchorPane layoutX="10.0" layoutY="10.0" maxWidth="1600.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" layoutX="50.0" layoutY="50.0" prefHeight="50.0" prefWidth="1500.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#onAddProductClick" styleClass="color4-button" stylesheets="@../../assets/style.css" text="add a product">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
                         <VBox layoutX="40.0" layoutY="140.0" maxWidth="1500.0" prefHeight="650.0" prefWidth="1500.0" spacing="30.0">
                            <children>
                               <HBox fx:id="row1" maxHeight="270.0" maxWidth="1500.0" minHeight="270.0" minWidth="1500.0" prefHeight="270.0" prefWidth="1500.0" spacing="30.0" />

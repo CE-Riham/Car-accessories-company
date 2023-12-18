@@ -1,12 +1,11 @@
 package database.retrieving;
 
+import classes.Starter;
 import helpers.Generator;
-import model.Address;
 import model.Product;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public class RetrievingProducts {
             try{
                 if (st != null) st.close();
             }catch (Exception e){
-                return new ArrayList<>();
+                Starter.logger.warning("can't close statement");
             }
         }
     }
@@ -55,8 +54,8 @@ public class RetrievingProducts {
     public List<Product> selectFromProductsTable(String field, String input){
         return selectProductsWithCondition("where " + field + " = \'" + input + "\';");
     }
-    public List<Product> findProductsByID(String ID) throws SQLException {
-        return selectFromProductsTable("productID", ID);
+    public List<Product> findProductsByID(String id){
+        return selectFromProductsTable("productID", id);
     }
     public List<Product> findProductsByProductName(String productName){
         return selectFromProductsTable("productName", productName);

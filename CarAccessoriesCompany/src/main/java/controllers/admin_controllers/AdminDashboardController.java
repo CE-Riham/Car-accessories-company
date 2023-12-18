@@ -1,6 +1,6 @@
 package controllers.admin_controllers;
 
-import authentication.UserSessionManager;
+import classes.Starter;
 import classes.UserSession;
 import helpers.stage_helpers.AdminStageHelper;
 import javafx.event.ActionEvent;
@@ -15,7 +15,7 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Button dashboardButton;
 
-    private void disableAllMenuButtonsExcept(){
+    private void activateMenuButton(){
         dashboardButton.setStyle("-fx-border-color: #C9B3AD;");
     }
 
@@ -26,12 +26,12 @@ public class AdminDashboardController implements Initializable {
 
     @FXML
     void onAdminsClick(ActionEvent event) {
-
+        AdminStageHelper.showAdminAdmins(event);
     }
 
     @FXML
     void onCustomersClick(ActionEvent event) {
-
+        AdminStageHelper.showAdminCustomers(event);
     }
 
     @FXML
@@ -65,7 +65,7 @@ public class AdminDashboardController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        disableAllMenuButtonsExcept();
+        activateMenuButton();
     }
 
 }

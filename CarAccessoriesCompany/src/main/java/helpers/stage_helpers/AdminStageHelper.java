@@ -47,6 +47,24 @@ public class AdminStageHelper {
             Starter.logger.warning("Can't open admin products page");
         }
     }
+
+    public static void showAdminCustomers(ActionEvent event){
+        try{
+            showPage(event, "/FXMLFiles/admin_pages/adminCustomersPage.fxml", 1615, 965);
+        }catch (Exception e){
+            Starter.logger.warning("Can't open admin customers page");
+        }
+    }
+
+    public static void showAdminAdmins(ActionEvent event){
+        try{
+            showPage(event, "/FXMLFiles/admin_pages/adminAdminsPage.fxml", 1615, 965);
+        }catch (Exception e){
+            Starter.logger.warning("Can't open admin admins page");
+            e.printStackTrace();
+        }
+    }
+
     public static void showAddProducts(ActionEvent event){
         try{
             showPage(event, "/FXMLFiles/admin_pages/addProductPage.fxml", 608, 837);

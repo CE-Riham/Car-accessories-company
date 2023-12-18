@@ -102,7 +102,7 @@ public class ProductCard{
     private void setShowProductButton() {
         showProductButton = new Button("show product");
         showProductButton.setMnemonicParsing(false);
-        showProductButton.getStyleClass().add("product-button");
+        showProductButton.getStyleClass().add("color4-button");
         showProductButton.setFont(Font.font(12.0));
     }
 

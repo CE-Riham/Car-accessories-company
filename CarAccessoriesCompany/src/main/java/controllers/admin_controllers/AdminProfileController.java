@@ -71,7 +71,7 @@ public class AdminProfileController implements Initializable {
     @FXML
     private TextField streetTextField;
 
-    private void disableAllMenuButtonsExcept(){
+    private void activateMenuButton(){
         adminProfileButton.setStyle("-fx-border-color: #C9B3AD;");
     }
 
@@ -134,7 +134,7 @@ public class AdminProfileController implements Initializable {
 
     @FXML
     void onCustomersClick(ActionEvent event) {
-        //TODO
+        AdminStageHelper.showAdminCustomers(event);
     }
 
     @FXML
@@ -144,7 +144,7 @@ public class AdminProfileController implements Initializable {
 
     @FXML
     void onAdminsClick(ActionEvent event) {
-
+        AdminStageHelper.showAdminAdmins(event);
     }
 
     @FXML
@@ -253,7 +253,7 @@ public class AdminProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        disableAllMenuButtonsExcept();
+        activateMenuButton();
         getProfileFromDB();
     }
 }

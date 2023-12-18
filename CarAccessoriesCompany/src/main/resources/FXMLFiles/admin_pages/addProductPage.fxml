@@ -123,6 +123,15 @@
                         </Button>
                      </children>
                   </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="13.0" prefWidth="80.0" styleClass="color1-button" stylesheets="@../../assets/style.css" text="cancel" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
