@@ -39,7 +39,7 @@ public class LoginController {
             Alerts.errorAlert("Error", null, login.getStatus());
         else {
             if(UserSession.getCurrentUser().getUserType().equals("admin"))
-                AdminStageHelper.showAdminDashboard(event);
+                AdminStageHelper.showAdminProfile(event);
         }
 
     }

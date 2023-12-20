@@ -26,11 +26,11 @@ public class AdminStageHelper {
             stage.centerOnScreen();
         }
     }
-    public static void showAdminDashboard(ActionEvent event){
+    public static void showAdminCategories(ActionEvent event){
         try{
-            showPage(event, "/FXMLFiles/admin_pages/adminDashboardPage.fxml", 1615, 938);
+            showPage(event, "/FXMLFiles/admin_pages/adminCategoriesPage.fxml", 1615, 938);
         }catch (Exception e){
-            Starter.logger.warning("Can't open admin dashboard page");
+            Starter.logger.warning("Can't open admin categories page");
         }
     }
     public static void showAdminProfile(ActionEvent event){
@@ -62,6 +62,7 @@ public class AdminStageHelper {
         }catch (Exception e){
             Starter.logger.warning("Can't open admin admins page");
             e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -70,6 +71,7 @@ public class AdminStageHelper {
             showPage(event, "/FXMLFiles/admin_pages/addProductPage.fxml", 608, 837);
         }catch (Exception e){
             Starter.logger.warning("Can't open admin add product page");
+            e.printStackTrace();
         }
     }
 

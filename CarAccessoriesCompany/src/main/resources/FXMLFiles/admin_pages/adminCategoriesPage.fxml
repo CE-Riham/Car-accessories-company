@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxWidth="1600.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.AdminDashboardController">
+<AnchorPane maxWidth="1600.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.AdminCategoriesController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>
@@ -17,9 +17,9 @@
                   <HBox prefHeight="81.0" prefWidth="1200.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
                      <children>
                         <Button mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="View profile" />
-                        <Button fx:id="dashboardButton" mnemonicParsing="false" onAction="#onDashboardClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Dashboard" />
                         <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Orders" />
                         <Button mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Products" />
+                        <Button fx:id="categoriesButton" mnemonicParsing="false" onAction="#onCategoriesClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Categories" />
                         <Button mnemonicParsing="false" onAction="#onCustomersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Customers" />
                         <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Installers" />
                         <Button mnemonicParsing="false" onAction="#onAdminsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="admins" />

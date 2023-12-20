@@ -9,7 +9,7 @@ public class Product{
     protected String productName;
     protected String shortDescription;
     protected String imagePath;
-    protected Category productCategory;
+    protected String productCategory;
 
     public int getAvailableAmount() {
         return availableAmount;
@@ -74,11 +74,11 @@ public class Product{
         this.imagePath = imagePath;
     }
 
-    public Category getProductCategory() {
+    public String getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(Category productCategory) {
+    public void setProductCategory(String productCategory) {
         this.productCategory = productCategory;
     }
     public Product(){
@@ -88,13 +88,13 @@ public class Product{
         setProductName("");
         setShortDescription("");
         setImagePath("");
-        setProductCategory(Category.OTHER);
+        setProductCategory("OTHERS");
         setAvailableAmount(0);
         setLongDescription("");
     }
     public Product(int productID, int availableAmount, int numberOfOrders, double productPrice,
                    String productName, String longDescription,
-                   String shortDescription, String imagePath, Category productCategory) {
+                   String shortDescription, String imagePath, String productCategory) {
         setProductID(productID);
         setNumberOfOrders(numberOfOrders);
         setProductPrice(productPrice);

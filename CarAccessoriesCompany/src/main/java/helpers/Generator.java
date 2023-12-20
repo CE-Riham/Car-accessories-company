@@ -1,7 +1,6 @@
 package helpers;
 
 import model.Address;
-import model.Category;
 import model.Product;
 import model.User;
 
@@ -38,8 +37,7 @@ public class Generator {
         Product tmpProduct = new Product();
         tmpProduct.setProductID(rs.getInt("productID"));
         tmpProduct.setProductName(rs.getString("productName"));
-        String category = rs.getString("category");
-        tmpProduct.setProductCategory(Category.valueOf(category.toUpperCase()));
+        tmpProduct.setProductCategory(rs.getString("category"));
         tmpProduct.setProductPrice(rs.getDouble("price"));
         tmpProduct.setNumberOfOrders(rs.getInt("numberOfOrders"));
         tmpProduct.setImagePath(rs.getString("image"));
@@ -61,7 +59,7 @@ public class Generator {
     }
     public static PreparedStatement productToPS(PreparedStatement preparedStmt, Product product) throws SQLException {
         preparedStmt.setString  (1, product.getProductName());
-        preparedStmt.setString  (2, product.getProductCategory().toString());
+        preparedStmt.setString  (2, product.getProductCategory());
         preparedStmt.setDouble  (3, product.getProductPrice());
         preparedStmt.setInt     (4, product.getNumberOfOrders());
         preparedStmt.setString  (5, product.getImagePath());

@@ -52,8 +52,8 @@ public class AdminCustomersController implements Initializable {
     }
 
     @FXML
-    void onDashboardClick(ActionEvent event) {
-        AdminStageHelper.showAdminDashboard(event);
+    void onCategoriesClick(ActionEvent event) {
+        AdminStageHelper.showAdminCategories(event);
     }
 
     @FXML

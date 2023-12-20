@@ -18,9 +18,9 @@
                   <HBox prefHeight="81.0" prefWidth="1200.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
                      <children>
                         <Button mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="View profile" />
-                        <Button mnemonicParsing="false" onAction="#onDashboardClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Dashboard" />
                         <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Orders" />
                         <Button fx:id="productsButton" mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Products" />
+                        <Button mnemonicParsing="false" onAction="#onCategoriesClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Categories" />
                         <Button mnemonicParsing="false" onAction="#onCustomersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Customers" />
                         <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Installers" />
                         <Button mnemonicParsing="false" onAction="#onAdminsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="admins" />
