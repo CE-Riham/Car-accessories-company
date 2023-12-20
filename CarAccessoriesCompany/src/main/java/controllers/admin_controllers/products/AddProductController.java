@@ -2,11 +2,12 @@ package controllers.admin_controllers.products;
 
 import classes.DBConnector;
 import database.inserting.InsertingData;
+import database.retrieving.RetrievingCategories;
 import database.updating.ProductUpdater;
 import helpers.Alerts;
 import helpers.DataValidation;
-import helpers.stage_helpers.AdminStageHelper;
 import helpers.Uploader;
+import helpers.stage_helpers.AdminStageHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.Category;
 import model.Product;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddProductController implements Initializable{
@@ -28,7 +29,7 @@ public class AddProductController implements Initializable{
     @FXML
     private Label imagePathLabel;
     @FXML
-    private ComboBox<Category> category;
+    private ComboBox<String> category;
 
     @FXML
     private TextField longDescription;
@@ -45,10 +46,14 @@ public class AddProductController implements Initializable{
     @FXML
     private TextField shortDescription;
 
+    private void fillCategories(){
+        RetrievingCategories categoriesRetriever = new RetrievingCategories(DBConnector.getConnector().getCon());
+        List<String> allCategories = categoriesRetriever.selectAllCategories();
+        category.setItems(FXCollections.observableArrayList(allCategories));
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        ObservableList<Category> list = FXCollections.observableArrayList(Category.values());
-        category.setItems(list);
+        fillCategories();
         productInserter = new InsertingData(DBConnector.getConnector().getCon());
         uploader = new Uploader();
     }
@@ -57,7 +62,7 @@ public class AddProductController implements Initializable{
         String productNameString = productName.getText();
         String longDescriptionString = longDescription.getText();
         String shortDescriptionString = shortDescription.getText();
-        String productCategory = String.valueOf(category.getValue());
+        String productCategory = category.getValue();
         String productPriceString = productPrice.getText();
         String quantityString = quantity.getText();
         String status = DataValidation.productFieldsTest(productNameString, longDescriptionString, shortDescriptionString,
@@ -69,20 +74,22 @@ public class AddProductController implements Initializable{
             product.setProductName(productNameString);
             product.setLongDescription(longDescriptionString);
             product.setShortDescription(shortDescriptionString);
-            product.setProductCategory(Category.valueOf(productCategory.toUpperCase()));
+            product.setProductCategory(productCategory);
             product.setProductPrice(Double.parseDouble(productPriceString));
             product.setAvailableAmount(Integer.parseInt(quantityString));
             int productID = productInserter.insertProduct(product);
             status = productInserter.getStatus();
-            if(status.equals("Product was inserted successfully") && !uploader.getFileName().equals("")){
-                String savePath = "src/main/resources/assets/products/" +  productID + ".png";
-                boolean savingFlag = uploader.saveToFile(savePath, false);
-                if(savingFlag){
-                    //save new photo to database
-                    product.setImagePath(savePath);
-                    String condition = " where productID = \'" + productID + "\';";
-                    ProductUpdater productUpdater = new ProductUpdater(DBConnector.getConnector().getCon());
-                    productUpdater.updateProductImage(savePath, condition);
+            if(status.equals("Product was inserted successfully")){
+                if(!uploader.getFileName().equals("")) {
+                    String savePath = "src/main/resources/assets/products/" + productID + ".png";
+                    boolean savingFlag = uploader.saveToFile(savePath, false);
+                    if (savingFlag) {
+                        //save new photo to database
+                        product.setImagePath(savePath);
+                        String condition = " where productID = \'" + productID + "\';";
+                        ProductUpdater productUpdater = new ProductUpdater(DBConnector.getConnector().getCon());
+                        productUpdater.updateProductImage(savePath, condition);
+                    }
                 }
                 Alerts.informationAlert(alertTitle, null, "Product was added successfully");
             }

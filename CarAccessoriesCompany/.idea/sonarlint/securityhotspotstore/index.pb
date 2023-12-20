@@ -95,3 +95,5 @@ N
 Ssrc/main/java/controllers/admin_controllers/customers/AdminCustomersController.java,b\4\b4df8ed67286fbc033fa3e9a2bf2e476b32fae0e
 Q
 !src/main/java/cards/UserCard.java,7\0\70cb2ee5fd9a7f388e9b4520e7f6d9f08f3df989
+}
+Msrc/main/java/controllers/admin_controllers/admins/AdminAdminsController.java,0\0\008f35e95c09c50b8df4dcddaefc0ae0178ff06e

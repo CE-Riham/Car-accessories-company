@@ -42,7 +42,7 @@ public class DataValidation {
     }
     public static String productValidationTest(Product product){
         return productFieldsTest(product.getProductName(), product.getLongDescription(), product.getShortDescription(),
-                product.getProductCategory().toString(), String.valueOf(product.getProductPrice()), String.valueOf(product.getAvailableAmount()));
+                product.getProductCategory(), String.valueOf(product.getProductPrice()), String.valueOf(product.getAvailableAmount()));
     }
     public static String userValidationTest(User user){
         String emptyFieldsTest = emptyUserFieldsTest(user);

@@ -13,7 +13,7 @@ public class Uploader {
     private String fileName;
 
     public String getFileName() {
-        return fileName;
+        return (fileName==null) ? "" : fileName;
     }
 
     public void setFileName(String fileName) {
