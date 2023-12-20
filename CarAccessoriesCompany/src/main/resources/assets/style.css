@@ -28,9 +28,20 @@
     -fx-background-color: #C9B3AD; /* color4 */
     -fx-text-fill: #414141; /* color1 */
     -fx-font-weight: bold;
+    -fx-font-size: 18px;
 }
 .color4-button:hover {
     -fx-background-color: #D6C8C1;
+    -fx-cursor: hand;
+}
+.delete-button {
+    -fx-background-color: red;
+    -fx-text-fill: #EFEEEC; /* color5 */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+.delete-button:hover {
+    -fx-background-color: #f54242;
     -fx-cursor: hand;
 }
 .auth-text-field {
