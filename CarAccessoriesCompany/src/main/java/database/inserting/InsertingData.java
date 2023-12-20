@@ -1,5 +1,6 @@
 package database.inserting;
 
+import classes.Starter;
 import helpers.Generator;
 import model.Product;
 import model.User;
@@ -90,5 +91,26 @@ public class InsertingData {
             setStatus("Couldn't insert Product");
         }
         return -1;
+    }
+    public boolean insertCategory(String category){
+        PreparedStatement preparedStmt = null;
+        try {
+            String query = "insert into categories "
+                    + " values (?);";
+            preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString (1, category);
+            preparedStmt.execute();
+            setStatus("category was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert category");
+            return false;
+        }finally{
+            try{
+                if (preparedStmt != null) preparedStmt.close();
+            }catch (Exception e){
+                Starter.logger.warning("Couldn't close the statement");
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 package cards;
+
 import classes.DBConnector;
 import database.deleting.CategoryDeleter;
+import database.updating.CategoryUpdater;
 import helpers.Alerts;
 import helpers.stage_helpers.AdminStageHelper;
 import javafx.geometry.Insets;
@@ -10,13 +12,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+import java.util.Optional;
+
 public class CategoryCard {
     private HBox card;
     private Label categoryName;
     private Button deleteButton;
     private Button editButton;
-    private Button doneButton;
-    private boolean editing = false;
     private void setCard() {
         card = new HBox(25);
         card.setAlignment(Pos.CENTER);
@@ -27,7 +29,7 @@ public class CategoryCard {
     }
     public HBox getCard(){return card;}
     private void addToCard(){
-        card.getChildren().addAll(categoryName, doneButton, editButton, deleteButton);
+        card.getChildren().addAll(categoryName, editButton, deleteButton);
         card.setPadding(new Insets(10.0));
     }
 
@@ -64,22 +66,27 @@ public class CategoryCard {
         editButton.setMaxWidth(100);
         editButton.getStyleClass().add("color1-button");
         editButton.setFont(new Font(18));
-    }
 
-    private void setDoneButton() {
-        doneButton = new Button("Done");
-        doneButton.setMinWidth(100);
-        doneButton.setPrefWidth(100);
-        doneButton.setMaxWidth(100);
-        doneButton.getStyleClass().add("color1-button");
-        doneButton.setFont(new Font(18));
-        doneButton.setVisible(false);
+        editButton.setOnAction(e->{
+            String title = "Edit category";
+            Optional<String> result = Alerts.withInputAlert(title, null, "Enter new category name");
+            result.ifPresent(newCategory -> {
+                CategoryUpdater categoryUpdater = new CategoryUpdater(DBConnector.getConnector().getCon());
+                boolean flag = categoryUpdater.updateCategory(newCategory, categoryName.getText());
+                if(!flag)
+                    Alerts.errorAlert(title, null, categoryUpdater.getStatus());
+                else{
+                    Alerts.informationAlert(title, null, categoryUpdater.getStatus());
+                    AdminStageHelper.showAdminCategories(e);
+                }
+            });
+        });
+
     }
 
     public CategoryCard(String category){
         setCard();
         setCategoryName(category);
-        setDoneButton();
         setEditButton();
         setDeleteButton();
         addToCard();
