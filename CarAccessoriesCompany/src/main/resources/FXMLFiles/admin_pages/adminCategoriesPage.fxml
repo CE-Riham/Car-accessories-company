@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxWidth="1600.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.AdminCategoriesController">
+<AnchorPane maxWidth="1600.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.categories.AdminCategoriesController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>
@@ -50,7 +50,35 @@
                   </AnchorPane>
                </children>
             </HBox>
-            <AnchorPane prefHeight="820.0" prefWidth="1600.0" styleClass="back" />
+            <AnchorPane prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="820.0" prefWidth="1600.0" spacing="10.0">
+                     <children>
+                        <VBox fx:id="categoriesTable" alignment="TOP_CENTER" maxHeight="600.0" maxWidth="1600.0" minHeight="600.0" minWidth="1600.0" prefHeight="600.0" prefWidth="1600.0" spacing="25.0">
+                           <padding>
+                              <Insets left="250.0" right="250.0" />
+                           </padding>
+                        </VBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+                           <children>
+                              <Button fx:id="prevButton" mnemonicParsing="false" onAction="#onPrevButtonClick" style="-fx-background-color: #D6C8C1; -fx-text-fill: #414141; -fx-font-weight: regular;" styleClass="color1-button" text="prev" />
+                              <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onNextButtonClick" style="-fx-background-color: #D6C8C1; -fx-text-fill: #414141; -fx-font-weight: regular;" styleClass="color1-button" text="next" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #D6C8C1; -fx-text-fill: #414141; -fx-font-weight: regular;" styleClass="color1-button" text="Add a new category" />
+                           </children>
+                           <padding>
+                              <Insets right="150.0" top="-50.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" top="30.0" />
+                     </padding>
+                  </VBox>
+               </children></AnchorPane>
          </children>
       </VBox>
    </children>
