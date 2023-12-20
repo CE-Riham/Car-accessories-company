@@ -51,4 +51,7 @@ public class RetrievingCategories {
     public List<String> selectAllCategories(){
         return selectCategoriesWithCondition(";");
     }
+    public List<String> selectACategory(String categoryName){
+        return selectCategoriesWithCondition("where CAST(category AS BINARY) category = '" + categoryName + "';");
+    }
 }
