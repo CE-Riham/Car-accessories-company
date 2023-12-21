@@ -33,7 +33,7 @@ public class DataValidation {
         if(name.equals(""))return "Product name can't be empty";
         if(longDescription.equals(""))return "Product long description can't be empty";
         if(shortDescription.equals(""))return "Product short description can't be empty";
-        if(category.equals("null"))return "Product category can't be empty";
+        if(category == null)return "Product category can't be empty";
         if(price.equals(""))return "Product price can't be empty";
         if(quantity.equals(""))return "Product quantity can't be empty";
         if(!doubleValidationTest(price)) return "Invalid price";

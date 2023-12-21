@@ -1,19 +1,19 @@
 
 q
+java:S2095F"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8ªòü×Ã1
+q
+java:S2095S"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8þòì×Ã1
+q
 java:S2095`"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8ùÖø×Ã1
-q
-java:S2095|"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8”²ó×Ã1
-q
-java:S2095n"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8ó±þ×Ã1
 q
 java:S20959"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8Åüô×Ã1
 r
 java:S2095Š"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8ì›û×Ã1
 q
-java:S2095F"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8ªòü×Ã1
-q
-java:S2095S"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8þòì×Ã1
+java:S2095|"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8”²ó×Ã1
 r
 java:S2095˜"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8ë‘ö×Ã1
+q
+java:S2095n"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«æô¬úÿÿÿÿ8ó±þ×Ã1
 D
 java:S1128"'Remove this unused import 'model.User'.(˜Ð ñ8ï—ñèÃ1

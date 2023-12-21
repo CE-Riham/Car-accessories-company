@@ -1,6 +1,6 @@
 package cards;
+
 import classes.UserSession;
-import helpers.Alerts;
 import helpers.stage_helpers.AdminStageHelper;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -22,7 +22,6 @@ public class UserCard {
     private HBox nameBox;
     private HBox usernameBox;
     private Button showProfileButton;
-    private String type;
     private User user;
     public UserCard(User user) {
         this.user = new User(user);
@@ -33,7 +32,6 @@ public class UserCard {
         setUsername(user.getUsername());
         setShowProfileButton();
         addToCard();
-        type = user.getUserType();
     }
 
     public AnchorPane getCard() {
