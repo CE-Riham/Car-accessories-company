@@ -120,7 +120,7 @@ public class AdminProductsController implements Initializable {
         for(int i = index; i<(index + 6) && i< allProducts.size(); i++){
             row2.getChildren().add(new ProductCard(allProducts.get(i)).getCard());
         }
-        disableButton(nextButton, ((index + 6) > allProducts.size()));
+        disableButton(nextButton, ((index + 6) >= allProducts.size()));
     }
     private void fillProducts(){
         getAllProductsFromDB();

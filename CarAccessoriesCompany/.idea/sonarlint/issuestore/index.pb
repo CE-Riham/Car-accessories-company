@@ -43,8 +43,6 @@ M
 src/main/java/model/User.java,8\e\8e1ebf0166aec1f7f81589f5763cf23a86e9c01e
 T
 $src/main/java/cards/ProductCard.java,e\6\e6eff2640facbe2a21fa1104d89ade547d34def2
-Q
-!src/main/java/model/Category.java,9\3\939d6ee580794eb4211fdfc3b47afaf9de6ab3a2
 W
 'src/main/java/authentication/Login.java,e\b\ebb691010976427c1860941ec83c2afd305a1c1a
 d
@@ -71,8 +69,6 @@ c
 3src/main/java/database/updating/ProductUpdater.java,a\5\a55f724071e2cd7dd557cc9df976de5190566e07
 w
 Gsrc/main/java/controllers/admin_controllers/AdminProfileController.java,7\c\7ce8b3ca99e86a34bc2ef39f790cf2ce745fa1f6
-y
-Isrc/main/java/controllers/admin_controllers/AdminDashboardController.java,3\1\31b20c9e9d531acfc0a54b2616d20b8c4c54b359
 r
 Bsrc/main/java/helpers/stage_helpers/AuthenticationStageHelper.java,5\f\5fdd39da1f32863b057c0342fb87ca1e878c4826
 i
@@ -97,3 +93,17 @@ Q
 !src/main/java/cards/UserCard.java,7\0\70cb2ee5fd9a7f388e9b4520e7f6d9f08f3df989
 }
 Msrc/main/java/controllers/admin_controllers/admins/AdminAdminsController.java,0\0\008f35e95c09c50b8df4dcddaefc0ae0178ff06e
+d
+4src/main/java/database/updating/CategoryUpdater.java,d\4\d4805d652623ac037e8b05f1e77d88b56cda1020
+k
+;src/main/java/database/retrieving/RetrievingCategories.java,d\6\d62d5b2a42af6fc8755d54d3dc21090aa308557f
+…
+Usrc/main/java/controllers/admin_controllers/categories/AdminCategoriesController.java,6\7\676fcc28e8d8ed6b83e0224a925af9383da2efde
+d
+4src/main/java/database/deleting/CategoryDeleter.java,0\4\0454d3435726c2794f4096880c5628ea3871074b
+U
+%src/main/java/cards/CategoryCard.java,f\c\fcb6ce38bcc5e7c9ac834cecd42406208f06c22d
+|
+Lsrc/main/java/controllers/admin_controllers/users/UserProfileController.java,9\2\92abff30f25a276ca12f3e7fe383712be60699d2
+`
+0src/main/java/database/deleting/UserDeleter.java,4\5\4555eeb8b061acb2ba0dd1315e6da98febc65c84
