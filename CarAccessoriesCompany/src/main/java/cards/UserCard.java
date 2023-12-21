@@ -1,5 +1,7 @@
 package cards;
+import classes.UserSession;
 import helpers.Alerts;
+import helpers.stage_helpers.AdminStageHelper;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,7 +23,9 @@ public class UserCard {
     private HBox usernameBox;
     private Button showProfileButton;
     private String type;
+    private User user;
     public UserCard(User user) {
+        this.user = new User(user);
         setCard("#EFEEEC");
         setContainer();
         setImage(user.getImagePath());
@@ -99,12 +103,8 @@ public class UserCard {
         showProfileButton.getStyleClass().add("color4-button");
         showProfileButton.setFont(Font.font(12.0));
         showProfileButton.setOnAction(e->{
-            if(type.equals("customer")){
-                Alerts.informationAlert("type", null, "Customer");
-            }else if(type.equals("admin"))
-                Alerts.informationAlert("type", null, "admin");
-            else
-                Alerts.informationAlert("type", null, "installer");
+            UserSession.setUserToDisplay(user);
+            AdminStageHelper.showAdminUserProfile(e);
         });
     }
 

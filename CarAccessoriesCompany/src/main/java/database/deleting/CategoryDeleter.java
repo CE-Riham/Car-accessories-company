@@ -44,7 +44,6 @@ public class CategoryDeleter {
             String query = "delete from categories where category = '" + category+ "';";
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.execute();
-            System.out.println("HI");
             return true;
         } catch (Exception e) {
             return false;
