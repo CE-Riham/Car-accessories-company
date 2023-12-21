@@ -107,3 +107,7 @@ U
 Lsrc/main/java/controllers/admin_controllers/users/UserProfileController.java,9\2\92abff30f25a276ca12f3e7fe383712be60699d2
 `
 0src/main/java/database/deleting/UserDeleter.java,4\5\4555eeb8b061acb2ba0dd1315e6da98febc65c84
+X
+(src/test/java/controllers/emailSent.java,3\2\321709402d6cf5829e7882de4396da5dd429e30d
+S
+#src/test/java/controllers/Test.java,f\a\fa2989b531b94475013f4eb537580dd4e04c1ad4
