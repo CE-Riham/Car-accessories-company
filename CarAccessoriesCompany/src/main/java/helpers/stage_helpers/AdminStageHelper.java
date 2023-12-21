@@ -74,5 +74,13 @@ public class AdminStageHelper {
             e.printStackTrace();
         }
     }
+    public static void showAdminUserProfile(ActionEvent event){
+        try{
+            showPage(event, "/FXMLFiles/admin_pages/userProfilePage.fxml", 1615, 920);
+        }catch (Exception e){
+            Starter.logger.warning("Can't open admin display user page");
+            e.printStackTrace();
+        }
+    }
 
 }
