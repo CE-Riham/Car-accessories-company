@@ -20,7 +20,7 @@ public class SignupTester {
     @Before
     @When("user is in sign-up page")
     public void userIsOnTheSignUpPage() {
-        connection = new DatabaseConnection();
+        connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
         userRegisterer = new Register(connection.getCon());
         user = new User();
     }
@@ -47,7 +47,7 @@ public class SignupTester {
 
     @When("he submits the registration form")
     public void heSubmitsTheRegistrationForm() throws SQLException {
-        userRegisterer.registerUserTest(user);
+        userRegisterer.registerUser(user);
         status = userRegisterer.getStatus();
     }
     @Then("he should see {string} for register")

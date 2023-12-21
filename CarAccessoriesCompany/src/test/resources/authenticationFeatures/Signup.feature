@@ -28,8 +28,8 @@ Feature: User sign-Up
       |shahd19  |Shahd     |Hamad    |0595014020  |             |shahd29@gmail.com |admin    |Password can't be empty                    |
       |shahd19  |Shahd     |Hamad    |0595014020  |1234**Aa     |                  |admin    |Email address can't be empty               |
       |shahd28  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd22@gmail.com |         |User type can't be empty                   |
-      |shahd28  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd22@gmail.com |customer |User was registered successfully           |
-      |shahd28  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd22@gmail.com |installer|User was registered successfully           |
+      |shahd21  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd22@gmail.com |customer |User was registered successfully           |
+      |shahd22  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd22@gmail.com |installer|User was registered successfully           |
       |shahd28  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd22@gmail.com |none     |Invalid user type                          |
 
 

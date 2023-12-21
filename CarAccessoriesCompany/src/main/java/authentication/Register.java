@@ -1,7 +1,7 @@
 package authentication;
 
-import database.InsertingData;
-import database.RetrievingData;
+import database.inserting.InsertingData;
+import database.retrieving.RetrievingUser;
 import helpers.DataValidation;
 import model.User;
 
@@ -12,11 +12,11 @@ import java.util.List;
 public class Register {
     private String status;
     private InsertingData userInserter;
-    private RetrievingData userRetriever;
+    private RetrievingUser userRetriever;
 
     public Register(Connection connection){
         userInserter = new InsertingData(connection);
-        userRetriever = new RetrievingData(connection);
+        userRetriever = new RetrievingUser(connection);
     }
     public String getStatus() {
         return status;
@@ -26,25 +26,23 @@ public class Register {
         this.status = status;
     }
 
-    public void registerUserTest(User user) throws SQLException {
+    public boolean registerUser(User user) throws SQLException {
         String st = DataValidation.userValidationTest(user);
-        if(st.equals("Valid")){
-            List<User> allUsers = userRetriever.selectUsers("username = '" + user.getUsername() + "'");
-            if(allUsers == null || allUsers.isEmpty())
+        setStatus(st);
+        if(getStatus().equals("Valid")){
+            List<User> allUsers = userRetriever.findUserByUsername(user.getUsername());
+            if(allUsers == null || allUsers.isEmpty()) {
+                if(userInserter.insertUser(user)){
+                    if(user.getUserType().equals("customer"))
+                        userInserter.insertCustomer(user.getUsername(), 0);
+                    else if(user.getUserType().equals("installer"))
+                        userInserter.insertInstaller(user.getUsername(), 0, 0);
                     setStatus("User was registered successfully");
+                    return true;
+                }
+            }
             else
                 setStatus("Username is already taken");
-        }
-        else
-            setStatus(st);
-    }
-    public boolean registerUser(User user) throws SQLException {
-        registerUserTest(user);
-        if(getStatus().equals("User was registered successfully")){
-            if(userInserter.insertUser(user))
-                return true;
-            setStatus("Couldn't register user");
-
         }
         return false;
     }

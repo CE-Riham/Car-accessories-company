@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.products.AdminProductsController">
+   <children>
+      <VBox prefHeight="900.0" prefWidth="1600.0">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="1600.0" spacing="200.0" styleClass="admin-header" stylesheets="@../../assets/style.css">
+               <children>
+                  <HBox prefHeight="81.0" prefWidth="1200.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="View profile" />
+                        <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Orders" />
+                        <Button fx:id="productsButton" mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Products" />
+                        <Button mnemonicParsing="false" onAction="#onCategoriesClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Categories" />
+                        <Button mnemonicParsing="false" onAction="#onCustomersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Customers" />
+                        <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Installers" />
+                        <Button mnemonicParsing="false" onAction="#onAdminsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="admins" />
+                     </children>
+                  </HBox>
+                  <AnchorPane prefHeight="98.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" layoutX="-10.0" layoutY="-2.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                           <padding>
+                              <Insets right="30.0" />
+                           </padding>
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../assets/icons/notification.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../assets/icons/logout.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Button layoutX="57.0" layoutY="25.0" mnemonicParsing="false" onAction="#onNotificationsCLick" prefHeight="45.0" prefWidth="40.0" styleClass="transparent-button" />
+                        <Button layoutX="120.0" layoutY="25.0" mnemonicParsing="false" onAction="#onLogoutClick" prefHeight="45.0" prefWidth="40.0" styleClass="transparent-button" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <AnchorPane maxWidth="1600.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+               <children>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" maxWidth="1600.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" layoutX="50.0" layoutY="50.0" prefHeight="50.0" prefWidth="1500.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#onAddProductClick" styleClass="color4-button" stylesheets="@../../assets/style.css" text="add a product">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <VBox layoutX="40.0" layoutY="140.0" maxWidth="1500.0" prefHeight="650.0" prefWidth="1500.0" spacing="30.0">
+                           <children>
+                              <HBox fx:id="row1" maxHeight="270.0" maxWidth="1500.0" minHeight="270.0" minWidth="1500.0" prefHeight="270.0" prefWidth="1500.0" spacing="30.0" />
+                              <HBox fx:id="row2" maxHeight="270.0" maxWidth="1500.0" minHeight="270.0" minWidth="1500.0" prefHeight="270.0" prefWidth="1500.0" spacing="30.0" />
+                              <HBox fx:id="row21" alignment="CENTER" maxWidth="1500.0" prefHeight="270.0" prefWidth="1500.0" spacing="50.0">
+                                 <children>
+                                    <Button fx:id="prevButton" disable="true" mnemonicParsing="false" onAction="#onPrevButtonClick" styleClass="color4-button" text="prev">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="nextButton" disable="true" mnemonicParsing="false" onAction="#onNextButtonClick" styleClass="color4-button" text="next">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

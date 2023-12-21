@@ -1,5 +1,6 @@
 package helpers;
 
+import model.Product;
 import model.User;
 
 import java.util.regex.Matcher;
@@ -27,6 +28,22 @@ public class DataValidation {
         if(user.getUserType().equals("")) return "User type can't be empty";
         return valid;
     }
+    public static String productFieldsTest(String name, String longDescription, String shortDescription,
+                                           String category, String price, String quantity){
+        if(name.equals(""))return "Product name can't be empty";
+        if(longDescription.equals(""))return "Product long description can't be empty";
+        if(shortDescription.equals(""))return "Product short description can't be empty";
+        if(category == null)return "Product category can't be empty";
+        if(price.equals(""))return "Product price can't be empty";
+        if(quantity.equals(""))return "Product quantity can't be empty";
+        if(!doubleValidationTest(price)) return "Invalid price";
+        if(!integerValidationTest(quantity)) return "Invalid quantity";
+        return valid;
+    }
+    public static String productValidationTest(Product product){
+        return productFieldsTest(product.getProductName(), product.getLongDescription(), product.getShortDescription(),
+                product.getProductCategory(), String.valueOf(product.getProductPrice()), String.valueOf(product.getAvailableAmount()));
+    }
     public static String userValidationTest(User user){
         String emptyFieldsTest = emptyUserFieldsTest(user);
         if(!emptyFieldsTest.equals(valid))
@@ -49,23 +66,19 @@ public class DataValidation {
         return "Invalid email address";
     }
 
-    public static boolean idTest(String id) {
-        if (id.length() == 9) {
-            boolean flag = true;
-            for (int i = 0; i < id.length(); i++) {
-                if (!Character.isDigit(id.charAt(i))) {
-                    flag = false;
-                    break;
-                }
-            }
-            return flag;
-        }
-        return false;
-    }
-
     public static boolean phoneNumberValidationTest(String phoneNumber) {
         String regex = "^[0-9]{10}$";
         return regexMatcher(regex, phoneNumber);
+    }
+
+    public static boolean integerValidationTest(String number){
+        String regex = "^[0-9]{1,}$";
+        return regexMatcher(regex, number);
+    }
+
+    public static boolean doubleValidationTest(String number){
+        String regex = "^[0-9]{1,}+.[0-9]{0,2}$";
+        return regexMatcher(regex, number) || integerValidationTest(number);
     }
 
     public static  boolean emailValidationTest(String email) {
