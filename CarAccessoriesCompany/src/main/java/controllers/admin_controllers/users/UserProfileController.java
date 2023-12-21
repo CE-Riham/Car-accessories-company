@@ -116,13 +116,17 @@ public class UserProfileController implements Initializable {
     @FXML
     void onDeleteButtonClick(ActionEvent event){
         String title = "Delete user";
+        if(UserSession.getUserToDisplay().getUsername().equals(UserSession.getCurrentUser().getUsername())){
+            Alerts.errorAlert(title, null, "You can't delete your profile!");
+            return;
+        }
         Optional<ButtonType> result = Alerts.confirmationAlert(title, "Are you sure you want to delete this user?");
         if((result.isPresent() && result.get() == ButtonType.OK)){
             UserDeleter userDeleter = new UserDeleter(DBConnector.getConnector().getCon());
             boolean flag = userDeleter.deleteUserFromUsersTableByUsername(UserSession.getUserToDisplay());
             if(flag) {
                 Alerts.informationAlert(title, null, userDeleter.getStatus());
-                if(UserSession.getUserToDisplay().getUserType().equals("admmin"))
+                if(UserSession.getUserToDisplay().getUserType().equals("admin"))
                     AdminStageHelper.showAdminAdmins(event);
                 else if(UserSession.getUserToDisplay().getUserType().equals("installer")) {
                     //TODO
