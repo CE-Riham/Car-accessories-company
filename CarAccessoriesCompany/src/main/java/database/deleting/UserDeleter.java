@@ -1,9 +1,6 @@
 package database.deleting;
 
-import classes.DBConnector;
 import classes.Starter;
-import database.updating.ProductUpdater;
-import helpers.Alerts;
 import model.User;
 
 import java.sql.Connection;

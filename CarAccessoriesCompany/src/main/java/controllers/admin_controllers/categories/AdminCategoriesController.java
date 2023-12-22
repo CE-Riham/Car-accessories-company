@@ -1,12 +1,10 @@
 package controllers.admin_controllers.categories;
 
 import cards.CategoryCard;
-import cards.UserCard;
 import classes.DBConnector;
 import classes.UserSession;
 import database.inserting.InsertingData;
 import database.retrieving.RetrievingCategories;
-import database.retrieving.RetrievingUser;
 import helpers.Alerts;
 import helpers.stage_helpers.AdminStageHelper;
 import javafx.event.ActionEvent;
@@ -98,7 +96,7 @@ public class AdminCategoriesController implements Initializable {
         String title = "Add category";
         Optional<String> result = Alerts.withInputAlert(title, null, "enter category name:");
         result.ifPresent(newCategory -> {
-            if(new RetrievingCategories(DBConnector.getConnector().getCon()).selectACategory(newCategory).size() != 0)
+            if( ! (new RetrievingCategories(DBConnector.getConnector().getCon()).selectACategory(newCategory).isEmpty()))
                 Alerts.errorAlert(title, null, "Category is already existed.");
             else{
                 InsertingData insertingData = new InsertingData(DBConnector.getConnector().getCon());

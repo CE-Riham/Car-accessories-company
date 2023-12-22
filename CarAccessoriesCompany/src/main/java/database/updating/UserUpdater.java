@@ -8,36 +8,38 @@ import model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class UserUpdater{
+public class UserUpdater {
     private String status;
     private Connection connection;
-    public UserUpdater(Connection connection){
+
+    public UserUpdater(Connection connection) {
         this.connection = connection;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public boolean updateUserTest(User user, String condition){
+    public boolean updateUserTest(User user, String condition) {
         Starter.logger.info(condition);
         String st = DataValidation.userValidationTest(user);
-        if(st.equals("Valid"))
+        if (st.equals("Valid"))
             setStatus("User was updated successfully");
         else
             setStatus(st);
         return false;
     }
-    public boolean updateUsersAllFields(User user, String condition){
+
+    public boolean updateUsersAllFields(User user, String condition) {
         String st = DataValidation.userValidationTest(user);
-        if(st.equals("Valid")){
-            try {
-                String query = "UPDATE users SET firstName = ?, lastName = ?, username = ?, " +
-                        "phone = ?, email = ?, userPassword = ?, image = ?, userType = ? " + condition;
-                PreparedStatement preparedStmt = connection.prepareStatement(query);
-                preparedStmt = Generator.userToPS(preparedStmt, user);
+        if (st.equals("Valid")) {
+            String query = "UPDATE users SET firstName = ?, lastName = ?, username = ?, " +
+                    "phone = ?, email = ?, userPassword = ?, image = ?, userType = ? " + condition;
+            try (PreparedStatement preparedStmt = Generator.userToPS(connection.prepareStatement(query), user)) {
                 preparedStmt.execute();
                 setStatus("User was updated successfully");
                 return true;
@@ -45,16 +47,15 @@ public class UserUpdater{
                 setStatus("Couldn't update user");
                 return false;
             }
-        }
-        else
+        } else
             setStatus(st);
         return false;
     }
-    public boolean updateUserFirstName(String newFirstName, String condition){
-        try {
-            String query = "UPDATE users SET firstName = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newFirstName);
+
+    public boolean updateUserFirstName(String newFirstName, String condition) {
+        String query = "UPDATE users SET firstName = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newFirstName);
             preparedStmt.execute();
             setStatus("User firstName was updated successfully");
             return true;
@@ -63,11 +64,11 @@ public class UserUpdater{
             return false;
         }
     }
-    public boolean updateUserLastName(String newLastName, String condition){
-        try {
-            String query = "UPDATE users SET lastName = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newLastName);
+
+    public boolean updateUserLastName(String newLastName, String condition) {
+        String query = "UPDATE users SET lastName = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newLastName);
             preparedStmt.execute();
             setStatus("User lastName was updated successfully");
             return true;
@@ -76,11 +77,11 @@ public class UserUpdater{
             return false;
         }
     }
-    public boolean updateUserPhone(String newPhoneNumber, String condition){
-        try {
-            String query = "UPDATE users SET phone = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newPhoneNumber);
+
+    public boolean updateUserPhone(String newPhoneNumber, String condition) {
+        String query = "UPDATE users SET phone = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newPhoneNumber);
             preparedStmt.execute();
             setStatus("User phone was updated successfully");
             return true;
@@ -89,11 +90,11 @@ public class UserUpdater{
             return false;
         }
     }
-    public boolean updateUserEmail(String newEmail, String condition){
-        try {
-            String query = "UPDATE users SET email = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newEmail);
+
+    public boolean updateUserEmail(String newEmail, String condition) {
+        String query = "UPDATE users SET email = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newEmail);
             preparedStmt.execute();
             setStatus("User email was updated successfully");
             return true;
@@ -103,11 +104,10 @@ public class UserUpdater{
         }
     }
 
-    public boolean updateUserPassword(String newPassword, String condition){
-        try {
-            String query = "UPDATE users SET userPassword = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newPassword);
+    public boolean updateUserPassword(String newPassword, String condition) {
+        String query = "UPDATE users SET userPassword = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newPassword);
             preparedStmt.execute();
             setStatus("User password was updated successfully");
             return true;
@@ -117,11 +117,10 @@ public class UserUpdater{
         }
     }
 
-    public boolean updateUserImage(String newImage, String condition){
-        try {
-            String query = "UPDATE users SET image = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newImage);
+    public boolean updateUserImage(String newImage, String condition) {
+        String query = "UPDATE users SET image = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newImage);
             preparedStmt.execute();
             setStatus("User image was updated successfully");
             return true;

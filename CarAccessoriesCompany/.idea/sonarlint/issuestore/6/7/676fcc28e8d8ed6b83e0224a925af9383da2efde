@@ -1,13 +1,7 @@
 
 
-java:S1186<"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ù³Ä8ÔÖßÌÈ1
+java:S1186:"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ù³Ä8ì†…“É1
 
-java:S1186F"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛùÏÏ8ÔÖßÌÈ1
+java:S1186D"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛùÏÏ8î†…“É1
 
-java:S1186K"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(€÷‡Ø8ÔÖßÌÈ1
-`
-java:S1155e">Use isEmpty() to check whether the collection is empty or not.(•’¸şÿÿÿÿ8ÙÖßÌÈ1
-M
-java:S1128"+Remove this unused import 'cards.UserCard'.(Ëö®Èüÿÿÿÿ8İÖßÌÈ1
-a
-java:S1128	"?Remove this unused import 'database.retrieving.RetrievingUser'.(¾ôìÇûÿÿÿÿ8İÖßÌÈ1
+java:S1186I"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(€÷‡Ø8î†…“É1

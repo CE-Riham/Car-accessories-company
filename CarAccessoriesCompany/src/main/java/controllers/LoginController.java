@@ -12,8 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.sql.SQLException;
-
 public class LoginController {
     private Login login;
     public LoginController(){
@@ -27,7 +25,7 @@ public class LoginController {
     private PasswordField passwordTextField;
 
     @FXML
-    protected void onLoginClick(ActionEvent event) throws SQLException {
+    protected void onLoginClick(ActionEvent event){
         //TODO
         //next page
         String username = usernameTextField.getText().toLowerCase();
