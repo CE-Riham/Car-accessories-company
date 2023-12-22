@@ -1,6 +1,5 @@
 package database.updating;
 
-import classes.Starter;
 import helpers.DataValidation;
 import helpers.Generator;
 import model.Product;
@@ -24,16 +23,6 @@ public class ProductUpdater {
         this.status = status;
     }
 
-    public boolean updateProductTest(Product product, String condition) {
-        Starter.logger.info(condition);
-        String st = DataValidation.productValidationTest(product);
-        if (st.equals("Valid"))
-            setStatus("Product was updated successfully");
-        else
-            setStatus(st);
-        return false;
-    }
-
     public boolean updateProductsAllFields(Product product, String condition) {
         String st = DataValidation.productValidationTest(product);
         if (st.equals("Valid")) {
@@ -54,30 +43,42 @@ public class ProductUpdater {
         return false;
     }
 
-    public boolean updateProductName(String newProductName, String condition) {
-        String query = "UPDATE products SET productName = ? " + condition;
+    public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
+        String query = "UPDATE products SET ? = ? ?";
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newProductName);
+            preparedStmt.setString(1, fieldName);
+            preparedStmt.setString(2, newValue);
+            preparedStmt.setString(3, condition);
             preparedStmt.execute();
-            setStatus("Product name was updated successfully");
+            setStatus("Product " + fieldName + " was updated successfully");
             return true;
         } catch (Exception e) {
-            setStatus("Couldn't update product name");
+            setStatus("Couldn't update product " + fieldName);
             return false;
         }
     }
 
-    public boolean updateProductCategory(String newCategory, String condition) {
-        String query = "UPDATE products SET category = ? " + condition;
+    public boolean updateProductSingleIntegerField(String fieldName, int newValue, String condition) {
+        String query = "UPDATE products SET ? = ? ?";
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newCategory);
+            preparedStmt.setString(1, fieldName);
+            preparedStmt.setInt(2, newValue);
+            preparedStmt.setString(3, condition);
             preparedStmt.execute();
-            setStatus("Product category was updated successfully");
+            setStatus("Product " + fieldName + " was updated successfully");
             return true;
         } catch (Exception e) {
-            setStatus("Couldn't update product category");
+            setStatus("Couldn't update product " + fieldName);
             return false;
         }
+    }
+
+    public boolean updateProductName(String newProductName, String condition) {
+        return updateProductSingleStringField("productName", newProductName, condition);
+    }
+
+    public boolean updateProductCategory(String newCategory, String condition) {
+        return updateProductSingleStringField("category", newCategory, condition);
     }
 
     public boolean updateProductPrice(Double newPrice, String condition) {
@@ -93,69 +94,24 @@ public class ProductUpdater {
         }
     }
 
-    public boolean updateProductNumberOfOrders(String newNumberOfOrders, String condition) {
-        String query = "UPDATE products SET numberOfOrders = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newNumberOfOrders);
-            preparedStmt.execute();
-            setStatus("Product newNumberOfOrders was updated successfully");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update product newNumberOfOrders");
-            return false;
-        }
+    public boolean updateProductNumberOfOrders(int newNumberOfOrders, String condition) {
+        return updateProductSingleIntegerField("numberOfOrders", newNumberOfOrders, condition);
     }
 
     public boolean updateProductImage(String newImagePath, String condition) {
-        String query = "UPDATE products SET image = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newImagePath);
-            preparedStmt.execute();
-            setStatus("Product image was updated successfully");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update product image");
-            return false;
-        }
+        return updateProductSingleStringField("image", newImagePath, condition);
     }
 
     public boolean updateProductLongDescription(String newLongDescription, String condition) {
-        String query = "UPDATE products SET longDescription = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newLongDescription);
-            preparedStmt.execute();
-            setStatus("Product long description was updated newLongDescription");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update product long description");
-            return false;
-        }
+        return updateProductSingleStringField("longDescription", newLongDescription, condition);
     }
 
     public boolean updateProductShortDescription(String newShortDescription, String condition) {
-        String query = "UPDATE products SET shortDescription = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newShortDescription);
-            preparedStmt.execute();
-            setStatus("Product short description was updated newLongDescription");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update product short description");
-            return false;
-        }
+        return updateProductSingleStringField("shortDescription", newShortDescription, condition);
     }
 
     public boolean updateProductAvailability(int newAvailability, String condition) {
-        String query = "UPDATE products SET availability = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)){
-            preparedStmt.setInt(1, newAvailability);
-            preparedStmt.execute();
-            setStatus("Product availability was updated newLongDescription");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update product availability");
-            return false;
-        }
+        return updateProductSingleIntegerField("availability", newAvailability, condition);
     }
 
 }
