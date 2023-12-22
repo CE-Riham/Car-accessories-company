@@ -161,3 +161,5 @@ h
 8src/test/resources/authenticationFeatures/Logout.feature,8\8\88dadf45f44c0a6cee821403fd8a42c71bc3a95e
 i
 9src/test/resources/databaseFeatures/updatingUsers.feature,4\1\413d2da04d6a73d8278d1390f836de290f7f9530
+d
+4src/test/java/authentication/AuthenticationTest.java,c\3\c354a50280abf3e43bc547b3e35e72aaebbe104d
