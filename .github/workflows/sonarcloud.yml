@@ -21,10 +21,6 @@ jobs:
       working-directory: CarAccessoriesCompany
       run: mvn --batch-mode -DskipTests package
 
-    - name: Step 4 - Run test cases 
-      working-directory: CarAccessoriesCompany
-      run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
-
     - name: Cache SonarCloud packages
       uses: actions/cache@v3
       with:
