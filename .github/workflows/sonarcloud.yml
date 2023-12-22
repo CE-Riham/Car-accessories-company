@@ -24,23 +24,21 @@ jobs:
     - name: Step 4 - Run test cases 
       working-directory: CarAccessoriesCompany
       run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
-
+      
     - name: Cache SonarCloud packages
       uses: actions/cache@v3
       with:
-        path: ~/.sonar/cache
-        key: ${{ runner.os }}-sonar
-        restore-keys: ${{ runner.os }}-sonar
-
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
     - name: Cache Maven packages
       uses: actions/cache@v3
       with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
     - name: Build and analyze
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B -f CarAccessoriesCompany/pom.xml  verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CE-Riham_Car-accessories-company
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B -f CarAccessoriesCompany/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CE-Riham_Car-accessories-company
