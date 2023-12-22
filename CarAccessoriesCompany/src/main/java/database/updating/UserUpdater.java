@@ -52,82 +52,44 @@ public class UserUpdater {
         return false;
     }
 
-    public boolean updateUserFirstName(String newFirstName, String condition) {
-        String query = "UPDATE users SET firstName = ? " + condition;
+    public boolean updateUserSingleField(String fieldName, String newValue, String condition) {
+        String query = "UPDATE users SET ? = ? ?";
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newFirstName);
+            preparedStmt.setString(1, fieldName);
+            preparedStmt.setString(2, newValue);
+            preparedStmt.setString(3, condition);
             preparedStmt.execute();
-            setStatus("User firstName was updated successfully");
+            setStatus("User " + fieldName + " was updated successfully");
             return true;
         } catch (Exception e) {
-            setStatus("Couldn't update user firstName");
+            setStatus("Couldn't update user " + fieldName);
             return false;
         }
+    }
+
+    public boolean updateUserFirstName(String newFirstName, String condition) {
+        return updateUserSingleField("firstName", newFirstName, condition);
     }
 
     public boolean updateUserLastName(String newLastName, String condition) {
-        String query = "UPDATE users SET lastName = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newLastName);
-            preparedStmt.execute();
-            setStatus("User lastName was updated successfully");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update user lastName");
-            return false;
-        }
+        return updateUserSingleField("lastName", newLastName, condition);
     }
 
     public boolean updateUserPhone(String newPhoneNumber, String condition) {
-        String query = "UPDATE users SET phone = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newPhoneNumber);
-            preparedStmt.execute();
-            setStatus("User phone was updated successfully");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update user phone");
-            return false;
-        }
+        return updateUserSingleField("phone", newPhoneNumber, condition);
     }
 
     public boolean updateUserEmail(String newEmail, String condition) {
-        String query = "UPDATE users SET email = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newEmail);
-            preparedStmt.execute();
-            setStatus("User email was updated successfully");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update user email");
-            return false;
-        }
+        return updateUserSingleField("email", newEmail, condition);
     }
 
     public boolean updateUserPassword(String newPassword, String condition) {
-        String query = "UPDATE users SET userPassword = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newPassword);
-            preparedStmt.execute();
-            setStatus("User password was updated successfully");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update user password");
-            return false;
-        }
+        return updateUserSingleField("userPassword", newPassword, condition);
+
     }
 
     public boolean updateUserImage(String newImage, String condition) {
-        String query = "UPDATE users SET image = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, newImage);
-            preparedStmt.execute();
-            setStatus("User image was updated successfully");
-            return true;
-        } catch (Exception e) {
-            setStatus("Couldn't update user image");
-            return false;
-        }
+        return updateUserSingleField("image", newImage, condition);
     }
 
 }
