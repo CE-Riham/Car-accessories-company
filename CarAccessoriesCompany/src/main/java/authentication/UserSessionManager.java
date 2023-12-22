@@ -2,14 +2,9 @@ package authentication;
 
 import classes.Starter;
 import classes.UserSession;
-import helpers.Alerts;
-import helpers.stage_helpers.AuthenticationStageHelper;
-import javafx.event.ActionEvent;
-import javafx.scene.control.ButtonType;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.logging.Level;
 
 public class UserSessionManager {

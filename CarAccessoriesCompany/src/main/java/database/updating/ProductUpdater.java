@@ -4,7 +4,6 @@ import classes.Starter;
 import helpers.DataValidation;
 import helpers.Generator;
 import model.Product;
-import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,28 +11,32 @@ import java.sql.PreparedStatement;
 public class ProductUpdater {
     private String status;
     private Connection connection;
-    public ProductUpdater(Connection connection){
+
+    public ProductUpdater(Connection connection) {
         this.connection = connection;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public boolean updateProductTest(Product product, String condition){
+    public boolean updateProductTest(Product product, String condition) {
         Starter.logger.info(condition);
         String st = DataValidation.productValidationTest(product);
-        if(st.equals("Valid"))
+        if (st.equals("Valid"))
             setStatus("Product was updated successfully");
         else
             setStatus(st);
         return false;
     }
-    public boolean updateProductsAllFields(Product product, String condition){
+
+    public boolean updateProductsAllFields(Product product, String condition) {
         String st = DataValidation.productValidationTest(product);
-        if(st.equals("Valid")){
+        if (st.equals("Valid")) {
             try {
                 String query = "UPDATE products SET productName = ?, category = ?, price = ?, " +
                         "numberOfOrders = ?, image = ?, longDescription = ?, shortDescription = ?, availability = ? " + condition;
@@ -46,16 +49,15 @@ public class ProductUpdater {
                 setStatus("Couldn't update product");
                 return false;
             }
-        }
-        else
+        } else
             setStatus(st);
         return false;
     }
-    public boolean updateProductName(String newProductName, String condition){
-        try {
-            String query = "UPDATE products SET productName = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newProductName);
+
+    public boolean updateProductName(String newProductName, String condition) {
+        String query = "UPDATE products SET productName = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newProductName);
             preparedStmt.execute();
             setStatus("Product name was updated successfully");
             return true;
@@ -64,11 +66,11 @@ public class ProductUpdater {
             return false;
         }
     }
-    public boolean updateProductCategory(String newCategory, String condition){
-        try {
-            String query = "UPDATE products SET category = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newCategory);
+
+    public boolean updateProductCategory(String newCategory, String condition) {
+        String query = "UPDATE products SET category = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newCategory);
             preparedStmt.execute();
             setStatus("Product category was updated successfully");
             return true;
@@ -77,11 +79,11 @@ public class ProductUpdater {
             return false;
         }
     }
-    public boolean updateProductPrice(Double newPrice, String condition){
-        try {
-            String query = "UPDATE products SET price = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setDouble (1, newPrice);
+
+    public boolean updateProductPrice(Double newPrice, String condition) {
+        String query = "UPDATE products SET price = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setDouble(1, newPrice);
             preparedStmt.execute();
             setStatus("Product price was updated successfully");
             return true;
@@ -90,11 +92,11 @@ public class ProductUpdater {
             return false;
         }
     }
-    public boolean updateProductNumberOfOrders(String newNumberOfOrders, String condition){
-        try {
-            String query = "UPDATE products SET numberOfOrders = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newNumberOfOrders);
+
+    public boolean updateProductNumberOfOrders(String newNumberOfOrders, String condition) {
+        String query = "UPDATE products SET numberOfOrders = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newNumberOfOrders);
             preparedStmt.execute();
             setStatus("Product newNumberOfOrders was updated successfully");
             return true;
@@ -104,11 +106,10 @@ public class ProductUpdater {
         }
     }
 
-    public boolean updateProductImage(String newImagePath, String condition){
-        try {
-            String query = "UPDATE products SET image = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newImagePath);
+    public boolean updateProductImage(String newImagePath, String condition) {
+        String query = "UPDATE products SET image = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newImagePath);
             preparedStmt.execute();
             setStatus("Product image was updated successfully");
             return true;
@@ -118,11 +119,10 @@ public class ProductUpdater {
         }
     }
 
-    public boolean updateProductLongDescription(String newLongDescription, String condition){
-        try {
-            String query = "UPDATE products SET longDescription = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newLongDescription);
+    public boolean updateProductLongDescription(String newLongDescription, String condition) {
+        String query = "UPDATE products SET longDescription = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newLongDescription);
             preparedStmt.execute();
             setStatus("Product long description was updated newLongDescription");
             return true;
@@ -132,11 +132,10 @@ public class ProductUpdater {
         }
     }
 
-    public boolean updateProductShortDescription(String newShortDescription, String condition){
-        try {
-            String query = "UPDATE products SET shortDescription = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newShortDescription);
+    public boolean updateProductShortDescription(String newShortDescription, String condition) {
+        String query = "UPDATE products SET shortDescription = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            preparedStmt.setString(1, newShortDescription);
             preparedStmt.execute();
             setStatus("Product short description was updated newLongDescription");
             return true;
@@ -146,11 +145,10 @@ public class ProductUpdater {
         }
     }
 
-    public boolean updateProductAvailability(int newAvailability, String condition){
-        try {
-            String query = "UPDATE products SET availability = ? " + condition;
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt (1, newAvailability);
+    public boolean updateProductAvailability(int newAvailability, String condition) {
+        String query = "UPDATE products SET availability = ? " + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)){
+            preparedStmt.setInt(1, newAvailability);
             preparedStmt.execute();
             setStatus("Product availability was updated newLongDescription");
             return true;

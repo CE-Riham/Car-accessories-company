@@ -52,7 +52,7 @@ public class CategoryDeleter {
                 try{
                     preparedStmt.close();
                 }catch (Exception e){
-                    Starter.logger.warning("error while closing the statement.");
+                    Starter.logger.warning("Error while closing the statement.");
                 }
             }
         }

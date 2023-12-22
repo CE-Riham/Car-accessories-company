@@ -58,7 +58,7 @@ public class AdminAdminsController implements Initializable {
 
     @FXML
     void onInstallersClick(ActionEvent event) {
-
+        //TODO
     }
 
     @FXML
@@ -68,12 +68,12 @@ public class AdminAdminsController implements Initializable {
 
     @FXML
     void onNotificationsCLick(ActionEvent event) {
-
+        //TODO
     }
 
     @FXML
     void onOrdersClick(ActionEvent event) {
-
+        //TODO
     }
 
     @FXML
