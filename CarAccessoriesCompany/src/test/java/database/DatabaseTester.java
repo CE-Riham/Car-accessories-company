@@ -7,6 +7,6 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/databaseFeatures",
         monochrome = true,snippets = CucumberOptions.SnippetType.CAMELCASE, glue = {"database"})
-public class DatabaseTest {
+public class DatabaseTester {
 
 }
