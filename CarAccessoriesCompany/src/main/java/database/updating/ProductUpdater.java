@@ -3,7 +3,7 @@ package database.updating;
 import helpers.DataValidation;
 import helpers.Generator;
 import model.Product;
-
+import java.util.Set;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
