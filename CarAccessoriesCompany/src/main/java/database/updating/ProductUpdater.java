@@ -24,6 +24,7 @@ public class ProductUpdater {
         this.status = status;
     }
 
+
 public boolean updateProductsAllFields(Product product, String condition) {
     String st = DataValidation.productValidationTest(product);
     if ("Valid".equals(st)) {
@@ -31,6 +32,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
             String query = "UPDATE products SET productName = ?, category = ?, price = ?, " +
                     "numberOfOrders = ?, image = ?, longDescription = ?, shortDescription = ?, availability = ? " +
                     condition;
+
             try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
                 preparedStmt.setString(1, product.getProductName());
                 preparedStmt.setString(2, product.getProductCategory());
@@ -41,12 +43,20 @@ public boolean updateProductsAllFields(Product product, String condition) {
                 preparedStmt.setString(7, product.getShortDescription());
                 preparedStmt.setInt(8, product.getAvailableAmount());
 
-                preparedStmt.executeUpdate();
-                setStatus("Product was updated successfully");
-                return true;
+                int rowsAffected = preparedStmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    setStatus("Product was updated successfully");
+                    return true;
+                } else {
+                    setStatus("No product was updated. Check your condition.");
+                    return false;
+                }
             }
         } catch (SQLException e) {
-            setStatus("Couldn't update product");
+            // Log the specific SQL exception details for debugging.
+            e.printStackTrace();
+            setStatus("Couldn't update product. Check logs for details.");
             return false;
         }
     } else {
