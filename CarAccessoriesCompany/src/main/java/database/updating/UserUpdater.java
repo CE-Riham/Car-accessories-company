@@ -36,41 +36,31 @@ public class UserUpdater {
     }
 
     public boolean updateUsersAllFields(User user, String condition) {
-         String st = DataValidation.userValidationTest(user);
-    
-    if ("Valid".equals(st)) {
-        String query = "UPDATE users SET firstName = ?, lastName = ?, username = ?, " +
-                "phone = ?, email = ?, userPassword = ?, image = ?, userType = ? " + condition;
+      String st = DataValidation.userValidationTest(user);
+        if (st.equals("Valid")) {
+            String query = "UPDATE users SET firstName = ?, lastName = ?, username = ?, " +
+                    "phone = ?, email = ?, userPassword = ?, image = ?, userType = ? " + condition;
+            try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+                preparedStmt.setString(1, user.getFirstName());
+                preparedStmt.setString(2, user.getLastName());
+                preparedStmt.setString(3, user.getUsername());
+                preparedStmt.setString(4, user.getPhoneNumber());
+                preparedStmt.setString(5, user.getEmail());
+                preparedStmt.setString(6, user.getPassword());
+                preparedStmt.setString(7, user.getImagePath());
+                preparedStmt.setString(8, user.getUserType());
 
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, user.getFirstName());
-            preparedStmt.setString(2, user.getLastName());
-            preparedStmt.setString(3, user.getUsername());
-            preparedStmt.setString(4, user.getPhoneNumber());
-            preparedStmt.setString(5, user.getEmail());
-            preparedStmt.setString(6, user.getPassword());
-            preparedStmt.setString(7, user.getImagePath());
-            preparedStmt.setString(8, user.getUserType());
-
-            int rowsAffected = preparedStmt.executeUpdate();
-
-            if (rowsAffected > 0) {
+                preparedStmt.executeUpdate();
                 setStatus("User was updated successfully");
                 return true;
-            } else {
-                setStatus("User not found or no changes made");
+            } catch (SQLException e) {
+                setStatus("Couldn't update user");
                 return false;
             }
-        } catch (SQLException e) {
-            // Log the exception details for debugging
-            e.printStackTrace();
-            setStatus("Couldn't update user due to a database error");
+        } else {
+            setStatus(st);
             return false;
         }
-    } else {
-        setStatus(st);
-        return false;
-    }
     }
 
     public boolean updateUserSingleField(String fieldName, String newValue, String condition) {
