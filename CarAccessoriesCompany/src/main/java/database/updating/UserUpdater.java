@@ -72,6 +72,7 @@ public class UserUpdater {
     }
 
     private boolean isValidColumnName(String columnName) {
-        return columnName.matches("[a-zA-Z_]+");
+            return columnName.matches("[a-zA-Z0-9_]+");
+
     }
 }
