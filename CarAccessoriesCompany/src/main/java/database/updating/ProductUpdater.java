@@ -106,18 +106,21 @@ public boolean updateProductsAllFields(Product product, String condition) {
         return updateProductSingleStringField("category", newCategory, condition);
     }
 
-    public boolean updateProductPrice(Double newPrice, String condition) {
-        String query = "UPDATE products SET price = ? " + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setDouble(1, newPrice);
-            preparedStmt.executeUpdate();
-            setStatus("Product price was updated successfully");
-            return true;
-        } catch (SQLException e) {
-            setStatus("Couldn't update product price");
-            return false;
-        }
+  public boolean updateProductPrice(Double newPrice, String condition) {
+    StringBuilder queryBuilder = new StringBuilder("UPDATE products SET price = ?");
+    queryBuilder.append(" ").append(condition);
+
+    try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
+        preparedStmt.setDouble(1, newPrice);
+        preparedStmt.executeUpdate();
+        setStatus("Product price was updated successfully");
+        return true;
+    } catch (SQLException e) {
+        setStatus("Couldn't update product price");
+        return false;
     }
+}
+
 
     public boolean updateProductNumberOfOrders(int newNumberOfOrders, String condition) {
         return updateProductSingleIntegerField("numberOfOrders", newNumberOfOrders, condition);
