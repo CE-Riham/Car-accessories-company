@@ -64,7 +64,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
             preparedStmt.execute();
             setStatus("Product " + fieldName + " was updated successfully");
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             setStatus("Couldn't update product " + fieldName);
             return false;
         }
@@ -79,7 +79,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
             preparedStmt.execute();
             setStatus("Product " + fieldName + " was updated successfully");
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             setStatus("Couldn't update product " + fieldName);
             return false;
         }
@@ -100,7 +100,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
             preparedStmt.execute();
             setStatus("Product price was updated successfully");
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             setStatus("Couldn't update product price");
             return false;
         }
