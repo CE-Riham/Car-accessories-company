@@ -69,13 +69,14 @@ private boolean isValidColumnName(String columnName) {
       String query = "UPDATE products SET " + fieldName + " = ? " + condition;
     try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
         preparedStmt.setString(1, newValue);
-        preparedStmt.execute();
+        preparedStmt.executeUpdate();
         setStatus("Product " + fieldName + " was updated successfully");
         return true;
     } catch (SQLException e) {
         setStatus("Couldn't update product " + fieldName);
         return false;
     }
+
     }
 
     public boolean updateProductSingleIntegerField(String fieldName, int newValue, String condition) {
@@ -87,7 +88,7 @@ private boolean isValidColumnName(String columnName) {
   String query = "UPDATE products SET " + fieldName + " = ? " + condition;
     try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
         preparedStmt.setInt(1, newValue);
-        preparedStmt.execute();
+        preparedStmt.executeUpdate();
         setStatus("Product " + fieldName + " was updated successfully");
         return true;
     } catch (SQLException e) {
