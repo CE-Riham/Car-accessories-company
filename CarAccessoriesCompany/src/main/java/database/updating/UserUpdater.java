@@ -46,8 +46,8 @@ public class UserUpdater {
                 preparedStmt.setString(3, user.getUsername());
                 preparedStmt.setString(4, user.getPhoneNumber());
                 preparedStmt.setString(5, user.getEmail());
-                preparedStmt.setString(6, user.getUserPassword());
-                preparedStmt.setString(7, user.getImage());
+                preparedStmt.setString(6, user.getPassword());
+                preparedStmt.setString(7, user.getImagePath());
                 preparedStmt.setString(8, user.getUserType());
 
                 preparedStmt.execute();
