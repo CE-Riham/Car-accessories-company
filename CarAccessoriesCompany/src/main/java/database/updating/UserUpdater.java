@@ -50,7 +50,7 @@ public class UserUpdater {
                 preparedStmt.setString(7, user.getImagePath());
                 preparedStmt.setString(8, user.getUserType());
 
-                preparedStmt.execute();
+                preparedStmt.executeUpdate();
                 setStatus("User was updated successfully");
                 return true;
             } catch (SQLException e) {
@@ -72,7 +72,7 @@ public class UserUpdater {
         String query = "UPDATE users SET " + fieldName + " = ? " + condition;
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
             preparedStmt.setString(1, newValue);
-            preparedStmt.execute();
+            preparedStmt.executeUpdate();
             setStatus("User " + fieldName + " was updated successfully");
             return true;
         } catch (SQLException e) {
