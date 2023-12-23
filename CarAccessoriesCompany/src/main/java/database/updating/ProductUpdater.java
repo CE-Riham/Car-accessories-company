@@ -6,7 +6,7 @@ import model.Product;
 import java.util.Set;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.SQLException; 
 
 public class ProductUpdater {
     private String status;
