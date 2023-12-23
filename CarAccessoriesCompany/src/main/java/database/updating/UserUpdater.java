@@ -7,6 +7,7 @@ import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class UserUpdater {
     private String status;
@@ -53,11 +54,14 @@ public class UserUpdater {
     }
 
     public boolean updateUserSingleField(String fieldName, String newValue, String condition) {
-        String query = "UPDATE users SET ? = ? ?";
+        if (!isValidColumnName(fieldName)) {
+            setStatus("Invalid column name");
+            return false;
+        }
+
+        String query = "UPDATE users SET " + fieldName + " = ? " + condition;
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, fieldName);
-            preparedStmt.setString(2, newValue);
-            preparedStmt.setString(3, condition);
+            preparedStmt.setString(1, newValue);
             preparedStmt.execute();
             setStatus("User " + fieldName + " was updated successfully");
             return true;
@@ -67,29 +71,7 @@ public class UserUpdater {
         }
     }
 
-    public boolean updateUserFirstName(String newFirstName, String condition) {
-        return updateUserSingleField("firstName", newFirstName, condition);
+    private boolean isValidColumnName(String columnName) {
+        return columnName.matches("[a-zA-Z_]+");
     }
-
-    public boolean updateUserLastName(String newLastName, String condition) {
-        return updateUserSingleField("lastName", newLastName, condition);
-    }
-
-    public boolean updateUserPhone(String newPhoneNumber, String condition) {
-        return updateUserSingleField("phone", newPhoneNumber, condition);
-    }
-
-    public boolean updateUserEmail(String newEmail, String condition) {
-        return updateUserSingleField("email", newEmail, condition);
-    }
-
-    public boolean updateUserPassword(String newPassword, String condition) {
-        return updateUserSingleField("userPassword", newPassword, condition);
-
-    }
-
-    public boolean updateUserImage(String newImage, String condition) {
-        return updateUserSingleField("image", newImage, condition);
-    }
-
 }
