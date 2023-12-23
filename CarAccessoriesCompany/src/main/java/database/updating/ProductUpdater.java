@@ -41,7 +41,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
                 preparedStmt.setString(7, product.getShortDescription());
                 preparedStmt.setInt(8, product.getAvailableAmount());
 
-                preparedStmt.execute();
+                preparedStmt.executeUpdate();
                 setStatus("Product was updated successfully");
                 return true;
             }
@@ -54,6 +54,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
         return false;
     }
 }
+
 
  public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
         String query = "UPDATE products SET ? = ? ?";
