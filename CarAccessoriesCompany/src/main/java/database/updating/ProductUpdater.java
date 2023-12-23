@@ -54,7 +54,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
         return false;
     }
 }
-    private Set<String> allowedColumns = Set.of("column1", "column2", "column3");
+    private static final Set<String> allowedColumns = Set.of("column1", "column2", "column3");
 
 private boolean isValidColumnName(String columnName) {
     return allowedColumns.contains(columnName);
