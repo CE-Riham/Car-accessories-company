@@ -54,35 +54,46 @@ public boolean updateProductsAllFields(Product product, String condition) {
         return false;
     }
 }
-     public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
-        String query = "UPDATE products SET ? = ? ?";
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, fieldName);
-            preparedStmt.setString(2, newValue);
-            preparedStmt.setString(3, condition);
-            preparedStmt.execute();
-            setStatus("Product " + fieldName + " was updated successfully");
-            return true;
-        } catch (SQLException e) {
-            setStatus("Couldn't update product " + fieldName);
-            return false;
-        }
+   public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
+    if (!isValidColumnName(fieldName)) {
+        setStatus("Invalid column name");
+        return false;
     }
 
-    public boolean updateProductSingleIntegerField(String fieldName, int newValue, String condition) {
-        String query = "UPDATE products SET ? = ? ?";
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, fieldName);
-            preparedStmt.setInt(2, newValue);
-            preparedStmt.setString(3, condition);
-            preparedStmt.execute();
-            setStatus("Product " + fieldName + " was updated successfully");
-            return true;
-        } catch (SQLException e) {
-            setStatus("Couldn't update product " + fieldName);
-            return false;
-        }
+    String query = "UPDATE products SET " + fieldName + " = ? " + condition;
+    try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+        preparedStmt.setString(1, newValue);
+        preparedStmt.execute();
+        setStatus("Product " + fieldName + " was updated successfully");
+        return true;
+    } catch (SQLException e) {
+        setStatus("Couldn't update product " + fieldName);
+        return false;
     }
+}
+
+public boolean updateProductSingleIntegerField(String fieldName, int newValue, String condition) {
+    if (!isValidColumnName(fieldName)) {
+        setStatus("Invalid column name");
+        return false;
+    }
+
+    String query = "UPDATE products SET " + fieldName + " = ? " + condition;
+    try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+        preparedStmt.setInt(1, newValue);
+        preparedStmt.execute();
+        setStatus("Product " + fieldName + " was updated successfully");
+        return true;
+    } catch (SQLException e) {
+        setStatus("Couldn't update product " + fieldName);
+        return false;
+    }
+}
+
+
+private boolean isValidColumnName(String columnName) {
+    return columnName.matches("[a-zA-Z0-9_]+");
+}
 
 
    
