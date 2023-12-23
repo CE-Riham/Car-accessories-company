@@ -43,7 +43,7 @@ public class UserUpdater {
                 preparedStmt.execute();
                 setStatus("User was updated successfully");
                 return true;
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 setStatus("Couldn't update user");
                 return false;
             }
@@ -61,7 +61,7 @@ public class UserUpdater {
             preparedStmt.execute();
             setStatus("User " + fieldName + " was updated successfully");
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             setStatus("Couldn't update user " + fieldName);
             return false;
         }
