@@ -23,25 +23,36 @@ public class ProductUpdater {
         this.status = status;
     }
 
-    public boolean updateProductsAllFields(Product product, String condition) {
-        String st = DataValidation.productValidationTest(product);
-        if (st.equals("Valid")) {
-            try {
-                String query = "UPDATE products SET productName = ?, category = ?, price = ?, " +
-                        "numberOfOrders = ?, image = ?, longDescription = ?, shortDescription = ?, availability = ? " + condition;
-                PreparedStatement preparedStmt = connection.prepareStatement(query);
-                preparedStmt = Generator.productToPS(preparedStmt, product);
+public boolean updateProductsAllFields(Product product, String condition) {
+    String st = DataValidation.productValidationTest(product);
+    if ("Valid".equals(st)) {
+        try {
+            String query = "UPDATE products SET productName = ?, category = ?, price = ?, " +
+                    "numberOfOrders = ?, image = ?, longDescription = ?, shortDescription = ?, availability = ? " +
+                    condition;
+            try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+                preparedStmt.setString(1, product.getProductName());
+                preparedStmt.setString(2, product.getProductCategory());
+                preparedStmt.setDouble(3, product.getProductPrice());
+                preparedStmt.setInt(4, product.getNumberOfOrders());
+                preparedStmt.setString(5, product.getImagePath());
+                preparedStmt.setString(6, product.getLongDescription());
+                preparedStmt.setString(7, product.getShortDescription());
+                preparedStmt.setInt(8, product.getAvailableAmount());
+
                 preparedStmt.execute();
                 setStatus("Product was updated successfully");
                 return true;
-            } catch (Exception e) {
-                setStatus("Couldn't update product");
-                return false;
             }
-        } else
-            setStatus(st);
+        } catch (SQLException e) {
+            setStatus("Couldn't update product");
+            return false;
+        }
+    } else {
+        setStatus(st);
         return false;
     }
+}
 
     public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
         String query = "UPDATE products SET ? = ? ?";
