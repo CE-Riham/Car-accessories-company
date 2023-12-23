@@ -2,7 +2,6 @@ package database.updating;
 
 import classes.Starter;
 import helpers.DataValidation;
-import helpers.Generator;
 import model.User;
 
 import java.sql.Connection;
@@ -28,10 +27,11 @@ public class UserUpdater {
     public boolean updateUserTest(User user, String condition) {
         Starter.logger.info(condition);
         String st = DataValidation.userValidationTest(user);
-        if (st.equals("Valid"))
+        if (st.equals("Valid")) {
             setStatus("User was updated successfully");
-        else
+        } else {
             setStatus(st);
+        }
         return false;
     }
 
@@ -40,7 +40,16 @@ public class UserUpdater {
         if (st.equals("Valid")) {
             String query = "UPDATE users SET firstName = ?, lastName = ?, username = ?, " +
                     "phone = ?, email = ?, userPassword = ?, image = ?, userType = ? " + condition;
-            try (PreparedStatement preparedStmt = Generator.userToPS(connection.prepareStatement(query), user)) {
+            try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+                preparedStmt.setString(1, user.getFirstName());
+                preparedStmt.setString(2, user.getLastName());
+                preparedStmt.setString(3, user.getUsername());
+                preparedStmt.setString(4, user.getPhoneNumber());
+                preparedStmt.setString(5, user.getEmail());
+                preparedStmt.setString(6, user.getUserPassword());
+                preparedStmt.setString(7, user.getImage());
+                preparedStmt.setString(8, user.getUserType());
+
                 preparedStmt.execute();
                 setStatus("User was updated successfully");
                 return true;
@@ -48,9 +57,10 @@ public class UserUpdater {
                 setStatus("Couldn't update user");
                 return false;
             }
-        } else
+        } else {
             setStatus(st);
-        return false;
+            return false;
+        }
     }
 
     public boolean updateUserSingleField(String fieldName, String newValue, String condition) {
@@ -72,7 +82,6 @@ public class UserUpdater {
     }
 
     private boolean isValidColumnName(String columnName) {
-            return columnName.matches("[a-zA-Z0-9_]+");
-
+        return columnName.matches("[a-zA-Z0-9_]+");
     }
 }
