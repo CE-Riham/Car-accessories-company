@@ -54,8 +54,19 @@ public boolean updateProductsAllFields(Product product, String condition) {
         return false;
     }
 }
+    private Set<String> allowedColumns = Set.of("column1", "column2", "column3");
+
+private boolean isValidColumnName(String columnName) {
+    return allowedColumns.contains(columnName);
+}
   public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
-        String query = "UPDATE products SET " + fieldName + " = ? " + condition;
+       
+       if (!isValidColumnName(fieldName)) {
+        setStatus("Invalid column name");
+        return false;
+    }
+      
+      String query = "UPDATE products SET " + fieldName + " = ? " + condition;
     try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
         preparedStmt.setString(1, newValue);
         preparedStmt.execute();
@@ -68,7 +79,12 @@ public boolean updateProductsAllFields(Product product, String condition) {
     }
 
     public boolean updateProductSingleIntegerField(String fieldName, int newValue, String condition) {
-     String query = "UPDATE products SET " + fieldName + " = ? " + condition;
+      if (!isValidColumnName(fieldName)) {
+        setStatus("Invalid column name");
+        return false;
+    }
+        
+  String query = "UPDATE products SET " + fieldName + " = ? " + condition;
     try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
         preparedStmt.setInt(1, newValue);
         preparedStmt.execute();
