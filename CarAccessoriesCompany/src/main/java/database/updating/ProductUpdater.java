@@ -29,14 +29,14 @@ public boolean updateProductsAllFields(Product product, String condition) {
     String st = DataValidation.productValidationTest(product);
     if ("Valid".equals(st)) {
         try {
-            // Define a base query without the dynamic condition
-            String baseQuery = "UPDATE products SET productName = ?, category = ?, price = ?, " +
-                    "numberOfOrders = ?, image = ?, longDescription = ?, shortDescription = ?, availability = ?";
+            // Use StringBuilder to construct the SQL query
+            StringBuilder queryBuilder = new StringBuilder();
+            queryBuilder.append("UPDATE products SET productName = ?, category = ?, price = ?, ")
+                    .append("numberOfOrders = ?, image = ?, longDescription = ?, ")
+                    .append("shortDescription = ?, availability = ?").append(" ").append(condition);
 
-            // Add the dynamic condition to the base query
-            String query = baseQuery + " " + condition;
-
-            try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+            // Use try-with-resources to manage the PreparedStatement
+            try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
                 // Set parameters for the base query
                 preparedStmt.setString(1, product.getProductName());
                 preparedStmt.setString(2, product.getProductCategory());
@@ -62,6 +62,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
         return false;
     }
 }
+
 
 
 
