@@ -100,7 +100,7 @@ public boolean updateProductsAllFields(Product product, String condition) {
         String query = "UPDATE products SET price = ? " + condition;
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
             preparedStmt.setDouble(1, newPrice);
-            preparedStmt.execute();
+            preparedStmt.executeUpdate();
             setStatus("Product price was updated successfully");
             return true;
         } catch (SQLException e) {
