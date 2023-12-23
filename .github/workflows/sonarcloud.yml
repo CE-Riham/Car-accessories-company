@@ -1,11 +1,11 @@
-name: GitHub Action Maven Build Example 
+name: GitHub Action Maven Build and Test
 
-on: 
+on:
   push:
     branches: [main]
 
 jobs:
-  build-on-ubuntu:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,24 +21,26 @@ jobs:
       working-directory: CarAccessoriesCompany
       run: mvn --batch-mode -DskipTests package
 
-    - name: Step 4 - Run test cases 
+    - name: Step 4 - Run tests and generate coverage report
       working-directory: CarAccessoriesCompany
-      run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
-      
-    - name: Cache SonarCloud packages
+      run: mvn --batch-mode clean test jacoco:report
+
+    - name: Step 5 - Cache SonarCloud packages
       uses: actions/cache@v3
       with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-    - name: Cache Maven packages
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+
+    - name: Step 6 - Cache Maven packages
       uses: actions/cache@v3
       with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-    - name: Build and analyze
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Step 7 - Build and analyze with SonarCloud
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B -f CarAccessoriesCompany/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CE-Riham_Car-accessories-company
