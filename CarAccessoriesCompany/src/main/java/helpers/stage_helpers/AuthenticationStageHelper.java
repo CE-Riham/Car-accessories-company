@@ -15,6 +15,7 @@ public class AuthenticationStageHelper {
     private AuthenticationStageHelper() {
         throw new IllegalStateException("Utility class");
     }
+
     private static void showPage(ActionEvent event, String path, int width, int height) throws IOException {
         if (event.getSource() instanceof Node source) {
             Parent root = FXMLLoader.load(AuthenticationStageHelper.class.getResource(path));
@@ -27,18 +28,18 @@ public class AuthenticationStageHelper {
         }
     }
 
-    public static void showLogin(ActionEvent event){
-        try{
+    public static void showLogin(ActionEvent event) {
+        try {
             showPage(event, "/FXMLFiles/loginPage.fxml", 608, 837);
-        }catch (Exception e){
+        } catch (Exception e) {
             Starter.logger.warning("Can't open login page");
         }
     }
 
-    public static void showSignup(ActionEvent event){
-        try{
+    public static void showSignup(ActionEvent event) {
+        try {
             showPage(event, "/FXMLFiles/signupPage.fxml", 608, 837);
-        }catch (Exception e){
+        } catch (Exception e) {
             Starter.logger.warning("Can't open sign-up page");
         }
     }

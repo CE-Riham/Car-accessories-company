@@ -13,13 +13,14 @@ import model.Product;
 
 import java.io.File;
 
-public class ProductCard{
+public class ProductCard {
     private AnchorPane card;
     private VBox container;
     private ImageView image;
     private HBox header;
     private HBox descriptionBox;
     private Button showProductButton;
+
     public ProductCard(Product product) {
         setCard("#EFEEEC");
         setContainer();
@@ -106,7 +107,7 @@ public class ProductCard{
         showProductButton.setFont(Font.font(12.0));
     }
 
-    private void addToCard(){
+    private void addToCard() {
         container.getChildren().addAll(image, header, descriptionBox, showProductButton);
         container.setPadding(new Insets(10.0));
         AnchorPane.setTopAnchor(container, 0.0);

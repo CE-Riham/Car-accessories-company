@@ -13,21 +13,25 @@ public class DatabaseConnection {
     private int port;
     private Connection con;
 
-    public DatabaseConnection(){
+    public DatabaseConnection() {
         setPort(3306);
         setDatabaseName("caraccessoriescompany");
         setUsername("root");
         setPassword("12345678password");
         setCon();
     }
-    public DatabaseConnection(int port, String databaseName, String username, String password){
+
+    public DatabaseConnection(int port, String databaseName, String username, String password) {
         setPort(port);
         setDatabaseName(databaseName);
         setUsername(username);
         setPassword(password);
         setCon();
     }
-    public String getStatus() { return status;}
+
+    public String getStatus() {
+        return status;
+    }
 
     public Connection getCon() {
         return con;
@@ -48,6 +52,7 @@ public class DatabaseConnection {
     public void setPort(int port) {
         this.port = port;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -55,11 +60,11 @@ public class DatabaseConnection {
 
     public void setCon() {
         String url = "jdbc:mysql://localhost:" + port + "/" + databaseName;
-        try{
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con= DriverManager.getConnection(url,username,password);
+            con = DriverManager.getConnection(url, username, password);
             setStatus("Connected to the database successfully");
-        }catch(Exception e){
+        } catch (Exception e) {
             Starter.logger.warning(e.getMessage());
             setStatus("Couldn't connect to the database");
         }

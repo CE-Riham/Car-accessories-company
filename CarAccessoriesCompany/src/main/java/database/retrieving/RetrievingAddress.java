@@ -14,7 +14,7 @@ public class RetrievingAddress {
     private Connection con;
     private String status;
 
-    public RetrievingAddress(Connection con){
+    public RetrievingAddress(Connection con) {
         this.con = con;
     }
 
@@ -37,32 +37,37 @@ public class RetrievingAddress {
                 addresses.add(Generator.rsToAddress(rs));
             setStatus("Retrieving addresses successfully");
             return addresses;
-        }catch (Exception e){
+        } catch (Exception e) {
             setStatus("Error while retrieving addresses from database");
             return new ArrayList<>();
-        }finally {
-            if(st != null) {
+        } finally {
+            if (st != null) {
                 try {
                     st.close();
-                }catch (Exception e){
+                } catch (Exception e) {
                     Starter.logger.warning("Couldn't close the statement");
                 }
             }
         }
     }
-    public List<Address> selectFromAddressesTable(String field, String input){
+
+    public List<Address> selectFromAddressesTable(String field, String input) {
         return selectAddressesWithCondition("where " + field + " = \'" + input + "\';");
     }
-    public List<Address> findAddressByUsername(String username){
+
+    public List<Address> findAddressByUsername(String username) {
         return selectFromAddressesTable("username", username);
     }
-    public List<Address> findAddressByCountry(String country){
+
+    public List<Address> findAddressByCountry(String country) {
         return selectFromAddressesTable("country", country);
     }
-    public List<Address> findAddressByCity(String city){
+
+    public List<Address> findAddressByCity(String city) {
         return selectFromAddressesTable("city", city);
     }
-    public List<Address> findAddressByStreet(String street){
+
+    public List<Address> findAddressByStreet(String street) {
         return selectFromAddressesTable("street", street);
     }
 }

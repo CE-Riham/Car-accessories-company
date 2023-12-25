@@ -1,6 +1,6 @@
 package model;
 
-public class Product{
+public class Product {
     private int availableAmount;
     private String longDescription;
     protected int productID;
@@ -26,6 +26,7 @@ public class Product{
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
     }
+
     public int getProductID() {
         return productID;
     }
@@ -67,7 +68,7 @@ public class Product{
     }
 
     public String getImagePath() {
-        return (imagePath.equals("") ? "src/main/resources/assets/products/noproduct.png":imagePath);
+        return (imagePath.equals("") ? "src/main/resources/assets/products/noproduct.png" : imagePath);
     }
 
     public void setImagePath(String imagePath) {
@@ -81,7 +82,8 @@ public class Product{
     public void setProductCategory(String productCategory) {
         this.productCategory = productCategory;
     }
-    public Product(){
+
+    public Product() {
         setProductID(-1);
         setNumberOfOrders(0);
         setProductPrice(-1);
@@ -92,6 +94,7 @@ public class Product{
         setAvailableAmount(0);
         setLongDescription("");
     }
+
     public Product(int productID, int availableAmount, int numberOfOrders, double productPrice,
                    String productName, String longDescription,
                    String shortDescription, String imagePath, String productCategory) {

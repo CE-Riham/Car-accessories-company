@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 public class Starter extends Application {
     public static final Logger logger = Logger.getLogger(Starter.class.getName());
+
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         DBConnector.setConnector(new DatabaseConnection());

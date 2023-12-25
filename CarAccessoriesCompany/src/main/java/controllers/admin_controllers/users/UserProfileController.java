@@ -46,13 +46,14 @@ public class UserProfileController implements Initializable {
     @FXML
     private TextField streetTextField;
 
-    private void setProfilePicture(){
-        File file = new File(UserSession.getUserToDisplay().getImagePath() );
+    private void setProfilePicture() {
+        File file = new File(UserSession.getUserToDisplay().getImagePath());
         String localUrl = file.toURI().toString();
         Image image = new Image(localUrl);
         profilePicture.setFill(new ImagePattern(image));
     }
-    private void getProfileFromDB(){
+
+    private void getProfileFromDB() {
         setProfilePicture();
         firstName.setText(UserSession.getUserToDisplay().getFirstName());
         lastName.setText(UserSession.getUserToDisplay().getLastName());
@@ -70,6 +71,7 @@ public class UserProfileController implements Initializable {
     void onAdminProfileClick(ActionEvent event) {
         AdminStageHelper.showAdminProfile(event);
     }
+
     @FXML
     void onCategoriesClick(ActionEvent event) {
         AdminStageHelper.showAdminCategories(event);
@@ -112,32 +114,31 @@ public class UserProfileController implements Initializable {
     }
 
     @FXML
-    void onDeleteButtonClick(ActionEvent event){
+    void onDeleteButtonClick(ActionEvent event) {
         String title = "Delete user";
-        if(UserSession.getUserToDisplay().getUsername().equals(UserSession.getCurrentUser().getUsername())){
+        if (UserSession.getUserToDisplay().getUsername().equals(UserSession.getCurrentUser().getUsername())) {
             Alerts.errorAlert(title, null, "You can't delete your profile!");
             return;
         }
         Optional<ButtonType> result = Alerts.confirmationAlert(title, "Are you sure you want to delete this user?");
-        if((result.isPresent() && result.get() == ButtonType.OK)){
+        if ((result.isPresent() && result.get() == ButtonType.OK)) {
             UserDeleter userDeleter = new UserDeleter(DBConnector.getConnector().getCon());
             boolean flag = userDeleter.deleteUserFromUsersTableByUsername(UserSession.getUserToDisplay());
-            if(flag) {
+            if (flag) {
                 Alerts.informationAlert(title, null, userDeleter.getStatus());
-                if(UserSession.getUserToDisplay().getUserType().equals("admin"))
+                if (UserSession.getUserToDisplay().getUserType().equals("admin"))
                     AdminStageHelper.showAdminAdmins(event);
-                else if(UserSession.getUserToDisplay().getUserType().equals("installer")) {
+                else if (UserSession.getUserToDisplay().getUserType().equals("installer")) {
                     //TODO
                     //go to installers page //
-                }
-                else
+                } else
                     AdminStageHelper.showAdminCustomers(event);
 
-            }
-            else
+            } else
                 Alerts.errorAlert(title, null, userDeleter.getStatus());
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getProfileFromDB();

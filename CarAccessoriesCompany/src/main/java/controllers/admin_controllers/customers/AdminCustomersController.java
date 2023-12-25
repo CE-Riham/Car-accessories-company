@@ -32,7 +32,8 @@ public class AdminCustomersController implements Initializable {
 
     @FXML
     private HBox row2;
-    private void activateMenuButton(){
+
+    private void activateMenuButton() {
         customersButton.setStyle("-fx-border-color: #C9B3AD;");
     }
 
@@ -99,32 +100,34 @@ public class AdminCustomersController implements Initializable {
         fillCustomers();
     }
 
-    private void getAllCustomersFromDB(){
+    private void getAllCustomersFromDB() {
         RetrievingUser usersRetriever = new RetrievingUser(DBConnector.getConnector().getCon());
         allCustomers = usersRetriever.findUserByUserType("customer");
     }
 
-    private void fillRow1(int index){
+    private void fillRow1(int index) {
         row1.getChildren().clear();
-        for(int i = index; i<(index + 6) && i< allCustomers.size(); i++){
+        for (int i = index; i < (index + 6) && i < allCustomers.size(); i++) {
             row1.getChildren().add(new UserCard(allCustomers.get(i)).getCard());
         }
         disableButton(prevButton, (index == 0));
     }
-    private void fillRow2(int index){
+
+    private void fillRow2(int index) {
         row2.getChildren().clear();
-        for(int i = index; i<(index + 6) && i< allCustomers.size(); i++){
+        for (int i = index; i < (index + 6) && i < allCustomers.size(); i++) {
             row2.getChildren().add(new UserCard(allCustomers.get(i)).getCard());
         }
         disableButton(nextButton, ((index + 6) > allCustomers.size()));
     }
-    private void fillCustomers(){
+
+    private void fillCustomers() {
         getAllCustomersFromDB();
-        fillRow1(pageNumber*12);
+        fillRow1(pageNumber * 12);
         fillRow2(pageNumber * 12 + 6);
     }
 
-    private void disableButton(Button button, boolean flag){
+    private void disableButton(Button button, boolean flag) {
         button.setDisable(flag);
     }
 
