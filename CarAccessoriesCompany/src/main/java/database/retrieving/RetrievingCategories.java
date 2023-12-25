@@ -13,7 +13,7 @@ public class RetrievingCategories {
     private Connection con;
     private String status;
 
-    public RetrievingCategories(Connection con){
+    public RetrievingCategories(Connection con) {
         this.con = con;
     }
 
@@ -25,7 +25,7 @@ public class RetrievingCategories {
         this.status = status;
     }
 
-    public List<String> selectCategoriesWithCondition(String condition){
+    public List<String> selectCategoriesWithCondition(String condition) {
         List<String> categories = new ArrayList<>();
         Statement st = null;
         try {
@@ -36,21 +36,23 @@ public class RetrievingCategories {
                 categories.add(rs.getString("category"));
             setStatus("Retrieving categories successfully");
             return categories;
-        }catch (Exception e){
+        } catch (Exception e) {
             setStatus("Error while retrieving categories from database");
             return new ArrayList<>();
-        }finally {
-            try{
+        } finally {
+            try {
                 if (st != null) st.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 Starter.logger.warning("Can't close statement");
             }
         }
     }
-    public List<String> selectAllCategories(){
+
+    public List<String> selectAllCategories() {
         return selectCategoriesWithCondition(";");
     }
-    public List<String> selectACategory(String categoryName){
+
+    public List<String> selectACategory(String categoryName) {
         return selectCategoriesWithCondition("where CAST(category AS BINARY) category = '" + categoryName + "';");
     }
 }

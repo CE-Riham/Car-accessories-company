@@ -10,17 +10,19 @@ public class User {
     private String imagePath;
     private String userType;
     private Address address;
-    public User(){
-        this.username    = "";
-        this.firstName   = "";
-        this.lastName    = "";
+
+    public User() {
+        this.username = "";
+        this.firstName = "";
+        this.lastName = "";
         this.phoneNumber = "";
-        this.password    = "";
-        this.email       = "";
-        this.imagePath   = "";
-        this.userType    = "";
-        this.address     = null;
+        this.password = "";
+        this.email = "";
+        this.imagePath = "";
+        this.userType = "";
+        this.address = null;
     }
+
     public User(String username, String firstName, String lastName,
                 String phoneNumber, String password, String email,
                 String imagePath, String userType, Address address) {
@@ -34,11 +36,13 @@ public class User {
         setUserType(userType);
         setAddress(address);
     }
-    public User(User user){
+
+    public User(User user) {
         this(user.getUsername(), user.getFirstName(), user.getLastName(),
                 user.getPhoneNumber(), user.getPassword(), user.getEmail(),
                 user.getImagePath(), user.getUserType(), user.getAddress());
     }
+
     public String getUsername() {
         return username;
     }
@@ -88,7 +92,7 @@ public class User {
     }
 
     public String getImagePath() {
-        return (imagePath.equals("") ? "src/main/resources/assets/usersPictures/nouser.png":imagePath);
+        return (imagePath.equals("") ? "src/main/resources/assets/usersPictures/nouser.png" : imagePath);
     }
 
     public void setImagePath(String imagePath) {

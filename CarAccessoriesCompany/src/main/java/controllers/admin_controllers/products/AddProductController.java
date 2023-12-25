@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddProductController implements Initializable{
+public class AddProductController implements Initializable {
     private Uploader uploader;
     private String alertTitle = "Adding product";
     private InsertingData productInserter;
@@ -45,17 +45,19 @@ public class AddProductController implements Initializable{
     @FXML
     private TextField shortDescription;
 
-    private void fillCategories(){
+    private void fillCategories() {
         RetrievingCategories categoriesRetriever = new RetrievingCategories(DBConnector.getConnector().getCon());
         List<String> allCategories = categoriesRetriever.selectAllCategories();
         category.setItems(FXCollections.observableArrayList(allCategories));
     }
+
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
         fillCategories();
         productInserter = new InsertingData(DBConnector.getConnector().getCon());
         uploader = new Uploader();
     }
+
     @FXML
     void onAddProductClick(ActionEvent event) {
         String productNameString = productName.getText();
@@ -66,7 +68,7 @@ public class AddProductController implements Initializable{
         String quantityString = quantity.getText();
         String status = DataValidation.productFieldsTest(productNameString, longDescriptionString, shortDescriptionString,
                 productCategory, productPriceString, quantityString);
-        if(!status.equals("Valid"))
+        if (!status.equals("Valid"))
             Alerts.errorAlert(alertTitle, null, status);
         else {
             Product product = new Product();
@@ -78,8 +80,8 @@ public class AddProductController implements Initializable{
             product.setAvailableAmount(Integer.parseInt(quantityString));
             int productID = productInserter.insertProduct(product);
             status = productInserter.getStatus();
-            if(status.equals("Product was inserted successfully")){
-                if(!uploader.getFileName().equals("")) {
+            if (status.equals("Product was inserted successfully")) {
+                if (!uploader.getFileName().equals("")) {
                     String savePath = "src/main/resources/assets/products/" + productID + ".png";
                     boolean savingFlag = uploader.saveToFile(savePath, false);
                     if (savingFlag) {
@@ -91,8 +93,7 @@ public class AddProductController implements Initializable{
                     }
                 }
                 Alerts.informationAlert(alertTitle, null, "Product was added successfully");
-            }
-            else
+            } else
                 Alerts.errorAlert(alertTitle, null, "Couldn't add the product!");
             AdminStageHelper.showAdminProducts(event);
         }
@@ -101,13 +102,13 @@ public class AddProductController implements Initializable{
     @FXML
     void onChooseImageClick(ActionEvent event) {
         boolean uploadImageFlag = uploader.uploadImage();
-        if(uploadImageFlag){
+        if (uploadImageFlag) {
             imagePathLabel.setText(uploader.getFileName());
         }
     }
 
     @FXML
-    void onCancelButtonClick(ActionEvent event){
+    void onCancelButtonClick(ActionEvent event) {
         AdminStageHelper.showAdminProducts(event);
     }
 }

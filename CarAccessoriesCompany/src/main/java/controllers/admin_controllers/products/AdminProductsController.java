@@ -31,7 +31,8 @@ public class AdminProductsController implements Initializable {
 
     @FXML
     private HBox row2;
-    private void activateMenuButton(){
+
+    private void activateMenuButton() {
         productsButton.setStyle("-fx-border-color: #C9B3AD;");
     }
 
@@ -103,32 +104,34 @@ public class AdminProductsController implements Initializable {
         fillProducts();
     }
 
-    private void getAllProductsFromDB(){
+    private void getAllProductsFromDB() {
         RetrievingProducts productsRetriever = new RetrievingProducts(DBConnector.getConnector().getCon());
         allProducts = productsRetriever.selectAllProducts();
     }
 
-    private void fillRow1(int index){
+    private void fillRow1(int index) {
         row1.getChildren().clear();
-        for(int i = index; i<(index + 6) && i< allProducts.size(); i++){
+        for (int i = index; i < (index + 6) && i < allProducts.size(); i++) {
             row1.getChildren().add(new ProductCard(allProducts.get(i)).getCard());
         }
         disableButton(prevButton, (index == 0));
     }
-    private void fillRow2(int index){
+
+    private void fillRow2(int index) {
         row2.getChildren().clear();
-        for(int i = index; i<(index + 6) && i< allProducts.size(); i++){
+        for (int i = index; i < (index + 6) && i < allProducts.size(); i++) {
             row2.getChildren().add(new ProductCard(allProducts.get(i)).getCard());
         }
         disableButton(nextButton, ((index + 6) >= allProducts.size()));
     }
-    private void fillProducts(){
+
+    private void fillProducts() {
         getAllProductsFromDB();
-        fillRow1(pageNumber*12);
+        fillRow1(pageNumber * 12);
         fillRow2(pageNumber * 12 + 6);
     }
 
-    private void disableButton(Button button, boolean flag){
+    private void disableButton(Button button, boolean flag) {
         button.setDisable(flag);
     }
 }

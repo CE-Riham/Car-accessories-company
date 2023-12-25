@@ -1,4 +1,4 @@
-package controllers;//import animatefx.animation.FadeIn;
+package controllers;
 
 import authentication.Login;
 import classes.DBConnector;
@@ -14,7 +14,8 @@ import javafx.scene.control.TextField;
 
 public class LoginController {
     private Login login;
-    public LoginController(){
+
+    public LoginController() {
         login = new Login(DBConnector.getConnector().getCon());
     }
 
@@ -25,7 +26,7 @@ public class LoginController {
     private PasswordField passwordTextField;
 
     @FXML
-    protected void onLoginClick(ActionEvent event){
+    protected void onLoginClick(ActionEvent event) {
         //TODO
         //next page
         String username = usernameTextField.getText().toLowerCase();
@@ -33,10 +34,10 @@ public class LoginController {
         boolean flag = login.loginUser(username, password);
         Starter.logger.info(login.getStatus());
 
-        if(!flag)
+        if (!flag)
             Alerts.errorAlert("Error", null, login.getStatus());
         else {
-            if(UserSession.getCurrentUser().getUserType().equals("admin"))
+            if (UserSession.getCurrentUser().getUserType().equals("admin"))
                 AdminStageHelper.showAdminProfile(event);
         }
 
@@ -46,8 +47,9 @@ public class LoginController {
     void onSignupClick(ActionEvent event) {
         AuthenticationStageHelper.showSignup(event);
     }
+
     @FXML
-    protected void onForgetPasswordClick(){
+    protected void onForgetPasswordClick() {
         //TODO
     }
 

@@ -28,7 +28,8 @@ public class AdminProfileController implements Initializable {
     private UserUpdater dataUpdater;
     private String successfulUpdate = "User was updated successfully";
     private Uploader uploader;
-    public AdminProfileController(){
+
+    public AdminProfileController() {
         uploader = new Uploader();
         dataUpdater = new UserUpdater(DBConnector.getConnector().getCon());
     }
@@ -71,11 +72,11 @@ public class AdminProfileController implements Initializable {
     @FXML
     private TextField streetTextField;
 
-    private void activateMenuButton(){
+    private void activateMenuButton() {
         adminProfileButton.setStyle("-fx-border-color: #C9B3AD;");
     }
 
-    private void setProfileEditable(boolean flag){
+    private void setProfileEditable(boolean flag) {
         firstNameTextField.setEditable(flag);
         lastNameTextField.setEditable(flag);
         phoneTextField.setEditable(flag);
@@ -85,13 +86,14 @@ public class AdminProfileController implements Initializable {
         streetTextField.setEditable(flag);
     }
 
-    private void setProfilePicture(){
-        File file = new File(UserSession.getCurrentUser().getImagePath() );
+    private void setProfilePicture() {
+        File file = new File(UserSession.getCurrentUser().getImagePath());
         String localUrl = file.toURI().toString();
         Image image = new Image(localUrl);
         profilePicture.setFill(new ImagePattern(image));
     }
-    private void getProfileFromDB(){
+
+    private void getProfileFromDB() {
         setProfilePicture();
         firstName.setText(UserSession.getCurrentUser().getFirstName());
         lastName.setText(UserSession.getCurrentUser().getLastName());
@@ -117,6 +119,7 @@ public class AdminProfileController implements Initializable {
     void onAdminProfileClick(ActionEvent event) {
         AdminStageHelper.showAdminProfile(event);
     }
+
     @FXML
     void onCategoriesClick(ActionEvent event) {
         AdminStageHelper.showAdminCategories(event);
@@ -154,18 +157,18 @@ public class AdminProfileController implements Initializable {
 
     @FXML
     void onChangePictureClick(ActionEvent event) {
-        String savePath = "src/main/resources/assets/usersPictures/"+ UserSession.getCurrentUser().getUsername() + ".png";
+        String savePath = "src/main/resources/assets/usersPictures/" + UserSession.getCurrentUser().getUsername() + ".png";
         boolean uploadImageFlag = uploader.uploadImage();
-        if(uploadImageFlag){
+        if (uploadImageFlag) {
             boolean savingFlag = uploader.saveToFile(savePath, true);
-            if(savingFlag){
+            if (savingFlag) {
                 //save the new photo in database
                 User user = UserSession.getCurrentUser();
                 user.setImagePath(savePath);
                 String condition = " where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
                 dataUpdater.updateUsersAllFields(user, condition);
                 String status = dataUpdater.getStatus();
-                if(status.equals(successfulUpdate)){
+                if (status.equals(successfulUpdate)) {
                     UserSession.setCurrentUser(user);
                     Alerts.informationAlert("Change picture", null, "Picture was updated successfully.");
                     getProfileFromDB();
@@ -190,23 +193,20 @@ public class AdminProfileController implements Initializable {
     void onChangePasswordClick(ActionEvent event) {
         setProfileEditable(false);
         String header = """
-                            - at least 8 characters
-                            - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
-                            - Can contain special characters""";
+                - at least 8 characters
+                - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
+                - Can contain special characters""";
         Optional<String> result = Alerts.withInputAlert("Change password", header, "Password: ");
         result.ifPresent(password -> {
-            if(DataValidation.passwordValidationTest(password)){
-                User user = UserSession.getCurrentUser();
-                user.setPassword(password);
+            if (DataValidation.passwordValidationTest(password)) {
                 String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
-                dataUpdater.updateUsersAllFields(user, condition);
+                dataUpdater.updateUserPassword(password, condition);
                 String status = dataUpdater.getStatus();
-                if(status.equals(successfulUpdate)){
+                if (status.equals("User userPassword was updated successfully")) {
                     Alerts.informationAlert("Update", null, "password was updated successfully.");
-                    UserSession.setCurrentUser(user);
+                    UserSession.getCurrentUser().setPassword(password);
                 }
-            }
-            else{
+            } else {
                 Alerts.errorAlert("Error", null, "Invalid password.");
             }
         });
@@ -214,12 +214,12 @@ public class AdminProfileController implements Initializable {
 
     //done
     @FXML
-    void onCancelProfileClick(ActionEvent event){
+    void onCancelProfileClick(ActionEvent event) {
         getProfileFromDB();
     }
 
     @FXML
-    void onSaveProfileClick(ActionEvent event){
+    void onSaveProfileClick(ActionEvent event) {
         //TODO
         //edit address
         //update admin information
@@ -236,11 +236,10 @@ public class AdminProfileController implements Initializable {
 
         //result
         String status = dataUpdater.getStatus();
-        if(status.equals(successfulUpdate)){
+        if (status.equals(successfulUpdate)) {
             Alerts.informationAlert("Update", null, status);
             UserSession.setCurrentUser(user);
-        }
-        else
+        } else
             Alerts.errorAlert("Error", null, status);
         getProfileFromDB();
 

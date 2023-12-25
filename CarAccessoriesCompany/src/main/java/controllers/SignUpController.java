@@ -17,9 +17,11 @@ import java.sql.SQLException;
 public class SignUpController {
 
     private Register userRegisterer;
-    public SignUpController(){
+
+    public SignUpController() {
         userRegisterer = new Register(DBConnector.getConnector().getCon());
     }
+
     @FXML
     private TextField emailTextField;
     @FXML
@@ -54,14 +56,12 @@ public class SignUpController {
         userRegisterer.registerUser(user);
         String status = userRegisterer.getStatus();
         Starter.logger.info(status);
-        if(status.equals("User was registered successfully")){
+        if (status.equals("User was registered successfully")) {
             Alerts.informationAlert("Register user", null, status);
             AuthenticationStageHelper.showLogin(event);
-        }
-        else {
+        } else {
             Alerts.errorAlert("Register user", null, status);
         }
 
     }
 }
-

@@ -10,9 +10,11 @@ import java.sql.*;
 public class InsertingData {
     private String status;
     private Connection connection;
-    public InsertingData(Connection connection){
+
+    public InsertingData(Connection connection) {
         this.connection = connection;
     }
+
     public String getStatus() {
         return status;
     }
@@ -21,7 +23,7 @@ public class InsertingData {
         this.status = status;
     }
 
-    public boolean insertUser(User user){
+    public boolean insertUser(User user) {
         try {
             String query = "insert into users "
                     + " values (?, ?, ?, ?, ?, ?, ?, ?);";
@@ -42,16 +44,16 @@ public class InsertingData {
             String query = "insert into customers "
                     + " values (?, ?);";
             preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, username);
-            preparedStmt.setString (2, String.valueOf(account));
+            preparedStmt.setString(1, username);
+            preparedStmt.setString(2, String.valueOf(account));
             preparedStmt.execute();
             setStatus("customer was inserted successfully");
             return true;
         } catch (Exception e) {
             setStatus("Couldn't insert customer");
             return false;
-        }finally{
-            if(preparedStmt!=null)preparedStmt.close();
+        } finally {
+            if (preparedStmt != null) preparedStmt.close();
         }
     }
 
@@ -61,21 +63,21 @@ public class InsertingData {
             String query = "insert into installers "
                     + " values (?, ?, ?);";
             preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, username);
-            preparedStmt.setDouble (2, account);
-            preparedStmt.setInt (3, installationTimes);
+            preparedStmt.setString(1, username);
+            preparedStmt.setDouble(2, account);
+            preparedStmt.setInt(3, installationTimes);
             preparedStmt.execute();
             setStatus("installer was inserted successfully");
             return true;
         } catch (Exception e) {
             setStatus("Couldn't insert installer");
             return false;
-        }finally{
-            if(preparedStmt!=null)preparedStmt.close();
+        } finally {
+            if (preparedStmt != null) preparedStmt.close();
         }
     }
 
-    public int insertProduct(Product product){
+    public int insertProduct(Product product) {
         try {
             String query = "insert into products (productName, category, price, numberOfOrders, image, longDescription, " +
                     "shortDescription, availability) values (?, ?, ?, ?, ?, ?, ?, ?);";
@@ -84,7 +86,7 @@ public class InsertingData {
             preparedStmt.executeUpdate();
             setStatus("Product was inserted successfully");
             ResultSet rs = preparedStmt.getGeneratedKeys(); //to get productID
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
@@ -92,23 +94,24 @@ public class InsertingData {
         }
         return -1;
     }
-    public boolean insertCategory(String category){
+
+    public boolean insertCategory(String category) {
         PreparedStatement preparedStmt = null;
         try {
             String query = "insert into categories "
                     + " values (?);";
             preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, category);
+            preparedStmt.setString(1, category);
             preparedStmt.execute();
             setStatus("category was inserted successfully");
             return true;
         } catch (Exception e) {
             setStatus("Couldn't insert category");
             return false;
-        }finally{
-            try{
+        } finally {
+            try {
                 if (preparedStmt != null) preparedStmt.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 Starter.logger.warning("Couldn't close the statement");
             }
         }

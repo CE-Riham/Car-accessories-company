@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import model.User;
 
 import java.io.File;
+
 public class UserCard {
 
     private AnchorPane card;
@@ -23,6 +24,7 @@ public class UserCard {
     private HBox usernameBox;
     private Button showProfileButton;
     private User user;
+
     public UserCard(User user) {
         this.user = new User(user);
         setCard("#EFEEEC");
@@ -100,13 +102,13 @@ public class UserCard {
         showProfileButton.setMnemonicParsing(false);
         showProfileButton.getStyleClass().add("color4-button");
         showProfileButton.setFont(Font.font(12.0));
-        showProfileButton.setOnAction(e->{
+        showProfileButton.setOnAction(e -> {
             UserSession.setUserToDisplay(user);
             AdminStageHelper.showAdminUserProfile(e);
         });
     }
 
-    private void addToCard(){
+    private void addToCard() {
         container.getChildren().addAll(image, nameBox, usernameBox, showProfileButton);
         container.setPadding(new Insets(10.0));
         AnchorPane.setTopAnchor(container, 0.0);
