@@ -10,6 +10,7 @@ import java.util.List;
 public class Login {
     private String status;
     private RetrievingUser usersRetriever;
+
     public Login(Connection connection) {
         usersRetriever = new RetrievingUser(connection);
     }
@@ -22,9 +23,9 @@ public class Login {
         this.status = status;
     }
 
-    public boolean loginUser(String username, String password){
+    public boolean loginUser(String username, String password) {
         List<User> allUsers = usersRetriever.findUserByUsername(username.toLowerCase());
-        if(allUsers != null && !allUsers.isEmpty() ) {
+        if (allUsers != null && !allUsers.isEmpty()) {
             User tmpUser = allUsers.get(0);
             if (tmpUser.getPassword().equals(password)) {
                 setStatus("Valid username and password");

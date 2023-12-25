@@ -12,6 +12,7 @@ public class Generator {
     private Generator() {
         throw new IllegalStateException("Utility class");
     }
+
     public static User rsToUser(ResultSet rs) throws SQLException {
         User tmpUser = new User();
         tmpUser.setFirstName(rs.getString("firstName"));
@@ -46,26 +47,28 @@ public class Generator {
         tmpProduct.setAvailableAmount(rs.getInt("availability"));
         return tmpProduct;
     }
+
     public static PreparedStatement userToPS(PreparedStatement preparedStmt, User user) throws SQLException {
-        preparedStmt.setString  (1, user.getFirstName());
-        preparedStmt.setString  (2, user.getLastName());
-        preparedStmt.setString  (3, user.getUsername());
-        preparedStmt.setString  (4, user.getPhoneNumber());
-        preparedStmt.setString  (5, user.getEmail());
-        preparedStmt.setString  (6, user.getPassword());
-        preparedStmt.setString  (7, user.getImagePath());
-        preparedStmt.setString  (8, user.getUserType());
+        preparedStmt.setString(1, user.getFirstName());
+        preparedStmt.setString(2, user.getLastName());
+        preparedStmt.setString(3, user.getUsername());
+        preparedStmt.setString(4, user.getPhoneNumber());
+        preparedStmt.setString(5, user.getEmail());
+        preparedStmt.setString(6, user.getPassword());
+        preparedStmt.setString(7, user.getImagePath());
+        preparedStmt.setString(8, user.getUserType());
         return preparedStmt;
     }
+
     public static PreparedStatement productToPS(PreparedStatement preparedStmt, Product product) throws SQLException {
-        preparedStmt.setString  (1, product.getProductName());
-        preparedStmt.setString  (2, product.getProductCategory());
-        preparedStmt.setDouble  (3, product.getProductPrice());
-        preparedStmt.setInt     (4, product.getNumberOfOrders());
-        preparedStmt.setString  (5, product.getImagePath());
-        preparedStmt.setString  (6, product.getLongDescription());
-        preparedStmt.setString  (7, product.getShortDescription());
-        preparedStmt.setInt     (8, product.getAvailableAmount());
+        preparedStmt.setString(1, product.getProductName());
+        preparedStmt.setString(2, product.getProductCategory());
+        preparedStmt.setDouble(3, product.getProductPrice());
+        preparedStmt.setInt(4, product.getNumberOfOrders());
+        preparedStmt.setString(5, product.getImagePath());
+        preparedStmt.setString(6, product.getLongDescription());
+        preparedStmt.setString(7, product.getShortDescription());
+        preparedStmt.setInt(8, product.getAvailableAmount());
         return preparedStmt;
     }
 }

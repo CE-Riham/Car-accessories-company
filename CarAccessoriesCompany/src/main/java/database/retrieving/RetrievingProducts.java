@@ -14,7 +14,7 @@ public class RetrievingProducts {
     private Connection con;
     private String status;
 
-    public RetrievingProducts(Connection con){
+    public RetrievingProducts(Connection con) {
         this.con = con;
     }
 
@@ -37,30 +37,35 @@ public class RetrievingProducts {
                 products.add(Generator.rsToProduct(rs));
             setStatus("Retrieving products successfully");
             return products;
-        }catch (Exception e){
+        } catch (Exception e) {
             setStatus("Error while retrieving products from database");
             return new ArrayList<>();
-        }finally {
-            try{
+        } finally {
+            try {
                 if (st != null) st.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 Starter.logger.warning("can't close statement");
             }
         }
     }
-    public List<Product> selectAllProducts(){
+
+    public List<Product> selectAllProducts() {
         return selectProductsWithCondition(";");
     }
-    public List<Product> selectFromProductsTable(String field, String input){
+
+    public List<Product> selectFromProductsTable(String field, String input) {
         return selectProductsWithCondition("where " + field + " = \'" + input + "\';");
     }
-    public List<Product> findProductsByID(String id){
+
+    public List<Product> findProductsByID(String id) {
         return selectFromProductsTable("productID", id);
     }
-    public List<Product> findProductsByProductName(String productName){
+
+    public List<Product> findProductsByProductName(String productName) {
         return selectFromProductsTable("productName", productName);
     }
-    public List<Product> findProductsByCategory(String category){
+
+    public List<Product> findProductsByCategory(String category) {
         return selectFromProductsTable("category", category);
     }
 }

@@ -3,10 +3,10 @@ package database.updating;
 import helpers.DataValidation;
 import helpers.Generator;
 import model.Product;
-import java.util.Set;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException; 
+import java.sql.SQLException;
 
 public class ProductUpdater {
     private String status;
@@ -25,48 +25,32 @@ public class ProductUpdater {
     }
 
 
-public boolean updateProductsAllFields(Product product, String condition) {
-    String st = DataValidation.productValidationTest(product);
-    if ("Valid".equals(st)) {
-        try {
-            // Use StringBuilder to construct the SQL query
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("UPDATE products SET productName = ?, category = ?, price = ?, ")
-                    .append("numberOfOrders = ?, image = ?, longDescription = ?, ")
-                    .append("shortDescription = ?, availability = ?").append(" ").append(condition);
+    public boolean updateProductsAllFields(Product product, String condition) {
+        String st = DataValidation.productValidationTest(product);
+        if ("Valid".equals(st)) {
+            try {
+                StringBuilder queryBuilder = new StringBuilder();
+                queryBuilder.append("UPDATE products SET productName = ?, category = ?, price = ?, ")
+                        .append("numberOfOrders = ?, image = ?, longDescription = ?, ")
+                        .append("shortDescription = ?, availability = ?").append(" ").append(condition);
 
-            // Use try-with-resources to manage the PreparedStatement
-            try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
-                // Set parameters for the base query
-                preparedStmt.setString(1, product.getProductName());
-                preparedStmt.setString(2, product.getProductCategory());
-                preparedStmt.setDouble(3, product.getProductPrice());
-                preparedStmt.setInt(4, product.getNumberOfOrders());
-                preparedStmt.setString(5, product.getImagePath());
-                preparedStmt.setString(6, product.getLongDescription());
-                preparedStmt.setString(7, product.getShortDescription());
-                preparedStmt.setInt(8, product.getAvailableAmount());
-
-                // Execute the update
-                preparedStmt.executeUpdate();
-
-                setStatus("Product was updated successfully");
-                return true;
+                try (PreparedStatement preparedStmt = Generator.productToPS(connection.prepareStatement(queryBuilder.toString()), product)) {
+                    preparedStmt.executeUpdate();
+                    setStatus("Product was updated successfully");
+                    return true;
+                }
+            } catch (SQLException e) {
+                setStatus("Couldn't update product");
+                return false;
             }
-        } catch (SQLException e) {
-            setStatus("Couldn't update product");
+        } else {
+            setStatus(st);
             return false;
         }
-    } else {
-        setStatus(st);
-        return false;
     }
-}
 
 
-
-
- public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
+    public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
         String query = "UPDATE products SET ? = ? ?";
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
             preparedStmt.setString(1, fieldName);
@@ -97,7 +81,6 @@ public boolean updateProductsAllFields(Product product, String condition) {
     }
 
 
-   
     public boolean updateProductName(String newProductName, String condition) {
         return updateProductSingleStringField("productName", newProductName, condition);
     }
@@ -106,20 +89,20 @@ public boolean updateProductsAllFields(Product product, String condition) {
         return updateProductSingleStringField("category", newCategory, condition);
     }
 
-  public boolean updateProductPrice(Double newPrice, String condition) {
-    StringBuilder queryBuilder = new StringBuilder("UPDATE products SET price = ?");
-    queryBuilder.append(" ").append(condition);
+    public boolean updateProductPrice(Double newPrice, String condition) {
+        StringBuilder queryBuilder = new StringBuilder("UPDATE products SET price = ?");
+        queryBuilder.append(" ").append(condition);
 
-    try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
-        preparedStmt.setDouble(1, newPrice);
-        preparedStmt.executeUpdate();
-        setStatus("Product price was updated successfully");
-        return true;
-    } catch (SQLException e) {
-        setStatus("Couldn't update product price");
-        return false;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
+            preparedStmt.setDouble(1, newPrice);
+            preparedStmt.executeUpdate();
+            setStatus("Product price was updated successfully");
+            return true;
+        } catch (SQLException e) {
+            setStatus("Couldn't update product price");
+            return false;
+        }
     }
-}
 
 
     public boolean updateProductNumberOfOrders(int newNumberOfOrders, String condition) {

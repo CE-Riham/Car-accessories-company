@@ -30,7 +30,7 @@ public class AdminCategoriesController implements Initializable {
     @FXML
     private VBox categoriesTable;
 
-    private void activateMenuButton(){
+    private void activateMenuButton() {
         categoriesButton.setStyle("-fx-border-color: #C9B3AD;");
     }
 
@@ -92,20 +92,19 @@ public class AdminCategoriesController implements Initializable {
     }
 
     @FXML
-    void onAddCategoryClick(ActionEvent event){
+    void onAddCategoryClick(ActionEvent event) {
         String title = "Add category";
         Optional<String> result = Alerts.withInputAlert(title, null, "enter category name:");
         result.ifPresent(newCategory -> {
-            if( ! (new RetrievingCategories(DBConnector.getConnector().getCon()).selectACategory(newCategory).isEmpty()))
+            if (!(new RetrievingCategories(DBConnector.getConnector().getCon()).selectACategory(newCategory).isEmpty()))
                 Alerts.errorAlert(title, null, "Category is already existed.");
-            else{
+            else {
                 InsertingData insertingData = new InsertingData(DBConnector.getConnector().getCon());
                 boolean flag = insertingData.insertCategory(newCategory);
-                if(flag) {
+                if (flag) {
                     Alerts.informationAlert(title, null, insertingData.getStatus());
                     AdminStageHelper.showAdminCategories(event);
-                }
-                else
+                } else
                     Alerts.errorAlert(title, null, insertingData.getStatus());
             }
         });
@@ -117,24 +116,26 @@ public class AdminCategoriesController implements Initializable {
         fillCategories();
     }
 
-    private void getAllCategoriesFromDB(){
+    private void getAllCategoriesFromDB() {
         RetrievingCategories categoriesRetriever = new RetrievingCategories(DBConnector.getConnector().getCon());
         allCategories = categoriesRetriever.selectAllCategories();
     }
-    private void fillTable(int index){
+
+    private void fillTable(int index) {
         categoriesTable.getChildren().clear();
-        for(int i = index; i<(index + 5) && i< allCategories.size(); i++)
+        for (int i = index; i < (index + 5) && i < allCategories.size(); i++)
             categoriesTable.getChildren().add(new CategoryCard(allCategories.get(i)).getCard());
 
         disableButton(prevButton, (index == 0));
         disableButton(nextButton, ((index + 5) > allCategories.size()));
     }
-    private void fillCategories(){
+
+    private void fillCategories() {
         getAllCategoriesFromDB();
-        fillTable(pageNumber*5);
+        fillTable(pageNumber * 5);
     }
 
-    private void disableButton(Button button, boolean flag){
+    private void disableButton(Button button, boolean flag) {
         button.setDisable(flag);
     }
 

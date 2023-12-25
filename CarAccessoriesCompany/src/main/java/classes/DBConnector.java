@@ -8,6 +8,7 @@ public class DBConnector {
     private DBConnector() {
         throw new IllegalStateException("Utility class");
     }
+
     public static DatabaseConnection getConnector() {
         return connector;
     }
