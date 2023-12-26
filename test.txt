@@ -1,0 +1,58 @@
+  /*  String jdbcUrl = "jdbc:mysql://localhost:3307/mysql";
+        String username = "root";
+        String password = "Vqo@954719";
+
+        String insertSql = "INSERT INTO installationrequests (UserId, ProductId, CarMakeModel, PreferredDate) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+             PreparedStatement insertStatement = connection.prepareStatement(insertSql)) {
+
+            insertStatement.setInt(1, userId);
+            insertStatement.setInt(2, productId);
+            insertStatement.setString(3, carMakeModel);
+            insertStatement.setDate(4, Date.valueOf(preferredDate));
+            insertStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to insert installation request into the database.", e);
+        }*/
+
+
+
+
+
+
+
+
+
+
+  /*    @FXML
+    void insertInstallationRequest(ActionEvent event){
+          int userId =UserSession.getInstance().getUserId(); ;
+          String selectedProduct = productTextArea.getSelectedText();
+          if (selectedProduct != null && !selectedProduct.isEmpty()) {
+              String[] productInfo = selectedProduct.split("\n");
+              int productId = Integer.parseInt(productInfo[0].split(":")[1].trim());
+
+              // Get the installation request details from the additional fields
+              String carMakeModel = carMakeModelField.getText();
+              LocalDate preferredDate = preferredDateField.getValue();
+
+              try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/mysql", "root", "Vqo@954719")) {
+                  // Prepare the SQL query
+                  String insertSql = "INSERT INTO installationrequests (UserId, ProductId, CarMakeModel, PreferredDate) VALUES (?, ?, ?, ?)";
+                  try (PreparedStatement insertStatement = connection.prepareStatement(insertSql)) {
+                      insertStatement.setInt(1, userId);
+                      insertStatement.setInt(2, productId);
+                      insertStatement.setString(3, carMakeModel);
+                      insertStatement.setDate(4, Date.valueOf(preferredDate));
+                      insertStatement.executeUpdate();
+
+                      showAlert("Installation request successfully inserted!");
+                  }
+              } catch (SQLException e) {
+                  showAlert("Something Wrong!");
+
+              }
+          }
+  }*/
