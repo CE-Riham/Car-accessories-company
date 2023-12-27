@@ -4,8 +4,6 @@ import database.DatabaseConnection;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.sql.SQLException;
 
@@ -17,10 +15,9 @@ public class LoginTester {
     private DatabaseConnection connection;
     private Login login;
 
-    @BeforeAll
     @Given("user is connected to the database")
     public void userIsConnectedToTheDatabase() {
-        connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
+        connection = new DatabaseConnection(3306, "caraccessoriescompany", "root", "12345678password");
         login = new Login(connection.getCon());
     }
 
@@ -32,7 +29,7 @@ public class LoginTester {
             password = input;
     }
     @When("user clicks on login")
-    public void userClicksOnLogin() throws SQLException {
+    public void userClicksOnLogin(){
         login.loginUser(username, password);
         status = login.getStatus();
     }
@@ -40,7 +37,6 @@ public class LoginTester {
     public void userShouldSee(String message) {
         assertEquals(status,message);
     }
-    @AfterAll
     @Then("close the connection")
     public void closeTheConnection() throws SQLException {
         connection.getCon().close();
