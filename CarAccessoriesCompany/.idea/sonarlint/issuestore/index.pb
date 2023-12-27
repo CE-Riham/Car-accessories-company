@@ -161,3 +161,5 @@ h
 8src/test/resources/authenticationFeatures/Logout.feature,8\8\88dadf45f44c0a6cee821403fd8a42c71bc3a95e
 i
 9src/test/resources/databaseFeatures/updatingUsers.feature,4\1\413d2da04d6a73d8278d1390f836de290f7f9530
+i
+9src/main/java/helpers/comparators/ProductComparators.java,2\c\2cbb34b1733982fd4f404204967ee012f673b107
