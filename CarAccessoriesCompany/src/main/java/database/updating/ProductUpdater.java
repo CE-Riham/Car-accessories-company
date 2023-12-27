@@ -51,11 +51,9 @@ public class ProductUpdater {
 
 
     public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
-        String query = "UPDATE products SET ? = ? ?";
+        String query = "UPDATE products SET " + fieldName + " = ? " + condition;
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, fieldName);
-            preparedStmt.setString(2, newValue);
-            preparedStmt.setString(3, condition);
+            preparedStmt.setString(1, newValue);
             preparedStmt.executeUpdate();
             setStatus("Product " + fieldName + " was updated successfully");
             return true;
@@ -66,11 +64,9 @@ public class ProductUpdater {
     }
 
     public boolean updateProductSingleIntegerField(String fieldName, int newValue, String condition) {
-        String query = "UPDATE products SET ? = ? ?";
+        String query = "UPDATE products SET " + fieldName + " = ? " + condition;
         try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setString(1, fieldName);
-            preparedStmt.setInt(2, newValue);
-            preparedStmt.setString(3, condition);
+            preparedStmt.setInt(1, newValue);
             preparedStmt.executeUpdate();
             setStatus("Product " + fieldName + " was updated successfully");
             return true;
