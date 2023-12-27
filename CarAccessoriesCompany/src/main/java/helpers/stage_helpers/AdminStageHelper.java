@@ -48,6 +48,7 @@ public class AdminStageHelper {
         try {
             showPage(event, "/FXMLFiles/admin_pages/adminProductsPage.fxml", 1615, 965);
         } catch (Exception e) {
+            e.printStackTrace();
             Starter.logger.warning("Can't open admin products page");
         }
     }

@@ -81,15 +81,15 @@ public class AddProductController implements Initializable {
             int productID = productInserter.insertProduct(product);
             status = productInserter.getStatus();
             if (status.equals("Product was inserted successfully")) {
-                if (!uploader.getFileName().equals("")) {
+                if (!uploader.getFileName().isEmpty()) {
                     String savePath = "src/main/resources/assets/products/" + productID + ".png";
                     boolean savingFlag = uploader.saveToFile(savePath, false);
                     if (savingFlag) {
                         //save new photo to database
                         product.setImagePath(savePath);
-                        String condition = " where productID = \'" + productID + "\';";
+                        String condition = "where productID = \'" + productID + "\';";
                         ProductUpdater productUpdater = new ProductUpdater(DBConnector.getConnector().getCon());
-                        productUpdater.updateProductImage(savePath, condition);
+                        System.out.println(productUpdater.updateProductImage(savePath, condition));
                     }
                 }
                 Alerts.informationAlert(alertTitle, null, "Product was added successfully");

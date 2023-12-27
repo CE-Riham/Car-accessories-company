@@ -52,7 +52,6 @@ public class SignupTester {
     }
     @Then("he should see {string} for register")
     public void heShouldSee(String message) {
-        System.out.println(status);
         assertEquals(message, status);
     }
 

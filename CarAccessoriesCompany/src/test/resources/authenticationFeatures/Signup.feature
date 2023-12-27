@@ -20,7 +20,7 @@ Feature: User sign-Up
       |shahd12  |Shahd     |Hamad    |059501402a  |1234**Aa     |shahd12@gmail.com |admin    |Invalid phone number                       |
       |shahd28  |Shahd     |Hamad    |0595014020  |weakPassword |shahd28@gmail.com |admin    |Invalid password                           |
       |shahd20  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd22ail.com    |admin    |Invalid email address                      |
-      |shahd11  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd11@gmail.com |admin    |Username is already taken                  |
+      |shahd28  |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd28@gmail.com |admin    |Username is already taken                  |
       |         |Shahd     |Hamad    |0595014020  |1234**Aa     |shahd29@gmail.com |admin    |Username can't be empty                    |
       |shahd19  |          |Hamad    |0595014020  |1234**Aa     |shahd29@gmail.com |admin    |First name can't be empty                  |
       |shahd19  |Shahd     |         |0595014020  |1234**Aa     |shahd29@gmail.com |admin    |Last name can't be empty                   |
