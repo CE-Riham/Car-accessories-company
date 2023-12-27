@@ -163,3 +163,7 @@ i
 9src/test/resources/databaseFeatures/updatingUsers.feature,4\1\413d2da04d6a73d8278d1390f836de290f7f9530
 i
 9src/main/java/helpers/comparators/ProductComparators.java,2\c\2cbb34b1733982fd4f404204967ee012f673b107
+a
+1src/main/java/helpers/filters/ProductsFilter.java,8\3\83127c2be0e889b4dadf349f98083002bdc90857
+`
+0src/main/java/helpers/filters/ProductFilter.java,6\c\6c211083fe0f2bdd82c220960e9f0762ee831544

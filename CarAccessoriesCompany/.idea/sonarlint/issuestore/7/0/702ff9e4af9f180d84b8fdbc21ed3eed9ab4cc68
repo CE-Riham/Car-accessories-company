@@ -1,15 +1,9 @@
 
-m
-java:S1192¾"JDefine a constant instead of duplicating this literal "productID" 4 times.(òæ…ïùÿÿÿÿ8¤ŞñÕÊ1
 
-java:S1186U"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ù³Ä8¾ŞñÕÊ1
+java:S1186W"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ù³Ä8–ÑÉçÊ1
 
-java:S1186_"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛùÏÏ8¾ŞñÕÊ1
+java:S1186a"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛùÏÏ8–ÑÉçÊ1
 
-java:S1186d"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(€÷‡Ø8¾ŞñÕÊ1
+java:S1186f"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(€÷‡Ø8–ÑÉçÊ1
 Ÿ
-java:S1186„"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ˆï§Â8¾ŞñÕÊ1
-Ÿ
-java:S1186‰"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ûÿù8¾ŞñÕÊ1
-|
-java:S1450"ZRemove the "allProducts" field and declare it as a local variable in the relevant methods.(™Õ‡Èıÿÿÿÿ8¿ŞñÕÊ1
+java:S1186†"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ˆï§Â8–ÑÉçÊ1
