@@ -80,7 +80,7 @@
                                     <Insets left="-10.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <TextField fx:id="searchTextField" onAction="#onSearchFill" prefHeight="27.0" prefWidth="250.0" styleClass="auth-text-field">
+                              <TextField fx:id="searchTextField" onKeyReleased="#onSearchFill" prefHeight="27.0" prefWidth="250.0" styleClass="auth-text-field">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
