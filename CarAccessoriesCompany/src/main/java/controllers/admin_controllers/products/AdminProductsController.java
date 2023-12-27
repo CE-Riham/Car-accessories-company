@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import model.Product;
 
@@ -24,9 +25,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminProductsController implements Initializable {
+
+    // -------------------------------------------- section1: Class attributes -------------------------------------------- //
+
     private List<Product> allProducts;
     private List<Product> toViewProducts;
-    private String productID = "productID";
     private int pageNumber = 0;
 
     @FXML
@@ -59,43 +62,11 @@ public class AdminProductsController implements Initializable {
     @FXML
     private ComboBox<String> categoryCombo;
 
-    private void activateMenuButton() {
-        productsButton.setStyle("-fx-border-color: #C9B3AD;");
-    }
+    // ---------------------------------------- section2: Navigation button action ---------------------------------------- //
 
     @FXML
     void onAdminProfileClick(ActionEvent event) {
         AdminStageHelper.showAdminProfile(event);
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-
     }
 
     @FXML
@@ -106,6 +77,62 @@ public class AdminProductsController implements Initializable {
     @FXML
     void onProductsClick(ActionEvent event) {
         AdminStageHelper.showAdminProducts(event);
+    }
+
+    @FXML
+    void onCategoriesClick(ActionEvent event) {
+        AdminStageHelper.showAdminCategories(event);
+    }
+
+    @FXML
+    void onCustomersClick(ActionEvent event) {
+        AdminStageHelper.showAdminCustomers(event);
+    }
+
+    @FXML
+    void onInstallersClick(ActionEvent event) {
+    }
+
+    @FXML
+    void onAdminsClick(ActionEvent event) {
+        AdminStageHelper.showAdminAdmins(event);
+    }
+
+    @FXML
+    void onNotificationsCLick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onLogoutClick(ActionEvent event) {
+        UserSession.logoutUser(event);
+    }
+
+    // ------------------------------------------ section3: Page button actions ------------------------------------------- //
+
+    @FXML
+    void onCategorySelect(ActionEvent event) {
+        filterProductsByCategory();
+        fillProducts();
+    }
+
+    @FXML
+    void onSearchFill(KeyEvent event) {
+        System.out.println(searchTextField.getText());
+        filterProductsByCategory();
+        searchProducts();
+        sortProducts();
+        fillProducts();
+    }
+
+    @FXML
+    void onSortTypeSelect(ActionEvent event) {
+        fillProducts();
+    }
+
+    @FXML
+    void onSortSelect(ActionEvent event) {
+        fillProducts();
     }
 
     @FXML
@@ -125,76 +152,23 @@ public class AdminProductsController implements Initializable {
         fillProducts();
     }
 
-    @FXML
-    void onSortSelect(ActionEvent event) {
-        fillProducts();
-    }
-
-    @FXML
-    void onSearchFill(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onCategorySelect(ActionEvent event) {
-        toViewProducts = ProductFilter.filterProductsBy("productCategory", categoryCombo.getValue(), new ArrayList<>(allProducts));
-        fillProducts();
-    }
-
-    @FXML
-    void onSortTypeSelect(ActionEvent event) {
-        fillProducts();
-    }
+    // ------------------------------------------ section4: Initialising actions ------------------------------------------ //
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         activateMenuButton();
         getAllProductsFromDB();
-        fillSearchByCombo();
-        fillCategoryCombo();
-        fillSortTypeCombo();
-        fillSortByCombo();
+        fillAllComboBoxes();
         fillProducts();
     }
 
-    private void getAllProductsFromDB() {
-        RetrievingProducts productsRetriever = new RetrievingProducts(DBConnector.getConnector().getCon());
-        allProducts = productsRetriever.selectAllProducts();
-        toViewProducts = new ArrayList<>(allProducts);
-    }
+    // -------------------------------------------- section5: Fill combo Boxes -------------------------------------------- //
 
-    private void fillRow1(int index) {
-        row1.getChildren().clear();
-        for (int i = index; i < (index + 6) && i < toViewProducts.size(); i++) {
-            row1.getChildren().add(new ProductCard(toViewProducts.get(i)).getCard());
-        }
-        disableButton(prevButton, (index == 0));
-    }
-
-    private void fillRow2(int index) {
-        row2.getChildren().clear();
-        for (int i = index; i < (index + 6) && i < toViewProducts.size(); i++) {
-            row2.getChildren().add(new ProductCard(toViewProducts.get(i)).getCard());
-        }
-        disableButton(nextButton, ((index + 6) >= toViewProducts.size()));
-    }
-
-    private void fillProducts() {
-        sortProducts();
-        fillRow1(pageNumber * 12);
-        fillRow2(pageNumber * 12 + 6);
-    }
-
-    private void disableButton(Button button, boolean flag) {
-        button.setDisable(flag);
-    }
-
-    private void fillSearchByCombo() {
-        List<String> allFields = new ArrayList<>();
-        allFields.add(productID);
-        allFields.add("productName");
-        allFields.add("description");
-        searchByCombo.setItems(FXCollections.observableArrayList(allFields));
+    private void fillAllComboBoxes() {
+        fillCategoryCombo();
+        fillSearchByCombo();
+        fillSortTypeCombo();
+        fillSortByCombo();
     }
 
     private void fillCategoryCombo() {
@@ -204,27 +178,68 @@ public class AdminProductsController implements Initializable {
         categoryCombo.setItems(FXCollections.observableArrayList(allCategories));
     }
 
-    private void fillSortByCombo() {
-        List<String> allFields = new ArrayList<>();
-        allFields.add(productID);
-        allFields.add("price");
-        allFields.add("numberOfOrders");
-        allFields.add("availability");
-        sortByCombo.setItems(FXCollections.observableArrayList(allFields));
-        sortByCombo.setValue(productID);
+    private void fillSearchByCombo() {
+        List<String> allFields = List.of("productID", "productName", "description");
+        searchByCombo.setItems(FXCollections.observableArrayList(allFields));
+        searchByCombo.setValue(allFields.get(0));
     }
 
     private void fillSortTypeCombo() {
-        List<String> allFields = new ArrayList<>();
-        allFields.add("ASC");
-        allFields.add("DSC");
+        List<String> allFields = List.of("ASC", "DSC");
         sortTypeCombo.setItems(FXCollections.observableArrayList(allFields));
-        sortTypeCombo.setValue("ASC");
+        sortTypeCombo.setValue(allFields.get(0));
+    }
+
+    private void fillSortByCombo() {
+        List<String> allFields = List.of("productID", "price", "numberOfOrders", "availability");
+        sortByCombo.setItems(FXCollections.observableArrayList(allFields));
+        sortByCombo.setValue(allFields.get(0));
+    }
+
+    // ----------------------------------------- section6: Display toViewProducts ----------------------------------------- //
+
+    private void fillProducts() {
+        sortProducts();
+        fillRow(row1, pageNumber * 12);
+        fillRow(row2, pageNumber * 12 + 6);
+    }
+
+    private void fillRow(HBox row, int index) {
+        row.getChildren().clear();
+        for (int i = index; i < (index + 6) && i < toViewProducts.size(); i++) {
+            row.getChildren().add(new ProductCard(toViewProducts.get(i)).getCard());
+        }
+        disableButton(prevButton, (index == 0));
+        disableButton(nextButton, ((index + 6) >= toViewProducts.size()));
+    }
+
+    // --------------------------------------------- section7: helper methods --------------------------------------------- //
+
+    private void activateMenuButton() {
+        productsButton.setStyle("-fx-border-color: #C9B3AD;");
+    }
+
+    private void getAllProductsFromDB() {
+        RetrievingProducts productsRetriever = new RetrievingProducts(DBConnector.getConnector().getCon());
+        allProducts = productsRetriever.selectAllProducts();
+        toViewProducts = new ArrayList<>(allProducts);
+    }
+
+    private void disableButton(Button button, boolean flag) {
+        button.setDisable(flag);
     }
 
     private void sortProducts() {
         boolean sortingType = sortTypeCombo.getValue().equals("ASC");
         String sortBy = sortByCombo.getValue();
         toViewProducts = ProductComparator.sortProducts(sortBy, sortingType, toViewProducts);
+    }
+
+    private void filterProductsByCategory(){
+        toViewProducts = ProductFilter.filterProductsBy("productCategory", categoryCombo.getValue(), new ArrayList<>(allProducts));
+    }
+
+    private void searchProducts(){
+        toViewProducts = ProductFilter.filterProductsBy(searchByCombo.getValue(), searchTextField.getText(), toViewProducts);
     }
 }

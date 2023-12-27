@@ -34,6 +34,17 @@
     -fx-background-color: #D6C8C1;
     -fx-cursor: hand;
 }
+
+.color4-2-button {
+    -fx-background-color: #C9B3AD; /* color4 */
+    -fx-text-fill: #414141; /* color1 */
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+.color4-2-button:hover {
+    -fx-background-color: #D6C8C1;
+    -fx-cursor: hand;
+}
 .delete-button {
     -fx-background-color: red;
     -fx-text-fill: #EFEEEC; /* color5 */
