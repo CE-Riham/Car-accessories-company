@@ -1,5 +1,7 @@
 package cards;
 
+import classes.UserSession;
+import helpers.stage_helpers.AdminStageHelper;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,8 +22,10 @@ public class ProductCard {
     private HBox header;
     private HBox descriptionBox;
     private Button showProductButton;
+    private Product product;
 
     public ProductCard(Product product) {
+        this.product = new Product(product);
         setCard("#EFEEEC");
         setContainer();
         setImage(product.getImagePath());
@@ -105,6 +109,10 @@ public class ProductCard {
         showProductButton.setMnemonicParsing(false);
         showProductButton.getStyleClass().add("color4-2-button");
         showProductButton.setFont(Font.font(12.0));
+        showProductButton.setOnAction(e -> {
+            UserSession.setProductToDisplay(product);
+            AdminStageHelper.showAdminDisplayProductPage(e);
+        });
     }
 
     private void addToCard() {

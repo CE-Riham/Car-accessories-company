@@ -89,7 +89,7 @@ public class AddProductController implements Initializable {
                         product.setImagePath(savePath);
                         String condition = "where productID = \'" + productID + "\';";
                         ProductUpdater productUpdater = new ProductUpdater(DBConnector.getConnector().getCon());
-                        System.out.println(productUpdater.updateProductImage(savePath, condition));
+                        productUpdater.updateProductImage(savePath, condition);
                     }
                 }
                 Alerts.informationAlert(alertTitle, null, "Product was added successfully");

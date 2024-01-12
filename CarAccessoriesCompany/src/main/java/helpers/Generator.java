@@ -2,6 +2,7 @@ package helpers;
 
 import model.Address;
 import model.Product;
+import model.ProductReview;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -47,7 +48,13 @@ public class Generator {
         tmpProduct.setAvailableAmount(rs.getInt("availability"));
         return tmpProduct;
     }
-
+    public static ProductReview rsToProductReview(ResultSet rs) throws SQLException {
+        ProductReview productReview = new ProductReview();
+        productReview.setReviewID(rs.getInt("reviewID"));
+        productReview.setCustomerComment(rs.getString("customerComment"));
+        productReview.setProductID(rs.getInt("productID"));
+        return productReview;
+    }
     public static PreparedStatement userToPS(PreparedStatement preparedStmt, User user) throws SQLException {
         preparedStmt.setString(1, user.getFirstName());
         preparedStmt.setString(2, user.getLastName());

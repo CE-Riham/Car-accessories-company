@@ -109,6 +109,11 @@ public class Product {
         setLongDescription(longDescription);
     }
 
+    public Product(Product product){
+        this(product.productID, product.getAvailableAmount(), product.getNumberOfOrders(), product.getProductPrice(),
+                product.getProductName(), product.getLongDescription(), product.getShortDescription(),
+                product.getImagePath(), product.productCategory);
+    }
     @Override
     public String toString() {
         return "Product{" +

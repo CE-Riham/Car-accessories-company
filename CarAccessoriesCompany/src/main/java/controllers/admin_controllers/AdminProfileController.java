@@ -86,15 +86,15 @@ public class AdminProfileController implements Initializable {
         streetTextField.setEditable(flag);
     }
 
-    private void setProfilePicture() {
-        File file = new File(UserSession.getCurrentUser().getImagePath());
+    private void setProfilePicture(String imagePath) {
+        File file = new File(imagePath);
         String localUrl = file.toURI().toString();
         Image image = new Image(localUrl);
         profilePicture.setFill(new ImagePattern(image));
     }
 
     private void getProfileFromDB() {
-        setProfilePicture();
+        setProfilePicture(UserSession.getCurrentUser().getImagePath());
         firstName.setText(UserSession.getCurrentUser().getFirstName());
         lastName.setText(UserSession.getCurrentUser().getLastName());
         User tmpUser = UserSession.getCurrentUser();

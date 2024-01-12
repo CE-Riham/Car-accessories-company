@@ -8,13 +8,23 @@ import model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserUpdater {
     private String status;
     private Connection connection;
+    private Map<String, String> queries = new HashMap<>();
+    private String[] allFields;
 
     public UserUpdater(Connection connection) {
         this.connection = connection;
+        String tmp = "UPDATE users SET ";
+        allFields = new String[]{"firstName", "lastName", "phone",
+                "email", "userPassword", "image"};
+        for (String field : allFields) {
+            queries.put(field, tmp + field + " = ? ");
+        }
     }
 
     public String getStatus() {
@@ -59,10 +69,9 @@ public class UserUpdater {
 
 
     public boolean updateUserSingleField(String fieldName, String newValue, String condition) {
-        StringBuilder queryBuilder = new StringBuilder("UPDATE users SET ");
-        queryBuilder.append(fieldName).append(" = ? ").append(condition);
-
-        try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
+        if (!queries.containsKey(fieldName)) return false;
+        String query = queries.get(fieldName) + condition;
+        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
             preparedStmt.setString(1, newValue);
             preparedStmt.executeUpdate();
             setStatus("User " + fieldName + " was updated successfully");
@@ -74,26 +83,26 @@ public class UserUpdater {
     }
 
     public boolean updateUserFirstName(String newFirstName, String condition) {
-        return updateUserSingleField("firstName", newFirstName, condition);
+        return updateUserSingleField(allFields[0], newFirstName, condition);
     }
 
     public boolean updateUserLastName(String newLastName, String condition) {
-        return updateUserSingleField("lastName", newLastName, condition);
+        return updateUserSingleField(allFields[1], newLastName, condition);
     }
 
     public boolean updateUserPhone(String newPhoneNumber, String condition) {
-        return updateUserSingleField("phone", newPhoneNumber, condition);
+        return updateUserSingleField(allFields[2], newPhoneNumber, condition);
     }
 
     public boolean updateUserEmail(String newEmail, String condition) {
-        return updateUserSingleField("email", newEmail, condition);
+        return updateUserSingleField(allFields[3], newEmail, condition);
     }
 
     public boolean updateUserPassword(String newPassword, String condition) {
-        return updateUserSingleField("userPassword", newPassword, condition);
+        return updateUserSingleField(allFields[4], newPassword, condition);
     }
 
     public boolean updateUserImage(String newImage, String condition) {
-        return updateUserSingleField("image", newImage, condition);
+        return updateUserSingleField(allFields[5], newImage, condition);
     }
 }

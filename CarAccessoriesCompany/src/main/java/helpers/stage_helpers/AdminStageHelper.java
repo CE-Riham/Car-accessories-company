@@ -46,9 +46,8 @@ public class AdminStageHelper {
 
     public static void showAdminProducts(ActionEvent event) {
         try {
-            showPage(event, "/FXMLFiles/admin_pages/adminProductsPage.fxml", 1615, 965);
+            showPage(event, "/FXMLFiles/admin_pages/product/adminProductsPage.fxml", 1615, 965);
         } catch (Exception e) {
-            e.printStackTrace();
             Starter.logger.warning("Can't open admin products page");
         }
     }
@@ -66,17 +65,14 @@ public class AdminStageHelper {
             showPage(event, "/FXMLFiles/admin_pages/adminAdminsPage.fxml", 1615, 965);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin admins page");
-            e.printStackTrace();
-            e.printStackTrace();
         }
     }
 
     public static void showAddProducts(ActionEvent event) {
         try {
-            showPage(event, "/FXMLFiles/admin_pages/addProductPage.fxml", 608, 837);
+            showPage(event, "/FXMLFiles/admin_pages/product/addProductPage.fxml", 608, 837);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin add product page");
-            e.printStackTrace();
         }
     }
 
@@ -85,8 +81,21 @@ public class AdminStageHelper {
             showPage(event, "/FXMLFiles/admin_pages/userProfilePage.fxml", 1615, 920);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin display user page");
-            e.printStackTrace();
         }
     }
 
+    public static void showAdminDisplayProductPage(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/admin_pages/product/adminProductPage.fxml", 1615, 920);
+        } catch (Exception e) {
+            Starter.logger.warning("Can't open admin display product page");
+        }
+    }
+    public static void showUpdateProducts(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/admin_pages/product/updateProductPage.fxml", 608, 837);
+        } catch (Exception e) {
+            Starter.logger.warning("Can't open admin update product page");
+        }
+    }
 }

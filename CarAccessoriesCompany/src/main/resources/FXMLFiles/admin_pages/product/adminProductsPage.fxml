@@ -12,21 +12,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.products.AdminProductsController">
+<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.products.AdminProductsController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>
-            <HBox prefHeight="80.0" prefWidth="1600.0" spacing="200.0" styleClass="admin-header" stylesheets="@../../assets/style.css">
+            <HBox prefHeight="80.0" prefWidth="1600.0" spacing="200.0" styleClass="admin-header" stylesheets="@../../../assets/style.css">
                <children>
-                  <HBox prefHeight="81.0" prefWidth="1200.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
+                  <HBox prefHeight="81.0" prefWidth="1200.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../../assets/style.css">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="View profile" />
-                        <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Orders" />
-                        <Button fx:id="productsButton" mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Products" />
-                        <Button mnemonicParsing="false" onAction="#onCategoriesClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Categories" />
-                        <Button mnemonicParsing="false" onAction="#onCustomersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Customers" />
-                        <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Installers" />
-                        <Button mnemonicParsing="false" onAction="#onAdminsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="admins" />
+                        <Button mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../../assets/style.css" text="View profile" />
+                        <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../../assets/style.css" text="Orders" />
+                        <Button fx:id="productsButton" mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../../assets/style.css" text="Products" />
+                        <Button mnemonicParsing="false" onAction="#onCategoriesClick" styleClass="admin-header-item" stylesheets="@../../../assets/style.css" text="Categories" />
+                        <Button mnemonicParsing="false" onAction="#onCustomersClick" styleClass="admin-header-item" stylesheets="@../../../assets/style.css" text="Customers" />
+                        <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../../assets/style.css" text="Installers" />
+                        <Button mnemonicParsing="false" onAction="#onAdminsClick" styleClass="admin-header-item" stylesheets="@../../../assets/style.css" text="admins" />
                      </children>
                   </HBox>
                   <AnchorPane prefHeight="98.0" prefWidth="200.0">
@@ -38,12 +38,12 @@
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
-                                    <Image url="@../../assets/icons/notification.png" />
+                                    <Image url="@../../../assets/icons/notification.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
-                                    <Image url="@../../assets/icons/logout.png" />
+                                    <Image url="@../../../assets/icons/logout.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -58,14 +58,14 @@
                <children>
                   <AnchorPane layoutX="10.0" layoutY="10.0" maxWidth="1600.0" prefHeight="820.0" prefWidth="1600.0" styleClass="back">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" layoutX="50.0" layoutY="50.0" prefHeight="50.0" prefWidth="1500.0" spacing="20.0">
+                        <HBox alignment="CENTER_RIGHT" layoutX="40.0" layoutY="50.0" prefHeight="50.0" prefWidth="1510.0" spacing="20.0">
                            <children>
                               <Label text="Category" textFill="#efeeec">
                                  <font>
                                     <Font name="System Bold Italic" size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="categoryCombo" onAction="#onCategorySelect" prefHeight="39.0" prefWidth="185.0" promptText="All Categories" styleClass="color4-button">
+                              <ComboBox fx:id="categoryCombo" onAction="#filterProducts" prefHeight="39.0" prefWidth="185.0" promptText="All Categories" styleClass="color4-button">
                                  <HBox.margin>
                                     <Insets left="-10.0" />
                                  </HBox.margin>
@@ -75,12 +75,12 @@
                                     <Font name="System Bold Italic" size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="searchByCombo" prefHeight="39.0" prefWidth="185.0" styleClass="color4-button">
+                              <ComboBox fx:id="searchByCombo" onAction="#filterProducts" prefHeight="39.0" prefWidth="185.0" styleClass="color4-button">
                                  <HBox.margin>
                                     <Insets left="-10.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <TextField fx:id="searchTextField" onKeyReleased="#onSearchFill" prefHeight="27.0" prefWidth="250.0" styleClass="auth-text-field">
+                              <TextField fx:id="searchTextField" onKeyReleased="#filterProducts" prefHeight="27.0" prefWidth="250.0" style="-fx-text-fill: white;" styleClass="auth-text-field">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -90,20 +90,23 @@
                                     <Font name="System Bold Italic" size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="sortTypeCombo" onAction="#onSortTypeSelect" prefHeight="39.0" prefWidth="100.0" promptText="ASC" styleClass="color4-button">
+                              <ComboBox fx:id="sortTypeCombo" onAction="#filterProducts" prefHeight="39.0" prefWidth="100.0" promptText="ASC" styleClass="color4-button">
                                  <HBox.margin>
                                     <Insets left="-10.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <ComboBox fx:id="sortByCombo" onAction="#onSortSelect" prefHeight="39.0" prefWidth="185.0" styleClass="color4-button">
+                              <ComboBox fx:id="sortByCombo" onAction="#filterProducts" prefHeight="39.0" prefWidth="185.0" styleClass="color4-button">
                                  <HBox.margin>
                                     <Insets left="-10.0" right="140.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button mnemonicParsing="false" onAction="#onAddProductClick" styleClass="color4-button" stylesheets="@../../assets/style.css" text="add a product">
+                              <Button mnemonicParsing="false" onAction="#onAddProductClick" styleClass="color4-button" stylesheets="@../../../assets/style.css" text="add a product">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>

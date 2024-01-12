@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="back" stylesheets="@../../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.products.AddProductController">
+<children>
+      <ImageView fitHeight="837.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/Pages/addProductPage.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" prefHeight="837.0" prefWidth="606.0" style="-fx-background-color: transparent;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="610.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefWidth="150.0" styleClass="auth-text-field-label" stylesheets="@../../../assets/style.css" text="product name" textAlignment="CENTER" />
+                        <TextField fx:id="productName" maxWidth="350.0" prefHeight="25.0" prefWidth="350.0" styleClass="auth-text-field" stylesheets="@../../../assets/style.css">
+                           <HBox.margin>
+                              <Insets bottom="2.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="610.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefWidth="150.0" styleClass="auth-text-field-label" stylesheets="@../../../assets/style.css" text="long description" textAlignment="CENTER" />
+                        <TextField fx:id="longDescription" maxWidth="350.0" prefHeight="25.0" prefWidth="350.0" styleClass="auth-text-field" stylesheets="@../../../assets/style.css">
+                           <HBox.margin>
+                              <Insets bottom="2.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="610.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefWidth="150.0" styleClass="auth-text-field-label" stylesheets="@../../../assets/style.css" text="short description" textAlignment="CENTER" />
+                        <TextField fx:id="shortDescription" maxWidth="350.0" prefHeight="25.0" prefWidth="350.0" styleClass="auth-text-field" stylesheets="@../../../assets/style.css">
+                           <HBox.margin>
+                              <Insets bottom="2.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="610.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefWidth="150.0" styleClass="auth-text-field-label" stylesheets="@../../../assets/style.css" text="category" textAlignment="CENTER" />
+                        <ComboBox fx:id="category" prefWidth="350.0" promptText="choose category" styleClass="auth-text-field" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="610.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefWidth="150.0" styleClass="auth-text-field-label" stylesheets="@../../../assets/style.css" text="price ($)" textAlignment="CENTER" />
+                        <TextField fx:id="productPrice" maxWidth="350.0" prefHeight="25.0" prefWidth="350.0" styleClass="auth-text-field" stylesheets="@../../../assets/style.css">
+                           <HBox.margin>
+                              <Insets bottom="2.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="610.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefWidth="150.0" styleClass="auth-text-field-label" stylesheets="@../../../assets/style.css" text="quantity" textAlignment="CENTER" />
+                        <TextField fx:id="quantity" maxWidth="350.0" prefHeight="25.0" prefWidth="350.0" styleClass="auth-text-field" stylesheets="@../../../assets/style.css">
+                           <HBox.margin>
+                              <Insets bottom="2.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="610.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefWidth="150.0" styleClass="auth-text-field-label" stylesheets="@../../../assets/style.css" text="image" textAlignment="CENTER" />
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#onChooseImageClick" prefWidth="100.0" text="choose image" />
+                        <Label fx:id="imagePathLabel" maxWidth="245.0" minWidth="245.0" prefWidth="245.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="139.0" prefWidth="606.0" spacing="10.0">
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onAddProductClick" prefHeight="43.0" prefWidth="352.0" styleClass="color1-button" stylesheets="@../../../assets/style.css" text="add product" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="13.0" prefWidth="80.0" styleClass="color1-button" stylesheets="@../../../assets/style.css" text="cancel" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="9.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="120.0" top="170.0" />
+         </padding>
+      </VBox>
+</children>
+</AnchorPane>

@@ -5,6 +5,7 @@ import helpers.Alerts;
 import helpers.stage_helpers.AuthenticationStageHelper;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ButtonType;
+import model.Product;
 import model.User;
 
 import java.util.Optional;
@@ -13,6 +14,7 @@ public class UserSession {
     private static String sessionId;
     private static User currentUser;
     private static User userToDisplay;
+    private static Product productToDisplay;
 
     public static String getSessionId() {
         return sessionId;
@@ -37,6 +39,10 @@ public class UserSession {
     public static void setUserToDisplay(User userToDisplay) {
         UserSession.userToDisplay = userToDisplay;
     }
+
+    public static Product getProductToDisplay() { return productToDisplay;}
+
+    public static void setProductToDisplay(Product productToDisplay) { UserSession.productToDisplay = productToDisplay;}
 
     public static void logoutUser(ActionEvent event) {
         Optional<ButtonType> result = Alerts.confirmationAlert("Logout", "Are you sure you want to logout?");

@@ -1,5 +1,6 @@
 package helpers.comparators;
 
+import classes.Starter;
 import model.Product;
 
 import java.util.Collections;
@@ -8,6 +9,9 @@ import java.util.List;
 
 public class ProductComparator {
 
+    private ProductComparator(){
+        Starter.logger.info("Hi from product comparator.");
+    }
     public static List<Product> sortProducts(String field, boolean sortingType, List<Product> products) {
         Collections.sort(products, chooseProductComparator(field, sortingType));
         return products;
