@@ -70,13 +70,16 @@ public class UserUpdater {
 
     public boolean updateUserSingleField(String fieldName, String newValue, String condition) {
         if (!queries.containsKey(fieldName)) return false;
-        String query = queries.get(fieldName) + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+        String query = queries.get(fieldName) ;
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append(query).append(condition);
+        try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
             preparedStmt.setString(1, newValue);
             preparedStmt.executeUpdate();
             setStatus("User " + fieldName + " was updated successfully");
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             setStatus("Couldn't update user " + fieldName);
             return false;
         }

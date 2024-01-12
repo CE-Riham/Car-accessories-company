@@ -2,7 +2,6 @@ package database.deleting;
 
 import classes.Starter;
 import model.Product;
-import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,9 +24,11 @@ public class ProductDeleter {
 
     public boolean deleteProductByProductID(Product product) {
         PreparedStatement preparedStmt = null;
+        String query = "delete from products where productID = ?";
+
         try {
-            String query = "delete from products where productID = '" + product.getProductID() + "';";
             preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, product.getProductID());
             preparedStmt.execute();
             setStatus("Product was deleted successfully.");
             return true;

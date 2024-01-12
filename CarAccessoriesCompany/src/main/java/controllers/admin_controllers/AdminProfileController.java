@@ -199,10 +199,9 @@ public class AdminProfileController implements Initializable {
         Optional<String> result = Alerts.withInputAlert("Change password", header, "Password: ");
         result.ifPresent(password -> {
             if (DataValidation.passwordValidationTest(password)) {
-                String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
-                dataUpdater.updateUserPassword(password, condition);
-                String status = dataUpdater.getStatus();
-                if (status.equals("User userPassword was updated successfully")) {
+                String condition = "where username = \'" + UserSession.getCurrentUser().getUsername() + "\'";
+                boolean flag = dataUpdater.updateUserPassword(password, condition);
+                if (flag) {
                     Alerts.informationAlert("Update", null, "password was updated successfully.");
                     UserSession.getCurrentUser().setPassword(password);
                 }

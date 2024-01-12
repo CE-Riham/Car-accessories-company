@@ -1,8 +1,6 @@
 package database.deleting;
 
-import classes.DBConnector;
 import classes.Starter;
-import database.updating.ProductUpdater;
 import helpers.Alerts;
 
 import java.sql.Connection;
@@ -24,8 +22,8 @@ public class ProductReviewDeleter {
         this.status = status;
     }
 
-    public boolean deleteProductReview(String ReviewID) {
-        if (!deleteProductReviewFromTable(ReviewID)) {
+    public boolean deleteProductReview(String reviewID) {
+        if (!deleteProductReviewFromTable(reviewID)) {
             setStatus("Couldn't delete productReview");
             Alerts.errorAlert("Deleting productReview", null, "Error while deleting productReview");
             return false;
@@ -36,9 +34,10 @@ public class ProductReviewDeleter {
 
     private boolean deleteProductReviewFromTable(String reviewID) {
         PreparedStatement preparedStmt = null;
+        String query = "delete from productReviews where reviewID = ?";
         try {
-            String query = "delete from productReviews where reviewID = '" + reviewID + "';";
             preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1, reviewID);
             preparedStmt.execute();
             return true;
         } catch (Exception e) {

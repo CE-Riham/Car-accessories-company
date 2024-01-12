@@ -62,8 +62,10 @@ public class ProductUpdater {
 
     public boolean updateProductSingleStringField(String fieldName, String newValue, String condition) {
         if (!queries.containsKey(fieldName)) return false;
-        String query = queries.get(fieldName) + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+        String query = queries.get(fieldName);
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append(query).append(condition);
+        try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
             preparedStmt.setString(1, newValue);
             preparedStmt.executeUpdate();
             setStatus("Product " + fieldName + " was updated successfully");
@@ -77,8 +79,10 @@ public class ProductUpdater {
 
     public boolean updateProductSingleIntegerField(String fieldName, int newValue, String condition) {
         if (!queries.containsKey(fieldName)) return false;
-        String query = queries.get(fieldName) + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
+        String query = queries.get(fieldName);
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append(query).append(condition);
+        try (PreparedStatement preparedStmt = connection.prepareStatement(queryBuilder.toString())) {
             preparedStmt.setInt(1, newValue);
             preparedStmt.executeUpdate();
             setStatus("Product " + fieldName + " was updated successfully");
@@ -97,18 +101,6 @@ public class ProductUpdater {
         return updateProductSingleStringField(allFields[1], newCategory, condition);
     }
 
-    public boolean updateProductPrice(Double newPrice, String condition) {
-        String query = allFields[2] + condition;
-        try (PreparedStatement preparedStmt = connection.prepareStatement(query)) {
-            preparedStmt.setDouble(1, newPrice);
-            preparedStmt.executeUpdate();
-            setStatus("Product price was updated successfully");
-            return true;
-        } catch (SQLException e) {
-            setStatus("Couldn't update product price");
-            return false;
-        }
-    }
 
     public boolean updateProductNumberOfOrders(int newNumberOfOrders, String condition) {
         return updateProductSingleIntegerField(allFields[3], newNumberOfOrders, condition);

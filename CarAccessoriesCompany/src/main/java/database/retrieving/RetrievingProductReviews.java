@@ -5,17 +5,18 @@ import helpers.Generator;
 import model.ProductReview;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RetrievingProductReviews {
-    private Connection con;
+    private Connection connection;
     private String status;
 
     public RetrievingProductReviews(Connection con) {
-        this.con = con;
+        this.connection = con;
     }
 
     public String getStatus() {
@@ -28,11 +29,12 @@ public class RetrievingProductReviews {
 
     public List<ProductReview> selectReviewsByProductID(String productID) {
         List<ProductReview> reviews = new ArrayList<>();
+        String query = "SELECT * FROM productReviews where productID = ?";
         Statement st = null;
-        try {
-            String query = "SELECT * FROM productReviews where productID = \'" + productID + "\'";
-            st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            st = connection.createStatement();
+            preparedStatement.setString(1, productID);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs != null && rs.next())
                 reviews.add(Generator.rsToProductReview(rs));
             setStatus("Retrieving reviews successfully");
@@ -52,10 +54,11 @@ public class RetrievingProductReviews {
     public List<ProductReview> selectReviewByReviewID(String reviewID) {
         List<ProductReview> result = new ArrayList<>();
         Statement st = null;
-        try {
-            String query = "SELECT * FROM productReviews where reviewID = \'" + reviewID + "\'";
-            st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
+        String query = "SELECT * FROM productReviews where reviewID = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            st = connection.createStatement();
+            preparedStatement.setString(1, reviewID);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs != null && rs.next()) result.add(Generator.rsToProductReview(rs));
             setStatus("Retrieving reviews successfully");
             return result;
