@@ -4,7 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-import model.ProductReview;
+import model.products.ProductReview;
 
 public class ProductReviewCard {
 

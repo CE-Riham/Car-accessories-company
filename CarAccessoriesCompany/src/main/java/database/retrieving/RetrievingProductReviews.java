@@ -2,7 +2,7 @@ package database.retrieving;
 
 import classes.Starter;
 import helpers.Generator;
-import model.ProductReview;
+import model.products.ProductReview;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,8 +1,9 @@
 package helpers;
 
 import model.Address;
-import model.Product;
-import model.ProductReview;
+import model.products.Product;
+import model.products.ProductRate;
+import model.products.ProductReview;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -54,6 +55,13 @@ public class Generator {
         productReview.setCustomerComment(rs.getString("customerComment"));
         productReview.setProductID(rs.getInt("productID"));
         return productReview;
+    }
+    public static ProductRate rsToProductRate(ResultSet rs) throws SQLException {
+        ProductRate productRate = new ProductRate();
+        productRate.setProductRateID(rs.getInt("rateID"));
+        productRate.setCustomerRate(rs.getInt("customerRate"));
+        productRate.setProductID(rs.getInt("productID"));
+        return productRate;
     }
     public static PreparedStatement userToPS(PreparedStatement preparedStmt, User user) throws SQLException {
         preparedStmt.setString(1, user.getFirstName());

@@ -2,7 +2,7 @@ package database.inserting;
 
 import classes.Starter;
 import helpers.Generator;
-import model.Product;
+import model.products.Product;
 import model.User;
 
 import java.sql.*;

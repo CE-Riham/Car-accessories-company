@@ -179,3 +179,11 @@ c
 3src/main/java/database/deleting/ProductDeleter.java,7\8\78782cb2fe5b03cda617ad9f620d1064e9184cfa
 Å
 Qsrc/main/java/controllers/admin_controllers/products/UpdateProductController.java,b\e\bef47d5834a4b99f78c0527e304030c76d29fd64
+T
+$src/main/java/model/ProductRate.java,b\3\b3ce008c545e9e619d1a51e357743d8e9d9241f5
+]
+-src/main/java/model/products/ProductRate.java,d\7\d7fb2d63ef005337636db925f02306b42c685a6b
+Y
+)src/main/java/model/products/Product.java,c\d\cdaedbf330fcf2fa5d2da35b6ebc861e7be938d2
+m
+=src/main/java/database/retrieving/RetrievingProductRates.java,9\0\90e2ffd581da98264c0f456288d0b6d9d738f94a

@@ -1,6 +1,6 @@
 package helpers;
 
-import model.Product;
+import model.products.Product;
 import model.User;
 
 import java.util.regex.Matcher;

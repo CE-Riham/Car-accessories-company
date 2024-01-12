@@ -1,7 +1,7 @@
 package database.deleting;
 
 import classes.Starter;
-import model.Product;
+import model.products.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

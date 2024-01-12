@@ -1,7 +1,7 @@
 package helpers.comparators;
 
 import classes.Starter;
-import model.Product;
+import model.products.Product;
 
 import java.util.Collections;
 import java.util.Comparator;

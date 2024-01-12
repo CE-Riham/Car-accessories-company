@@ -15,7 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.Product;
+import model.products.Product;
 
 import java.net.URL;
 import java.util.List;

@@ -5,6 +5,7 @@ import classes.DBConnector;
 import classes.UserSession;
 import database.deleting.ProductDeleter;
 import database.deleting.ProductReviewDeleter;
+import database.retrieving.RetrievingProductRates;
 import database.retrieving.RetrievingProductReviews;
 import helpers.Alerts;
 import helpers.stage_helpers.AdminStageHelper;
@@ -17,11 +18,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import model.Product;
-import model.ProductReview;
+import model.products.Product;
+import model.products.ProductRate;
+import model.products.ProductReview;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -180,8 +183,6 @@ public class AdminDisplayProductController implements Initializable {
     private void setProductFields() {
         Product tmpProduct = new Product(UserSession.getProductToDisplay());
         productPriceLabel.setText(String.valueOf(tmpProduct.getProductPrice()));
-        //TODO
-        //rate product
         productNameLabel.setText(tmpProduct.getProductName());
         productIDLabel.setText("ID: " + tmpProduct.getProductID());
         productCategoryLabel.setText(tmpProduct.getProductCategory());
@@ -190,6 +191,7 @@ public class AdminDisplayProductController implements Initializable {
         numberOfOrdersLabel.setText(String.valueOf(tmpProduct.getNumberOfOrders()));
         numberOfReviewsLabel.setText(String.valueOf(allReviews.size()));
         fillImage(tmpProduct.getImagePath());
+        findProductRate(tmpProduct.getProductID());
     }
 
     private void disableButton(Button button, boolean flag) {
@@ -238,5 +240,14 @@ public class AdminDisplayProductController implements Initializable {
                 Alerts.errorAlert(alertTitle, null, "This review belongs to the product with id = " + tmpReview.getProductID() + ", you can't delete it from here");
             }
         }
+    }
+
+    private void findProductRate(int productID) {
+        RetrievingProductRates retrievingProductRates = new RetrievingProductRates(DBConnector.getConnector().getCon());
+        List<ProductRate> rates = retrievingProductRates.selectRatesByProductID(String.valueOf(productID));
+        int numberOdRate = rates.size() == 0 ? 1 : rates.size();
+        double sum = 0;
+        for (ProductRate rate : rates) sum += rate.getCustomerRate();
+        productRateLabel.setText(new DecimalFormat("#.##").format(sum/numberOdRate));
     }
 }

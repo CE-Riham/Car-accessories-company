@@ -88,20 +88,6 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox prefHeight="60.0" prefWidth="235.0">
-                                             <children>
-                                                <Label prefHeight="58.0" prefWidth="54.0" text="Rate:">
-                                                   <font>
-                                                      <Font name="System Bold" size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="productRateLabel" prefHeight="58.0" prefWidth="126.0" text="rate" textFill="#979696">
-                                                   <font>
-                                                      <Font name="System Bold" size="16.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
                                           <Label fx:id="productNameLabel" prefHeight="34.0" prefWidth="231.0" text="Product Name">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />

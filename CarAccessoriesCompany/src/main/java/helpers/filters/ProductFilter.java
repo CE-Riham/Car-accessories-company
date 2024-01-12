@@ -1,7 +1,7 @@
 package helpers.filters;
 
 import classes.Starter;
-import model.Product;
+import model.products.Product;
 
 import java.util.List;
 
