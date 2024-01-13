@@ -245,7 +245,7 @@ public class AdminDisplayProductController implements Initializable {
     private void findProductRate(int productID) {
         RetrievingProductRates retrievingProductRates = new RetrievingProductRates(DBConnector.getConnector().getCon());
         List<ProductRate> rates = retrievingProductRates.selectRatesByProductID(String.valueOf(productID));
-        int numberOdRate = rates.size() == 0 ? 1 : rates.size();
+        int numberOdRate = rates.isEmpty() ? 1 : rates.size();
         double sum = 0;
         for (ProductRate rate : rates) sum += rate.getCustomerRate();
         productRateLabel.setText(new DecimalFormat("#.##").format(sum/numberOdRate));

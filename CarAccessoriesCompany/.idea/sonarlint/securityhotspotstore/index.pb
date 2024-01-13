@@ -187,3 +187,5 @@ Y
 )src/main/java/model/products/Product.java,c\d\cdaedbf330fcf2fa5d2da35b6ebc861e7be938d2
 m
 =src/main/java/database/retrieving/RetrievingProductRates.java,9\0\90e2ffd581da98264c0f456288d0b6d9d738f94a
+N
+src/main/java/model/Order.java,d\a\da40720aeeaaed55b9015b87ce0ba9418140ed2f
