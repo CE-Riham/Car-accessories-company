@@ -31,7 +31,7 @@ public class DBRetrievingProducts {
     @When("I want to retrieve {string} products")
     public void iWantToRetrieve(String entity) {
         if (entity.equals("products")) {
-            retrievingData.selectProductsWithCondition(condition);
+            retrievingData.selectOrdersWithCondition(condition);
             status = retrievingData.getStatus();
         } else
             status = "Error while retrieving from database";
