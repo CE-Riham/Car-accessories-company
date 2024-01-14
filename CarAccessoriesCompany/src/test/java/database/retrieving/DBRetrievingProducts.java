@@ -14,13 +14,13 @@ import static org.junit.Assert.assertEquals;
 public class DBRetrievingProducts {
     private String condition, status;
     private DatabaseConnection connection;
-    private RetrievingOrders retrievingData;
+    private RetrievingProducts retrievingData;
 
     @Before
     @Given("I'm connected to a database to retrieve products")
     public void iMConnectedToADatabase() {
         connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
-        retrievingData = new RetrievingOrders(connection.getCon());
+        retrievingData = new RetrievingProducts(connection.getCon());
     }
 
     @When("I fill in condition with {string} for products")
@@ -31,7 +31,7 @@ public class DBRetrievingProducts {
     @When("I want to retrieve {string} products")
     public void iWantToRetrieve(String entity) {
         if (entity.equals("products")) {
-            retrievingData.selectOrdersWithCondition(condition);
+            retrievingData.selectProductsWithCondition(condition);
             status = retrievingData.getStatus();
         } else
             status = "Error while retrieving from database";
