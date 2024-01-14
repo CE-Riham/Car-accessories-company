@@ -13,34 +13,30 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController {
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------- section1: Class attributes -------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
     private Login login;
+    @FXML
+    public TextField usernameTextField;
+    @FXML
+    private PasswordField passwordTextField;
 
+
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // ---------------------------------------------- section2: Constructors ---------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
     public LoginController() {
         login = new Login(DBConnector.getConnector().getCon());
     }
 
-    @FXML
-    public TextField usernameTextField;
 
-    @FXML
-    private PasswordField passwordTextField;
-
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // ------------------------------------------ section3: Page button actions ------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
     @FXML
     protected void onLoginClick(ActionEvent event) {
-        //TODO
-        //next page
-        String username = usernameTextField.getText().toLowerCase();
-        String password = passwordTextField.getText();
-        boolean flag = login.loginUser(username, password);
-        Starter.logger.info(login.getStatus());
-
-        if (!flag)
-            Alerts.errorAlert("Error", null, login.getStatus());
-        else {
-            if (UserSession.getCurrentUser().getUserType().equals("admin"))
-                AdminStageHelper.showAdminProfile(event);
-        }
-
+        handleLogin(event);
     }
 
     @FXML
@@ -50,6 +46,40 @@ public class LoginController {
 
     @FXML
     protected void onForgetPasswordClick() {
+        handleForgetPassword();
+    }
+
+
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------- section4: Helper functions -------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
+    private boolean checkUserInformation() {
+        String username = usernameTextField.getText().toLowerCase();
+        String password = passwordTextField.getText();
+        return login.loginUser(username, password);
+    }
+
+    private void openNextPage(String userType, ActionEvent event) {
+        //TODO
+        //complete pages
+        if (userType.equals("admin"))
+            AdminStageHelper.showAdminProfile(event);
+        else if (userType.equals("customer"))
+            Starter.logger.info("customer");
+        else
+            Starter.logger.info("installer");
+    }
+
+    private void handleLogin(ActionEvent event) {
+        boolean flag = checkUserInformation();
+        Starter.logger.info(login.getStatus());
+        if (Boolean.FALSE.equals(flag))
+            Alerts.errorAlert("Error", null, login.getStatus());
+        else
+            openNextPage(UserSession.getCurrentUser().getUserType(), event);
+    }
+
+    private void handleForgetPassword() {
         //TODO
     }
 

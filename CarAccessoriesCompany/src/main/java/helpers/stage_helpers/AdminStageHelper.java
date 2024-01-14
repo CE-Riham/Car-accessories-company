@@ -78,7 +78,7 @@ public class AdminStageHelper {
 
     public static void showAdminUserProfile(ActionEvent event) {
         try {
-            showPage(event, "/FXMLFiles/admin_pages/userProfilePage.fxml", 1615, 920);
+            showPage(event, "/FXMLFiles/admin_pages/userProfilePage.fxml", 1615, 965);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin display user page");
         }
@@ -86,16 +86,25 @@ public class AdminStageHelper {
 
     public static void showAdminDisplayProductPage(ActionEvent event) {
         try {
-            showPage(event, "/FXMLFiles/admin_pages/product/adminProductPage.fxml", 1615, 920);
+            showPage(event, "/FXMLFiles/admin_pages/product/adminProductPage.fxml", 1615, 965);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin display product page");
         }
     }
+
     public static void showUpdateProducts(ActionEvent event) {
         try {
             showPage(event, "/FXMLFiles/admin_pages/product/updateProductPage.fxml", 608, 837);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin update product page");
+        }
+    }
+
+    public static void showAdminOrdersPage(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/admin_pages/adminOrdersPage.fxml", 1615, 965);
+        } catch (Exception e) {
+            Starter.logger.warning("Can't open admin orders page");
         }
     }
 }

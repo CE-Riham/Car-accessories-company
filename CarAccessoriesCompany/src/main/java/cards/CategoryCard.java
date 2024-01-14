@@ -24,7 +24,7 @@ public class CategoryCard {
         card.setAlignment(Pos.CENTER);
         card.setPrefHeight(100);
         card.setPrefWidth(960);
-        card.setStyle("-fx-background-color: #D6C8C1;");
+        card.setStyle("-fx-background-color: #a1bbb6;");
         card.setPadding(new Insets(0, 50, 0, 50));
     }
     public HBox getCard(){return card;}
@@ -38,6 +38,7 @@ public class CategoryCard {
         this.categoryName.setMinWidth(300);
         this.categoryName.setPrefSize(835, 47);
         this.categoryName.setFont(new Font(32));
+        this.categoryName.setStyle("-fx-font-weight: bold;");
     }
 
     private void setDeleteButton() {
@@ -64,7 +65,7 @@ public class CategoryCard {
         editButton.setMinWidth(100);
         editButton.setPrefWidth(100);
         editButton.setMaxWidth(100);
-        editButton.getStyleClass().add("color1-button");
+        editButton.getStyleClass().add("color4-button");
         editButton.setFont(new Font(18));
 
         editButton.setOnAction(e->{

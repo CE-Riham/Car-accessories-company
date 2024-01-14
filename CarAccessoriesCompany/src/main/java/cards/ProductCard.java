@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import model.Product;
+import model.products.Product;
 
 import java.io.File;
 
@@ -26,7 +26,7 @@ public class ProductCard {
 
     public ProductCard(Product product) {
         this.product = new Product(product);
-        setCard("#EFEEEC");
+        setCard("#a1bbb6");
         setContainer();
         setImage(product.getImagePath());
         setHeader(product.getProductName(), String.valueOf(product.getProductPrice()));
@@ -43,7 +43,7 @@ public class ProductCard {
         card = new AnchorPane();
         card.setPrefHeight(270.0);
         card.setPrefWidth(225.0);
-        card.setStyle("-fx-background-color: " + color + ";");
+        card.setStyle("-fx-background-color: " + color + "; -fx-border-color: black; -fx-border-width: 2;");
     }
 
     public void setContainer() {

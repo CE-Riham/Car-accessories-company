@@ -2,7 +2,7 @@ package database.retrieving;
 
 import classes.Starter;
 import helpers.Generator;
-import model.Product;
+import model.products.Product;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

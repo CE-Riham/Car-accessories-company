@@ -1,48 +1,49 @@
 /*
-    color1 : #414141
-    color2 : #6d6960
-    color3 : #949376
-    color4 : #C9B3AD
-    color5 : #EFEEEC
-    color6 : #D6C8C1
+    color1 : black
+    color2 : #43766C
+    color3 : #E2E2E2
+    color4 : #B19470
+    color5 : #76453B
+    color6 : white
+    color7 : #533029
 */
-.auth-text-field-label {
-    -fx-font-size: 18px;
-    -fx-text-fill: #6d6960; /* color2*/
-    -fx-font-weight: bold;
-    -fx-font-family: 'Arial';
-}
 
+
+/* --------------------------------------------------------- Buttons --------------------------------------------------------- */
 .color1-button {
-    -fx-background-color: #414141; /* color1 */
-    -fx-text-fill: #EFEEEC; /* color5 */
+    -fx-background-color: #533029; /* color7 */
+    -fx-text-fill: white; /* color6 */
     -fx-font-weight: bold;
     -fx-font-size: 18px;
 }
 .color1-button:hover {
-    -fx-background-color: #51514c;
+    -fx-background-color: #76453B; /* color5 */
     -fx-cursor: hand;
 }
-
+.combo-beige{
+    -fx-background-color: #699189; /* color2 */
+    -fx-text-fill: white; /* color6 */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
 .color4-button {
-    -fx-background-color: #C9B3AD; /* color4 */
-    -fx-text-fill: #414141; /* color1 */
+    -fx-background-color: black; /* color1 */
+    -fx-text-fill: white; /* color6 */
     -fx-font-weight: bold;
     -fx-font-size: 18px;
 }
 .color4-button:hover {
-    -fx-background-color: #D6C8C1;
+    -fx-background-color: #533029;
     -fx-cursor: hand;
 }
-
 .color4-2-button {
-    -fx-background-color: #C9B3AD; /* color4 */
-    -fx-text-fill: #414141; /* color1 */
+    -fx-background-color: #533029; /* color4 */
+    -fx-text-fill: white; /* color6 */
     -fx-font-weight: bold;
     -fx-font-size: 12px;
 }
 .color4-2-button:hover {
-    -fx-background-color: #D6C8C1;
+    -fx-background-color: #B19470;
     -fx-cursor: hand;
 }
 .delete-button {
@@ -55,64 +56,29 @@
     -fx-background-color: #f54242;
     -fx-cursor: hand;
 }
-.auth-text-field {
-    -fx-background-color: transparent;
-    -fx-border-color: #C9B3AD; /* color4 */
-    -fx-border-radius: 0;
-    -fx-border-width: 0 0 2 0;
-    -fx-padding: 0px;
-    -fx-font-size: 16px;
-    -fx-text-fill: #333;
-    -fx-font-weight: bold;
-}
-
-.auth-text-field:focused {
-    -fx-border-color: #C9B3AD;
-}
-
-
-.auth-text-field .text {
-    -fx-fill: #999;
-}
-
-.admin-header{
-    -fx-background-color: #414141; /* color1 */
-    -fx-alignment: justify;
-    /*
-    -fx-border-color: #C9B3AD;
-    -fx-border-width: 0 0 5 0;
-    */
-}
-.admin-header-item{
-    -fx-background-color: transparent;
-    -fx-text-fill: #EFEEEC; /* color5 */
-    -fx-border-width: 0 0 5 0;
-    -fx-font-size: 26px;
-    -fx-padding: 0 0 -2 0;
-}
-.admin-header-menu{
-    -fx-background-color: transparent;
-    -fx-alignment: center;
-}
-
-.admin-header-item:hover{
-    -fx-border-color: #C9B3AD;
-    -fx-cursor: hand;
-}
-
-.icon{
-    -fx-cursor: hand;
-}
-
 .transparent-button{
     -fx-cursor: hand;
     -fx-background-color: transparent;
 }
-
-.back{
-    -fx-background-color: #414141; /* color1 */
+.admin-header-item{
+    -fx-background-color: transparent;
+    -fx-text-fill: black; /* color1 */
+    -fx-border-width: 0 0 5 0;
+    -fx-font-size: 26px;
+    -fx-padding: 0 0 -2 0;
+}
+.admin-header-item:hover{
+    -fx-border-color: #76453B; /* color5 */
+    -fx-cursor: hand;
 }
 
+/* --------------------------------------------------------- Labels --------------------------------------------------------- */
+.auth-text-field-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: black; /* color1*/
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arial';
+}
 .profile-label {
     -fx-background-color: transparent;
     -fx-text-fill: #231F20;
@@ -120,6 +86,23 @@
     -fx-alignment:center;
 }
 
+/* ------------------------------------------------------- Text Fields ------------------------------------------------------- */
+.auth-text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #76453B; /* color5*/
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0px;
+    -fx-font-size: 16px;
+    -fx-text-fill: black; /* color1 */
+    -fx-font-weight: bold;
+}
+.auth-text-field:focused {
+    -fx-border-color: #B19470; /* color4 */
+}
+.auth-text-field .text {
+    -fx-fill: black; /* color1 */
+}
 .profile-text-field {
     -fx-background-color: transparent;
     -fx-border-color: transparent; /* color1 */
@@ -129,12 +112,37 @@
     -fx-font-size: 24px;
     -fx-text-fill: #231F20;
 }
-
 .profile-text-field:focused {
     -fx-border-color: #414141;
 }
-
-
 .profile-text-field .text {
     -fx-fill: #231F20;
 }
+
+/* ------------------------------------------------------- Containers ------------------------------------------------------- */
+.back{
+    -fx-background-color: #E2E2E2; /* color3 */
+}
+.admin-header{
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 7 0; /* Top, Right, Bottom, Left */
+    -fx-border-color: #76453B; /* color5 */
+}
+/* -------------------------------------------------------- Ma 2adre -------------------------------------------------------- */
+
+
+
+.admin-header-menu{
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+}
+
+
+
+.icon{
+    -fx-cursor: hand;
+}
+
+
+
+

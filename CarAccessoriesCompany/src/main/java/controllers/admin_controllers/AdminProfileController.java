@@ -1,13 +1,11 @@
 package controllers.admin_controllers;
 
 import classes.DBConnector;
-import classes.Starter;
 import classes.UserSession;
 import database.updating.UserUpdater;
 import helpers.Alerts;
 import helpers.DataValidation;
 import helpers.Uploader;
-import helpers.stage_helpers.AdminStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,16 +22,12 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AdminProfileController implements Initializable {
+public class AdminProfileController extends AdminNavBarActions implements Initializable {
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------- section1: Class attributes -------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
     private UserUpdater dataUpdater;
-    private String successfulUpdate = "User was updated successfully";
     private Uploader uploader;
-
-    public AdminProfileController() {
-        uploader = new Uploader();
-        dataUpdater = new UserUpdater(DBConnector.getConnector().getCon());
-    }
-
     @FXML
     private Button adminProfileButton;
     @FXML
@@ -46,15 +40,12 @@ public class AdminProfileController implements Initializable {
     private Button saveProfileButton;
     @FXML
     private Button cancelProfileButton;
-
     @FXML
     private Label firstName;
     @FXML
     private Label lastName;
-
     @FXML
     private Circle profilePicture;
-
     @FXML
     private TextField firstNameTextField;
     @FXML
@@ -72,18 +63,68 @@ public class AdminProfileController implements Initializable {
     @FXML
     private TextField streetTextField;
 
-    private void activateMenuButton() {
-        adminProfileButton.setStyle("-fx-border-color: #C9B3AD;");
+
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // ------------------------------------------ section2: Page button actions ------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
+    @FXML
+    void onChangePictureClick(ActionEvent event) {
+        handleChangePicture();
+    }
+
+    @FXML
+    void onEditProfileClick(ActionEvent event) {
+        handleEditProfile();
+    }
+
+    @FXML
+    void onChangePasswordClick(ActionEvent event) {
+        handleChangePassword();
+    }
+
+    @FXML
+    void onCancelProfileClick(ActionEvent event) {
+        openProfile();
+    }
+
+    @FXML
+    void onSaveProfileClick(ActionEvent event) {
+        handleSaveProfileClick();
+    }
+
+
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
+    // -------------------------------------------------------------------------------------------------------------------- //
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        uploader = new Uploader();
+        dataUpdater = new UserUpdater(DBConnector.getConnector().getCon());
+        activateMenuButton(adminProfileButton);
+        openProfile();
+    }
+
+
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------- section4: Helper functions -------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
+    private void setEditable(boolean flag, TextField... textFields) {
+        for (TextField textField : textFields) {
+            textField.setEditable(flag);
+        }
     }
 
     private void setProfileEditable(boolean flag) {
-        firstNameTextField.setEditable(flag);
-        lastNameTextField.setEditable(flag);
-        phoneTextField.setEditable(flag);
-        emailTextField.setEditable(flag);
-        countryTextField.setEditable(flag);
-        cityTextField.setEditable(flag);
-        streetTextField.setEditable(flag);
+        setEditable(flag, firstNameTextField, lastNameTextField, phoneTextField, emailTextField,
+                countryTextField, cityTextField, streetTextField);
+    }
+
+    private void setText(Label label, String text) {
+        label.setText(text);
+    }
+
+    private void setText(TextField textField, String text) {
+        textField.setText(text);
     }
 
     private void setProfilePicture(String imagePath) {
@@ -93,70 +134,37 @@ public class AdminProfileController implements Initializable {
         profilePicture.setFill(new ImagePattern(image));
     }
 
+    private void setVisible(boolean flag, Button... buttons) {
+        for (Button button : buttons)
+            button.setVisible(flag);
+    }
+
     private void getProfileFromDB() {
-        setProfilePicture(UserSession.getCurrentUser().getImagePath());
-        firstName.setText(UserSession.getCurrentUser().getFirstName());
-        lastName.setText(UserSession.getCurrentUser().getLastName());
         User tmpUser = UserSession.getCurrentUser();
-        //admin data
-        firstNameTextField.setText(tmpUser.getFirstName());
-        lastNameTextField.setText(tmpUser.getLastName());
-        usernameTextField.setText(tmpUser.getUsername());
-        phoneTextField.setText(tmpUser.getPhoneNumber());
-        emailTextField.setText(tmpUser.getEmail());
+        setProfilePicture(tmpUser.getImagePath());
+        setText(firstName, tmpUser.getFirstName());
+        setText(lastName, tmpUser.getLastName());
+        setText(firstNameTextField, tmpUser.getFirstName());
+        setText(lastNameTextField, tmpUser.getLastName());
+        setText(usernameTextField, tmpUser.getUsername());
+        setText(phoneTextField, tmpUser.getPhoneNumber());
+        setText(emailTextField, tmpUser.getEmail());
         //TODO
         //add address
+    }
 
+    private void initializeProfileVisibility() {
         setProfileEditable(false);
-        saveProfileButton.setVisible(false);
-        cancelProfileButton.setVisible(false);
-        editProfileButton.setVisible(true);
-        changePictureButton.setVisible(false);
-        changePasswordButton.setVisible(true);
+        setVisible(false, saveProfileButton, cancelProfileButton, changePictureButton);
+        setVisible(true, editProfileButton, changePasswordButton);
     }
 
-    @FXML
-    void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
+    private void openProfile() {
+        getProfileFromDB();
+        initializeProfileVisibility();
     }
 
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onOrdersClick(ActionEvent event) {
-        //TODO
-    }
-
-    @FXML
-    void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-        Starter.logger.info("beeb");
-    }
-
-    @FXML
-    void onChangePictureClick(ActionEvent event) {
+    private void handleChangePicture() {
         String savePath = "src/main/resources/assets/usersPictures/" + UserSession.getCurrentUser().getUsername() + ".png";
         boolean uploadImageFlag = uploader.uploadImage();
         if (uploadImageFlag) {
@@ -166,20 +174,17 @@ public class AdminProfileController implements Initializable {
                 User user = UserSession.getCurrentUser();
                 user.setImagePath(savePath);
                 String condition = " where username = \'" + UserSession.getCurrentUser().getUsername() + "\';";
-                dataUpdater.updateUsersAllFields(user, condition);
-                String status = dataUpdater.getStatus();
-                if (status.equals(successfulUpdate)) {
+                boolean successfulUpdate = dataUpdater.updateUsersAllFields(user, condition);
+                if (successfulUpdate) {
                     UserSession.setCurrentUser(user);
                     Alerts.informationAlert("Change picture", null, "Picture was updated successfully.");
-                    getProfileFromDB();
+                    openProfile();
                 }
             }
         }
     }
 
-    //done
-    @FXML
-    void onEditProfileClick(ActionEvent event) {
+    private void handleEditProfile() {
         changePictureButton.setVisible(true);
         changePasswordButton.setVisible(false);
         editProfileButton.setVisible(false);
@@ -188,9 +193,7 @@ public class AdminProfileController implements Initializable {
         setProfileEditable(true);
     }
 
-    //done
-    @FXML
-    void onChangePasswordClick(ActionEvent event) {
+    private void handleChangePassword() {
         setProfileEditable(false);
         String header = """
                 - at least 8 characters
@@ -211,47 +214,32 @@ public class AdminProfileController implements Initializable {
         });
     }
 
-    //done
-    @FXML
-    void onCancelProfileClick(ActionEvent event) {
-        getProfileFromDB();
-    }
-
-    @FXML
-    void onSaveProfileClick(ActionEvent event) {
+    private User prepareAdminToUpdate() {
         //TODO
         //edit address
-        //update admin information
         String email = emailTextField.getText();
         String firstNameTmp = firstNameTextField.getText();
         String lastNameTmp = lastNameTextField.getText();
         String phone = phoneTextField.getText();
-        String condition = "where username = \'" + usernameTextField.getText() + "\';";
-        User user = new User(UserSession.getCurrentUser().getUsername(), firstNameTmp, lastNameTmp, phone,
+        return new User(UserSession.getCurrentUser().getUsername(), firstNameTmp, lastNameTmp, phone,
                 UserSession.getCurrentUser().getPassword(), email, UserSession.getCurrentUser().getImagePath(),
                 "admin", UserSession.getCurrentUser().getAddress());
+    }
 
-        dataUpdater.updateUsersAllFields(user, condition);
-
-        //result
+    private void showUpdateProfileResult(Boolean successfulUpdate, User user) {
         String status = dataUpdater.getStatus();
-        if (status.equals(successfulUpdate)) {
+        if (Boolean.TRUE.equals(successfulUpdate)) {
             Alerts.informationAlert("Update", null, status);
             UserSession.setCurrentUser(user);
         } else
             Alerts.errorAlert("Error", null, status);
-        getProfileFromDB();
-
     }
 
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
+    private void handleSaveProfileClick() {
+        User user = prepareAdminToUpdate();
+        String condition = "where username = \'" + usernameTextField.getText() + "\';";
+        showUpdateProfileResult(dataUpdater.updateUsersAllFields(user, condition), user);
+        openProfile();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        activateMenuButton();
-        getProfileFromDB();
-    }
 }

@@ -1,4 +1,4 @@
-package model;
+package model.products;
 
 public class ProductReview {
     private String customerComment;

@@ -3,6 +3,7 @@ package controllers.admin_controllers.categories;
 import cards.CategoryCard;
 import classes.DBConnector;
 import classes.UserSession;
+import controllers.admin_controllers.AdminNavBarActions;
 import database.inserting.InsertingData;
 import database.retrieving.RetrievingCategories;
 import helpers.Alerts;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AdminCategoriesController implements Initializable {
+public class AdminCategoriesController extends AdminNavBarActions implements Initializable {
     private List<String> allCategories;
     private int pageNumber = 0;
     @FXML
@@ -29,55 +30,6 @@ public class AdminCategoriesController implements Initializable {
     private Button categoriesButton;
     @FXML
     private VBox categoriesTable;
-
-    private void activateMenuButton() {
-        categoriesButton.setStyle("-fx-border-color: #C9B3AD;");
-    }
-
-    @FXML
-    void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onOrdersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
-    }
 
     @FXML
     void onPrevButtonClick(ActionEvent event) {
@@ -112,7 +64,7 @@ public class AdminCategoriesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        activateMenuButton();
+        activateMenuButton(categoriesButton);
         fillCategories();
     }
 

@@ -1,15 +1,22 @@
 package helpers;
 
+import classes.Starter;
 import model.Address;
-import model.Product;
-import model.ProductReview;
+import model.Order;
+import model.products.Product;
+import model.products.ProductRate;
+import model.products.ProductReview;
 import model.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Generator {
+    private static String productID = "productID";
+
     private Generator() {
         throw new IllegalStateException("Utility class");
     }
@@ -37,7 +44,7 @@ public class Generator {
 
     public static Product rsToProduct(ResultSet rs) throws SQLException {
         Product tmpProduct = new Product();
-        tmpProduct.setProductID(rs.getInt("productID"));
+        tmpProduct.setProductID(rs.getInt(productID));
         tmpProduct.setProductName(rs.getString("productName"));
         tmpProduct.setProductCategory(rs.getString("category"));
         tmpProduct.setProductPrice(rs.getDouble("price"));
@@ -48,13 +55,35 @@ public class Generator {
         tmpProduct.setAvailableAmount(rs.getInt("availability"));
         return tmpProduct;
     }
+
     public static ProductReview rsToProductReview(ResultSet rs) throws SQLException {
         ProductReview productReview = new ProductReview();
         productReview.setReviewID(rs.getInt("reviewID"));
         productReview.setCustomerComment(rs.getString("customerComment"));
-        productReview.setProductID(rs.getInt("productID"));
+        productReview.setProductID(rs.getInt(productID));
         return productReview;
     }
+
+    public static ProductRate rsToProductRate(ResultSet rs) throws SQLException {
+        ProductRate productRate = new ProductRate();
+        productRate.setProductRateID(rs.getInt("rateID"));
+        productRate.setCustomerRate(rs.getInt("customerRate"));
+        productRate.setProductID(rs.getInt(productID));
+        return productRate;
+    }
+
+    public static Order rsToOrder(ResultSet rs) throws SQLException {
+        Order order = new Order();
+        order.setOrderID(rs.getInt("orderID"));
+        order.setProductID(rs.getInt("productID"));
+        order.setCustomerUsername(rs.getString("customerUsername"));
+        order.setOrderStatus(rs.getInt("orderStatus"));
+        order.setOrderDate(rs.getDate("orderDate"));
+        order.setSendingDate(rs.getDate("sendingDate"));
+        order.setReceivingDate(rs.getDate("receivingDate"));
+        return order;
+    }
+
     public static PreparedStatement userToPS(PreparedStatement preparedStmt, User user) throws SQLException {
         preparedStmt.setString(1, user.getFirstName());
         preparedStmt.setString(2, user.getLastName());
@@ -77,5 +106,14 @@ public class Generator {
         preparedStmt.setString(7, product.getShortDescription());
         preparedStmt.setInt(8, product.getAvailableAmount());
         return preparedStmt;
+    }
+
+    public static Date stringToDateConvertor(String date){
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        }catch (Exception e){
+            Starter.logger.warning("Couldn't convert string to date");
+            return new Date();
+        }
     }
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="900.0" maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.users.UserProfileController">
+<AnchorPane maxHeight="900.0" maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="back" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.users.UserProfileController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>
@@ -171,10 +171,14 @@
                               </HBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="107.0" prefWidth="836.0" spacing="20.0">
                                        <children>
                                           <Button mnemonicParsing="false" onAction="#onDeleteButtonClick" styleClass="delete-button" text="Delete this user" />
+                                          <Button mnemonicParsing="false" onAction="#onSendMessageClick" styleClass="color4-button" text="send message" />
                                        </children>
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
                                     </HBox>
                                  </children>
                               </VBox>

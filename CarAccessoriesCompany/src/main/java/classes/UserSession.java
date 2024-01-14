@@ -5,7 +5,7 @@ import helpers.Alerts;
 import helpers.stage_helpers.AuthenticationStageHelper;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ButtonType;
-import model.Product;
+import model.products.Product;
 import model.User;
 
 import java.util.Optional;

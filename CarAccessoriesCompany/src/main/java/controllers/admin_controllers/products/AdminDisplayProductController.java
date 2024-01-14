@@ -3,8 +3,10 @@ package controllers.admin_controllers.products;
 import cards.ProductReviewCard;
 import classes.DBConnector;
 import classes.UserSession;
+import controllers.admin_controllers.AdminNavBarActions;
 import database.deleting.ProductDeleter;
 import database.deleting.ProductReviewDeleter;
+import database.retrieving.RetrievingProductRates;
 import database.retrieving.RetrievingProductReviews;
 import helpers.Alerts;
 import helpers.stage_helpers.AdminStageHelper;
@@ -17,17 +19,19 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import model.Product;
-import model.ProductReview;
+import model.products.Product;
+import model.products.ProductRate;
+import model.products.ProductReview;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AdminDisplayProductController implements Initializable {
+public class AdminDisplayProductController extends AdminNavBarActions implements Initializable {
     // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
@@ -62,55 +66,9 @@ public class AdminDisplayProductController implements Initializable {
     private List<ProductReview> allReviews = new ArrayList<>();
     private int reviewPageNumber;
 
-    // -------------------------------------------------------------------------------------------------------------------- //
-    // ---------------------------------------- section2: Navigation button action ---------------------------------------- //
-    // -------------------------------------------------------------------------------------------------------------------- //
-    @FXML
-    void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
-    }
-
-    @FXML
-    void onOrdersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
-    }
-
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
-    }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section3: Page button actions ------------------------------------------- //
+    // ------------------------------------------ section2: Page button actions ------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     @FXML
     void onUpdateProductClick(ActionEvent event) {
@@ -140,7 +98,7 @@ public class AdminDisplayProductController implements Initializable {
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section4: Initialising actions ------------------------------------------ //
+    // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -149,7 +107,7 @@ public class AdminDisplayProductController implements Initializable {
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // -------------------------------------------- section5: Helper functions -------------------------------------------- //
+    // -------------------------------------------- section4: Helper functions -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void retrieveAllReviewsFromDB() {
         allReviews = (new RetrievingProductReviews(DBConnector.getConnector().getCon())).selectReviewsByProductID(String.valueOf(UserSession.getProductToDisplay().getProductID()));
@@ -180,8 +138,6 @@ public class AdminDisplayProductController implements Initializable {
     private void setProductFields() {
         Product tmpProduct = new Product(UserSession.getProductToDisplay());
         productPriceLabel.setText(String.valueOf(tmpProduct.getProductPrice()));
-        //TODO
-        //rate product
         productNameLabel.setText(tmpProduct.getProductName());
         productIDLabel.setText("ID: " + tmpProduct.getProductID());
         productCategoryLabel.setText(tmpProduct.getProductCategory());
@@ -190,6 +146,7 @@ public class AdminDisplayProductController implements Initializable {
         numberOfOrdersLabel.setText(String.valueOf(tmpProduct.getNumberOfOrders()));
         numberOfReviewsLabel.setText(String.valueOf(allReviews.size()));
         fillImage(tmpProduct.getImagePath());
+        findProductRate(tmpProduct.getProductID());
     }
 
     private void disableButton(Button button, boolean flag) {
@@ -238,5 +195,14 @@ public class AdminDisplayProductController implements Initializable {
                 Alerts.errorAlert(alertTitle, null, "This review belongs to the product with id = " + tmpReview.getProductID() + ", you can't delete it from here");
             }
         }
+    }
+
+    private void findProductRate(int productID) {
+        RetrievingProductRates retrievingProductRates = new RetrievingProductRates(DBConnector.getConnector().getCon());
+        List<ProductRate> rates = retrievingProductRates.selectRatesByProductID(String.valueOf(productID));
+        int numberOdRate = rates.isEmpty() ? 1 : rates.size();
+        double sum = 0;
+        for (ProductRate rate : rates) sum += rate.getCustomerRate();
+        productRateLabel.setText(new DecimalFormat("#.##").format(sum / numberOdRate));
     }
 }

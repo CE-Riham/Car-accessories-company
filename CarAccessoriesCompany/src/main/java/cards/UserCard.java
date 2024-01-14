@@ -27,7 +27,7 @@ public class UserCard {
 
     public UserCard(User user) {
         this.user = new User(user);
-        setCard("#EFEEEC");
+        setCard("#a1bbb6");
         setContainer();
         setImage(user.getImagePath());
         setHeader(user.getFirstName(), user.getLastName());
@@ -44,7 +44,7 @@ public class UserCard {
         card = new AnchorPane();
         card.setPrefHeight(270.0);
         card.setPrefWidth(225.0);
-        card.setStyle("-fx-background-color: " + color + ";");
+        card.setStyle("-fx-background-color: " + color + "; -fx-border-color: black; -fx-border-width: 2;");
     }
 
     public void setContainer() {
@@ -100,7 +100,7 @@ public class UserCard {
     private void setShowProfileButton() {
         showProfileButton = new Button("show profile");
         showProfileButton.setMnemonicParsing(false);
-        showProfileButton.getStyleClass().add("color4-button");
+        showProfileButton.getStyleClass().add("color4-2-button");
         showProfileButton.setFont(Font.font(12.0));
         showProfileButton.setOnAction(e -> {
             UserSession.setUserToDisplay(user);

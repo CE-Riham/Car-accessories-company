@@ -12,13 +12,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="900.0" maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.AdminProfileController">
+<VBox prefHeight="200.0" prefWidth="100.0" styleClass="back" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.AdminProfileController">
    <children>
-      <VBox prefHeight="900.0" prefWidth="1600.0">
+      <VBox prefHeight="900.0" prefWidth="1600.0" styleClass="back" stylesheets="@../../assets/style.css">
          <children>
-            <HBox prefHeight="80.0" prefWidth="1600.0" spacing="200.0" styleClass="admin-header" stylesheets="@../../assets/style.css">
+            <HBox prefHeight="75.0" prefWidth="1593.0" spacing="200.0" styleClass="admin-header" stylesheets="@../../assets/style.css">
                <children>
-                  <HBox prefHeight="81.0" prefWidth="1200.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
+                  <HBox prefHeight="81.0" prefWidth="1197.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
                      <children>
                         <Button fx:id="adminProfileButton" mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="View profile" />
                         <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Orders" />
@@ -54,16 +54,16 @@
                   </AnchorPane>
                </children>
             </HBox>
-            <AnchorPane prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+            <AnchorPane prefHeight="820.0" prefWidth="1600.0" styleClass="back" stylesheets="@../../assets/style.css">
                <children>
-                  <AnchorPane prefHeight="820.0" prefWidth="1600.0" styleClass="back">
+                  <AnchorPane layoutX="-3.0" layoutY="2.0" prefHeight="809.0" prefWidth="1600.0">
                      <children>
                         <ImageView fitHeight="800.0" fitWidth="1400.0" layoutX="100.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../assets/Pages/adminProfilePage.png" />
                            </image>
                         </ImageView>
-                        <VBox layoutX="574.0" layoutY="103.0" prefHeight="587.0" prefWidth="888.0">
+                        <VBox alignment="CENTER" layoutX="534.0" layoutY="65.0" prefHeight="663.0" prefWidth="969.0" stylesheets="@../../assets/style.css">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="888.0" spacing="10.0">
                                  <children>
@@ -169,28 +169,37 @@
                                     <Insets left="50.0" top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox prefHeight="0.0" prefWidth="969.0">
                                  <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="969.0" spacing="20.0">
                                        <children>
                                           <Button fx:id="editProfileButton" mnemonicParsing="false" onAction="#onEditProfileClick" styleClass="color1-button" text="Edit profile" />
                                           <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#onChangePasswordClick" styleClass="color1-button" text="Change password" />
                                        </children>
+                                       <padding>
+                                          <Insets right="50.0" />
+                                       </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="969.0" spacing="20.0">
                                        <children>
                                           <Button fx:id="cancelProfileButton" mnemonicParsing="false" onAction="#onCancelProfileClick" styleClass="color1-button" text="cancel" visible="false" />
                                           <Button fx:id="saveProfileButton" mnemonicParsing="false" onAction="#onSaveProfileClick" styleClass="color1-button" text="save" visible="false" />
                                        </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets right="50.0" />
+                                       </padding>
                                     </HBox>
                                  </children>
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER" layoutX="100.0" layoutY="65.0" prefHeight="663.0" prefWidth="380.0" spacing="20.0">
+                        <VBox alignment="CENTER" layoutX="100.0" layoutY="65.0" prefHeight="663.0" prefWidth="380.0" spacing="20.0" stylesheets="@../../assets/style.css">
                            <children>
                               <Circle fx:id="profilePicture" fill="WHITE" radius="120.0" stroke="#231f2080" strokeType="INSIDE" />
-                              <Label fx:id="firstName" prefWidth="300.0" styleClass="profile-label" text="FirstName" textAlignment="CENTER">
+                              <Label fx:id="firstName" prefWidth="300.0" styleClass="profile-label" text="FirstName">
                                  <font>
                                     <Font size="45.0" />
                                  </font>
@@ -213,4 +222,4 @@
          </children>
       </VBox>
    </children>
-</AnchorPane>
+</VBox>

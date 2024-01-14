@@ -2,7 +2,7 @@ package database.updating;
 
 import helpers.DataValidation;
 import helpers.Generator;
-import model.Product;
+import model.products.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -71,7 +71,6 @@ public class ProductUpdater {
             setStatus("Product " + fieldName + " was updated successfully");
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             setStatus("Couldn't update product " + fieldName);
             return false;
         }

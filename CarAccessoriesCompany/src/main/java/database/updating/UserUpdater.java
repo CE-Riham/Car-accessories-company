@@ -79,7 +79,6 @@ public class UserUpdater {
             setStatus("User " + fieldName + " was updated successfully");
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             setStatus("Couldn't update user " + fieldName);
             return false;
         }
