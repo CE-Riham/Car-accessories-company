@@ -24,7 +24,7 @@ public class ProductReviewCard {
         card.setPrefHeight(60);
         card.setPrefWidth(235);
         card.setSpacing(10);
-        card.setStyle("-fx-background-color: #e9e1de; -fx-border-color: black;");
+        card.setStyle("-fx-background-color: #a1bbb6; -fx-border-color: black;");
     }
 
     public void addIdAndCommentToContainer(int id, String comment){

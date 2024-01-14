@@ -3,6 +3,7 @@ package controllers.admin_controllers.products;
 import cards.ProductReviewCard;
 import classes.DBConnector;
 import classes.UserSession;
+import controllers.admin_controllers.AdminNavBarActions;
 import database.deleting.ProductDeleter;
 import database.deleting.ProductReviewDeleter;
 import database.retrieving.RetrievingProductRates;
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AdminDisplayProductController implements Initializable {
+public class AdminDisplayProductController extends AdminNavBarActions implements Initializable {
     // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
@@ -65,55 +66,9 @@ public class AdminDisplayProductController implements Initializable {
     private List<ProductReview> allReviews = new ArrayList<>();
     private int reviewPageNumber;
 
-    // -------------------------------------------------------------------------------------------------------------------- //
-    // ---------------------------------------- section2: Navigation button action ---------------------------------------- //
-    // -------------------------------------------------------------------------------------------------------------------- //
-    @FXML
-    void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
-    }
-
-    @FXML
-    void onOrdersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
-    }
-
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
-    }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section3: Page button actions ------------------------------------------- //
+    // ------------------------------------------ section2: Page button actions ------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     @FXML
     void onUpdateProductClick(ActionEvent event) {
@@ -143,7 +98,7 @@ public class AdminDisplayProductController implements Initializable {
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section4: Initialising actions ------------------------------------------ //
+    // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -152,7 +107,7 @@ public class AdminDisplayProductController implements Initializable {
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // -------------------------------------------- section5: Helper functions -------------------------------------------- //
+    // -------------------------------------------- section4: Helper functions -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void retrieveAllReviewsFromDB() {
         allReviews = (new RetrievingProductReviews(DBConnector.getConnector().getCon())).selectReviewsByProductID(String.valueOf(UserSession.getProductToDisplay().getProductID()));
@@ -248,6 +203,6 @@ public class AdminDisplayProductController implements Initializable {
         int numberOdRate = rates.isEmpty() ? 1 : rates.size();
         double sum = 0;
         for (ProductRate rate : rates) sum += rate.getCustomerRate();
-        productRateLabel.setText(new DecimalFormat("#.##").format(sum/numberOdRate));
+        productRateLabel.setText(new DecimalFormat("#.##").format(sum / numberOdRate));
     }
 }

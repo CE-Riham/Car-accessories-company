@@ -14,13 +14,13 @@ import static org.junit.Assert.assertEquals;
 public class DBRetrievingProducts {
     private String condition, status;
     private DatabaseConnection connection;
-    private RetrievingProducts retrievingData;
+    private RetrievingOrders retrievingData;
 
     @Before
     @Given("I'm connected to a database to retrieve products")
     public void iMConnectedToADatabase() {
         connection = new DatabaseConnection(3306, "caraccessoriestest", "root", "12345678password");
-        retrievingData = new RetrievingProducts(connection.getCon());
+        retrievingData = new RetrievingOrders(connection.getCon());
     }
 
     @When("I fill in condition with {string} for products")

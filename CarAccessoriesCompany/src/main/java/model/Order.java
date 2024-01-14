@@ -11,6 +11,9 @@ public class Order {
     private Date sendingDate;
     private Date receivingDate;
 
+    public Order(){
+
+    }
     public Order(int orderID, int productID, String customerUsername, int orderStatus, Date orderDate, Date sendingDate, Date receivingDate){
         setOrderID(orderID);
         setProductID(productID);
@@ -74,5 +77,18 @@ public class Order {
 
     public void setReceivingDate(Date receivingDate) {
         this.receivingDate = receivingDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID=" + orderID +
+                ", productID=" + productID +
+                ", customerUsername='" + customerUsername + '\'' +
+                ", orderStatus=" + orderStatus +
+                ", orderDate=" + orderDate +
+                ", sendingDate=" + sendingDate +
+                ", receivingDate=" + receivingDate +
+                '}';
     }
 }

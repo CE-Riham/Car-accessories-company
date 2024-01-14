@@ -28,4 +28,6 @@ module com.example.caraccessoriescompany {
     opens controllers.admin_controllers.categories to javafx.fxml;
     exports controllers.admin_controllers.users;
     opens controllers.admin_controllers.users to javafx.fxml;
+    exports controllers.admin_controllers.orders;
+    opens controllers.admin_controllers.orders to javafx.fxml;
 }

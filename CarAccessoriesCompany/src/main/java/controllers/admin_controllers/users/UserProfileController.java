@@ -139,6 +139,10 @@ public class UserProfileController implements Initializable {
         }
     }
 
+    @FXML
+    void onSendMessageClick(ActionEvent event){
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getProfileFromDB();

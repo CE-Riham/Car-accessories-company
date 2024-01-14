@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.admins.AdminAdminsController">
+<AnchorPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="back" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.admins.AdminAdminsController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>

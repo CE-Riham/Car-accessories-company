@@ -189,3 +189,23 @@ m
 =src/main/java/database/retrieving/RetrievingProductRates.java,9\0\90e2ffd581da98264c0f456288d0b6d9d738f94a
 N
 src/main/java/model/Order.java,d\a\da40720aeeaaed55b9015b87ce0ba9418140ed2f
+v
+Fsrc/main/java/controllers/admin_controllers/AdminOrdersController.java,8\e\8e4c6f6885355836c70f2d3c30c8b9d90020e948
+}
+Msrc/main/java/controllers/admin_controllers/orders/AdminOrdersController.java,9\a\9a666647dacacd75c3ac3888ecc3570817f9cbaf
+
+Osrc/main/java/controllers/admin_controllers/products/AdminOrdersController.java,d\1\d14216465067d16ad06c5c138c7cd90fa405d929
+s
+Csrc/main/java/controllers/admin_controllers/adminNavBarActions.java,c\4\c4ad2047dd74de8444cbd389404eb8b329d066ee
+s
+Csrc/main/java/controllers/admin_controllers/AdminNavBarActions.java,d\6\d68f803c64b87771a937dc13da356b623b4d6870
+g
+7src/main/java/database/retrieving/RetrievingOrders.java,9\d\9ddc0f92b1f1132f3d1cfde0751c7e20b348318c
+f
+6src/main/java/helpers/comparators/OrderComparator.java,5\5\55b7018842cb7d51dc93a86d57c8c31b8538a393
+^
+.src/main/java/helpers/filters/OrderFilter.java,3\3\33df9e6cb0f6dcf1630bbbdd54ca41aa7a7d6b10
+N
+src/main/java/cards/Order.java,b\b\bb93b4cbcf73ed2c7208b071095f2e0c549eda58
+R
+"src/main/java/cards/OrderCard.java,9\6\9618b66171e384ac204a96e8e15f674ab7f187fe

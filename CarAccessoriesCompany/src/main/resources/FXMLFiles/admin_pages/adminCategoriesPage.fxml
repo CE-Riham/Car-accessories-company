@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxWidth="1600.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.categories.AdminCategoriesController">
+<AnchorPane maxWidth="1600.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="back" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.categories.AdminCategoriesController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0">
          <children>
@@ -61,13 +61,13 @@
                         </VBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                            <children>
-                              <Button fx:id="prevButton" mnemonicParsing="false" onAction="#onPrevButtonClick" style="-fx-background-color: #D6C8C1; -fx-text-fill: #414141; -fx-font-weight: regular;" styleClass="color1-button" text="prev" />
-                              <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onNextButtonClick" style="-fx-background-color: #D6C8C1; -fx-text-fill: #414141; -fx-font-weight: regular;" styleClass="color1-button" text="next" />
+                              <Button fx:id="prevButton" mnemonicParsing="false" onAction="#onPrevButtonClick" styleClass="color1-button" text="prev" />
+                              <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onNextButtonClick" styleClass="color1-button" text="next" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#onAddCategoryClick" style="-fx-background-color: #D6C8C1; -fx-text-fill: #414141; -fx-font-weight: regular;" styleClass="color1-button" text="Add a new category" />
+                              <Button mnemonicParsing="false" onAction="#onAddCategoryClick" styleClass="color4-button" text="Add a new category" />
                            </children>
                            <padding>
                               <Insets right="150.0" top="-50.0" />
