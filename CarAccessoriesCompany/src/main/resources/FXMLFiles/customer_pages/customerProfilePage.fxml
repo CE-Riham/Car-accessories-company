@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="200.0" prefWidth="100.0" styleClass="back" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.AdminProfileController">
+<VBox prefHeight="200.0" prefWidth="100.0" styleClass="back" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.customer_controllers.CustomerProfileController">
    <children>
       <VBox prefHeight="900.0" prefWidth="1600.0" styleClass="back" stylesheets="@../../assets/style.css">
          <children>
@@ -21,14 +21,14 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="98.0" prefWidth="734.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
                      <children>
                         <Button fx:id="homaPageButton" mnemonicParsing="false" onAction="#onHomePageClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Home" />
-                        <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="My orders" />
+                        <Button mnemonicParsing="false" onAction="#onMyOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="My orders" />
                         <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Installation" />
                         <Button fx:id="customerProfileButton" mnemonicParsing="false" onAction="#onCustomerProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="My profile" />
                      </children>
                   </HBox>
                   <AnchorPane prefHeight="98.0" prefWidth="407.0">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" layoutX="-10.0" layoutY="-2.0" prefHeight="100.0" prefWidth="680.0" spacing="30.0">
+                        <HBox alignment="CENTER_RIGHT" layoutX="544.0" layoutY="-2.0" prefHeight="100.0" prefWidth="126.0" spacing="30.0">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
@@ -45,8 +45,8 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <Button layoutX="57.0" layoutY="25.0" mnemonicParsing="false" onAction="#onNotificationsCLick" prefHeight="45.0" prefWidth="40.0" styleClass="transparent-button" />
-                        <Button layoutX="120.0" layoutY="25.0" mnemonicParsing="false" onAction="#onLogoutClick" prefHeight="45.0" prefWidth="40.0" styleClass="transparent-button" />
+                        <Button layoutX="536.0" layoutY="27.0" mnemonicParsing="false" onAction="#onNotificationsCLick" prefHeight="45.0" prefWidth="46.0" styleClass="transparent-button" />
+                        <Button layoutX="601.0" layoutY="26.0" mnemonicParsing="false" onAction="#onLogoutClick" prefHeight="45.0" prefWidth="40.0" styleClass="transparent-button" />
                      </children>
                   </AnchorPane>
                </children>

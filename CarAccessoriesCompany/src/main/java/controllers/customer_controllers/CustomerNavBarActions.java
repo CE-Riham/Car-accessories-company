@@ -19,8 +19,8 @@ public class CustomerNavBarActions {
     }
 
     @FXML
-    protected void onOrdersClick(ActionEvent event) {
-        AdminStageHelper.showAdminOrdersPage(event);
+    protected void onMyOrdersClick(ActionEvent event) {
+        CustomerStageHelper.showCustomerOrders(event);
     }
 
     @FXML

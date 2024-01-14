@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CustomerStageHelper {
+    private CustomerStageHelper(){
+        Starter.logger.info("Hi customer stage helper :)");
+    }
     protected static void showPage(ActionEvent event, String path, int width, int height) throws IOException {
         if (event.getSource() instanceof Node source) {
             Parent root = FXMLLoader.load(CustomerStageHelper.class.getResource(path));
@@ -43,8 +46,16 @@ public class CustomerStageHelper {
         try {
             showPage(event, "/FXMLFiles/customer_pages/customerProfilePage.fxml", 1615, 938);
         } catch (Exception e) {
-            e.printStackTrace();
             Starter.logger.warning("Can't open customer profile page");
+        }
+    }
+
+    public static void showCustomerDisplayProductPage(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/customer_pages/customerProductPage.fxml", 1615, 965);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Starter.logger.warning("Can't open customer display product page");
         }
     }
 }

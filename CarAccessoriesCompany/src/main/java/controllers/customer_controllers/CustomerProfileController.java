@@ -2,7 +2,6 @@ package controllers.customer_controllers;
 
 import classes.DBConnector;
 import classes.UserSession;
-import controllers.admin_controllers.AdminNavBarActions;
 import database.updating.UserUpdater;
 import helpers.Alerts;
 import helpers.DataValidation;
@@ -24,6 +23,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerProfileController extends CustomerNavBarActions implements Initializable {
+
     // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
@@ -215,7 +215,7 @@ public class CustomerProfileController extends CustomerNavBarActions implements 
         });
     }
 
-    private User prepareAdminToUpdate() {
+    private User prepareCustomerToUpdate() {
         //TODO
         //edit address
         String email = emailTextField.getText();
@@ -224,7 +224,7 @@ public class CustomerProfileController extends CustomerNavBarActions implements 
         String phone = phoneTextField.getText();
         return new User(UserSession.getCurrentUser().getUsername(), firstNameTmp, lastNameTmp, phone,
                 UserSession.getCurrentUser().getPassword(), email, UserSession.getCurrentUser().getImagePath(),
-                "admin", UserSession.getCurrentUser().getAddress());
+                "customer", UserSession.getCurrentUser().getAddress());
     }
 
     private void showUpdateProfileResult(Boolean successfulUpdate, User user) {
@@ -237,7 +237,7 @@ public class CustomerProfileController extends CustomerNavBarActions implements 
     }
 
     private void handleSaveProfileClick() {
-        User user = prepareAdminToUpdate();
+        User user = prepareCustomerToUpdate();
         String condition = "where username = \'" + usernameTextField.getText() + "\';";
         showUpdateProfileResult(dataUpdater.updateUsersAllFields(user, condition), user);
         openProfile();
