@@ -66,7 +66,7 @@ public class LoginController {
         if (userType.equals("admin"))
             AdminStageHelper.showAdminProfile(event);
         else if (userType.equals("customer"))
-            CustomerStageHelper.showAdminProducts(event);
+            CustomerStageHelper.showCustomerHomePage(event);
         else
             Starter.logger.info("installer");
     }

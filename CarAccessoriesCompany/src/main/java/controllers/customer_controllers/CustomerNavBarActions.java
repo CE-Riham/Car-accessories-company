@@ -2,24 +2,25 @@ package controllers.customer_controllers;
 
 import classes.UserSession;
 import helpers.stage_helpers.AdminStageHelper;
+import helpers.stage_helpers.CustomerStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class CustomerNavBarActions {
     @FXML
-    protected void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
+    protected void onHomePageClick(ActionEvent event) {
+        CustomerStageHelper.showCustomerHomePage(event);
+    }
+
+    @FXML
+    protected void onCustomerProfileClick(ActionEvent event) {
+        CustomerStageHelper.showCustomerProfile(event);
     }
 
     @FXML
     protected void onOrdersClick(ActionEvent event) {
         AdminStageHelper.showAdminOrdersPage(event);
-    }
-
-    @FXML
-    protected void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
     }
 
     @FXML

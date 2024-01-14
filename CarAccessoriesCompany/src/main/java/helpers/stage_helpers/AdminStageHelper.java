@@ -1,7 +1,6 @@
 package helpers.stage_helpers;
 
 import classes.Starter;
-import helpers.common.StageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,12 +10,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AdminStageHelper extends StageHelper {
+public class AdminStageHelper{
 
     private AdminStageHelper() {
         throw new IllegalStateException("Utility class");
     }
-
+    protected static void showPage(ActionEvent event, String path, int width, int height) throws IOException {
+        if (event.getSource() instanceof Node source) {
+            Parent root = FXMLLoader.load(AdminStageHelper.class.getResource(path));
+            Scene scene = source.getScene();
+            Stage stage = (Stage) scene.getWindow();
+            scene.setRoot(root);
+            stage.setHeight(height);
+            stage.setWidth(width);
+            stage.centerOnScreen();
+        }
+    }
     public static void showAdminCategories(ActionEvent event) {
         try {
             showPage(event, "/FXMLFiles/admin_pages/adminCategoriesPage.fxml", 1615, 938);
@@ -93,6 +102,7 @@ public class AdminStageHelper extends StageHelper {
         try {
             showPage(event, "/FXMLFiles/admin_pages/adminOrdersPage.fxml", 1615, 965);
         } catch (Exception e) {
+            e.printStackTrace();
             Starter.logger.warning("Can't open admin orders page");
         }
     }

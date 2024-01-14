@@ -231,3 +231,7 @@ l
 .src/main/java/helpers/common/StageHelpers.java,8\f\8fcc95f4f7dc258133e1e984018157092c43028c
 ]
 -src/main/java/helpers/common/StageHelper.java,a\3\a32b4022b59a560414fef1f5ffae0f2a0a3ec2c3
+c
+3src/main/java/helpers/common/ProfileController.java,3\6\361b6b9f8d2d31f13b68b86ff35d6f8139f58837
+}
+Msrc/main/java/controllers/customer_controllers/CustomerProfileController.java,b\8\b80b67e2ffa3398a28946ad40370c12e1dccd75b

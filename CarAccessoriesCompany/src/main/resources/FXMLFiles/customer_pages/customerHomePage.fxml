@@ -20,10 +20,10 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="98.0" prefWidth="734.0" spacing="60.0" styleClass="admin-header-menu" stylesheets="@../../assets/style.css">
                      <children>
-                        <Button fx:id="homaPageButton" mnemonicParsing="false" onAction="#onProductsClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Home" />
+                        <Button fx:id="homaPageButton" mnemonicParsing="false" onAction="#onHomePageClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Home" />
                         <Button mnemonicParsing="false" onAction="#onOrdersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="My orders" />
                         <Button mnemonicParsing="false" onAction="#onInstallersClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="Installation" />
-                        <Button mnemonicParsing="false" onAction="#onAdminProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="My profile" />
+                        <Button mnemonicParsing="false" onAction="#onCustomerProfileClick" styleClass="admin-header-item" stylesheets="@../../assets/style.css" text="My profile" />
                      </children>
                   </HBox>
                   <AnchorPane prefHeight="98.0" prefWidth="407.0">
