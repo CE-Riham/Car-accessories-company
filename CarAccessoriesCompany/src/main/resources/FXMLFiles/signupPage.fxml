@@ -126,7 +126,7 @@
                                     <Font name="Arial" size="13.0" />
                                  </font>
                               </Label>
-                              <Hyperlink onAction="#onLoginClick" text="Login" textFill="#ae938d">
+                              <Hyperlink onAction="#onLoginClick" text="Login" textFill="#533029">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>

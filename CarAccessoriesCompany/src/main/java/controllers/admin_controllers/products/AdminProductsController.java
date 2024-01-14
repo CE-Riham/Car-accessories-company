@@ -3,6 +3,7 @@ package controllers.admin_controllers.products;
 import cards.ProductCard;
 import classes.DBConnector;
 import classes.UserSession;
+import controllers.admin_controllers.AdminNavBarActions;
 import database.retrieving.RetrievingCategories;
 import database.retrieving.RetrievingProducts;
 import helpers.comparators.ProductComparator;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdminProductsController implements Initializable {
+public class AdminProductsController extends AdminNavBarActions implements Initializable {
 
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
 
@@ -62,53 +63,8 @@ public class AdminProductsController implements Initializable {
     @FXML
     private ComboBox<String> categoryCombo;
 
-    // ---------------------------------------- section2: Navigation button action ---------------------------------------- //
 
-    @FXML
-    void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
-    }
-
-    @FXML
-    void onOrdersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
-    }
-
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
-    }
-
-    // ------------------------------------------ section3: Page button actions ------------------------------------------- //
+    // ------------------------------------------ section2: Page button actions ------------------------------------------- //
 
     @FXML
     void filterProducts(Event event) {
@@ -132,17 +88,17 @@ public class AdminProductsController implements Initializable {
         fillProducts();
     }
 
-    // ------------------------------------------ section4: Initialising actions ------------------------------------------ //
+    // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        activateMenuButton();
+        activateMenuButton(productsButton);
         getAllProductsFromDB();
         fillAllComboBoxes();
         fillFilteredData();
     }
 
-    // -------------------------------------------- section5: Fill combo Boxes -------------------------------------------- //
+    // -------------------------------------------- section4: Fill combo Boxes -------------------------------------------- //
 
     private void fillAllComboBoxes() {
         fillCategoryCombo();
@@ -177,7 +133,7 @@ public class AdminProductsController implements Initializable {
         sortByCombo.setValue(allFields.get(0));
     }
 
-    // ----------------------------------------- section6: Display toViewProducts ----------------------------------------- //
+    // ----------------------------------------- section5: Display toViewProducts ----------------------------------------- //
 
     private void fillProducts() {
         fillRow(row1, pageNumber * 12);
@@ -193,12 +149,7 @@ public class AdminProductsController implements Initializable {
         disableButton(nextButton, ((index + 6) >= toViewProducts.size()));
     }
 
-    // --------------------------------------------- section7: helper methods --------------------------------------------- //
-
-    private void activateMenuButton() {
-        productsButton.setStyle("-fx-border-color: #C9B3AD;");
-    }
-
+    // --------------------------------------------- section6: helper methods --------------------------------------------- //
     private void getAllProductsFromDB() {
         RetrievingProducts productsRetriever = new RetrievingProducts(DBConnector.getConnector().getCon());
         allProducts = productsRetriever.selectAllProducts();

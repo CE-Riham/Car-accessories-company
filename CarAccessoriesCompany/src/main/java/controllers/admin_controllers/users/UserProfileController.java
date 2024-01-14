@@ -3,6 +3,7 @@ package controllers.admin_controllers.users;
 import classes.DBConnector;
 import classes.Starter;
 import classes.UserSession;
+import controllers.admin_controllers.AdminNavBarActions;
 import database.deleting.UserDeleter;
 import helpers.Alerts;
 import helpers.stage_helpers.AdminStageHelper;
@@ -22,7 +23,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class UserProfileController implements Initializable {
+public class UserProfileController extends AdminNavBarActions implements Initializable {
     @FXML
     private Label firstName;
     @FXML
@@ -68,52 +69,6 @@ public class UserProfileController implements Initializable {
     }
 
     @FXML
-    void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
-    }
-
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onOrdersClick(ActionEvent event) {
-        //TODO
-    }
-
-    @FXML
-    void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-        Starter.logger.info("beeb");
-    }
-
-
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
-    }
-
-    @FXML
     void onDeleteButtonClick(ActionEvent event) {
         String title = "Delete user";
         if (UserSession.getUserToDisplay().getUsername().equals(UserSession.getCurrentUser().getUsername())) {
@@ -140,9 +95,10 @@ public class UserProfileController implements Initializable {
     }
 
     @FXML
-    void onSendMessageClick(ActionEvent event){
+    void onSendMessageClick(ActionEvent event) {
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getProfileFromDB();

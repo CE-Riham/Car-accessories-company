@@ -3,6 +3,7 @@ package controllers.admin_controllers.customers;
 import cards.UserCard;
 import classes.DBConnector;
 import classes.UserSession;
+import controllers.admin_controllers.AdminNavBarActions;
 import database.retrieving.RetrievingUser;
 import helpers.stage_helpers.AdminStageHelper;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdminCustomersController implements Initializable {
+public class AdminCustomersController extends AdminNavBarActions implements Initializable {
 
     private List<User> allCustomers;
     private int pageNumber = 0;
@@ -33,55 +34,6 @@ public class AdminCustomersController implements Initializable {
     @FXML
     private HBox row2;
 
-    private void activateMenuButton() {
-        customersButton.setStyle("-fx-border-color: #C9B3AD;");
-    }
-
-    @FXML
-    void onAdminProfileClick(ActionEvent event) {
-        AdminStageHelper.showAdminProfile(event);
-    }
-
-    @FXML
-    void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
-    }
-
-    @FXML
-    void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
-    void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    void onInstallersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onLogoutClick(ActionEvent event) {
-        UserSession.logoutUser(event);
-    }
-
-    @FXML
-    void onNotificationsCLick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onOrdersClick(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onProductsClick(ActionEvent event) {
-        AdminStageHelper.showAdminProducts(event);
-    }
-
     @FXML
     void onPrevButtonClick(ActionEvent event) {
         pageNumber--;
@@ -96,7 +48,7 @@ public class AdminCustomersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        activateMenuButton();
+        activateMenuButton(customersButton);
         fillCustomers();
     }
 
