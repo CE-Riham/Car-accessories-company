@@ -5,7 +5,6 @@ import helpers.Generator;
 import model.Order;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -29,30 +28,6 @@ public class RetrievingOrders {
 
     public List<Order> selectOrdersWithCondition(String condition) {
         List<Order> orders = new ArrayList<>();
-        String query = "SELECT * FROM orders ?";
-        Statement st = null;
-        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-            st = con.createStatement();
-            preparedStatement.setString(1, condition);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs != null && rs.next())
-                orders.add(Generator.rsToOrder(rs));
-            setStatus("Retrieving orders successfully");
-            return orders;
-        } catch (Exception e) {
-            setStatus("Error while retrieving orders from database");
-            return new ArrayList<>();
-        } finally {
-            try {
-                if (st != null) st.close();
-            } catch (Exception e) {
-                Starter.logger.warning("can't close statement");
-            }
-        }
-    }
-
-    public List<Order> selectProductsWithCondition(String condition) {
-        List<Order> orders = new ArrayList<>();
         StringBuilder query = new StringBuilder("SELECT * FROM orders ").append(condition);
         Statement st = null;
         try {
@@ -75,11 +50,11 @@ public class RetrievingOrders {
     }
 
     public List<Order> selectAllOrders() {
-        return selectProductsWithCondition("");
+        return selectOrdersWithCondition("");
     }
 
     private List<Order> selectFromOrdersTable(String field, String input) {
-        return selectProductsWithCondition("where " + field + " = \'" + input + "\'");
+        return selectOrdersWithCondition("where " + field + " = \'" + input + "\'");
     }
 
     public List<Order> findOrdersByCustomerUsername(String customerUsername) {

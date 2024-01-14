@@ -28,7 +28,7 @@ public class RetrievingProducts {
 
     public List<Product> selectProductsWithCondition(String condition) {
         List<Product> products = new ArrayList<>();
-        StringBuilder query = new StringBuilder("SELECT * FROM products ?").append(condition);
+        StringBuilder query = new StringBuilder("SELECT * FROM products ").append(condition);
         Statement st = null;
         try {
             st = con.createStatement();

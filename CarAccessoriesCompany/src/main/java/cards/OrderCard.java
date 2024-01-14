@@ -14,24 +14,16 @@ public class OrderCard {
     private Button showOrderButton;
     private Order order;
 
-    public HBox getCard() {
-        return card;
-    }
-
     public OrderCard(Order order) {
         this.order = order;
         setCard("#a1bbb6");
+        setObjects();
+        createShowOrderButton();
         addToCard();
     }
 
-    private Label createLabel(String text, double width) {
-        Label label = new Label(text);
-        label.setPrefWidth(width);
-        label.setMinWidth(width);
-        label.setMaxWidth(width);
-        label.setPrefHeight(19.0);
-        label.setFont(new Font("System Bold", 13.0));
-        return label;
+    public HBox getCard() {
+        return card;
     }
 
     private void setObjects() {
@@ -50,9 +42,17 @@ public class OrderCard {
         //TODO
     }
 
+    private Label createLabel(String text, double width) {
+        Label label = new Label(text);
+        label.setPrefWidth(width);
+        label.setMinWidth(width);
+        label.setMaxWidth(width);
+        label.setPrefHeight(19.0);
+        label.setFont(new Font("System Bold", 13.0));
+        return label;
+    }
+
     private void addToCard() {
-        setObjects();
-        createShowOrderButton();
         card.getChildren().addAll(orderID, dateLabel, showOrderButton);
     }
 
@@ -63,5 +63,4 @@ public class OrderCard {
         card.setPrefWidth(350.0);
         card.setStyle("-fx-background-color: " + color + ";");
     }
-
 }
