@@ -1,6 +1,5 @@
-package controllers.admin_controllers.products;
+package controllers.customer_controllers;
 
-import controllers.admin_controllers.AdminNavBarActions;
 import helpers.common.ProductsController;
 import helpers.comparators.ProductComparator;
 import helpers.filters.ProductFilter;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdminProductsController extends AdminNavBarActions implements Initializable {
+public class CustomerHomeController extends CustomerNavBarActions implements Initializable {
     // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
@@ -28,7 +27,7 @@ public class AdminProductsController extends AdminNavBarActions implements Initi
     private List<Product> toViewProducts;
     private int pageNumber = 0;
     @FXML
-    private Button productsButton;
+    private Button homaPageButton;
     @FXML
     private Button prevButton;
     @FXML
@@ -58,11 +57,6 @@ public class AdminProductsController extends AdminNavBarActions implements Initi
     }
 
     @FXML
-    void onAddProductClick(ActionEvent event) {
-        AdminStageHelper.showAddProducts(event);
-    }
-
-    @FXML
     void onPrevButtonClick(ActionEvent event) {
         pageNumber--;
         ProductsController.fillFilteredData(toViewProducts, row1, row2, pageNumber);
@@ -81,7 +75,7 @@ public class AdminProductsController extends AdminNavBarActions implements Initi
     // -------------------------------------------------------------------------------------------------------------------- //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        activateMenuButton(productsButton);
+        activateMenuButton(homaPageButton);
         allProducts = ProductsController.getAllProductsFromDB();
         toViewProducts = new ArrayList<>(allProducts);
         ProductsController.fillAllComboBoxes(categoryCombo, searchByCombo, sortTypeCombo, sortByCombo);

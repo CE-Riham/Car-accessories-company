@@ -1,4 +1,4 @@
-package controllers.admin_controllers;
+package controllers.customer_controllers;
 
 import classes.UserSession;
 import helpers.stage_helpers.AdminStageHelper;
@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class AdminNavBarActions {
+public class CustomerNavBarActions {
     @FXML
     protected void onAdminProfileClick(ActionEvent event) {
         AdminStageHelper.showAdminProfile(event);
@@ -23,22 +23,7 @@ public class AdminNavBarActions {
     }
 
     @FXML
-    protected void onCategoriesClick(ActionEvent event) {
-        AdminStageHelper.showAdminCategories(event);
-    }
-
-    @FXML
-    protected void onCustomersClick(ActionEvent event) {
-        AdminStageHelper.showAdminCustomers(event);
-    }
-
-    @FXML
     protected void onInstallersClick(ActionEvent event) {
-    }
-
-    @FXML
-    protected void onAdminsClick(ActionEvent event) {
-        AdminStageHelper.showAdminAdmins(event);
     }
 
     @FXML
@@ -54,6 +39,7 @@ public class AdminNavBarActions {
     protected void activateMenuButton(Button button) {
         button.setStyle("-fx-border-color: #76453B;"); //color5
     }
+
     protected void disableButton(Button button, boolean flag) {
         button.setDisable(flag);
     }

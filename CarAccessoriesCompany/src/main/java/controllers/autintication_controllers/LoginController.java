@@ -1,4 +1,4 @@
-package controllers;
+package controllers.autintication_controllers;
 
 import authentication.Login;
 import classes.DBConnector;
@@ -7,6 +7,7 @@ import classes.UserSession;
 import helpers.Alerts;
 import helpers.stage_helpers.AdminStageHelper;
 import helpers.stage_helpers.AuthenticationStageHelper;
+import helpers.stage_helpers.CustomerStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -65,7 +66,7 @@ public class LoginController {
         if (userType.equals("admin"))
             AdminStageHelper.showAdminProfile(event);
         else if (userType.equals("customer"))
-            Starter.logger.info("customer");
+            CustomerStageHelper.showAdminProducts(event);
         else
             Starter.logger.info("installer");
     }

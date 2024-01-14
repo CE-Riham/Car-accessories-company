@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="back" stylesheets="@../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="back" stylesheets="@../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.autintication_controllers.SignUpController">
 <children>
       <ImageView fitHeight="837.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/Pages/signupGUI.png" />
+            <Image url="@../../assets/Pages/signupGUI.png" />
          </image>
       </ImageView>
       <VBox alignment="CENTER" prefHeight="837.0" prefWidth="606.0" style="-fx-background-color: transparent;">
@@ -26,8 +26,8 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
                      <children>
-                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../assets/style.css" text="First Name" />
-                        <TextField fx:id="firstNameTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../assets/style.css">
+                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../../assets/style.css" text="First Name" />
+                        <TextField fx:id="firstNameTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../../assets/style.css">
                            <HBox.margin>
                               <Insets bottom="2.0" />
                            </HBox.margin>
@@ -40,8 +40,8 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
                      <children>
-                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../assets/style.css" text="Last Name" />
-                        <TextField fx:id="lastNameTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../assets/style.css">
+                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../../assets/style.css" text="Last Name" />
+                        <TextField fx:id="lastNameTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../../assets/style.css">
                            <HBox.margin>
                               <Insets bottom="2.0" />
                            </HBox.margin>
@@ -54,8 +54,8 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
                      <children>
-                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../assets/style.css" text="Username" />
-                        <TextField fx:id="usernameTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../assets/style.css">
+                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../../assets/style.css" text="Username" />
+                        <TextField fx:id="usernameTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../../assets/style.css">
                            <HBox.margin>
                               <Insets bottom="2.0" />
                            </HBox.margin>
@@ -68,8 +68,8 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
                      <children>
-                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../assets/style.css" text="Email" />
-                        <TextField fx:id="emailTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../assets/style.css">
+                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../../assets/style.css" text="Email" />
+                        <TextField fx:id="emailTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../../assets/style.css">
                            <HBox.margin>
                               <Insets bottom="2.0" />
                            </HBox.margin>
@@ -82,8 +82,8 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
                      <children>
-                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../assets/style.css" text="Phone" />
-                        <TextField fx:id="phoneTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../assets/style.css">
+                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../../assets/style.css" text="Phone" />
+                        <TextField fx:id="phoneTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field" stylesheets="@../../assets/style.css">
                            <HBox.margin>
                               <Insets bottom="2.0" />
                            </HBox.margin>
@@ -96,7 +96,7 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="56.0" prefHeight="43.0" prefWidth="606.0" spacing="5.0">
                      <children>
-                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../assets/style.css" text="password" />
+                        <Label alignment="BOTTOM_CENTER" prefWidth="110.0" styleClass="auth-text-field-label" stylesheets="@../../assets/style.css" text="password" />
                         <PasswordField fx:id="passwordTextField" maxWidth="250.0" prefHeight="25.0" prefWidth="250.0" styleClass="auth-text-field">
                            <HBox.margin>
                               <Insets bottom="2.0" />
@@ -110,7 +110,7 @@
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onRegisterClick" prefHeight="43.0" prefWidth="352.0" styleClass="color1-button" stylesheets="@../assets/style.css" text="Register" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onRegisterClick" prefHeight="43.0" prefWidth="352.0" styleClass="color1-button" stylesheets="@../../assets/style.css" text="Register" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -121,7 +121,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="22.0" prefWidth="606.0">
                            <children>
-                              <Label stylesheets="@../assets/style.css" text="Already have an account">
+                              <Label stylesheets="@../../assets/style.css" text="Already have an account">
                                  <font>
                                     <Font name="Arial" size="13.0" />
                                  </font>

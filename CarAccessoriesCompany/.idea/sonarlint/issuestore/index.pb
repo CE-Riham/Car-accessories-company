@@ -209,3 +209,25 @@ N
 src/main/java/cards/Order.java,b\b\bb93b4cbcf73ed2c7208b071095f2e0c549eda58
 R
 "src/main/java/cards/OrderCard.java,9\6\9618b66171e384ac204a96e8e15f674ab7f187fe
+v
+Fsrc/main/java/controllers/customer_controllers/AdminNavBarActions.java,f\3\f3338acbe99023f7289241be08520e0ee87fde53
+y
+Isrc/main/java/controllers/customer_controllers/CustomerNavBarActions.java,6\c\6cf18de4022c40f998e58f5cd718db5295cfdb11
+{
+Ksrc/main/java/controllers/customer_controllers/AdminProductsController.java,5\b\5be14dccc833aadbedaa8ad7395a6c35643cf973
+z
+Jsrc/main/java/controllers/customer_controllers/customerHomeController.java,4\7\4718e4bf35366d14f870008c4fc497f3be159577
+h
+8src/main/java/controllers/common/ProductsController.java,c\2\c26826af582ee53da0836d920d3187eef0dc37cc
+d
+4src/main/java/helpers/common/ProductsController.java,e\2\e2f4327493720d7ec138cd030f1e962b92ade8b9
+z
+Jsrc/main/java/controllers/customer_controllers/CustomerHomeController.java,8\2\82ee029d9ef139637876d914732b7231c27fa848
+x
+Hsrc/main/java/controllers/autintication_controllers/LoginController.java,f\c\fc4374de431918523fbb70621b5c23fc6c731aab
+l
+<src/main/java/helpers/stage_helpers/CustomerStageHelper.java,a\9\a95fefcd883c48bb944f4191c08999835c39be49
+^
+.src/main/java/helpers/common/StageHelpers.java,8\f\8fcc95f4f7dc258133e1e984018157092c43028c
+]
+-src/main/java/helpers/common/StageHelper.java,a\3\a32b4022b59a560414fef1f5ffae0f2a0a3ec2c3

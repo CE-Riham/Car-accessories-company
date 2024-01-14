@@ -1,11 +1,13 @@
 package controllers.admin_controllers.orders;
 
-import cards.OrderCard;
+import cards.ProductCard;
 import classes.DBConnector;
 import controllers.admin_controllers.AdminNavBarActions;
-import database.retrieving.RetrievingOrders;
-import helpers.comparators.OrderComparator;
-import helpers.filters.OrderFilter;
+import database.retrieving.RetrievingCategories;
+import database.retrieving.RetrievingProducts;
+import helpers.comparators.ProductComparator;
+import helpers.filters.ProductFilter;
+import helpers.stage_helpers.AdminStageHelper;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -13,10 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import model.Order;
+import javafx.scene.layout.HBox;
+import model.products.Product;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,40 +28,19 @@ public class AdminOrdersController extends AdminNavBarActions implements Initial
     // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
-    private List<Order> allOrders;
-    private List<Order> toViewOrders;
-    private List<Order> pendingOrders;
-    private List<Order> sentOrders;
-    private List<Order> receivedOrders;
-    private int pendingOrdersPageNumber = 0;
-    private int sentOrdersPageNumber = 0;
-    private int receivedOrdersPageNumber = 0;
-
-    // --------- Buttons
+    private List<Product> allProducts;
+    private List<Product> toViewProducts;
+    private int pageNumber = 0;
     @FXML
-    private Button ordersButton;
+    private Button homaPageButton;
     @FXML
-    private Button nextPendingOrdersButton;
+    private Button prevButton;
     @FXML
-    private Button nextReceivedOrdersButton;
+    private Button nextButton;
     @FXML
-    private Button nextSentOrdersButton;
+    private HBox row1;
     @FXML
-    private Button previousPendingOrdersButton;
-    @FXML
-    private Button previousReceivedOrdersButton;
-    @FXML
-    private Button previousSentOrdersButton;
-
-    // --------- Containers
-    @FXML
-    private VBox pendingOrdersContainer;
-    @FXML
-    private VBox receivedOrdersContainer;
-    @FXML
-    private VBox sentOrdersContainer;
-
-    // --------- Searching & Filtering
+    private HBox row2;
     @FXML
     private ComboBox<String> searchByCombo;
     @FXML
@@ -69,52 +49,61 @@ public class AdminOrdersController extends AdminNavBarActions implements Initial
     private ComboBox<String> sortByCombo;
     @FXML
     private ComboBox<String> sortTypeCombo;
+    @FXML
+    private ComboBox<String> categoryCombo;
 
 
     // -------------------------------------------------------------------------------------------------------------------- //
     // ------------------------------------------ section2: Page button actions ------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     @FXML
-    void filterOrders(Event event) {
-        handleFilterOrders();
+    void filterProducts(Event event) {
+        handleFilterProducts();
     }
 
     @FXML
-    void onPreviousPageClick(ActionEvent event) {
-        handlePreviousPage(event);
+    void onPrevButtonClick(ActionEvent event) {
+        pageNumber--;
+        fillFilteredData();
     }
 
     @FXML
-    void onNextPageClick(ActionEvent event) {
-        handleNextPage(event);
-    }
-
-
-    // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section4: Initialising actions ------------------------------------------ //
-    // -------------------------------------------------------------------------------------------------------------------- //
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        pendingOrders = new ArrayList<>();
-        sentOrders = new ArrayList<>();
-        receivedOrders = new ArrayList<>();
-        activateMenuButton(ordersButton);
-        fillAllComboBoxes();
-        getAllOrdersFromDB();
+    void onNextButtonClick(ActionEvent event) {
+        pageNumber++;
         fillFilteredData();
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // -------------------------------------------- section5: Fill combo-Boxes -------------------------------------------- //
+    // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
+    // -------------------------------------------------------------------------------------------------------------------- //
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        activateMenuButton(homaPageButton);
+        getAllProductsFromDB();
+        fillAllComboBoxes();
+        fillFilteredData();
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // -------------------------------------------- section4: Fill combo Boxes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void fillAllComboBoxes() {
+        fillCategoryCombo();
         fillSearchByCombo();
         fillSortTypeCombo();
         fillSortByCombo();
     }
 
+    private void fillCategoryCombo() {
+        RetrievingCategories categoriesRetriever = new RetrievingCategories(DBConnector.getConnector().getCon());
+        List<String> allCategories = categoriesRetriever.selectAllCategories();
+        allCategories.add("All Categories");
+        categoryCombo.setItems(FXCollections.observableArrayList(allCategories));
+        categoryCombo.setValue(allCategories.get(allCategories.size() - 1));
+    }
+
     private void fillSearchByCombo() {
-        List<String> allFields = List.of("orderID", "productID", "customerUsername", "orderDate", "sendingDate", "receivingDate");
+        List<String> allFields = List.of("productID", "productName", "description");
         searchByCombo.setItems(FXCollections.observableArrayList(allFields));
         searchByCombo.setValue(allFields.get(0));
     }
@@ -126,123 +115,60 @@ public class AdminOrdersController extends AdminNavBarActions implements Initial
     }
 
     private void fillSortByCombo() {
-        List<String> allFields = List.of("orderID", "productID", "orderDate", "sendingDate", "receivingDate");
+        List<String> allFields = List.of("productID", "price", "numberOfOrders", "availability");
         sortByCombo.setItems(FXCollections.observableArrayList(allFields));
         sortByCombo.setValue(allFields.get(0));
     }
 
+
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section6: Display toViewOrders ------------------------------------------ //
+    // ----------------------------------------- section5: Display toViewProducts ----------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
-    private void fillVBox(VBox container, List<Order> orders, int index) {
-        container.getChildren().clear();
-        for (int i = index; i < (index + 6) && i < orders.size() && i >= 0; i++) {
-            container.getChildren().add(new OrderCard(orders.get(i)).getCard());
-        }
-    }
-
-    private void fillOrdersContainer(int... status) {
-        for (int i : status) {
-            if (i == 0) {
-                fillVBox(pendingOrdersContainer, pendingOrders, pendingOrdersPageNumber * 6);
-                disableOrdersButtons(0);
-            } else if (i == 1) {
-                fillVBox(sentOrdersContainer, sentOrders, sentOrdersPageNumber * 6);
-                disableOrdersButtons(1);
-            } else {
-                fillVBox(receivedOrdersContainer, receivedOrders, receivedOrdersPageNumber * 6);
-                disableOrdersButtons(2);
-            }
-        }
-    }
-
-    private List<Order> getOrdersByStatus(int status) {
-        return OrderFilter.filterOrdersBy("orderStatus", String.valueOf(status), toViewOrders);
-    }
-
     private void fillFilteredData() {
-        pendingOrders = getOrdersByStatus(0);
-        sentOrders = getOrdersByStatus(1);
-        receivedOrders = getOrdersByStatus(2);
-        fillOrdersContainer(0, 1, 2);
+        fillRow(row1, pageNumber * 12);
+        fillRow(row2, pageNumber * 12 + 6);
+    }
+
+    private void fillRow(HBox row, int index) {
+        row.getChildren().clear();
+        for (int i = index; i < (index + 6) && i < toViewProducts.size(); i++) {
+            row.getChildren().add(new ProductCard(toViewProducts.get(i)).getCard());
+        }
+        disableButton(prevButton, (pageNumber == 0));
+        disableButton(nextButton, ((index + 6) >= toViewProducts.size()));
     }
 
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // --------------------------------------------- section7: helper methods --------------------------------------------- //
+    // --------------------------------------------- section6: helper methods --------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
-    private void getAllOrdersFromDB() {
-        allOrders = new RetrievingOrders(DBConnector.getConnector().getCon()).selectAllOrders();
-        toViewOrders = new ArrayList<>(allOrders);
+    private void getAllProductsFromDB() {
+        RetrievingProducts productsRetriever = new RetrievingProducts(DBConnector.getConnector().getCon());
+        allProducts = productsRetriever.selectAllProducts();
+        toViewProducts = new ArrayList<>(allProducts);
     }
 
-    private void disableButton(Button button, boolean flag) {
-        button.setDisable(flag);
-    }
-
-    private void sortOrders() {
+    private void sortProducts() {
         boolean sortingType = sortTypeCombo.getValue().equals("ASC");
         String sortBy = sortByCombo.getValue();
-        toViewOrders = OrderComparator.sortOrders(sortBy, sortingType, new ArrayList<>(toViewOrders));
+        toViewProducts = ProductComparator.sortProducts(sortBy, sortingType, new ArrayList<>(toViewProducts));
     }
 
-    private void searchOrders() {
-        toViewOrders = OrderFilter.filterOrdersBy(searchByCombo.getValue(), searchTextField.getText(), allOrders);
+    private void filterProductsByCategory() {
+        toViewProducts = ProductFilter.filterProductsBy("productCategory", categoryCombo.getValue(), new ArrayList<>(allProducts));
     }
 
-    private void disableOrdersButtons(int status) {
-        if (status == 0) {
-            disableButton(previousPendingOrdersButton, (pendingOrdersPageNumber == 0));
-            disableButton(nextPendingOrdersButton, ((pendingOrdersPageNumber * 6 + 6) >= pendingOrders.size()));
-        } else if (status == 1) {
-            disableButton(previousSentOrdersButton, (sentOrdersPageNumber == 0));
-            disableButton(nextSentOrdersButton, ((sentOrdersPageNumber * 6 + 6) >= sentOrders.size()));
-        } else {
-            disableButton(previousReceivedOrdersButton, (receivedOrdersPageNumber == 0));
-            disableButton(nextReceivedOrdersButton, ((receivedOrdersPageNumber * 6 + 6) >= receivedOrders.size()));
-        }
+    private void searchProducts() {
+        toViewProducts = ProductFilter.filterProductsBy(searchByCombo.getValue(), searchTextField.getText(), toViewProducts);
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
     // ------------------------------------------------ section7: handlers ------------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
-    private void handleFilterOrders() {
-        searchOrders();
-        sortOrders();
+    private void handleFilterProducts() {
+        filterProductsByCategory();
+        searchProducts();
+        sortProducts();
         fillFilteredData();
-    }
-
-    private void handlePendingOrdersButtons(boolean b) {
-        //true for nextPage
-        pendingOrdersPageNumber += (b ? 1 : -1);
-        fillOrdersContainer(0);
-    }
-
-    private void handleSentOrdersButtons(boolean b) {
-        sentOrdersPageNumber += (b ? 1 : -1);
-        fillOrdersContainer(1);
-    }
-
-    private void handleReceivedOrdersButtons(boolean b) {
-        receivedOrdersPageNumber += (b ? 1 : -1);
-        fillOrdersContainer(2);
-    }
-
-    private void handlePreviousPage(ActionEvent event) {
-        if (event.getSource() == previousPendingOrdersButton)
-            handlePendingOrdersButtons(false);
-        else if (event.getSource() == previousSentOrdersButton)
-            handleSentOrdersButtons(false);
-        else
-            handleReceivedOrdersButtons(false);
-    }
-
-    private void handleNextPage(ActionEvent event) {
-        if (event.getSource() == nextPendingOrdersButton)
-            handlePendingOrdersButtons(true);
-        else if (event.getSource() == nextSentOrdersButton)
-            handleSentOrdersButtons(true);
-        else
-            handleReceivedOrdersButtons(true);
     }
 }

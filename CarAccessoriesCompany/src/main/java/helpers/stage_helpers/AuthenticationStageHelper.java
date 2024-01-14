@@ -30,7 +30,7 @@ public class AuthenticationStageHelper {
 
     public static void showLogin(ActionEvent event) {
         try {
-            showPage(event, "/FXMLFiles/loginPage.fxml", 608, 837);
+            showPage(event, "/FXMLFiles/authinticationPages/loginPage.fxml", 608, 837);
         } catch (Exception e) {
             Starter.logger.warning("Can't open login page");
         }
@@ -38,7 +38,7 @@ public class AuthenticationStageHelper {
 
     public static void showSignup(ActionEvent event) {
         try {
-            showPage(event, "/FXMLFiles/signupPage.fxml", 608, 837);
+            showPage(event, "/FXMLFiles/authinticationPages/signupPage.fxml", 608, 837);
         } catch (Exception e) {
             Starter.logger.warning("Can't open sign-up page");
         }
