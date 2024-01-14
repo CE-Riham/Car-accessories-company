@@ -28,11 +28,11 @@ public class RetrievingProducts {
 
     public List<Product> selectProductsWithCondition(String condition) {
         List<Product> products = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM products ?").append(condition);
         Statement st = null;
         try {
-            String query = "SELECT * FROM products " + condition;
             st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
+            ResultSet rs = st.executeQuery(query.toString());
             while (rs != null && rs.next())
                 products.add(Generator.rsToProduct(rs));
             setStatus("Retrieving products successfully");
