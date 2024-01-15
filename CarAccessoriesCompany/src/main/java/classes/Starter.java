@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -17,7 +18,6 @@ public class Starter extends Application {
     public void start(Stage stage) throws IOException, SQLException {
         DBConnector.setConnector(new DatabaseConnection());
         logger.info(DBConnector.getConnector().getStatus());
-
         FXMLLoader fxmlLoader = new FXMLLoader(Starter.class.getResource("/FXMLFiles/authinticationPages/loginPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 608, 837);
         stage.setTitle("Car Zone Company");

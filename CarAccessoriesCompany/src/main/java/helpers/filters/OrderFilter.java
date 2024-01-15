@@ -59,19 +59,19 @@ public class OrderFilter {
 
     private static List<Order> searchByOrderDate(List<Order> orders, String orderDate) {
         return orders.stream()
-                .filter(order -> order.getOrderDate().equals(Generator.stringToDateConvertor(orderDate)))
+                .filter(order -> order.getOrderDate().equals(Generator.stringToDateConverter(orderDate)))
                 .toList();
     }
 
     private static List<Order> searchBySendingDate(List<Order> orders, String sendingDate) {
         return orders.stream()
-                .filter(order -> order.getSendingDate().equals(Generator.stringToDateConvertor(sendingDate)))
+                .filter(order -> order.getSendingDate().equals(Generator.stringToDateConverter(sendingDate)))
                 .toList();
     }
 
     private static List<Order> searchByReceivingDate(List<Order> orders, String receivingDate) {
         return orders.stream()
-                .filter(order -> order.getReceivingDate().equals(Generator.stringToDateConvertor(receivingDate)))
+                .filter(order -> order.getReceivingDate().equals(Generator.stringToDateConverter(receivingDate)))
                 .toList();
     }
 }

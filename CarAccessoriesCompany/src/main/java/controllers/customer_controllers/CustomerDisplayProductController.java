@@ -3,16 +3,20 @@ package controllers.customer_controllers;
 import cards.ProductReviewCard;
 import classes.DBConnector;
 import classes.UserSession;
+import database.inserting.InsertingData;
 import database.retrieving.RetrievingProductRates;
 import database.retrieving.RetrievingProductReviews;
+import helpers.Alerts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import model.Order;
 import model.products.Product;
 import model.products.ProductRate;
 import model.products.ProductReview;
@@ -20,8 +24,10 @@ import model.products.ProductReview;
 import java.io.File;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerDisplayProductController extends CustomerNavBarActions implements Initializable {
@@ -63,8 +69,17 @@ public class CustomerDisplayProductController extends CustomerNavBarActions impl
     // -------------------------------------------------------------------------------------------------------------------- //
     @FXML
     void onOrderProductClick(ActionEvent event) {
-        //TODO
-        //order product
+        String alertTitle = "Order product";
+        Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to order the product? Once you order it you can't cancel the order.");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Order order = prepareOrder();
+            boolean flag = new InsertingData(DBConnector.getConnector().getCon()).insertOrder(order);
+            if (flag) {
+                Alerts.informationAlert(alertTitle, null, "Product was ordered successfully.");
+            } else {
+                Alerts.errorAlert(alertTitle, null, "Error while ordering the product.");
+            }
+        }
     }
 
     @FXML
@@ -138,5 +153,14 @@ public class CustomerDisplayProductController extends CustomerNavBarActions impl
         double sum = 0;
         for (ProductRate rate : rates) sum += rate.getCustomerRate();
         productRateLabel.setText(new DecimalFormat("#.##").format(sum / numberOdRate));
+    }
+
+    private Order prepareOrder() {
+        Order order = new Order();
+        order.setProductID(UserSession.getProductToDisplay().getProductID());
+        order.setCustomerUsername(UserSession.getCurrentUser().getUsername());
+        order.setOrderStatus(0);
+        order.setOrderDate(LocalDate.now());
+        return order;
     }
 }

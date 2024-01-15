@@ -2,6 +2,7 @@ package database.inserting;
 
 import classes.Starter;
 import helpers.Generator;
+import model.Order;
 import model.products.Product;
 import model.User;
 
@@ -114,6 +115,21 @@ public class InsertingData {
             } catch (Exception e) {
                 Starter.logger.warning("Couldn't close the statement");
             }
+        }
+    }
+
+    public boolean insertOrder(Order order) {
+        try {
+            String query = "insert into orders (productID, customerUsername, orderStatus, orderDate, sendingDate, receivingDate)" +
+                    " values (?, ?, ?, ?, ?, ?);";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt = Generator.orderToPS(preparedStmt, order);
+            preparedStmt.executeUpdate();
+            setStatus("Order was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert Order");
+            return false;
         }
     }
 }
