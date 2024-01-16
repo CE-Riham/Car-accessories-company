@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="back" stylesheets="@../../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.orders.AdminDisplayProductController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="back" stylesheets="@../../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.admin_controllers.orders.AdminDisplayOrderController">
 <children>
       <ImageView fitHeight="837.0" fitWidth="605.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -58,16 +58,36 @@
       </VBox>
       <ImageView fx:id="productImage" fitHeight="136.0" fitWidth="136.0" layoutX="45.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="customerImage" fitHeight="136.0" fitWidth="136.0" layoutX="45.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true" />
-      <HBox alignment="CENTER" layoutX="41.0" layoutY="510.0" prefHeight="73.0" prefWidth="524.0" spacing="50.0">
+      <HBox alignment="CENTER" layoutX="41.0" layoutY="567.0" prefHeight="73.0" prefWidth="524.0" spacing="50.0">
          <children>
             <Button fx:id="rejectOrderButton" mnemonicParsing="false" onAction="#onRejectOrderClick" styleClass="delete-button" text="reject order" />
             <Button fx:id="acceptOrderButton" mnemonicParsing="false" onAction="#onAcceptOrderClick" styleClass="color2-button" text="accept order" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="41.0" layoutY="575.0" prefHeight="73.0" prefWidth="524.0" spacing="50.0">
+      <HBox alignment="CENTER" layoutX="41.0" layoutY="632.0" prefHeight="73.0" prefWidth="524.0" spacing="50.0">
          <children>
             <Button mnemonicParsing="false" onAction="#onBackClick" styleClass="color4-button" text="back" />
          </children>
       </HBox>
+      <VBox layoutX="448.0" layoutY="445.0" prefHeight="82.0" prefWidth="143.0" spacing="37.0">
+         <children>
+            <Label fx:id="sendingDateLabel" prefHeight="19.0" prefWidth="227.0" text="sendingDateLabel" textFill="#868585" />
+            <Label fx:id="receivingDateLabel" prefHeight="19.0" prefWidth="227.0" text="receivingDateLabel" textFill="#868585">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="145.0" layoutY="445.0" prefHeight="82.0" prefWidth="143.0" spacing="37.0">
+         <children>
+            <Label fx:id="orderStatusLabel" prefHeight="19.0" prefWidth="227.0" text="orderStatusLabel" textFill="#868585" />
+            <Label fx:id="orderDateLabel" prefHeight="19.0" prefWidth="227.0" text="orderDateLabel" textFill="#868585">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
 </children>
 </AnchorPane>

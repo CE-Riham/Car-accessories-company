@@ -8,6 +8,7 @@ import database.retrieving.RetrievingProducts;
 import database.retrieving.RetrievingUser;
 import database.updating.OrderUpdater;
 import helpers.Alerts;
+import helpers.Generator;
 import helpers.stage_helpers.AdminStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Address;
+import model.Order;
 import model.User;
 import model.products.Product;
 
@@ -25,7 +27,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class AdminDisplayProductController extends AdminNavBarActions implements Initializable {
+public class AdminDisplayOrderController extends AdminNavBarActions implements Initializable {
     // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
@@ -52,6 +54,14 @@ public class AdminDisplayProductController extends AdminNavBarActions implements
     private Label productNameLabel;
     @FXML
     private Label productPriceLabel;
+    @FXML
+    private Label sendingDateLabel;
+    @FXML
+    private Label receivingDateLabel;
+    @FXML
+    private Label orderDateLabel;
+    @FXML
+    private Label orderStatusLabel;
 
     // --------- Image views
     @FXML
@@ -87,6 +97,7 @@ public class AdminDisplayProductController extends AdminNavBarActions implements
         displayingButtons();
         fillProductFields();
         fillCustomerFields();
+        fillOrderFields();
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
@@ -118,6 +129,19 @@ public class AdminDisplayProductController extends AdminNavBarActions implements
         fillImage(customerImage, customer.getImagePath());
     }
 
+    private void fillOrderFields() {
+        Order order = UserSession.getOrderToDisplay();
+        String[] status = {"pending", "sent", "received"};
+        orderStatusLabel.setText(status[order.getOrderStatus()]);
+        orderDateLabel.setText(String.valueOf(order.getOrderDate()));
+        String sendingDate = String.valueOf(order.getSendingDate());
+        sendingDate = sendingDate.equals("0001-01-01") ? "not sent yet" : sendingDate;
+        sendingDateLabel.setText(sendingDate);
+        String receivingDate = String.valueOf(order.getReceivingDate());
+        receivingDate = receivingDate.equals("0001-01-01") ? "not received yet" : receivingDate;
+        receivingDateLabel.setText(receivingDate);
+    }
+
     private String generateAddress(Address address) {
         return address.getCountry() + ", " + address.getCity() + ", " + address.getStreet();
     }
@@ -132,12 +156,13 @@ public class AdminDisplayProductController extends AdminNavBarActions implements
         OrderUpdater orderUpdater = new OrderUpdater(DBConnector.getConnector().getCon());
         String condition = "where orderID = \'" + UserSession.getOrderToDisplay().getOrderID() + "\'";
         boolean flag = orderUpdater.updateSendingDate(LocalDate.now(), condition);
-        return flag ? flag && orderUpdater.updateOrderStatus(1, condition) : flag;
+        return flag && orderUpdater.updateOrderStatus(1, condition);
     }
 
-    private boolean deleteOrder(){
+    private boolean deleteOrder() {
         return new OrderDeleter(DBConnector.getConnector().getCon()).deleteOrderByOrderID(UserSession.getOrderToDisplay());
     }
+
     // -------------------------------------------------------------------------------------------------------------------- //
     // ------------------------------------------------ section6: handlers ------------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
@@ -151,7 +176,8 @@ public class AdminDisplayProductController extends AdminNavBarActions implements
         }
         AdminStageHelper.showAdminOrdersPage(event);
     }
-    private void handleRejectOrder(ActionEvent event){
+
+    private void handleRejectOrder(ActionEvent event) {
         boolean flag = deleteOrder();
         String alertTitle = "Rejecting order";
         if (flag) {
