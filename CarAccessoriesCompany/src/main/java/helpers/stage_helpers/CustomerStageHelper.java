@@ -54,7 +54,6 @@ public class CustomerStageHelper {
         try {
             showPage(event, "/FXMLFiles/customer_pages/customerProductPage.fxml", 1615, 965);
         } catch (Exception e) {
-            e.printStackTrace();
             Starter.logger.warning("Can't open customer display product page");
         }
     }

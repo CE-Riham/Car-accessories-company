@@ -1,14 +1,12 @@
-package controllers.admin_controllers.orders;
+package controllers.customer_controllers;
 
 import classes.DBConnector;
 import classes.UserSession;
 import controllers.admin_controllers.AdminNavBarActions;
 import database.deleting.OrderDeleter;
 import database.retrieving.RetrievingProducts;
-import database.retrieving.RetrievingUser;
-import database.updating.OrderUpdater;
 import helpers.Alerts;
-import helpers.stage_helpers.AdminStageHelper;
+import helpers.stage_helpers.CustomerStageHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,40 +15,27 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.Address;
 import model.Order;
-import model.User;
 import model.products.Product;
 
 import java.io.File;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AdminDisplayOrderController extends AdminNavBarActions implements Initializable {
+public class CustomerDisplayOrderController extends AdminNavBarActions implements Initializable {
     // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     // --------- Buttons
     @FXML
-    private Button acceptOrderButton;
-    @FXML
-    private Button rejectOrderButton;
+    private Button cancelOrderButton;
 
     // --------- Labels
     @FXML
     private Label availableAmountLabel;
     @FXML
-    private Label customerAddressLabel;
-    @FXML
-    private Label customerNameLabel;
-    @FXML
-    private Label customerPhoneLabel;
-    @FXML
     private Label productIDLabel;
-    @FXML
-    private Label customerEmailLabel;
     @FXML
     private Label productNameLabel;
     @FXML
@@ -66,8 +51,6 @@ public class AdminDisplayOrderController extends AdminNavBarActions implements I
 
     // --------- Image views
     @FXML
-    private ImageView customerImage;
-    @FXML
     private ImageView productImage;
 
 
@@ -75,18 +58,13 @@ public class AdminDisplayOrderController extends AdminNavBarActions implements I
     // ------------------------------------------ section2: Page button actions ------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     @FXML
-    void onRejectOrderClick(ActionEvent event) {
-        handleRejectOrder(event);
-    }
-
-    @FXML
-    void onAcceptOrderClick(ActionEvent event) {
-        handleAcceptOrder(event);
+    void onCancelOrderClick(ActionEvent event) {
+        handleCancelOrder(event);
     }
 
     @FXML
     void onBackClick(ActionEvent event) {
-        AdminStageHelper.showAdminOrdersPage(event);
+        CustomerStageHelper.showCustomerOrders(event);
     }
 
 
@@ -97,7 +75,6 @@ public class AdminDisplayOrderController extends AdminNavBarActions implements I
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayingButtons();
         fillProductFields();
-        fillCustomerFields();
         fillOrderFields();
     }
 
@@ -105,9 +82,7 @@ public class AdminDisplayOrderController extends AdminNavBarActions implements I
     // --------------------------------------------- section5: helper methods --------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void displayingButtons() {
-        boolean flag = UserSession.getOrderToDisplay().getOrderStatus() == 0;
-        displayButton(acceptOrderButton, flag);
-        displayButton(rejectOrderButton, flag);
+        displayButton(cancelOrderButton, UserSession.getOrderToDisplay().getOrderStatus() == 0);
     }
 
     private void fillProductFields() {
@@ -118,16 +93,6 @@ public class AdminDisplayOrderController extends AdminNavBarActions implements I
         productPriceLabel.setText(String.valueOf(product.getProductPrice()));
         availableAmountLabel.setText(String.valueOf(product.getAvailableAmount()));
         fillImage(productImage, product.getImagePath());
-    }
-
-    private void fillCustomerFields() {
-        String customerName = UserSession.getOrderToDisplay().getCustomerUsername();
-        User customer = new RetrievingUser(DBConnector.getConnector().getCon()).findUserByUsername(customerName).get(0);
-        customerNameLabel.setText(customer.getFirstName() + " " + customer.getLastName());
-        customerEmailLabel.setText(customer.getEmail());
-        customerPhoneLabel.setText(customer.getPhoneNumber());
-        customerAddressLabel.setText(generateAddress(customer.getAddress()));
-        fillImage(customerImage, customer.getImagePath());
     }
 
     private void fillOrderFields() {
@@ -143,21 +108,10 @@ public class AdminDisplayOrderController extends AdminNavBarActions implements I
         receivingDateLabel.setText(receivingDate);
     }
 
-    private String generateAddress(Address address) {
-        return address.getCountry() + ", " + address.getCity() + ", " + address.getStreet();
-    }
-
     private void fillImage(ImageView image, String imagePath) {
         File file = new File(imagePath);
         String localUrl = file.toURI().toString();
         image.setImage(new Image(localUrl));
-    }
-
-    private boolean acceptOrder() {
-        OrderUpdater orderUpdater = new OrderUpdater(DBConnector.getConnector().getCon());
-        String condition = "where orderID = \'" + UserSession.getOrderToDisplay().getOrderID() + "\'";
-        boolean flag = orderUpdater.updateSendingDate(LocalDate.now(), condition);
-        return flag && orderUpdater.updateOrderStatus(1, condition);
     }
 
     private boolean deleteOrder() {
@@ -167,31 +121,18 @@ public class AdminDisplayOrderController extends AdminNavBarActions implements I
     // -------------------------------------------------------------------------------------------------------------------- //
     // ------------------------------------------------ section6: handlers ------------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
-    private void handleAcceptOrder(ActionEvent event) {
-        String alertTitle = "Accepting order";
-        Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to accept the order?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            boolean flag = acceptOrder();
-            if (flag) {
-                Alerts.informationAlert(alertTitle, null, "Accepting order successfully");
-            } else {
-                Alerts.errorAlert(alertTitle, null, "Couldn't accept the order, try again");
-            }
-            AdminStageHelper.showAdminOrdersPage(event);
-        }
-    }
-
-    private void handleRejectOrder(ActionEvent event) {
-        String alertTitle = "Rejecting order";
-        Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to reject the order?");
+    private void handleCancelOrder(ActionEvent event) {
+        String alertTitle = "Canceling order";
+        Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to cancel the order?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             boolean flag = deleteOrder();
+
             if (flag) {
-                Alerts.informationAlert(alertTitle, null, "Rejecting order successfully");
+                Alerts.informationAlert(alertTitle, null, "Canceling order successfully");
             } else {
-                Alerts.errorAlert(alertTitle, null, "Couldn't reject the order, try again");
+                Alerts.errorAlert(alertTitle, null, "Couldn't cancel the order, try again");
             }
-            AdminStageHelper.showAdminOrdersPage(event);
+            CustomerStageHelper.showCustomerOrders(event);
         }
     }
 }

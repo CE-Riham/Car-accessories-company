@@ -70,7 +70,7 @@ public class CustomerDisplayProductController extends CustomerNavBarActions impl
     @FXML
     void onOrderProductClick(ActionEvent event) {
         String alertTitle = "Order product";
-        Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to order the product? Once you order it you can't cancel the order.");
+        Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to order the product?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Order order = prepareOrder();
             boolean flag = new InsertingData(DBConnector.getConnector().getCon()).insertOrder(order);
