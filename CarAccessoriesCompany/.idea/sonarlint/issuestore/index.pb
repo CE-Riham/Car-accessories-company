@@ -239,3 +239,9 @@ Msrc/main/java/controllers/customer_controllers/CustomerProfileController.java,
 Qsrc/main/java/controllers/customer_controllers/AdminDisplayProductController.java,e\a\eaafec400c77c870a19158be64d767a39df83427
 „
 Tsrc/main/java/controllers/customer_controllers/CustomerDisplayProductController.java,e\1\e14ccac1a22e0e627daef5796522bb73d8453ae3
+d
+4src/main/java/controllers/AdminOrdersController.java,4\f\4f98e827d4761997a7de1811305a969badd2a77f
+y
+Isrc/main/java/controllers/customer_controllers/AdminOrdersController.java,8\4\8410ea1df51f92025175725a0e7beb1325a18cce
+|
+Lsrc/main/java/controllers/customer_controllers/CustomerOrdersController.java,3\a\3a3ef6114b250030d39f1d9b9819c5ace4e63e03
