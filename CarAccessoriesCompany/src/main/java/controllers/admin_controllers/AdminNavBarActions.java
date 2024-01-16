@@ -57,5 +57,8 @@ public class AdminNavBarActions {
     protected void disableButton(Button button, boolean flag) {
         button.setDisable(flag);
     }
+    protected void displayButton(Button button, boolean flag) {
+        button.setVisible(flag);
+    }
 
 }

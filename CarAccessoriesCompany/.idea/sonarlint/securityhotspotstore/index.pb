@@ -245,3 +245,9 @@ y
 Isrc/main/java/controllers/customer_controllers/AdminOrdersController.java,8\4\8410ea1df51f92025175725a0e7beb1325a18cce
 |
 Lsrc/main/java/controllers/customer_controllers/CustomerOrdersController.java,3\a\3a3ef6114b250030d39f1d9b9819c5ace4e63e03
+…
+Usrc/main/java/controllers/admin_controllers/orders/AdminDisplayProductController.java,8\1\81823affce4b084c6bf0b1d44db752b87887f5a2
+a
+1src/main/java/database/updating/OrderUpdater.java,2\a\2a6358041c50d953f9975f3b47ae0db53668efdc
+a
+1src/main/java/database/deleting/OrderDeleter.java,8\2\82eebf246e74b080f44ff8914562f6bc34510ae4

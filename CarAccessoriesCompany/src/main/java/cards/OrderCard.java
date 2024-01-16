@@ -1,5 +1,8 @@
 package cards;
 
+import classes.UserSession;
+import helpers.stage_helpers.AdminStageHelper;
+import helpers.stage_helpers.CustomerStageHelper;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,7 +42,13 @@ public class OrderCard {
     private void createShowOrderButton() {
         showOrderButton = new Button("show order");
         showOrderButton.getStyleClass().add("color4-2-button");
-        //TODO
+        showOrderButton.setOnAction(e -> {
+            UserSession.setOrderToDisplay(order);
+            if (UserSession.getCurrentUser().getUserType().equalsIgnoreCase("admin"))
+                AdminStageHelper.showAdminDisplayOrderPage(e);
+            else if (UserSession.getCurrentUser().getUserType().equalsIgnoreCase("customer"))
+                CustomerStageHelper.showCustomerDisplayOrderPage(e);
+        });
     }
 
     private Label createLabel(String text, double width) {

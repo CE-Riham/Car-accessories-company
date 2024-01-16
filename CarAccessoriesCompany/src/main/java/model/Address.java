@@ -5,6 +5,16 @@ public class Address {
     private String city;
     private String street;
 
+    public Address(){
+        setStreet("street");
+        setCity("city");
+        setCountry("country");
+    }
+    public Address(String street, String city, String country){
+        setStreet(street);
+        setCity(city);
+        setCountry(country);
+    }
     public String getCountry() {
         return country;
     }

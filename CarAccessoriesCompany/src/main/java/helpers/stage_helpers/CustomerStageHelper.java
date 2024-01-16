@@ -58,4 +58,12 @@ public class CustomerStageHelper {
             Starter.logger.warning("Can't open customer display product page");
         }
     }
+
+    public static void showCustomerDisplayOrderPage(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/customer_pages/customerOrderPage.fxml", 608, 837);
+        } catch (Exception e) {
+            Starter.logger.warning("Can't open customer display order page");
+        }
+    }
 }

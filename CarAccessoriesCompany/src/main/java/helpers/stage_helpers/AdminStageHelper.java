@@ -100,9 +100,17 @@ public class AdminStageHelper{
 
     public static void showAdminOrdersPage(ActionEvent event) {
         try {
-            showPage(event, "/FXMLFiles/admin_pages/adminOrdersPage.fxml", 1615, 965);
+            showPage(event, "/FXMLFiles/admin_pages/order/adminOrdersPage.fxml", 1615, 965);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin orders page");
+        }
+    }
+    public static void showAdminDisplayOrderPage(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/admin_pages/order/adminOrderPage.fxml", 608, 837);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Starter.logger.warning("Can't open admin display order page");
         }
     }
 }
