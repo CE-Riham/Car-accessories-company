@@ -1,4 +1,4 @@
-package controllers;
+package controllers.autintication_controllers;
 
 import authentication.Register;
 import classes.DBConnector;

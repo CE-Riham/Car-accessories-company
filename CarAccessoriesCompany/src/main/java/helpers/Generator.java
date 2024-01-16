@@ -8,11 +8,11 @@ import model.products.ProductRate;
 import model.products.ProductReview;
 import model.User;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Generator {
     private static String productID = "productID";
@@ -78,11 +78,16 @@ public class Generator {
         order.setProductID(rs.getInt("productID"));
         order.setCustomerUsername(rs.getString("customerUsername"));
         order.setOrderStatus(rs.getInt("orderStatus"));
-        order.setOrderDate(rs.getDate("orderDate"));
-        order.setSendingDate(rs.getDate("sendingDate"));
-        order.setReceivingDate(rs.getDate("receivingDate"));
+        Date orderDateSql = rs.getDate("orderDate");
+        Date sendingDateSql = rs.getDate("sendingDate");
+        Date receivingDateSql = rs.getDate("receivingDate");
+        order.setOrderDate(orderDateSql != null ? orderDateSql.toLocalDate() : null);
+        order.setSendingDate(sendingDateSql != null ? sendingDateSql.toLocalDate() : null);
+        order.setReceivingDate(receivingDateSql != null ? receivingDateSql.toLocalDate() : null);
+
         return order;
     }
+
 
     public static PreparedStatement userToPS(PreparedStatement preparedStmt, User user) throws SQLException {
         preparedStmt.setString(1, user.getFirstName());
@@ -108,12 +113,23 @@ public class Generator {
         return preparedStmt;
     }
 
-    public static Date stringToDateConvertor(String date){
+    public static PreparedStatement orderToPS(PreparedStatement preparedStmt, Order order) throws SQLException {
+        preparedStmt.setInt(1, order.getProductID());
+        preparedStmt.setString(2, order.getCustomerUsername());
+        preparedStmt.setInt(3, order.getOrderStatus());
+        preparedStmt.setDate(4, Date.valueOf(order.getOrderDate()));
+        preparedStmt.setDate(5, Date.valueOf(order.getSendingDate()));
+        preparedStmt.setDate(6, Date.valueOf(order.getReceivingDate()));
+        return preparedStmt;
+    }
+
+    public static Date stringToDateConverter(String date) {
         try {
-            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        }catch (Exception e){
+            java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+            return new Date(utilDate.getTime());
+        } catch (Exception e) {
             Starter.logger.warning("Couldn't convert string to date");
-            return new Date();
+            return new Date(System.currentTimeMillis()); // or handle the exception based on your needs
         }
     }
 }

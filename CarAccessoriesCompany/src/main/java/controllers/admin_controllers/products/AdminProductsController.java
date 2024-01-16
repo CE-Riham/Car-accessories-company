@@ -1,15 +1,10 @@
 package controllers.admin_controllers.products;
 
-import cards.ProductCard;
-import classes.DBConnector;
-import classes.UserSession;
 import controllers.admin_controllers.AdminNavBarActions;
-import database.retrieving.RetrievingCategories;
-import database.retrieving.RetrievingProducts;
+import helpers.common.ProductsController;
 import helpers.comparators.ProductComparator;
 import helpers.filters.ProductFilter;
 import helpers.stage_helpers.AdminStageHelper;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -26,49 +21,40 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminProductsController extends AdminNavBarActions implements Initializable {
-
+    // -------------------------------------------------------------------------------------------------------------------- //
     // -------------------------------------------- section1: Class attributes -------------------------------------------- //
-
+    // -------------------------------------------------------------------------------------------------------------------- //
     private List<Product> allProducts;
     private List<Product> toViewProducts;
     private int pageNumber = 0;
-
     @FXML
     private Button productsButton;
-
     @FXML
     private Button prevButton;
-
     @FXML
     private Button nextButton;
-
     @FXML
     private HBox row1;
-
     @FXML
     private HBox row2;
-
     @FXML
     private ComboBox<String> searchByCombo;
-
     @FXML
     private TextField searchTextField;
-
     @FXML
     private ComboBox<String> sortByCombo;
-
     @FXML
     private ComboBox<String> sortTypeCombo;
-
     @FXML
     private ComboBox<String> categoryCombo;
 
 
+    // -------------------------------------------------------------------------------------------------------------------- //
     // ------------------------------------------ section2: Page button actions ------------------------------------------- //
-
+    // -------------------------------------------------------------------------------------------------------------------- //
     @FXML
     void filterProducts(Event event) {
-        fillFilteredData();
+        handleFilterProducts();
     }
 
     @FXML
@@ -79,87 +65,34 @@ public class AdminProductsController extends AdminNavBarActions implements Initi
     @FXML
     void onPrevButtonClick(ActionEvent event) {
         pageNumber--;
-        fillProducts();
+        ProductsController.fillFilteredData(toViewProducts, row1, row2, pageNumber);
+        ProductsController.disableProductsButtons(toViewProducts, prevButton, nextButton, pageNumber);
     }
 
     @FXML
     void onNextButtonClick(ActionEvent event) {
         pageNumber++;
-        fillProducts();
+        ProductsController.fillFilteredData(toViewProducts, row1, row2, pageNumber);
+        ProductsController.disableProductsButtons(toViewProducts, prevButton, nextButton, pageNumber);
     }
 
+    // -------------------------------------------------------------------------------------------------------------------- //
     // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
-
+    // -------------------------------------------------------------------------------------------------------------------- //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         activateMenuButton(productsButton);
-        getAllProductsFromDB();
-        fillAllComboBoxes();
-        fillFilteredData();
-    }
-
-    // -------------------------------------------- section4: Fill combo Boxes -------------------------------------------- //
-
-    private void fillAllComboBoxes() {
-        fillCategoryCombo();
-        fillSearchByCombo();
-        fillSortTypeCombo();
-        fillSortByCombo();
-    }
-
-    private void fillCategoryCombo() {
-        RetrievingCategories categoriesRetriever = new RetrievingCategories(DBConnector.getConnector().getCon());
-        List<String> allCategories = categoriesRetriever.selectAllCategories();
-        allCategories.add("All Categories");
-        categoryCombo.setItems(FXCollections.observableArrayList(allCategories));
-        categoryCombo.setValue(allCategories.get(allCategories.size()-1));
-    }
-
-    private void fillSearchByCombo() {
-        List<String> allFields = List.of("productID", "productName", "description");
-        searchByCombo.setItems(FXCollections.observableArrayList(allFields));
-        searchByCombo.setValue(allFields.get(0));
-    }
-
-    private void fillSortTypeCombo() {
-        List<String> allFields = List.of("ASC", "DSC");
-        sortTypeCombo.setItems(FXCollections.observableArrayList(allFields));
-        sortTypeCombo.setValue(allFields.get(0));
-    }
-
-    private void fillSortByCombo() {
-        List<String> allFields = List.of("productID", "price", "numberOfOrders", "availability");
-        sortByCombo.setItems(FXCollections.observableArrayList(allFields));
-        sortByCombo.setValue(allFields.get(0));
-    }
-
-    // ----------------------------------------- section5: Display toViewProducts ----------------------------------------- //
-
-    private void fillProducts() {
-        fillRow(row1, pageNumber * 12);
-        fillRow(row2, pageNumber * 12 + 6);
-    }
-
-    private void fillRow(HBox row, int index) {
-        row.getChildren().clear();
-        for (int i = index; i < (index + 6) && i < toViewProducts.size(); i++) {
-            row.getChildren().add(new ProductCard(toViewProducts.get(i)).getCard());
-        }
-        disableButton(prevButton, (pageNumber == 0));
-        disableButton(nextButton, ((index + 6) >= toViewProducts.size()));
-    }
-
-    // --------------------------------------------- section6: helper methods --------------------------------------------- //
-    private void getAllProductsFromDB() {
-        RetrievingProducts productsRetriever = new RetrievingProducts(DBConnector.getConnector().getCon());
-        allProducts = productsRetriever.selectAllProducts();
+        allProducts = ProductsController.getAllProductsFromDB();
         toViewProducts = new ArrayList<>(allProducts);
+        ProductsController.fillAllComboBoxes(categoryCombo, searchByCombo, sortTypeCombo, sortByCombo);
+        ProductsController.fillFilteredData(toViewProducts, row1, row2, pageNumber);
+        ProductsController.disableProductsButtons(toViewProducts, prevButton, nextButton, pageNumber);
     }
 
-    private void disableButton(Button button, boolean flag) {
-        button.setDisable(flag);
-    }
 
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // --------------------------------------------- section4: helper methods --------------------------------------------- //
+    // -------------------------------------------------------------------------------------------------------------------- //
     private void sortProducts() {
         boolean sortingType = sortTypeCombo.getValue().equals("ASC");
         String sortBy = sortByCombo.getValue();
@@ -174,10 +107,13 @@ public class AdminProductsController extends AdminNavBarActions implements Initi
         toViewProducts = ProductFilter.filterProductsBy(searchByCombo.getValue(), searchTextField.getText(), toViewProducts);
     }
 
-    private void fillFilteredData(){
+    // -------------------------------------------------------------------------------------------------------------------- //
+    // ------------------------------------------------ section7: handlers ------------------------------------------------ //
+    // -------------------------------------------------------------------------------------------------------------------- //
+    private void handleFilterProducts() {
         filterProductsByCategory();
         searchProducts();
         sortProducts();
-        fillProducts();
+        ProductsController.fillFilteredData(toViewProducts, row1, row2, pageNumber);
     }
 }

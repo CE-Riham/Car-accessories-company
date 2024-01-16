@@ -10,6 +10,17 @@
 
 
 /* --------------------------------------------------------- Buttons --------------------------------------------------------- */
+.color2-button {
+    -fx-background-color: #43766C; /* color2 */
+    -fx-text-fill: white; /* color6 */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+.color2-button:hover {
+    -fx-background-color: #76453B; /* color5 */
+    -fx-cursor: hand;
+}
+
 .color1-button {
     -fx-background-color: #533029; /* color7 */
     -fx-text-fill: white; /* color6 */

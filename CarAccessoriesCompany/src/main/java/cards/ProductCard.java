@@ -2,6 +2,7 @@ package cards;
 
 import classes.UserSession;
 import helpers.stage_helpers.AdminStageHelper;
+import helpers.stage_helpers.CustomerStageHelper;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -111,7 +112,10 @@ public class ProductCard {
         showProductButton.setFont(Font.font(12.0));
         showProductButton.setOnAction(e -> {
             UserSession.setProductToDisplay(product);
-            AdminStageHelper.showAdminDisplayProductPage(e);
+            if (UserSession.getCurrentUser().getUserType().equalsIgnoreCase("admin"))
+                AdminStageHelper.showAdminDisplayProductPage(e);
+            else if (UserSession.getCurrentUser().getUserType().equalsIgnoreCase("customer"))
+                CustomerStageHelper.showCustomerDisplayProductPage(e);
         });
     }
 

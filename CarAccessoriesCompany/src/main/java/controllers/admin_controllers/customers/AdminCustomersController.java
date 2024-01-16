@@ -79,8 +79,4 @@ public class AdminCustomersController extends AdminNavBarActions implements Init
         fillRow2(pageNumber * 12 + 6);
     }
 
-    private void disableButton(Button button, boolean flag) {
-        button.setDisable(flag);
-    }
-
 }

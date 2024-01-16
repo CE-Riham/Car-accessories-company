@@ -91,7 +91,7 @@ public class AdminOrdersController extends AdminNavBarActions implements Initial
 
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section4: Initialising actions ------------------------------------------ //
+    // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -105,7 +105,7 @@ public class AdminOrdersController extends AdminNavBarActions implements Initial
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // -------------------------------------------- section5: Fill combo-Boxes -------------------------------------------- //
+    // -------------------------------------------- section4: Fill combo-Boxes -------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void fillAllComboBoxes() {
         fillSearchByCombo();
@@ -132,7 +132,7 @@ public class AdminOrdersController extends AdminNavBarActions implements Initial
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section6: Display toViewOrders ------------------------------------------ //
+    // ------------------------------------------ section5: Display toViewOrders ------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void fillVBox(VBox container, List<Order> orders, int index) {
         container.getChildren().clear();
@@ -169,15 +169,11 @@ public class AdminOrdersController extends AdminNavBarActions implements Initial
 
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // --------------------------------------------- section7: helper methods --------------------------------------------- //
+    // --------------------------------------------- section6: helper methods --------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void getAllOrdersFromDB() {
         allOrders = new RetrievingOrders(DBConnector.getConnector().getCon()).selectAllOrders();
         toViewOrders = new ArrayList<>(allOrders);
-    }
-
-    private void disableButton(Button button, boolean flag) {
-        button.setDisable(flag);
     }
 
     private void sortOrders() {

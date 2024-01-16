@@ -1,20 +1,23 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Order {
     private int orderID;
     private int productID;
     private String customerUsername;
     private int orderStatus;
-    private Date orderDate;
-    private Date sendingDate;
-    private Date receivingDate;
+    private LocalDate orderDate;
+    private LocalDate sendingDate;
+    private LocalDate receivingDate;
 
-    public Order(){
-
+    public Order() {
+        orderDate = LocalDate.of(1, 1, 1);
+        sendingDate = LocalDate.of(1, 1, 1);
+        receivingDate = LocalDate.of(1, 1, 1);
     }
-    public Order(int orderID, int productID, String customerUsername, int orderStatus, Date orderDate, Date sendingDate, Date receivingDate){
+
+    public Order(int orderID, int productID, String customerUsername, int orderStatus, LocalDate orderDate, LocalDate sendingDate, LocalDate receivingDate) {
         setOrderID(orderID);
         setProductID(productID);
         setCustomerUsername(customerUsername);
@@ -23,6 +26,7 @@ public class Order {
         setSendingDate(sendingDate);
         setReceivingDate(receivingDate);
     }
+
     public int getOrderID() {
         return orderID;
     }
@@ -55,27 +59,27 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Date getSendingDate() {
+    public LocalDate getSendingDate() {
         return sendingDate;
     }
 
-    public void setSendingDate(Date sendingDate) {
+    public void setSendingDate(LocalDate sendingDate) {
         this.sendingDate = sendingDate;
     }
 
-    public Date getReceivingDate() {
+    public LocalDate getReceivingDate() {
         return receivingDate;
     }
 
-    public void setReceivingDate(Date receivingDate) {
+    public void setReceivingDate(LocalDate receivingDate) {
         this.receivingDate = receivingDate;
     }
 

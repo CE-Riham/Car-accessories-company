@@ -20,7 +20,7 @@ public class User {
         this.email = "";
         this.imagePath = "";
         this.userType = "";
-        this.address = null;
+        this.address = new Address();
     }
 
     public User(String username, String firstName, String lastName,
@@ -104,7 +104,7 @@ public class User {
     }
 
     public void setAddress(Address address) {
-        this.address = address;
+        this.address = address == null ? new Address() : address;
     }
 
     public String getUserType() {

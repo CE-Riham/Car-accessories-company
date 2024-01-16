@@ -87,8 +87,4 @@ public class AdminCategoriesController extends AdminNavBarActions implements Ini
         fillTable(pageNumber * 5);
     }
 
-    private void disableButton(Button button, boolean flag) {
-        button.setDisable(flag);
-    }
-
 }

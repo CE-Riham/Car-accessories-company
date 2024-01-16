@@ -54,4 +54,11 @@ public class AdminNavBarActions {
     protected void activateMenuButton(Button button) {
         button.setStyle("-fx-border-color: #76453B;"); //color5
     }
+    protected void disableButton(Button button, boolean flag) {
+        button.setDisable(flag);
+    }
+    protected void displayButton(Button button, boolean flag) {
+        button.setVisible(flag);
+    }
+
 }

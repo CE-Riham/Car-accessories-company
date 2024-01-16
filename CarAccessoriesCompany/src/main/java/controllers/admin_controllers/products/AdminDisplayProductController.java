@@ -149,11 +149,6 @@ public class AdminDisplayProductController extends AdminNavBarActions implements
         findProductRate(tmpProduct.getProductID());
     }
 
-    private void disableButton(Button button, boolean flag) {
-        //true to disable
-        button.setDisable(flag);
-    }
-
     private void handleDeleteProduct(ActionEvent event) {
         String alertTitle = "Deleting product";
         Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to delete this product?");
