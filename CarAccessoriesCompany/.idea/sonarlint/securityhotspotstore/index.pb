@@ -257,3 +257,5 @@ Ssrc/main/java/controllers/admin_controllers/orders/AdminDisplayOrderController.
 Rsrc/main/java/controllers/customer_controllers/CustomerDisplayOrderController.java,8\5\85dbf2dbc0686e76274913d8997692cd06fffdc6
 f
 6src/main/java/controllers/customer_controllers/ef.java,3\9\395970bf606fb06e233bf136c953dfd7a2af8dce
+Å
+Qsrc/main/java/controllers/customer_controllers/CustomerProductRateController.java,f\4\f41498864d0e780ebfdc63857b837fc4d8f9669d

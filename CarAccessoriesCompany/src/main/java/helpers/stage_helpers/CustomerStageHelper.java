@@ -65,4 +65,12 @@ public class CustomerStageHelper {
             Starter.logger.warning("Can't open customer display order page");
         }
     }
+
+    public static void showCustomerOrderRatePage(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/customer_pages/rateOrderPage.fxml", 608, 608);
+        } catch (Exception e) {
+            Starter.logger.warning("Can't open customer order rate page");
+        }
+    }
 }

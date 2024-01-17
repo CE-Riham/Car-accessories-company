@@ -5,6 +5,7 @@ import classes.UserSession;
 import controllers.admin_controllers.AdminNavBarActions;
 import database.deleting.OrderDeleter;
 import database.retrieving.RetrievingProducts;
+import database.updating.OrderUpdater;
 import helpers.Alerts;
 import helpers.stage_helpers.CustomerStageHelper;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import model.products.Product;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -30,6 +32,8 @@ public class CustomerDisplayOrderController extends AdminNavBarActions implement
     // --------- Buttons
     @FXML
     private Button cancelOrderButton;
+    @FXML
+    private Button receiveOrderButton;
 
     // --------- Labels
     @FXML
@@ -63,13 +67,18 @@ public class CustomerDisplayOrderController extends AdminNavBarActions implement
     }
 
     @FXML
+    void onReceiveOrderClick(ActionEvent event) {
+        handleReceiveOrder(event);
+    }
+
+    @FXML
     void onBackClick(ActionEvent event) {
         CustomerStageHelper.showCustomerOrders(event);
     }
 
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------ section4: Initialising actions ------------------------------------------ //
+    // ------------------------------------------ section3: Initialising actions ------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,10 +88,11 @@ public class CustomerDisplayOrderController extends AdminNavBarActions implement
     }
 
     // -------------------------------------------------------------------------------------------------------------------- //
-    // --------------------------------------------- section5: helper methods --------------------------------------------- //
+    // --------------------------------------------- section4: helper methods --------------------------------------------- //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void displayingButtons() {
         displayButton(cancelOrderButton, UserSession.getOrderToDisplay().getOrderStatus() == 0);
+        displayButton(receiveOrderButton, UserSession.getOrderToDisplay().getOrderStatus() == 1);
     }
 
     private void fillProductFields() {
@@ -118,21 +128,42 @@ public class CustomerDisplayOrderController extends AdminNavBarActions implement
         return new OrderDeleter(DBConnector.getConnector().getCon()).deleteOrderByOrderID(UserSession.getOrderToDisplay());
     }
 
+    private boolean receiveOrder() {
+        OrderUpdater orderUpdater = new OrderUpdater(DBConnector.getConnector().getCon());
+        String condition = "where orderID = \'" + UserSession.getOrderToDisplay().getOrderID() + "\'";
+        boolean flag = orderUpdater.updateReceivingDate(LocalDate.now(), condition);
+        return flag && orderUpdater.updateOrderStatus(2, condition);
+    }
+
     // -------------------------------------------------------------------------------------------------------------------- //
-    // ------------------------------------------------ section6: handlers ------------------------------------------------ //
+    // ------------------------------------------------ section5: handlers ------------------------------------------------ //
     // -------------------------------------------------------------------------------------------------------------------- //
     private void handleCancelOrder(ActionEvent event) {
         String alertTitle = "Canceling order";
         Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you want to cancel the order?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             boolean flag = deleteOrder();
-
             if (flag) {
                 Alerts.informationAlert(alertTitle, null, "Canceling order successfully");
             } else {
                 Alerts.errorAlert(alertTitle, null, "Couldn't cancel the order, try again");
             }
             CustomerStageHelper.showCustomerOrders(event);
+        }
+    }
+
+    private void handleReceiveOrder(ActionEvent event) {
+        String alertTitle = "Receiving order";
+        Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure you received the order? Once you confirm you can't cancel.");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            boolean flag = receiveOrder();
+            if (flag) {
+                Alerts.informationAlert(alertTitle, null, "Receiving order successfully");
+                CustomerStageHelper.showCustomerOrderRatePage(event);
+            } else {
+                Alerts.errorAlert(alertTitle, null, "Couldn't retrieve the order, try again");
+                CustomerStageHelper.showCustomerOrders(event);
+            }
         }
     }
 }
