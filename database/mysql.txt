@@ -1,72 +1,207 @@
 create table users(
-    firstName varchar(10) not null, 
-    lastName varchar(10) not null, 
+    firstName varchar(15) not null, 
+    lastName varchar(15) not null, 
 	username varchar(20) not null,
-	phone varchar(15),
+	phone varchar(10) not null,
     email varchar(50) not null,
     userPassword varchar(20) not null, 
     image varchar(100), 
-    userType int, 
+    userType varchar(20) not null,
     primary key(username)
 );
 
-create table clients(
-	username varchar(20) not null, 
-    totalPayments double, 
-    primary key(username), 
+INSERT INTO users (`firstName`, `lastName`, `username`, `phone`, `email`, `userPassword`, `image`, `userType`) 
+VALUES ('Riham', 'Katout', 'rihamkatout', '0599119482', 'rihamkatm@gmail.com', '1234**Aa', 'src/main/resources/assets/usersPictures/rihamkatout.png', 'admin'),
+('Riham', 'Katout', 'rihamkatout2', '0599119482', 'rihamkatm@gmail.com', '1234**Aa', 'src/main/resources/assets/usersPictures/rihamkatout2.png', 'customer'), 
+('Riham', 'Katout', 'rihamkatout3', '0599119482', 'rihamkatm@gmail.com', '1234**Aa', '', 'installer'), 
+('Shahd', 'Hamad', 'shahd11', '0595014020', 'shahd11@gmail.com', '1234**Aa', 'src/main/resources/assets/usersPictures/shahd11.png', 'admin'), 
+('Siwar', 'Katout', 'siwarkatout', '0599119482', 'siwarkatout@gmail.com', '1234**Aa', 'src/main/resources/assets/usersPictures/siwarkatout.png', 'customer');
+
+create table addresses(
+	username varchar(20) not null,
+	country varchar(40) not null,
+	city varchar(40) not null,
+	street varchar(40) not null,
+    primary key(username),
     foreign key(username) references users(username)
 );
 
-create table colors(
-	colorID int not null auto_increment, 
-    hex varchar(10), 
-    colorName varchar(10),
-    primary key(colorID)
+create table customers(
+	username varchar(20) not null, 
+    totalPayments double not null, 
+    primary key(username), 
+    foreign key(username) references users(username) ON delete CASCADE
 );
+insert into customers(`username`, `totalPayments`) 
+VALUES ('rihamkatout2', 0), ('siwarkatout', 0);
+
+create table admins(
+	username varchar(20) not null, 
+    primary key(username), 
+    foreign key(username) references users(username)ON delete CASCADE
+);
+insert into admins(`username`) 
+VALUES ('rihamkatout'), ('shahd11');
 
 create table categories(
 	category varchar(20) not null, 
-    primary key(category)
+    primary key (category) 
 );
 
+insert into categories values ('INTERIOR'), ('EXTERIOR'), ('PERFORMANCE'), ('ELECTRONICS'), ('SAFETY'), ('MAINTENANCE'), ('OTHERS');
 create table products(
 	productID int not null auto_increment, 
     productName varchar(100) not null,
-    category varchar(20),
-    price double, 
-    offer double, 
-    numberOfOrders int, 
+    category varchar(20) not null,
+    price double not null, 
+    numberOfOrders int not null, 
     image varchar(100), 
-    primary key(productID),
-    foreign key(category) references categories(category)
+    longDescription varchar(500) not null,
+    shortDescription varchar(100) not null,
+    availability int not null,
+    primary key(productID)
 );
 
-create table colorQuantity(
-	colorID int not null, 
-    productID int not null,
-    quantity int, 
-    constraint PK_colorQuantity primary key(colorID, productID),
-    foreign key(colorID) references colors(colorID), 
-    foreign key(productID) references products(productID)
-);
+ALTER TABLE products
+ADD CONSTRAINT fk_cat FOREIGN KEY (category) REFERENCES categories(category) ON UPDATE CASCADE;
 
-create table productReview(
+INSERT INTO products (productName, category, price, numberOfOrders, image, longDescription, shortDescription, availability)
+VALUES
+('Car Floor Mats', 'INTERIOR', 49.99, 120, 'src/main/resources/assets/products/1.png', 'Premium car floor mats, protects against dirt and spills.', 'Car Floor Mats', 100),
+('Comfort Seat Covers', 'INTERIOR', 59.99, 90, 'src/main/resources/assets/products/2.png', 'Stylish and comfortable seat covers for car interiors.', 'Seat Covers', 80);
+
+INSERT INTO products (productName, category, price, numberOfOrders, image, longDescription, shortDescription, availability)
+VALUES
+('All-Weather Car Cover', 'EXTERIOR', 79.99, 130, 'src/main/resources/assets/products/3.png', 'Protects the vehicle from weather, dust, and debris.', 'Car Covers', 60),
+('RainMaster Windshield Wipers', 'EXTERIOR', 29.99, 75, 'src/main/resources/assets/products/4.png', 'Ensures clear visibility during rain or snow.', 'Windshield Wipers', 40);
+
+INSERT INTO products (productName, category, price, numberOfOrders, image, longDescription, shortDescription, availability)
+VALUES
+('MaxAir Performance Air Filter', 'PERFORMANCE', 49.99, 100, 'src/main/resources/assets/products/5.png', 'Enhances engine performance and efficiency.', 'Air Filters', 70),
+('EliteExhaust Performance Exhaust', 'PERFORMANCE', 249.99, 80, 'src/main/resources/assets/products/6.png', 'Improves engine sound and increases performance.', 'Exhaust Systems', 40),
+('ProSuspension Upgrade Kit', 'PERFORMANCE', 159.99, 70, 'src/main/resources/assets/products/7.png', 'Enhances handling and stability.', 'Suspension Upgrades', 50);
+
+INSERT INTO products (productName, category, price, numberOfOrders, image, longDescription, shortDescription, availability)
+VALUES
+('Premium Car Audio System', 'ELECTRONICS', 199.99, 90, 'src/main/resources/assets/products/8.png', 'Includes stereos, speakers, amplifiers, and subwoofers.', 'Car Audio Systems', 70);
+
+INSERT INTO products (productName, category, price, numberOfOrders, image, longDescription, shortDescription, availability)
+VALUES
+('Car Security Alarm System', 'SAFETY', 79.99, 70, 'src/main/resources/assets/products/9.png', 'Provides theft deterrence and security.', 'Car Alarms', 50),
+('Backup Camera and Parking Sensors', 'SAFETY', 109.99, 60, 'src/main/resources/assets/products/10.png', 'Aids in parking and avoids collisions.', 'Backup Cameras and Sensors', 40);
+
+INSERT INTO products (productName, category, price, numberOfOrders, image, longDescription, shortDescription, availability)
+VALUES
+('Complete Car Cleaning Kit', 'MAINTENANCE', 59.99, 85, 'src/main/resources/assets/products/11.png', 'Includes shampoos, wax, polishes, and cleaning tools.', 'Car Cleaning Kits', 70),
+('High-Performance Engine Oil', 'MAINTENANCE', 39.99, 110, 'src/main/resources/assets/products/12.png', 'Essential for regular maintenance.', 'Engine Oils and Fluids', 90),
+('Tire Care Bundle', 'MAINTENANCE', 34.99, 75, 'src/main/resources/assets/products/13.png', 'Includes tire cleaners, inflators, and pressure gauges.', 'Tire Care Products', 60);
+
+create table productReviews(
 	reviewID int not null auto_increment,
-	username varchar(20) not null, 
     productID int not null, 
-    rate int not null, 
-    clientComment varchar(500),
+    customerComment varchar(500),
     primary key(reviewID), 
-    foreign key(username) references clients(username),
-    foreign key(productID) references products(productID)
+    foreign key(productID) references products(productID) ON delete CASCADE
 );
+
+INSERT INTO productReviews (productID, customerComment)
+VALUES
+(1, 'need more colors from this'), 
+(2, 'very comfortable, WOW !'),
+(2, 'nice color'),
+(2, 'wish there os a black color'), 
+(2, 'comfortable'), 
+(2, 'fast delivering'), 
+(2, 'so expensive but it worths'), 
+(2, 'need more colors from this'), 
+(3, 'it must be white!'), 
+(3, 'the size is good'), 
+(3, 'amazing quality'), 
+(4, 'amazing quality'), 
+(5, 'amazing quality'), 
+(6, 'amazing quality'), 
+(7, 'amazing quality'), 
+(8, 'amazing quality'), 
+(9, 'amazing quality'), 
+(10, 'amazing quality'), 
+(11, 'amazing quality'), 
+(12, 'amazing quality'), 
+(13, 'amazing quality');
+
+ create table productRates(
+	rateID int not null auto_increment,
+    productID int not null, 
+    customerRate int not null,
+    primary key(rateID), 
+    foreign key(productID) references products(productID) ON delete CASCADE
+);
+INSERT INTO productRates (`productID`, `customerRate`)
+VALUES (1, 4), 
+(1, 4), 
+(1, 2), 
+(2, 3), 
+(3, 5), 
+(4, 4), 
+(5, 4), 
+(5, 1), 
+(6, 2), 
+(7, 4), 
+(8, 4), 
+(9, 4), 
+(1, 5), 
+(1, 4), 
+(1, 5), 
+(1, 2), 
+(1, 4), 
+(1, 1), 
+(1, 0), 
+(1, 5);
+
+create table orders(
+	orderID int not null auto_increment,
+    productID int not null, 
+    customerUsername varchar(20) not null,
+    orderStatus int not null, -- 0: ordered, 1: confirmed, 2: recieved  
+    orderDate date not null,
+    sendingDate date not null,
+    receivingDate date not null,    
+    primary key(orderID), 
+    foreign key(productID) references products(productID) ON delete  CASCADE,
+    foreign key(customerUsername) references customers(username) ON delete CASCADE
+);
+
+INSERT INTO orders (productID, customerUsername, orderStatus, orderDate, sendingDate, receivingDate)
+VALUES
+(1, 'rihamkatout2', 1, '2022-01-15', '2022-01-16', '0001-01-01'),
+(2, 'siwarkatout', 0, '2022-02-20', '0001-01-01', '0001-01-01'),
+(3, 'rihamkatout2', 2, '2022-03-25', '2022-03-26', '2022-03-30'),
+(4, 'siwarkatout', 0, '2022-04-10', '0001-01-01', '0001-01-01'),
+(5, 'rihamkatout2', 1, '2022-05-05', '2022-05-06', '0001-01-01'),
+(6, 'siwarkatout', 2, '2022-06-15', '2022-06-16', '2022-06-20'),
+(7, 'rihamkatout2', 1, '2022-07-20', '2022-07-22', '0001-01-01'),
+(8, 'siwarkatout', 0, '2022-08-25', '0001-01-01', '0001-01-01'),
+(9, 'rihamkatout2', 2, '2022-09-10', '2022-09-12', '2022-09-15'),
+(10, 'siwarkatout', 1, '2022-10-05', '2022-10-06', '0001-01-01'),
+(11, 'rihamkatout2', 0, '2022-11-15', '0001-01-01', '0001-01-01'),
+(12, 'siwarkatout', 1, '2022-12-20', '2022-12-22', '0001-01-01'),
+(13, 'rihamkatout2', 2, '2023-01-25', '2023-01-26', '2023-01-30'),
+(5, 'rihamkatout2', 0, '2023-02-10', '0001-01-01', '0001-01-01'),
+(6, 'siwarkatout', 1, '2023-03-05', '2023-03-06', '0001-01-01'),
+(7, 'rihamkatout2', 0, '2023-04-15', '0001-01-01', '0001-01-01'),
+(8, 'siwarkatout', 2, '2023-05-20', '2023-05-22', '2023-05-25'),
+(9, 'rihamkatout2', 0, '2023-06-25', '0001-01-01', '0001-01-01'),
+(10, 'siwarkatout', 1, '2023-07-10', '2023-07-12', '0001-01-01'),
+(11, 'rihamkatout2', 0, '2023-08-15', '0001-01-01', '0001-01-01'),
+(12, 'siwarkatout', 2, '2023-09-20', '2023-09-22', '2023-09-25'),
+(13, 'rihamkatout2', 0, '2023-10-25', '0001-01-01', '0001-01-01'),
+(1, 'siwarkatout', 1, '2023-11-10', '2023-11-12', '0001-01-01');
 
 create table installers(
 	username varchar(20) not null, 
-    category varchar(20) not null, 
-    pricePerHour double, 
+    pricePerHour double not null, 
+    installationStartHour time not null,
+    installationEndHour time not null,
+    available bool not null, 
     primary key(username), 
-    foreign key(username) references users(username),
-    foreign key(category) references categories(category)
+    foreign key(username) references users(username) ON delete CASCADE
 );
-

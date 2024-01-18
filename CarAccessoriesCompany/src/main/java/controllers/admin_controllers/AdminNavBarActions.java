@@ -34,6 +34,7 @@ public class AdminNavBarActions {
 
     @FXML
     protected void onInstallersClick(ActionEvent event) {
+        AdminStageHelper.showAdminInstallersPage(event);
     }
 
     @FXML

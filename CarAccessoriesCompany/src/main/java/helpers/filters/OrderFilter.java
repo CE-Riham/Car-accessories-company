@@ -12,25 +12,17 @@ public class OrderFilter {
     }
 
     public static List<Order> filterOrdersBy(String field, String fieldValue, List<Order> orders) {
-        if (fieldValue.equals("")) return orders;
-        switch (field) {
-            case "orderID":
-                return filterByOrderID(orders, fieldValue);
-            case "productID":
-                return searchByProductID(orders, fieldValue);
-            case "customerUsername":
-                return searchByCustomerUsername(orders, fieldValue);
-            case "orderStatus":
-                return searchByOrderStatus(orders, fieldValue);
-            case "orderDate":
-                return searchByOrderDate(orders, fieldValue);
-            case "sendingDate":
-                return searchBySendingDate(orders, fieldValue);
-            case "receivingDate":
-                return searchByReceivingDate(orders, fieldValue);
-            default:
-                return orders;
-        }
+        if (fieldValue.isEmpty()) return orders;
+        return switch (field) {
+            case "orderID" -> filterByOrderID(orders, fieldValue);
+            case "productID" -> searchByProductID(orders, fieldValue);
+            case "customerUsername" -> searchByCustomerUsername(orders, fieldValue);
+            case "orderStatus" -> searchByOrderStatus(orders, fieldValue);
+            case "orderDate" -> searchByOrderDate(orders, fieldValue);
+            case "sendingDate" -> searchBySendingDate(orders, fieldValue);
+            case "receivingDate" -> searchByReceivingDate(orders, fieldValue);
+            default -> orders;
+        };
     }
 
     private static List<Order> filterByOrderID(List<Order> orders, String orderID) {

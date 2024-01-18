@@ -10,11 +10,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AdminStageHelper{
+public class AdminStageHelper {
 
     private AdminStageHelper() {
         throw new IllegalStateException("Utility class");
     }
+
     protected static void showPage(ActionEvent event, String path, int width, int height) throws IOException {
         if (event.getSource() instanceof Node source) {
             Parent root = FXMLLoader.load(AdminStageHelper.class.getResource(path));
@@ -26,6 +27,7 @@ public class AdminStageHelper{
             stage.centerOnScreen();
         }
     }
+
     public static void showAdminCategories(ActionEvent event) {
         try {
             showPage(event, "/FXMLFiles/admin_pages/adminCategoriesPage.fxml", 1615, 938);
@@ -105,11 +107,20 @@ public class AdminStageHelper{
             Starter.logger.warning("Can't open admin orders page");
         }
     }
+
     public static void showAdminDisplayOrderPage(ActionEvent event) {
         try {
             showPage(event, "/FXMLFiles/admin_pages/order/adminOrderPage.fxml", 608, 837);
         } catch (Exception e) {
             Starter.logger.warning("Can't open admin display order page");
+        }
+    }
+
+    public static void showAdminInstallersPage(ActionEvent event) {
+        try {
+            showPage(event, "/FXMLFiles/admin_pages/installer/adminInstallersPage.fxml", 1615, 965);
+        } catch (Exception e) {
+            Starter.logger.warning("Can't open admin installers page");
         }
     }
 }
