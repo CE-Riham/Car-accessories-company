@@ -133,14 +133,14 @@ public class Generator {
         return preparedStmt;
     }
 
-    public static PreparedStatement rateToPS(PreparedStatement preparedStmt, int ID, int rate) throws SQLException {
-        preparedStmt.setInt(1, ID);
+    public static PreparedStatement rateToPS(PreparedStatement preparedStmt, int id, int rate) throws SQLException {
+        preparedStmt.setInt(1, id);
         preparedStmt.setInt(2, rate);
         return preparedStmt;
     }
 
-    public static PreparedStatement reviewToPS(PreparedStatement preparedStmt, int ID, String customerComment) throws SQLException {
-        preparedStmt.setInt(1, ID);
+    public static PreparedStatement reviewToPS(PreparedStatement preparedStmt, int id, String customerComment) throws SQLException {
+        preparedStmt.setInt(1, id);
         preparedStmt.setString(2, customerComment);
         return preparedStmt;
     }

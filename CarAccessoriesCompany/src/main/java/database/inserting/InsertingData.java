@@ -3,13 +3,14 @@ package database.inserting;
 import classes.Starter;
 import helpers.Generator;
 import model.Order;
-import model.products.Product;
 import model.User;
+import model.products.Product;
 
 import java.sql.*;
 
 public class InsertingData {
     private String status;
+    private String values = " values (?, ?);";
     private Connection connection;
 
     public InsertingData(Connection connection) {
@@ -43,7 +44,7 @@ public class InsertingData {
         PreparedStatement preparedStmt = null;
         try {
             String query = "insert into customers "
-                    + " values (?, ?);";
+                    + values;
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, username);
             preparedStmt.setString(2, String.valueOf(account));
@@ -135,8 +136,7 @@ public class InsertingData {
 
     public boolean insertProductRating(int productID, int rating) {
         try {
-            String query = "insert into productRates (productID, customerRate)" +
-                    " values (?, ?);";
+            String query = "insert into productRates (productID, customerRate)" + values;
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.rateToPS(preparedStmt, productID, rating);
             preparedStmt.executeUpdate();
@@ -147,10 +147,10 @@ public class InsertingData {
             return false;
         }
     }
+
     public boolean insertProductReview(int productID, String customerComment) {
         try {
-            String query = "insert into productReviews (productID, customerComment)" +
-                    " values (?, ?);";
+            String query = "insert into productReviews (productID, customerComment)" + values;
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.reviewToPS(preparedStmt, productID, customerComment);
             preparedStmt.executeUpdate();
@@ -161,10 +161,11 @@ public class InsertingData {
             return false;
         }
     }
+
     public boolean insertInstallationRating(int installerID, int rating) {
         try {
             String query = "insert into installerRates (installerID, customerRate)" +
-                    " values (?, ?);";
+                    values;
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.rateToPS(preparedStmt, installerID, rating);
             preparedStmt.executeUpdate();
@@ -175,10 +176,11 @@ public class InsertingData {
             return false;
         }
     }
+
     public boolean insertInstallerReview(int installerID, String customerComment) {
         try {
             String query = "insert into installerReviews (installerID, customerComment)" +
-                    " values (?, ?);";
+                    values;
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.reviewToPS(preparedStmt, installerID, customerComment);
             preparedStmt.executeUpdate();
