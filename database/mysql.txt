@@ -205,3 +205,40 @@ create table installers(
     primary key(username), 
     foreign key(username) references users(username) ON delete CASCADE
 );
+INSERT INTO users (firstName, lastName, username, phone, email, userPassword, image, userType)
+VALUES
+    ('Bissan', 'Katout', 'bissan_katout', '0599876543', 'bissan@hotmail.com', '1234**Aa', 'src/main/resources/assets/usersPictures/bissan_katout.png', 'installer'),
+    ('Ahmad', 'Katout', 'ahmadkatout', '0599866543', 'ahmad@hotmail.com', '1234**Aa', 'src/main/resources/assets/usersPictures/ahmadkatout.png', 'installer');
+
+
+INSERT INTO installers (username, pricePerHour, installationStartHour, installationEndHour, available)
+VALUES
+    ('ahmadkatout', 25.50, '09:00:00', '17:00:00', true),
+    ('bissan_katout', 30.75, '08:00:00', '16:00:00', false);
+
+create table installerWorkingDays(
+	username varchar(20) not null, 
+    workingDay varchar(10),
+    primary key(username, workingDay),
+    foreign key(username) references installers(username) ON delete CASCADE
+);
+
+INSERT INTO installerWorkingDays (username, workingDay)
+VALUES
+	('ahmadkatout', 'Sunday'),
+	('ahmadkatout', 'Monday'),
+	('ahmadkatout', 'Tuesday'),
+	('ahmadkatout', 'Wednesday'),
+	('ahmadkatout', 'Thursday'),
+	('bissan_katout', 'Friday'),
+	('bissan_katout', 'Monday');    
+    
+create table installationRequest(
+	installationRequestID int  not null auto_increment,
+	customerUsername varchar(20) not null,
+    carModel varchar(50) not null, 
+    preferredDate date not null,
+    preferredTime time not null, 
+    primary key(installationRequestID),
+    foreign key(customerUsername) references installers(username) ON delete CASCADE
+);
