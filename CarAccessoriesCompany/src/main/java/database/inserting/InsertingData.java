@@ -10,7 +10,6 @@ import java.sql.*;
 
 public class InsertingData {
     private String status;
-    private String values = " values (?, ?);";
     private Connection connection;
 
     public InsertingData(Connection connection) {
@@ -27,8 +26,7 @@ public class InsertingData {
 
     public boolean insertUser(User user) {
         try {
-            String query = "insert into users "
-                    + " values (?, ?, ?, ?, ?, ?, ?, ?);";
+            String query = "insert into users values (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.userToPS(preparedStmt, user);
             preparedStmt.execute();
@@ -43,8 +41,7 @@ public class InsertingData {
     public boolean insertCustomer(String username, double account) throws SQLException {
         PreparedStatement preparedStmt = null;
         try {
-            String query = "insert into customers "
-                    + values;
+            String query = "insert into customers values (?, ?);";
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, username);
             preparedStmt.setString(2, String.valueOf(account));
@@ -62,8 +59,7 @@ public class InsertingData {
     public boolean insertInstaller(String username, double account, int installationTimes) throws SQLException {
         PreparedStatement preparedStmt = null;
         try {
-            String query = "insert into installers "
-                    + " values (?, ?, ?);";
+            String query = "insert into installers values (?, ?, ?);";
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, username);
             preparedStmt.setDouble(2, account);
@@ -81,8 +77,7 @@ public class InsertingData {
 
     public int insertProduct(Product product) {
         try {
-            String query = "insert into products (productName, category, price, numberOfOrders, image, longDescription, " +
-                    "shortDescription, availability) values (?, ?, ?, ?, ?, ?, ?, ?);";
+            String query = "insert into products (productName, category, price, numberOfOrders, image, longDescription, shortDescription, availability) values (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStmt = Generator.productToPS(preparedStmt, product);
             preparedStmt.executeUpdate();
@@ -100,8 +95,7 @@ public class InsertingData {
     public boolean insertCategory(String category) {
         PreparedStatement preparedStmt = null;
         try {
-            String query = "insert into categories "
-                    + " values (?);";
+            String query = "insert into categories values (?);";
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, category);
             preparedStmt.execute();
@@ -121,8 +115,7 @@ public class InsertingData {
 
     public boolean insertOrder(Order order) {
         try {
-            String query = "insert into orders (productID, customerUsername, orderStatus, orderDate, sendingDate, receivingDate)" +
-                    " values (?, ?, ?, ?, ?, ?);";
+            String query = "insert into orders (productID, customerUsername, orderStatus, orderDate, sendingDate, receivingDate) values (?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.orderToPS(preparedStmt, order);
             preparedStmt.executeUpdate();
@@ -136,7 +129,7 @@ public class InsertingData {
 
     public boolean insertProductRating(int productID, int rating) {
         try {
-            String query = "insert into productRates (productID, customerRate)" + values;
+            String query = "insert into productRates (productID, customerRate) values (?, ?);";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.rateToPS(preparedStmt, productID, rating);
             preparedStmt.executeUpdate();
@@ -150,7 +143,7 @@ public class InsertingData {
 
     public boolean insertProductReview(int productID, String customerComment) {
         try {
-            String query = "insert into productReviews (productID, customerComment)" + values;
+            String query = "insert into productReviews (productID, customerComment) values (?, ?);";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.reviewToPS(preparedStmt, productID, customerComment);
             preparedStmt.executeUpdate();
@@ -164,8 +157,7 @@ public class InsertingData {
 
     public boolean insertInstallationRating(int installerID, int rating) {
         try {
-            String query = "insert into installerRates (installerID, customerRate)" +
-                    values;
+            String query = "insert into installerRates (installerID, customerRate) values (?, ?);";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.rateToPS(preparedStmt, installerID, rating);
             preparedStmt.executeUpdate();
@@ -179,8 +171,7 @@ public class InsertingData {
 
     public boolean insertInstallerReview(int installerID, String customerComment) {
         try {
-            String query = "insert into installerReviews (installerID, customerComment)" +
-                    values;
+            String query = "insert into installerReviews (installerID, customerComment) values (?, ?, );";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.reviewToPS(preparedStmt, installerID, customerComment);
             preparedStmt.executeUpdate();
