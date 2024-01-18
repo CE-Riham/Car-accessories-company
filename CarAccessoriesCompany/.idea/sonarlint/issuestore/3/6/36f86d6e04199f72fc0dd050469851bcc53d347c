@@ -1,4 +1,2 @@
 
-c	java:S107P"BConstructor has 13 parameters, which is greater than 7 authorized.(•øÛ°øÿÿÿÿ8áÜËØÑ1
-{
-java:S3012+"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.(áŞ‰Êÿÿÿÿÿ8âÜËØÑ1
+c	java:S107U"BConstructor has 13 parameters, which is greater than 7 authorized.(•øÛ°øÿÿÿÿ8õş¦ÙÑ1

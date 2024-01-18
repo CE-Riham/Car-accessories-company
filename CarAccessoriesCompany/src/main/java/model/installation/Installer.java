@@ -1,6 +1,10 @@
-package model;
+package model.installation;
+
+import model.Address;
+import model.User;
 
 import java.sql.Time;
+import java.util.List;
 
 public class Installer extends User {
     private double pricePerHour;
@@ -39,8 +43,7 @@ public class Installer extends User {
 
     public void setDays(String[] days) {
         this.days = new String[days.length];
-        for (int i = 0; i < days.length; i++)
-            this.days[i] = days[i];
+        System.arraycopy(days, 0, this.days, 0, days.length);
     }
 
     public boolean isAvailable() {
@@ -62,6 +65,11 @@ public class Installer extends User {
         return time.compareTo(installationStartHour) >= 0 && time.compareTo(installationEndHour) <= 0;
     }
 
+    public void addListDays(List<String> daysList){
+        days = new String[daysList.size()];
+        for (int i = 0; i < daysList.size(); i++)
+            this.days[i] = daysList.get(i);
+    }
     public void addUserInformation(User user){
         setFirstName(user.getFirstName());
         setLastName(user.getLastName());

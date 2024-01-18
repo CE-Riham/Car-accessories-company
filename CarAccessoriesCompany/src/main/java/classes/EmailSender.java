@@ -6,13 +6,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-public class Mail {
+public class EmailSender {
 
     Session newSession = null;
     MimeMessage mimeMessage = null;
 
     public void rasheedEmail(String names) throws MessagingException {
-        Mail mail = new Mail();
+        EmailSender mail = new EmailSender();
         mail.setupServerProperties();
         mail.draftEmail(names);
         Starter.logger.info("Befor mail.send     ; ;;;;;;;;;;;;;;");

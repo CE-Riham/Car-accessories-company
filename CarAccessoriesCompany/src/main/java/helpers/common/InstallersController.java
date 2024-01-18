@@ -8,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
-import model.Installer;
+import model.installation.Installer;
 
 import java.util.List;
 

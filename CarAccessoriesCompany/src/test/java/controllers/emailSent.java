@@ -1,6 +1,6 @@
 package controllers;
 
-import classes.Mail;
+import classes.EmailSender;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,7 +16,7 @@ public class emailSent {
     private String toEmail;
     private String subject;
     private String body;
-    Mail em=new Mail();
+    EmailSender em=new EmailSender();
 
     @Given("the user is ready to send an email")
     public void theUserIsReadyToSendAnEmail() {

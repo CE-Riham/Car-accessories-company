@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import model.Installer;
+import model.installation.Installer;
 
 import java.net.URL;
 import java.util.ArrayList;

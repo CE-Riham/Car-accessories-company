@@ -2,7 +2,7 @@ package helpers;
 
 import classes.Starter;
 import model.Address;
-import model.Installer;
+import model.installation.Installer;
 import model.Order;
 import model.User;
 import model.products.Product;

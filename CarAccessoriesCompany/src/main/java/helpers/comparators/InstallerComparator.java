@@ -1,7 +1,7 @@
 package helpers.comparators;
 
 import classes.Starter;
-import model.Installer;
+import model.installation.Installer;
 
 import java.util.Collections;
 import java.util.Comparator;

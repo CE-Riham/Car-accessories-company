@@ -2,7 +2,7 @@ package helpers.filters;
 
 import classes.Starter;
 import helpers.Generator;
-import model.Installer;
+import model.installation.Installer;
 
 import java.sql.Time;
 import java.util.List;
@@ -43,6 +43,8 @@ public class InstallerFilter {
 
 
     private static List<Installer> searchByWorkingHour(List<Installer> installers, String inputTime) {
+        if (inputTime.length() == 1)
+            inputTime = "0" + inputTime;
         Time time = Generator.stringToTimeConvertor(inputTime);
         return installers.stream()
                 .filter(installer -> installer.worksAtTime(time))

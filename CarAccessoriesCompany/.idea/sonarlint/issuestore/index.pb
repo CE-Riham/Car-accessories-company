@@ -275,3 +275,9 @@ j
 :src/main/java/helpers/comparators/InstallerComparator.java,e\6\e6160c3a5b1989d9d672dcc02847c2496dfb12f8
 b
 2src/main/java/helpers/filters/InstallerFilter.java,1\2\12fbed5f97bee4a0854080a7c08876bc1acdbedb
+V
+&src/main/java/classes/EmailSender.java,a\b\ab26d33a41d3a7d2e504a90147b5c95583f0385f
+`
+0src/main/java/model/installation/InstallReq.java,8\9\89e77f271faf4e1fca6b3fbdd373e8f480de3610
+i
+9src/main/java/model/installation/InstallationRequest.java,9\7\971cb1bbe421eb445a4ff6931e6ef7ca2a761019
