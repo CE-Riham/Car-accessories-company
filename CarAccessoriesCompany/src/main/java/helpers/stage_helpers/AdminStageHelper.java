@@ -109,7 +109,6 @@ public class AdminStageHelper{
         try {
             showPage(event, "/FXMLFiles/admin_pages/order/adminOrderPage.fxml", 608, 837);
         } catch (Exception e) {
-            e.printStackTrace();
             Starter.logger.warning("Can't open admin display order page");
         }
     }

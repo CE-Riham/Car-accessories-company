@@ -56,8 +56,8 @@
             </Label>
          </children>
       </VBox>
-      <ImageView fx:id="productImage" fitHeight="136.0" fitWidth="136.0" layoutX="45.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="customerImage" fitHeight="136.0" fitWidth="136.0" layoutX="45.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="productImage" fitHeight="136.0" fitWidth="136.0" layoutX="45.0" layoutY="81.0" pickOnBounds="true" preserveRatio="false" />
+      <ImageView fx:id="customerImage" fitHeight="136.0" fitWidth="136.0" layoutX="45.0" layoutY="261.0" pickOnBounds="true" preserveRatio="false" />
       <HBox alignment="CENTER" layoutX="41.0" layoutY="567.0" prefHeight="73.0" prefWidth="524.0" spacing="50.0">
          <children>
             <Button fx:id="rejectOrderButton" mnemonicParsing="false" onAction="#onRejectOrderClick" styleClass="delete-button" text="reject order" />

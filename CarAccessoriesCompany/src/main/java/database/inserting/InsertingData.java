@@ -132,4 +132,61 @@ public class InsertingData {
             return false;
         }
     }
+
+    public boolean insertProductRating(int productID, int rating) {
+        try {
+            String query = "insert into productRates (productID, customerRate)" +
+                    " values (?, ?);";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt = Generator.rateToPS(preparedStmt, productID, rating);
+            preparedStmt.executeUpdate();
+            setStatus("Product rating was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert product rate");
+            return false;
+        }
+    }
+    public boolean insertProductReview(int productID, String customerComment) {
+        try {
+            String query = "insert into productReviews (productID, customerComment)" +
+                    " values (?, ?);";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt = Generator.reviewToPS(preparedStmt, productID, customerComment);
+            preparedStmt.executeUpdate();
+            setStatus("Product review was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert product review");
+            return false;
+        }
+    }
+    public boolean insertInstallationRating(int installerID, int rating) {
+        try {
+            String query = "insert into installerRates (installerID, customerRate)" +
+                    " values (?, ?);";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt = Generator.rateToPS(preparedStmt, installerID, rating);
+            preparedStmt.executeUpdate();
+            setStatus("Installation rating was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert installation rate");
+            return false;
+        }
+    }
+    public boolean insertInstallerReview(int installerID, String customerComment) {
+        try {
+            String query = "insert into installerReviews (installerID, customerComment)" +
+                    " values (?, ?);";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt = Generator.reviewToPS(preparedStmt, installerID, customerComment);
+            preparedStmt.executeUpdate();
+            setStatus("Installation review was inserted successfully");
+            return true;
+        } catch (Exception e) {
+            setStatus("Couldn't insert installation review");
+            return false;
+        }
+    }
 }

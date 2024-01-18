@@ -3,10 +3,10 @@ package helpers;
 import classes.Starter;
 import model.Address;
 import model.Order;
+import model.User;
 import model.products.Product;
 import model.products.ProductRate;
 import model.products.ProductReview;
-import model.User;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -120,6 +120,18 @@ public class Generator {
         preparedStmt.setDate(4, Date.valueOf(order.getOrderDate()));
         preparedStmt.setDate(5, Date.valueOf(order.getSendingDate()));
         preparedStmt.setDate(6, Date.valueOf(order.getReceivingDate()));
+        return preparedStmt;
+    }
+
+    public static PreparedStatement rateToPS(PreparedStatement preparedStmt, int ID, int rate) throws SQLException {
+        preparedStmt.setInt(1, ID);
+        preparedStmt.setInt(2, rate);
+        return preparedStmt;
+    }
+
+    public static PreparedStatement reviewToPS(PreparedStatement preparedStmt, int ID, String customerComment) throws SQLException {
+        preparedStmt.setInt(1, ID);
+        preparedStmt.setString(2, customerComment);
         return preparedStmt;
     }
 

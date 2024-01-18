@@ -65,7 +65,7 @@
                                  <children>
                                     <VBox alignment="CENTER" maxHeight="300.0" maxWidth="408.0" minWidth="408.0" prefHeight="300.0" prefWidth="408.0" style="-fx-border-color: #414141;">
                                        <children>
-                                          <ImageView fx:id="productImage" fitHeight="300.0" fitWidth="408.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="productImage" fitHeight="300.0" fitWidth="408.0" pickOnBounds="true" preserveRatio="false">
                                              <image>
                                                 <Image url="@../../../assets/products/noproduct.png" />
                                              </image>
