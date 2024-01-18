@@ -10,19 +10,14 @@ public class ProductFilter {
         Starter.logger.info("Hi from product filter.");
     }
     public static List<Product> filterProductsBy(String field, String fieldValue, List<Product> products) {
-        if (fieldValue.equals("")) return products;
-        switch (field) {
-            case "productCategory":
-                return filterByCategory(products, fieldValue);
-            case "productName":
-                return searchByProductName(products, fieldValue);
-            case "productID":
-                return searchByProductID(products, fieldValue);
-            case "description":
-                return searchByProductDescription(products, fieldValue);
-            default:
-                return products;
-        }
+        if (fieldValue.isEmpty()) return products;
+        return switch (field) {
+            case "productCategory" -> filterByCategory(products, fieldValue);
+            case "productName" -> searchByProductName(products, fieldValue);
+            case "productID" -> searchByProductID(products, fieldValue);
+            case "description" -> searchByProductDescription(products, fieldValue);
+            default -> products;
+        };
     }
 
     private static List<Product> filterByCategory(List<Product> products, String category) {

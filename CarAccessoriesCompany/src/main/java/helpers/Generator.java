@@ -2,17 +2,17 @@ package helpers;
 
 import classes.Starter;
 import model.Address;
+import model.Installer;
 import model.Order;
 import model.User;
 import model.products.Product;
 import model.products.ProductRate;
 import model.products.ProductReview;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Generator {
     private static String productID = "productID";
@@ -40,6 +40,16 @@ public class Generator {
         tmpAddress.setCity(rs.getString("city"));
         tmpAddress.setStreet(rs.getString("street"));
         return tmpAddress;
+    }
+
+    public static Installer rsToInstaller(ResultSet rs) throws SQLException {
+        Installer tmpInstaller = new Installer();
+        tmpInstaller.setUsername(rs.getString("username"));
+        tmpInstaller.setPricePerHour(rs.getDouble("pricePerHour"));
+        tmpInstaller.setInstallationStartHour(rs.getTime("installationStartHour"));
+        tmpInstaller.setInstallationEndHour(rs.getTime("installationEndHour"));
+        tmpInstaller.setAvailable(rs.getBoolean("available"));
+        return tmpInstaller;
     }
 
     public static Product rsToProduct(ResultSet rs) throws SQLException {
@@ -135,13 +145,25 @@ public class Generator {
         return preparedStmt;
     }
 
-    public static Date stringToDateConverter(String date) {
+    public static LocalDate stringToDateConverter(String date) {
         try {
-            java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            return new Date(utilDate.getTime());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return LocalDate.parse(date, formatter);
         } catch (Exception e) {
             Starter.logger.warning("Couldn't convert string to date");
-            return new Date(System.currentTimeMillis()); // or handle the exception based on your needs
+            return LocalDate.of(1, 1, 1);
+        }
+    }
+
+    public static Time stringToTimeConvertor(String time) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            time += ":00:00";
+            LocalTime localTime = LocalTime.parse(time, formatter);
+            return Time.valueOf(localTime);
+        } catch (Exception e) {
+            Starter.logger.warning("Couldn't convert string to time");
+            return new Time(System.currentTimeMillis());
         }
     }
 }
