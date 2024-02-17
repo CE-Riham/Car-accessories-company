@@ -8,6 +8,7 @@ import helpers.stage_helpers.AdminStageHelper;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -62,13 +63,16 @@ public class CategoryCard {
         deleteButton.getStyleClass().add("delete-button");
         deleteButton.setFont(new Font(18));
         deleteButton.setOnAction(e -> {
+            String alertTitle = "Deleting category";
+            Optional<ButtonType> result = Alerts.confirmationAlert(alertTitle, "Are you sure that you want to delete this category?");
+            if (result.isEmpty() || result.get() != ButtonType.OK) return;
             CategoryDeleter categoryDeleter = new CategoryDeleter(DBConnector.getConnector().getCon());
             boolean flag = categoryDeleter.deleteCategory(categoryName.getText());
             if (flag) {
-                Alerts.informationAlert("Deleting category", null, categoryDeleter.getStatus());
+                Alerts.informationAlert(alertTitle, null, categoryDeleter.getStatus());
                 AdminStageHelper.showAdminCategories(e);
             } else
-                Alerts.errorAlert("Deleting category", null, categoryDeleter.getStatus());
+                Alerts.errorAlert(alertTitle, null, categoryDeleter.getStatus());
         });
     }
 

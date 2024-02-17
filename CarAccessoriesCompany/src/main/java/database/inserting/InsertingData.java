@@ -171,7 +171,7 @@ public class InsertingData {
 
     public boolean insertInstallerReview(int installerID, String customerComment) {
         try {
-            String query = "insert into installerReviews (installerID, customerComment) values (?, ?, );";
+            String query = "insert into installerReviews (installerID, customerComment) values (?, ? );";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt = Generator.reviewToPS(preparedStmt, installerID, customerComment);
             preparedStmt.executeUpdate();
